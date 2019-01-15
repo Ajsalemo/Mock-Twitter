@@ -3,19 +3,44 @@
 
 import React from 'react';
 
+// Material-UI components
+import { withStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
+
+// Image
+import twitterlogo from '../../images/twitterlogo.jpg';
+
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
-const Home = () => {
+const styles = theme => ({
+    gridOne: {
+        backgroundColor: '#00acee',
+        background: `url(${twitterlogo}) no-repeat left`
+    },
+    gridTwo: {
+        backgroundColor: '#fff'
+    }
+})
+
+const Home = props => {
+    const { classes } = props;
     return (
-        <div>Hello World!</div>
+        <Grid container direction='column' style={{height: '100vh'}}>
+            <Grid item xs={12} className={classes.gridOne}>
+               
+            </Grid>
+            <Grid item xs={12} className={classes.gridTwo}>
+               
+            </Grid>
+        </Grid>
     )
 };
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
-export default Home;
+export default withStyles(styles)(Home);
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
