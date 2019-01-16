@@ -8,15 +8,20 @@ import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
-import Button from '@material-ui/core/Button';
+import Fab from '@material-ui/core/Fab';
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
 const styles = theme => ({
     button: {
-        borderRadius: '37%',
-        marginTop: '1.2em'
+        marginTop: '1.2em',
+        backgroundColor: '#fff',
+        color: '#00acee',
+        border: '1px solid #00acee',
+        '&:hover': {
+            backgroundColor: '#d2d2d252'
+        }
     },
     logInForm: {
         width: '100%',
@@ -53,9 +58,9 @@ const Login = props => {
                     type="password"
                     className={classNames(classes.textField, classes.dense)}
                 />  
-                <Button variant="outlined" color="primary" className={classes.button}>
+                <Fab variant="extended" color="primary" aria-label="Log In" className={classes.button}>
                     Log in
-                </Button>
+                </Fab>
             </form>
         </Grid>
     )

@@ -14,9 +14,14 @@ import PeopleOutline from '@material-ui/icons/PeopleOutline';
 import ChatBubbleOutline from '@material-ui/icons/ChatBubbleOutline';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
+import Avatar from '@material-ui/core/Avatar';
+import Fab from '@material-ui/core/Fab';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
 
 // Image
 import twitterlogo from '../../images/twitterlogo.jpg';
+import twitterminilogo from '../../images/twitterminilogo.png';
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
@@ -51,6 +56,34 @@ const styles = theme => ({
     },
     rightColumnFontMargin: {
         marginBottom: '2em'
+    },
+    twitterAvatar: {
+        width: 80,
+        height: 80,
+        paddingRight: '1em'
+    },
+    button: {
+        width: '100%',
+        height: '2.5em',
+        margin: '0.5em 0'
+    },
+    logInButton: {
+        backgroundColor: '#00acee',
+        color: '#fff'
+    },
+    signInButton: {
+        backgroundColor: '#fff',
+        color: '#00acee',
+        border: '1px solid #00acee',
+        '&:hover': {
+            backgroundColor: '#d2d2d252'
+        }
+    },
+    appBar: {
+        top: 'auto',
+        bottom: 0,
+        height: '2.7em',
+        backgroundColor: '#fff'
     }
 });
 
@@ -73,19 +106,41 @@ const Home = props => {
                     </Typography>
                 </Grid>
             </Grid>
+            {/* --------------------------------------------- Log in/ Sign up buttons ---------------------------------------------- */}
             <Grid item xs={12}>
                 <Login />
                 <Grid item className={classes.gridTwo}>
                     <Grid item md={4}>
+                        <Avatar alt="twitter logo" src={twitterminilogo} className={classes.twitterAvatar} /> 
                         <Typography variant="h5" gutterBottom className={classNames(classes.rightColumnFont, classes.rightColumnFontMargin)}>
                             See whats happening in the world right now
                         </Typography>
                         <Typography variant="h6" gutterBottom className={classes.rightColumnFont}>
                             Join Twitter today.
                         </Typography>
+                        <Fab
+                            aria-label="Sign Up"
+                            className={classNames(classes.button, classes.logInButton)}
+                            variant="extended"
+                        >
+                            Sign up
+                        </Fab>
+                        <Fab
+                            variant="extended"
+                            aria-label="Log In"
+                            className={classNames(classes.button, classes.signInButton)}
+                        >
+                            Log in
+                        </Fab>
                     </Grid>
                 </Grid>
+                {/* ---------------------------------------------------------------------------------------------------------------------- */}
             </Grid>
+            <AppBar className={classes.appBar} position="fixed">
+                <Toolbar>
+                    {/* Future footer links */}
+                </Toolbar>
+            </AppBar>
         </Grid>
     )
 };
