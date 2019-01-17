@@ -5,13 +5,20 @@ import React from 'react';
 
 // Components
 import Navbar from '../../components/navbar';
+import ProfileHandle from '../../components/profilehandle';
+import Grid from '@material-ui/core/Grid';
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
 const Main = () => {
     return (
-        <Navbar />
+        <React.Fragment>
+            <Navbar />
+            <Grid container style={{marginTop: '3.5em'}}>
+                <ProfileHandle />
+            </Grid>
+        </React.Fragment>
     )
 };
 
