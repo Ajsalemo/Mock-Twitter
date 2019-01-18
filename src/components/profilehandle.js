@@ -28,16 +28,16 @@ const styles = theme => ({
             cursor: 'pointer'
         },
         position: 'absolute',
-        bottom: '24.5em',
+        bottom: '25.8em',
         left: '1em'
     },
     upperCardContent: {
         backgroundColor: '#007fec',
-        height: '8em',
+        height: '6em',
         position: 'relative'
     },
     lowerCardContent: {
-        height: '9em'
+        height: '8.5em'
     },
     upperText: {
         textAlign: 'center'
@@ -46,13 +46,25 @@ const styles = theme => ({
         paddingLeft: '4em',
     },
     handleTextUpper: {
-        wordBreak: 'break-word'
+        wordBreak: 'break-word',
+        display: 'block'
     },
     handleTextLower: {
         wordBreak: 'break-word',
         fontWeight: '200',
-        display: 'inline-flex',
         fontSize: '0.9em'
+    },
+    profileHandlerGrid: {
+        width: 'auto'
+    },
+    profileTweetSpan: {
+        color: 'gray',
+        textAlign: 'left'
+    },
+    profileTweetCount: {
+        color: '#00acee',
+        display: 'block',
+        fontWeight: '700'
     }
 });
 
@@ -61,7 +73,7 @@ const styles = theme => ({
 const ProfileHandle = props => {
     const { classes } = props;
     return (
-        <Grid item style={{width: '20%'}}>
+        <Grid item className={classes.profileHandlerGrid}>
             <Paper>
                 <Card>
                     <CardContent className={classes.upperCardContent}>
@@ -73,6 +85,12 @@ const ProfileHandle = props => {
                             <div className={classes.handleTextUpperDiv}>
                                 <span className={classes.handleTextUpper}>Letterman Icon</span>
                                 <span className={classes.handleTextLower}>@LettermanIcon</span>
+                            </div>
+                        </Typography>
+                        <Typography variant="subtitle2" gutterBottom>
+                            <div className={classes.profileTweetSpan}>
+                                <span>Tweets</span>
+                                <span className={classes.profileTweetCount}>5</span>
                             </div>
                         </Typography>
                     </CardContent>

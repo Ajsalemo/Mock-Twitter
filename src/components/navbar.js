@@ -2,6 +2,7 @@
 // ----------------------------------------------------------------------------------------------------- //
 
 import React from 'react';
+import classNames from 'classnames';
 
 // Material-UI components
 import { withStyles } from '@material-ui/core/styles';
@@ -37,7 +38,10 @@ const styles = theme => ({
         justifyContent: 'space-between'
     },
     innerText: {
-        verticalAlign: 'super'
+        verticalAlign: 'super',
+        [theme.breakpoints.down(1413)]: {
+            display: 'none'
+        }
     },
     colorDefault: {
         color: 'gray',
@@ -59,14 +63,20 @@ const styles = theme => ({
         height: 30,
         '&:hover': {
             cursor: 'pointer'
+        },
+    },
+    avatarMediaQuery: {
+        margin: '0em 0.3em',
+        [theme.breakpoints.down(889)]: {
+            display: 'none'
         }
     },
     searchDiv: {
         display: 'flex',
         paddingBottom: '1em',
-        width: '25%',
         justifyContent: 'space-between',
-        height: '3em'
+        height: '3em',
+        width: 'auto'
     },
     searchIconColor: {
         color: 'gray',
@@ -125,7 +135,7 @@ const Navbar = props => {
                             )
                         }}
                     />
-                    <Avatar alt="twitter avatar" src={avatar} className={classes.twitterAvatar} /> 
+                    <Avatar alt="twitter avatar" src={avatar} className={classNames(classes.twitterAvatar, classes.avatarMediaQuery)} /> 
                     <Fab size="small" variant="extended" aria-label="Add Tweet" className={classes.tweetButton}>
                         Tweet
                     </Fab>
