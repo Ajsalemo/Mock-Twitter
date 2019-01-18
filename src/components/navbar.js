@@ -119,8 +119,8 @@ const Navbar = props => {
                 </div>
                 <div className={classes.searchDiv}>
                     <TextField
-                        variant="filled"
                         placeholder="Search Twitter"
+                        variant="outlined"
                         InputProps={{
                             endAdornment: (
                               <InputAdornment variant="filled" position="end">

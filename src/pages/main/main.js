@@ -7,6 +7,7 @@ import React from 'react';
 import Navbar from '../../components/navbar';
 import ProfileHandle from '../../components/profilehandle';
 import Grid from '@material-ui/core/Grid';
+import SubmitTweet from '../../components/submittweet';
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
@@ -17,6 +18,7 @@ const Main = () => {
             <Navbar />
             <Grid container style={{marginTop: '3.5em'}}>
                 <ProfileHandle />
+                <SubmitTweet />
             </Grid>
         </React.Fragment>
     )
