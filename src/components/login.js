@@ -33,6 +33,14 @@ const styles = theme => ({
     },
     dense: {
         marginTop: 16
+    },
+    mediaHidden: {
+        [theme.breakpoints.down(768)]: {
+            display: 'none'
+        },
+        [theme.breakpoints.up(508)]: {
+            padding: '0em 0.3em'
+        }
     }
 });
 
@@ -41,7 +49,7 @@ const styles = theme => ({
 const Login = props => {
     const { classes } = props;
     return (
-        <Grid item xs={12}>
+        <Grid item xs={12} className={classes.mediaHidden}>
             <form className={classes.logInForm}>
                 <TextField
                     label="Phone, email, or username"

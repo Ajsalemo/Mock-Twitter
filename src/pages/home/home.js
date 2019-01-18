@@ -35,14 +35,16 @@ const styles = theme => ({
         backgroundSize: '150%',
         display: 'flex',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        padding: '1em'
     },
     gridTwo: {
         backgroundColor: '#fff',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        height: '75%'
+        height: '75%',
+        padding: '1em'
     },
     leftColumnFont: {
         color: '#fff',
@@ -84,6 +86,15 @@ const styles = theme => ({
         bottom: 0,
         height: '2.7em',
         backgroundColor: '#fff'
+    },
+    mediaGrid: {
+        padding: '1em',
+        height: '100vh',
+        [theme.breakpoints.up(508)]: {
+            padding: '0',
+            display: 'flex',
+            flexFlow: 'row-reverse',
+        }
     }
 });
 
@@ -92,20 +103,7 @@ const styles = theme => ({
 const Home = props => {
     const { classes } = props;
     return (
-        <Grid container direction='column' style={{height: '100vh'}}>
-            <Grid item xs={12} className={classes.gridOne}>
-                <Grid item>
-                    <Typography variant="h6" gutterBottom className={classes.leftColumnFont}>
-                            <Search style={{marginRight: '0.2em'}} />Follow your interests
-                    </Typography>
-                    <Typography variant="h6" gutterBottom className={classes.leftColumnFont}>
-                            <PeopleOutline style={{marginRight: '0.2em'}} />Hear what people are talking about
-                    </Typography>
-                    <Typography variant="h6" gutterBottom className={classes.leftColumnFont}>
-                            <ChatBubbleOutline style={{marginRight: '0.2em'}} />Join the conversation
-                    </Typography>
-                </Grid>
-            </Grid>
+        <Grid container className={classes.mediaGrid}>
             {/* --------------------------------------------- Log in/ Sign up buttons ---------------------------------------------- */}
             <Grid item xs={12}>
                 <Login />
@@ -135,6 +133,19 @@ const Home = props => {
                     </Grid>
                 </Grid>
                 {/* ---------------------------------------------------------------------------------------------------------------------- */}
+            </Grid>
+            <Grid item xs={12} className={classes.gridOne}>
+                <Grid item>
+                    <Typography variant="h6" gutterBottom className={classes.leftColumnFont}>
+                            <Search style={{marginRight: '0.2em'}} />Follow your interests
+                    </Typography>
+                    <Typography variant="h6" gutterBottom className={classes.leftColumnFont}>
+                            <PeopleOutline style={{marginRight: '0.2em'}} />Hear what people are talking about
+                    </Typography>
+                    <Typography variant="h6" gutterBottom className={classes.leftColumnFont}>
+                            <ChatBubbleOutline style={{marginRight: '0.2em'}} />Join the conversation
+                    </Typography>
+                </Grid>
             </Grid>
             <AppBar className={classes.appBar} position="fixed">
                 <Toolbar>
