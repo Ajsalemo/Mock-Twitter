@@ -8,7 +8,6 @@ import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
@@ -19,7 +18,7 @@ import avatar from '../images/avatar.png';
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
-const styles = theme => ({
+const styles = () => ({
     twitterAvatar: {
         width: 70,
         height: 70,
@@ -27,14 +26,11 @@ const styles = theme => ({
         '&:hover': {
             cursor: 'pointer'
         },
-        position: 'absolute',
-        bottom: '25.8em',
-        left: '1em'
+        margin: '-1.5em 0 0 0.5em'
     },
     upperCardContent: {
         backgroundColor: '#007fec',
-        height: '6em',
-        position: 'relative'
+        height: '6em'
     },
     lowerCardContent: {
         height: '8.5em'
@@ -76,9 +72,7 @@ const ProfileHandle = props => {
         <Grid item className={classes.profileHandlerGrid}>
             <Paper>
                 <Card>
-                    <CardContent className={classes.upperCardContent}>
-
-                    </CardContent>          
+                    <CardContent className={classes.upperCardContent}></CardContent>          
                     <Avatar alt="twitter avatar" src={avatar} className={classes.twitterAvatar} /> 
                     <CardContent className={classes.lowerCardContent}>
                         <Typography variant="h6" gutterBottom className={classes.upperText}>

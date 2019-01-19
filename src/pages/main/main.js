@@ -3,22 +3,37 @@
 
 import React from 'react';
 
+// Material-UI components
+import { withStyles } from '@material-ui/core/styles';
+
 // Components
 import Navbar from '../../components/navbar';
 import ProfileHandle from '../../components/profilehandle';
 import Grid from '@material-ui/core/Grid';
 import SubmitTweet from '../../components/submittweet';
+import Recommended from '../../components/recommended';
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
-const Main = () => {
+const styles = () => ({
+    containerStyle: {
+        marginTop: '3.5em',
+        justifyContent: 'center'
+    }
+});
+
+// ----------------------------------------------------------------------------------------------------- //
+
+const Main = props => {
+    const { classes } = props;
     return (
         <React.Fragment>
             <Navbar />
-            <Grid container style={{marginTop: '3.5em'}}>
+            <Grid container className={classes.containerStyle}>
                 <ProfileHandle />
                 <SubmitTweet />
+                <Recommended />
             </Grid>
         </React.Fragment>
     )
@@ -27,7 +42,7 @@ const Main = () => {
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
-export default Main;
+export default withStyles(styles)(Main);
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
