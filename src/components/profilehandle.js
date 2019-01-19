@@ -18,7 +18,7 @@ import avatar from '../images/avatar.png';
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
-const styles = () => ({
+const styles = theme => ({
     twitterAvatar: {
         width: 70,
         height: 70,
@@ -31,9 +31,6 @@ const styles = () => ({
     upperCardContent: {
         backgroundColor: '#007fec',
         height: '6em'
-    },
-    lowerCardContent: {
-        height: '8.5em'
     },
     upperText: {
         textAlign: 'center'
@@ -61,6 +58,9 @@ const styles = () => ({
         color: '#00acee',
         display: 'block',
         fontWeight: '700'
+    },
+    rootClass: {
+        paddingTop: '0em'
     }
 });
 
@@ -69,12 +69,12 @@ const styles = () => ({
 const ProfileHandle = props => {
     const { classes } = props;
     return (
-        <Grid item className={classes.profileHandlerGrid}>
+        <Grid item xs={8} sm={8} md={2} className={classes.profileHandlerGrid}>
             <Paper>
                 <Card>
                     <CardContent className={classes.upperCardContent}></CardContent>          
                     <Avatar alt="twitter avatar" src={avatar} className={classes.twitterAvatar} /> 
-                    <CardContent className={classes.lowerCardContent}>
+                    <CardContent className={classes.rootClass}>
                         <Typography variant="h6" gutterBottom className={classes.upperText}>
                             <div className={classes.handleTextUpperDiv}>
                                 <span className={classes.handleTextUpper}>Letterman Icon</span>

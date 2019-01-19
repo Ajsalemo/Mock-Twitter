@@ -16,9 +16,12 @@ import avatar from '../images/avatar.png';
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
-const styles = () => ({
+const styles = theme => ({
     gridItem: {
-        padding: '0 0.7em'
+        padding: '1em',
+        [theme.breakpoints.up('md')]: {
+            padding: '0 0.7em'
+        }
     },
     paperOutline: {
         display: 'flex',
@@ -41,7 +44,7 @@ const styles = () => ({
 const SubmitTweet = props => {
     const{ classes } = props;
     return (
-        <Grid item xs={5} className={classes.gridItem}>
+        <Grid item xs={10} sm={8} md={5} className={classes.gridItem}>
             <Paper className={classes.paperOutline}>
             <Avatar alt="twitter avatar" src={avatar} className={classes.twitterAvatar} /> 
                 <TextField
