@@ -11,6 +11,9 @@ import * as serviceWorker from './serviceWorker';
 // Material-UI components
 import CssBaseline from '@material-ui/core/CssBaseline';
 
+// DOTENV
+require('dotenv').config()
+
 // ----------------------------------------------------------------------------------------------------- //
 // Instantiating the Apollo client
 const client = new ApolloClient({
