@@ -19,12 +19,18 @@ import Fab from '@material-ui/core/Fab';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 
+// Auth
+import Auth from '../../services/auth'
+
 // Image
 import twitterlogo from '../../images/twitterlogo.jpg';
 import twitterminilogo from '../../images/twitterminilogo.png';
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
+
+// Creating a new instance of the Auth constructor
+const auth = new Auth();
 
 const styles = theme => ({
     gridOne: {
@@ -127,6 +133,7 @@ const Home = props => {
                             variant="extended"
                             aria-label="Log In"
                             className={classNames(classes.button, classes.signInButton)}
+                            onClick={() => auth.login()}
                         >
                             Log in
                         </Fab>

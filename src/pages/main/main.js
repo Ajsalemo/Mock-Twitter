@@ -1,7 +1,8 @@
 // --------------------------------------------- Imports ----------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
-import React from 'react';
+import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 
 // Material-UI components
 import { withStyles } from '@material-ui/core/styles';
@@ -25,24 +26,27 @@ const styles = () => ({
 
 // ----------------------------------------------------------------------------------------------------- //
 
-const Main = props => {
-    const { classes } = props;
-    return (
-        <React.Fragment>
-            <Navbar />
-            <Grid container className={classes.containerStyle}>
-                <ProfileHandle />
-                <SubmitTweet />
-                <Recommended />
-            </Grid>
-        </React.Fragment>
-    )
+class Main extends Component {
+    render() {
+        const { classes } = this.props;
+
+        return (
+            <React.Fragment>
+                <Navbar />
+                <Grid container className={classes.containerStyle}>
+                    <ProfileHandle />
+                    <SubmitTweet />
+                    <Recommended />
+                </Grid>
+            </React.Fragment>
+        )
+    }
 };
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
-export default withStyles(styles)(Main);
+export default withRouter(withStyles(styles)(Main));
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //

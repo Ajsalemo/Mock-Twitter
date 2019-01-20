@@ -7,6 +7,7 @@ import { Switch, Route, BrowserRouter as Router } from 'react-router-dom';
 // Pages
 import Home from '../pages/home/home';
 import Main from '../pages/main/main';
+import CallBack from '../components/callback';
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
@@ -15,6 +16,7 @@ const RouteContainer = () => {
     return (
         <Router>
             <Switch>
+                <Route path='/callback' component={CallBack} />
                 <Route path='/main' component={Main} />
                 <Route path='/' component={Home} />
             </Switch>
