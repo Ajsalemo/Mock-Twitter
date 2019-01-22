@@ -16,8 +16,8 @@ const RouteContainer = () => {
     return (
         <Router>
             <Switch>
-                <Route path='/callback' component={CallBack} />
                 <Route path='/main' component={Main} />
+                <Route path='/callback' component={CallBack} />
                 <Route path='/' component={Home} />
             </Switch>
         </Router>
