@@ -1,25 +1,14 @@
 // --------------------------------------------- Imports ----------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
-const express = require('express');
-const graphqlHTTP = require('express-graphql');
-const schema = require('./schema');
-require('dotenv').config();
+import ApolloClient from "apollo-boost";
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
-const app = express();
+export const client = new ApolloClient({
+    uri: 'http://localhost:4000/graphql'
+});
 
 // ----------------------------------------------------------------------------------------------------- //
-
-app.use('/graphql', graphqlHTTP({
-    schema,
-    graphiql: true
-}));
-
-const PORT = process.env.PORT || 4000;
-
-app.listen(PORT, () => console.log(`Server is listening on PORT: ${PORT}`));
-
 // ----------------------------------------------------------------------------------------------------- //

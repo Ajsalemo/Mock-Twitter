@@ -19,6 +19,9 @@ import Fab from '@material-ui/core/Fab';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 
+// Auth0
+import auth from '../../auth';
+
 // Image
 import twitterlogo from '../../images/twitterlogo.jpg';
 import twitterminilogo from '../../images/twitterminilogo.png';
@@ -127,6 +130,7 @@ const Home = props => {
                             variant="extended"
                             aria-label="Log In"
                             className={classNames(classes.button, classes.signInButton)}
+                            onClick={() => auth.login()}
                         >
                             Log in
                         </Fab>
