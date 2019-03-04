@@ -2,6 +2,7 @@
 // ----------------------------------------------------------------------------------------------------- //
 
 import React from 'react';
+import { Query } from "react-apollo";
 
 // Material-UI components
 import { withStyles } from '@material-ui/core/styles';
@@ -11,6 +12,9 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
+
+// Queries
+import { GETUSER } from '../apolloclient/queries';
 
 // Image
 import avatar from '../images/avatar.png';
@@ -69,29 +73,37 @@ const styles = theme => ({
 const ProfileHandle = props => {
     const { classes } = props;
     return (
-        <Grid item xs={8} sm={8} md={2} className={classes.profileHandlerGrid}>
-            <Paper>
-                <Card>
-                    <CardContent className={classes.upperCardContent}></CardContent>          
-                    <Avatar alt="twitter avatar" src={avatar} className={classes.twitterAvatar} /> 
-                    <CardContent className={classes.rootClass}>
-                        <Typography variant="h6" gutterBottom className={classes.upperText}>
-                            <div className={classes.handleTextUpperDiv}>
-                                <span className={classes.handleTextUpper}>Letterman Icon</span>
-                                <span className={classes.handleTextLower}>@LettermanIcon</span>
-                            </div>
-                        </Typography>
-                        <Typography variant="subtitle2" gutterBottom>
-                            <div className={classes.profileTweetSpan}>
-                                <span>Tweets</span>
-                                <span className={classes.profileTweetCount}>5</span>
-                            </div>
-                        </Typography>
-                    </CardContent>
-                </Card>
-            </Paper>
-        </Grid>
-
+        <React.Fragment>
+            <Query query={GETUSER}>
+                {({ loading, error, data }) => {
+                    console.log(data)
+                    return (
+                        <Grid item xs={8} sm={8} md={2} className={classes.profileHandlerGrid}>
+                            <Paper>
+                                <Card>
+                                    <CardContent className={classes.upperCardContent}></CardContent>          
+                                    <Avatar alt="twitter avatar" src={avatar} className={classes.twitterAvatar} /> 
+                                    <CardContent className={classes.rootClass}>
+                                        <Typography variant="h6" gutterBottom className={classes.upperText}>
+                                            <div className={classes.handleTextUpperDiv}>
+                                                <span className={classes.handleTextUpper}>Letterman Icon</span>
+                                                <span className={classes.handleTextLower}>@LettermanIcon</span>
+                                            </div>
+                                        </Typography>
+                                        <Typography variant="subtitle2" gutterBottom>
+                                            <div className={classes.profileTweetSpan}>
+                                                <span>Tweets</span>
+                                                <span className={classes.profileTweetCount}>5</span>
+                                            </div>
+                                        </Typography>
+                                    </CardContent>
+                                </Card>
+                            </Paper>
+                        </Grid>
+                    )   
+                }}
+            </Query>
+        </React.Fragment>
     )
 };
 

@@ -13,10 +13,6 @@ import { client } from './apolloclient/apolloclient';
 // Material-UI components
 import CssBaseline from '@material-ui/core/CssBaseline';
 
-
-// DOTENV
-require('dotenv').config()
-
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 

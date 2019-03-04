@@ -1,30 +1,23 @@
 // --------------------------------------------- Imports ----------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
-require('dotenv').config();
-const express = require('express');
-const graphqlHTTP = require('express-graphql');
-const schema = require('./schema');
-const cors = require('cors');
 
-// Apollo server
-const server = require('./services');
+import gql from "graphql-tag";
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
-const app = express();
-server.applyMiddleware({ app });
+export const GETUSER = gql`
+    query getUser {
+        currentUser {
+            sub
+            nickname
+            name
+            picture
+            updated_at
+        }
+    }
+`;
 
 // ----------------------------------------------------------------------------------------------------- //
-
-app.use(cors());
-app.use('/graphql', graphqlHTTP({
-    schema,
-    graphiql: true
-}));
-
-const PORT = process.env.PORT || 4000;
-
-app.listen(PORT, () => console.log(`Server is listening on PORT: ${PORT}`));
-
 // ----------------------------------------------------------------------------------------------------- //
+ 

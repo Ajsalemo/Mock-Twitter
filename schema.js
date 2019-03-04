@@ -1,52 +1,38 @@
 // --------------------------------------------- Imports ----------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
-const { GraphQLObjectType, GraphQLString } = require('graphql');
+const { gql } = require('apollo-server-express');
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
-const userObject = {
-    sub: {
-        type: GraphQLString,
-        description: 'ID'
-    },
-    nickname: {
-        type: GraphQLString,
-        description: 'Nickname'
-    },
-    name: {
-        type: GraphQLString,
-        description: 'name'
-    },
-    picture: {
-        type: GraphQLString,
-        description: 'Profile picture'
-    },
-    updated_at: {
-        type: GraphQLString,
-        description: 'Last updated'
+const typeDefs = gql`
+    type User {
+        sub: String
+        nickname: String
+        name: String
+        picture: String
+        updated_at: String
+    }
+
+    type Query {
+        currentUser: User
+    }
+`;
+
+const resolvers = {
+    Query: {
+        currentUser: async (parent, args, { user }) => {
+            console.log(user)
+            const email = await user;
+        }
     }
 };
 
-const UserInfo = new GraphQLObjectType({
-    name: 'UserInfo',
-    description: 'Information of the user',
-    fields: () => (
-        userObject
-    )
-});
-
-const RootQuery = new GraphQLObjectType({
-    name: 'RootQuery',
-    description: 'Root Query',
-    fields: () => ({
-        type: UserInfo,
-        async resolve(parent, args, context) {
-            console.log(context)
-        }
-    })
-});
-
+// ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
+module.exports = {
+    typeDefs,
+    resolvers
+};

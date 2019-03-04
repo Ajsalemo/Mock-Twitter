@@ -1,9 +1,12 @@
 // --------------------------------------------- Imports ----------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
-const { ApolloServer } = require('apollo-server');
+const { ApolloServer } = require('apollo-server-express');
 const jwt = require('jsonwebtoken');
 const jwksClient = require('jwks-rsa');
+
+// Schema
+const { typeDefs, resolvers } = require('./schema');
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
@@ -13,7 +16,7 @@ const client = jwksClient({
 });
 
 const options = {
-    audience: `${process.env.REACT_APP_CLIENT_ID}`,
+    aud: `https://${process.env.REACT_APP_AUTH0_DOMAIN}/api/v2/`,
     issuer: `${process.env.REACT_APP_AUTH0_DOMAIN}/`,
     algorithms: ['RS256']
 };
@@ -28,9 +31,9 @@ const getKey = (header, cb) => {
 };
 
 const server = new ApolloServer({
+    typeDefs,
     resolvers,
     context: ({ req }) => {
-      // simple auth check on every request
       const token = req.headers.authorization;
       const user = new Promise((resolve, reject) => {
         jwt.verify(token, getKey, options, (err, decoded) => {
@@ -40,9 +43,16 @@ const server = new ApolloServer({
           resolve(decoded.email);
         });
       });
-  
       return {
         user
       };
     },
 });
+
+// ----------------------------------------------------------------------------------------------------- //
+// ----------------------------------------------------------------------------------------------------- //
+
+module.exports = server;
+
+// ----------------------------------------------------------------------------------------------------- //
+// ----------------------------------------------------------------------------------------------------- //
