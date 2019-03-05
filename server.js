@@ -17,7 +17,6 @@ server.applyMiddleware({ app });
 
 // ----------------------------------------------------------------------------------------------------- //
 
-app.use(cors());
 app.use('/graphql', graphqlHTTP({
     schema,
     graphiql: true

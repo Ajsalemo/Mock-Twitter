@@ -22,9 +22,8 @@ const typeDefs = gql`
 
 const resolvers = {
     Query: {
-        currentUser: async (parent, args, { user }) => {
-            console.log(user)
-            const email = await user;
+        currentUser (_, args, { user }) {
+            return console.log(user)
         }
     }
 };

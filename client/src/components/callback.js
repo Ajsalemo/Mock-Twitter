@@ -35,7 +35,7 @@ const styles = () => ({
 class CallBack extends Component {
     async componentDidMount() {
         await auth.handleAuthentication();
-        this.props.history.replace('/main');
+        this.props.history.push('/main');
     }
 
     render() {

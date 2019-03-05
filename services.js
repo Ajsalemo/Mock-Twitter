@@ -12,12 +12,12 @@ const { typeDefs, resolvers } = require('./schema');
 // ----------------------------------------------------------------------------------------------------- //
 
 const client = jwksClient({
-    jwksUri: `${process.env.REACT_APP_AUTH0_DOMAIN}/.well-known/jwks.json`
+    jwksUri: `reacttwitter.auth0.com/.well-known/jwks.json`
 });
 
 const options = {
-    aud: `https://${process.env.REACT_APP_AUTH0_DOMAIN}/api/v2/`,
-    issuer: `${process.env.REACT_APP_AUTH0_DOMAIN}/`,
+    audience: `http://localhost:3000/auth`,
+    issuer: `reacttwitter.auth0.com`,
     algorithms: ['RS256']
 };
 
@@ -40,7 +40,7 @@ const server = new ApolloServer({
           if(err) {
             return reject(err);
           }
-          resolve(decoded.email);
+          resolve(decoded);
         });
       });
       return {
