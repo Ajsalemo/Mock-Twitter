@@ -16,7 +16,7 @@ const client = jwksClient({
 });
 
 const options = {
-    audience: `http://localhost:3000/auth`,
+    audience: `reacttwitter.auth0.com`,
     issuer: `reacttwitter.auth0.com`,
     algorithms: ['RS256']
 };
@@ -40,8 +40,9 @@ const server = new ApolloServer({
           if(err) {
             return reject(err);
           }
-          resolve(decoded);
+          resolve(decoded.email);
         });
+        
       });
       return {
         user

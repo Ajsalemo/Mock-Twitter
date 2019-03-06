@@ -42,12 +42,12 @@ class RouteContainer extends Component {
             return (
                 <Switch>
                     <Route path='/main' component={Main} />
-                    <Route path='/callback' component={CallBack} />
+                    <Route path='/callback' render={props => <CallBack {...props} />} />
                     <Route path='/' component={Home} />
                 </Switch>
             )
         }
-        return <CallBack />;
+        return 'loading';
     }
 };
 

@@ -50,6 +50,9 @@ class Auth {
         // set the time that the id token will expire at
         this.expiresAt = authResult.expiresIn * 1000 + new Date().getTime();
         localStorage.setItem(this.authFlag, JSON.stringify(true)); 
+        localStorage.setItem('access_token', authResult.accessToken);
+        localStorage.setItem('id_token', authResult.idToken);
+        localStorage.setItem('expires_at', this.expiresAt);
     }
   
     logout() {
@@ -58,6 +61,9 @@ class Auth {
             returnTo: 'http://localhost:3000/',
             clientID: `wUrvnZ5bWgzuw6QbnDSYqszWlgtCUlL7`,
         });
+        localStorage.removeItem('access_token');
+        localStorage.removeItem('id_token');
+        localStorage.removeItem('expires_at');
     }
   
     silentAuth() {
@@ -76,8 +82,8 @@ class Auth {
     }
   
     isAuthenticated() {
-        // Check whether the current time is past the token's expiry time
-        return JSON.parse(localStorage.getItem(this.authFlag));
+        const expiresAt = JSON.parse(String(localStorage.getItem('expires_at')));
+        return new Date().getTime() < expiresAt && JSON.parse(localStorage.getItem(this.authFlag));
     }
   }
 

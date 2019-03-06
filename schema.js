@@ -22,8 +22,9 @@ const typeDefs = gql`
 
 const resolvers = {
     Query: {
-        currentUser (_, args, { user }) {
-            return console.log(user)
+        currentUser: (parent, args, { user }) => {
+            console.log(user)
+            return user;
         }
     }
 };

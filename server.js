@@ -13,10 +13,10 @@ const server = require('./services');
 // ----------------------------------------------------------------------------------------------------- //
 
 const app = express();
-server.applyMiddleware({ app });
+app.use(cors());
 
 // ----------------------------------------------------------------------------------------------------- //
-
+server.applyMiddleware({ app });
 app.use('/graphql', graphqlHTTP({
     schema,
     graphiql: true
