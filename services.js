@@ -12,12 +12,12 @@ const { typeDefs, resolvers } = require('./schema');
 // ----------------------------------------------------------------------------------------------------- //
 
 const client = jwksClient({
-    jwksUri: `reacttwitter.auth0.com/.well-known/jwks.json`
+    jwksUri: `${process.env.REACT_APP_AUTH0_DOMAIN}/.well-known/jwks.json`
 });
 
 const options = {
-    audience: `reacttwitter.auth0.com`,
-    issuer: `reacttwitter.auth0.com`,
+    audience: `${process.env.REACT_APP_AUTH0_DOMAIN}`,
+    issuer: `${process.env.REACT_APP_AUTH0_DOMAIN}`,
     algorithms: ['RS256']
 };
 

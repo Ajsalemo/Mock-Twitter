@@ -9,10 +9,10 @@ import auth0 from 'auth0-js';
 class Auth {
     constructor() {
       this.auth0 = new auth0.WebAuth({
-        domain: `reacttwitter.auth0.com`,
-        clientID: `wUrvnZ5bWgzuw6QbnDSYqszWlgtCUlL7`,
+        domain: `${process.env.REACT_APP_AUTH0_DOMAIN}`,
+        clientID: `${process.env.REACT_APP_CLIENT_ID}`,
         redirectUri: 'http://localhost:3000/callback',
-        audience: `https://reacttwitter.auth0.com/userinfo`,
+        audience: `https://${process.env.REACT_APP_CLIENT_AUDIENCE}/userinfo`,
         responseType: 'token id_token',
         scope: 'openid email',
       });
@@ -59,7 +59,7 @@ class Auth {
         localStorage.setItem(this.authFlag, JSON.stringify(false));
         this.auth0.logout({
             returnTo: 'http://localhost:3000/',
-            clientID: `wUrvnZ5bWgzuw6QbnDSYqszWlgtCUlL7`,
+            clientID: `${process.env.REACT_APP_CLIENT_ID}`,
         });
         localStorage.removeItem('access_token');
         localStorage.removeItem('id_token');
