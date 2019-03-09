@@ -2,7 +2,6 @@
 // ----------------------------------------------------------------------------------------------------- //
 
 import React, { Component } from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
 
 // Imports
 import RouteContainer from './routecontainer/routecontainer';
@@ -14,9 +13,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Router>
           <RouteContainer />
-        </Router>
       </div>
     );
   }

@@ -2,25 +2,13 @@
 // ----------------------------------------------------------------------------------------------------- //
 require('dotenv').config();
 const express = require('express');
-const graphqlHTTP = require('express-graphql');
-const schema = require('./schema');
-const cors = require('cors');
-
-// Apollo server
-const server = require('./services');
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
 const app = express();
-app.use(cors());
 
 // ----------------------------------------------------------------------------------------------------- //
-server.applyMiddleware({ app });
-app.use('/graphql', graphqlHTTP({
-    schema,
-    graphiql: true
-}));
 
 const PORT = process.env.PORT || 4000;
 

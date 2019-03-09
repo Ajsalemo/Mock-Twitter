@@ -29,7 +29,6 @@ const styles = () => ({
 class Main extends Component {
     render() {
         const { classes } = this.props;
-
         return (
             <React.Fragment>
                 <Navbar />
