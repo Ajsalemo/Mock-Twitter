@@ -3,6 +3,7 @@
 
 import React from 'react';
 import classNames from 'classnames';
+import { Query } from "react-apollo";
 
 // Material-UI components
 import { withStyles } from '@material-ui/core/styles';
@@ -18,10 +19,13 @@ import NotificationsNone from '@material-ui/icons/NotificationsNone';
 import Message from '@material-ui/icons/Message';
 import Search from '@material-ui/icons/Search';
 import InputAdornment from '@material-ui/core/InputAdornment';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 // Image
 import twitterminilogo from '../images/twitterminilogo.png';
-import avatar from '../images/avatar.png';
+
+// Apollo Queries
+import { GET_USER } from '../apolloclient/apolloqueries';
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
@@ -98,50 +102,61 @@ const styles = theme => ({
 const Navbar = props => {
     const { classes } = props;
     return (
-        <AppBar className={classes.appBar}>
-            <Toolbar className={classes.toolBar}>
-                <div className={classes.notificationDiv}>
-                    <Typography variant="subtitle2" className={classes.colorDefault}>
-                        <Home /><span className={classes.innerText}>Home</span>
-                    </Typography>
-                    <Typography variant="subtitle2" className={classes.colorDefault}>
-                        <OfflineBolt /><span className={classes.innerText}>Moments</span>
-                    </Typography>
-                    <Typography variant="subtitle2" className={classes.colorDefault}>
-                        <NotificationsNone /><span className={classes.innerText}>Notifications</span>
-                    </Typography>
-                    <Typography variant="subtitle2" className={classes.colorDefault}>
-                        <Message /><span className={classes.innerText}>Messages</span>
-                    </Typography>
-                </div>
-                <div className={classes.avatarDiv}>
-                    <Avatar alt="twitter logo" src={twitterminilogo} className={classes.twitterAvatar} /> 
-                </div>
-                <div className={classes.searchDiv}>
-                    <TextField
-                        placeholder="Search Twitter"
-                        variant="outlined"
-                        InputProps={{
-                            endAdornment: (
-                              <InputAdornment variant="filled" position="end">
-                                <Search
-                                  aria-label="Search form submit"
-                                  classes={{
-                                      root: classes.searchIconColor
-                                  }}
-                                >
-                                </Search>
-                              </InputAdornment>
-                            )
-                        }}
-                    />
-                    <Avatar alt="twitter avatar" src={avatar} className={classNames(classes.twitterAvatar, classes.avatarMediaQuery)} /> 
-                    <Fab size="small" variant="extended" aria-label="Add Tweet" className={classes.tweetButton}>
-                        Tweet
-                    </Fab>
-                </div>
-            </Toolbar>
-        </AppBar>
+        <React.Fragment>
+            <Query query={GET_USER}>
+                {({ loading, error, data }) => {
+                    if (loading) return <div><CircularProgress /></div>;
+                    if (error) console.log(error);
+
+                return (
+                    <AppBar className={classes.appBar}>
+                        <Toolbar className={classes.toolBar}>
+                            <div className={classes.notificationDiv}>
+                                <Typography variant="subtitle2" className={classes.colorDefault}>
+                                    <Home /><span className={classes.innerText}>Home</span>
+                                </Typography>
+                                <Typography variant="subtitle2" className={classes.colorDefault}>
+                                    <OfflineBolt /><span className={classes.innerText}>Moments</span>
+                                </Typography>
+                                <Typography variant="subtitle2" className={classes.colorDefault}>
+                                    <NotificationsNone /><span className={classes.innerText}>Notifications</span>
+                                </Typography>
+                                <Typography variant="subtitle2" className={classes.colorDefault}>
+                                    <Message /><span className={classes.innerText}>Messages</span>
+                                </Typography>
+                            </div>
+                            <div className={classes.avatarDiv}>
+                                <Avatar alt="twitter logo" src={twitterminilogo} className={classes.twitterAvatar} /> 
+                            </div>
+                            <div className={classes.searchDiv}>
+                                <TextField
+                                    placeholder="Search Twitter"
+                                    variant="outlined"
+                                    InputProps={{
+                                        endAdornment: (
+                                        <InputAdornment variant="filled" position="end">
+                                            <Search
+                                            aria-label="Search form submit"
+                                            classes={{
+                                                root: classes.searchIconColor
+                                            }}
+                                            >
+                                            </Search>
+                                        </InputAdornment>
+                                        )
+                                    }}
+                                />
+                                <Avatar alt="twitter avatar" src={data.currentUser.picture} className={classNames(classes.twitterAvatar, classes.avatarMediaQuery)} /> 
+                                <Fab size="small" variant="extended" aria-label="Add Tweet" className={classes.tweetButton}>
+                                    Tweet
+                                </Fab>
+                            </div>
+                        </Toolbar>
+                    </AppBar>
+                    )
+                }}
+            </Query>
+        </React.Fragment>
     )
 };
 

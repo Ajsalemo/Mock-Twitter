@@ -1,38 +1,42 @@
 // --------------------------------------------- Imports ----------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
-import { ApolloProvider } from "react-apollo";
-import { BrowserRouter as Router } from 'react-router-dom';
-
-// Apollo Client
-import { client } from './apolloclient/apolloclient';
-
-// Material-UI components
-import CssBaseline from '@material-ui/core/CssBaseline';
+const { gql } = require('apollo-server');
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
-ReactDOM.render(
-    <ApolloProvider client={client}>
-        <Router>
-            <CssBaseline>
-                <App />
-            </CssBaseline>
-        </Router>
-    </ApolloProvider>, 
-    document.getElementById('root')
-);
+const typeDefs = 
+    gql`
+        type User {
+            sub: String!
+            nickname: String!
+            name: String!
+            picture: String!
+            updated_at: String!
+        }
+
+        type Query {
+            currentUser: User
+        }
+    `;
+
+const resolvers = {
+    Query: {
+        // The 3rd argument(user) is being pulled off of the context in server.js
+        currentUser: (parent, args, user) => {
+            return user
+        }
+    }
+}
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
-serviceWorker.unregister();
+module.exports = {
+    typeDefs,
+    resolvers
+};
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
-
