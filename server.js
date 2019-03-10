@@ -10,12 +10,12 @@ const { typeDefs, resolvers } = require('./schema');
 // ----------------------------------------------------------------------------------------------------- //
 const options = {
     audience: `${process.env.REACT_APP_CLIENT_ID}`,
-    issuer: `https://${process.env.REACT_APP_AUTH0_DOMAIN}/`,
+    issuer: `https://${process.env.REACT_APP_DOMAIN}/`,
     algorithms: ['RS256']
 };
 
 const client = jwksClient({
-    jwksUri: `https://${process.env.REACT_APP_AUTH0_DOMAIN}/.well-known/jwks.json`
+    jwksUri: `https://${process.env.REACT_APP_DOMAIN}/.well-known/jwks.json`
 });
 
 const getKey = (header, cb) => {

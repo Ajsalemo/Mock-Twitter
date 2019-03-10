@@ -9,9 +9,9 @@ import auth0 from 'auth0-js';
 class Auth {
     constructor() {
         this.auth0 = new auth0.WebAuth({
-            domain: `${process.env.REACT_APP_AUTH0_DOMAIN}`,
+            domain: `${process.env.REACT_APP_DOMAIN}`,
             clientID: `${process.env.REACT_APP_CLIENT_ID}`,
-            redirectUri: `${process.env.REACT_APP_CALLBACK_URL}`,
+            redirectUri: `http://localhost:3000/callback`,
             audience: `${process.env.REACT_APP_AUDIENCE}`,
             responseType: 'token id_token',
             scope: 'openid profile'

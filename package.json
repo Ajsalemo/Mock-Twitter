@@ -22,8 +22,8 @@
   "homepage": "https://github.com/Ajsalemo/React-Apollo-GraphQL#readme",
   "dependencies": {
     "apollo-cache-inmemory": "^1.5.1",
+    "apollo-cache-persist": "^0.1.1",
     "apollo-server": "^2.4.8",
-    "dotenv": "^6.2.0",
     "graphql": "^14.1.1",
     "jsonwebtoken": "^8.5.0",
     "jwks-rsa": "^1.4.0"
