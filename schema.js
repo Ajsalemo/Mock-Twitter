@@ -2,11 +2,12 @@
 // ----------------------------------------------------------------------------------------------------- //
 
 const { gql } = require('apollo-server');
+const Client = require('./twitterkeys');
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
-const typeDefs = 
+const typeDefs =
     gql`
         type User {
             sub: String!
@@ -16,8 +17,20 @@ const typeDefs =
             updated_at: String!
         }
 
+        type UserTweets {
+            created_at: String!
+            id: String!
+            id_str: String!
+            text: String!
+            truncated: String!
+        }
+
         type Query {
             currentUser: User
+        }
+
+        type Tweets {
+            retrieveAuthUserTweets: [UserTweets]
         }
     `;
 
@@ -26,9 +39,17 @@ const resolvers = {
         // The 3rd argument(user) is being pulled off of the context in server.js
         currentUser: (parent, args, user) => {
             return user
+        },
+    },
+    Tweets: {
+        retrieveAuthUserTweets: (parent, args, user) => {
+            const params = { screen_name: 'Letterman Icon' };
+            Client.get('statuses/user_timeline', params, (error, tweets, response) => {
+                return response;
+            });
         }
     }
-}
+};
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //

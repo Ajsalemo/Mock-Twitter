@@ -13,7 +13,7 @@ import Avatar from '@material-ui/core/Avatar';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 // Apollo Queries
-import { GET_USER } from '../apolloclient/apolloqueries';
+import { GET_USER, GET_AUTHUSER_TWEETS } from '../apolloclient/apolloqueries';
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
@@ -64,6 +64,12 @@ const SubmitTweet = props => {
                         </Paper>
                     </Grid>
                     )
+                }}
+            </Query>
+            <Query query={GET_AUTHUSER_TWEETS}>
+                {({ loading, error, data }) => {
+                    console.log(data)
+                    return <div>test</div>
                 }}
             </Query>
         </React.Fragment>

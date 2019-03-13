@@ -1,11 +1,10 @@
 // --------------------------------------------- Imports ----------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
-
 require('dotenv').config();
 const { ApolloServer } = require('apollo-server');
 const jwt = require('jsonwebtoken');
 const jwksClient = require('jwks-rsa');
-const { typeDefs, resolvers } = require('./schema');
+const { typeDefs, resolvers } = require('../schema');
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
@@ -25,7 +24,6 @@ const getKey = (header, cb) => {
         cb(null, signingKey);
     });
 };
-
 
 const server = new ApolloServer({
     typeDefs,

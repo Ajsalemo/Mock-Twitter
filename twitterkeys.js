@@ -1,36 +1,22 @@
 // --------------------------------------------- Imports ----------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
-import { gql } from "apollo-boost";
+const Twitter = require('twitter');
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
-export const GET_USER = 
-    gql`
-        query GetUser {
-            currentUser {
-                sub
-                nickname
-                name
-                picture
-                updated_at
-            }
-        }
-    `;
+const Client = new Twitter({
+    consumer_key: `${process.env.REACT_APP_CLIENT_ID}`,
+    consumer_secret: `${process.env.REACT_APP_CLIENT_SECRET}`,
+    access_token_key: `${process.env.REACT_APP_ACCESS_KEY}`,
+    access_token_secret: `${process.env.REACT_APP_ACCESS_SECRET}`
+});
 
-export const GET_AUTHUSER_TWEETS = 
-    gql`
-        query GetAuthUserTweets {
-            retrieveAuthUserTweets {
-                created_at
-                id
-                id_str
-                text
-                truncated
-            }
-        }
-    `;
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
+module.exports = Client;
+
+// ----------------------------------------------------------------------------------------------------- //
+// ----------------------------------------------------------------------------------------------------- //
