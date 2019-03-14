@@ -2,7 +2,7 @@
 // ----------------------------------------------------------------------------------------------------- //
 
 const { gql } = require('apollo-server');
-const Client = require('./twitterkeys');
+const Client = require('./client/src/twitterkeys');
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
@@ -42,11 +42,10 @@ const resolvers = {
         },
     },
     Tweets: {
-        retrieveAuthUserTweets: (parent, args, user) => {
-            const params = { screen_name: 'Letterman Icon' };
-            Client.get('statuses/user_timeline', params, (error, tweets, response) => {
-                return response;
-            });
+        retrieveAuthUserTweets: async (parent, args, user) => {
+            const res = await Client.get('statuses/user_timeline', {screen_name: 'Letterman Icon'}, (error, tweets, response));
+            const { tweets } = res;
+            return tweets;
         }
     }
 };

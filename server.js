@@ -2,10 +2,17 @@
 // ----------------------------------------------------------------------------------------------------- //
 
 require('dotenv').config();
-const { ApolloServer } = require('apollo-server');
+const express = require('express');
+const cors = require('cors');
+const { ApolloServer } = require('apollo-server-express');
 const jwt = require('jsonwebtoken');
 const jwksClient = require('jwks-rsa');
 const { typeDefs, resolvers } = require('./schema');
+
+// ----------------------------------------------------------------------------------------------------- //
+
+const PORT = 4000;
+const app = express();
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
@@ -39,19 +46,22 @@ const server = new ApolloServer({
                     return reject(err);
                 }
                 resolve(decoded);
-                console.log(JSON.stringify(decoded))
             });
         });
         return user;
     }
 });
+app.use(cors())
+server.applyMiddleware({ app });
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
-server.listen().then(({ url }) => {
-    console.log(`🚀  Server ready at ${url}`);
-});
+app.listen({ port: PORT }, () =>
+  console.log(
+    `🚀 Server ready at http://localhost:${PORT}${server.graphqlPath}`
+  )
+);
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
