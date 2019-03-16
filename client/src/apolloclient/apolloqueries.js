@@ -24,10 +24,10 @@ export const GET_AUTHUSER_TWEETS =
         query GetAuthUserTweets {
             retrieveAuthUserTweets {
                 created_at
-                id
-                id_str
-                text
-                truncated
+                # id
+                # id_str
+                # text
+                # truncated
             }
         }
     `;

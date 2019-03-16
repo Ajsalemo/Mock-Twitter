@@ -19,10 +19,10 @@ const typeDefs =
 
         type UserTweets {
             created_at: String!
-            id: String!
-            id_str: String!
-            text: String!
-            truncated: String!
+            # id: String!
+            # id_str: String!
+            # text: String!
+            # truncated: String!
         }
 
         type Query {
@@ -30,7 +30,7 @@ const typeDefs =
         }
 
         type Tweets {
-            retrieveAuthUserTweets: [UserTweets]
+            retrieveAuthUserTweets: UserTweets
         }
     `;
 
@@ -42,10 +42,11 @@ const resolvers = {
         },
     },
     Tweets: {
-        retrieveAuthUserTweets: async (parent, args, user) => {
-            const res = await Client.get('statuses/user_timeline', {screen_name: 'Letterman Icon'}, (error, tweets, response));
-            const { tweets } = res;
-            return tweets;
+        retrieveAuthUserTweets: (parent, args, user) => {
+            // const res = await Client.get('statuses/user_timeline', {screen_name: 'Letterman Icon'}, (error, tweets, response));
+            // const { tweets } = res;
+            // return tweets;
+            return 'hello'
         }
     }
 };
