@@ -22,12 +22,22 @@ export const GET_USER =
 export const GET_AUTHUSER_TWEETS = 
     gql`
         query GetAuthUserTweets {
-            retrieveAuthUserTweets {
+            currentUserTimelineTweets {
                 created_at
-                # id
-                # id_str
-                # text
-                # truncated
+                id
+                id_str
+                text
+                truncated
+                geo
+                coordinates
+                place
+                contributors
+                is_quote_status
+                retweet_count
+                favorite_count
+                favorited
+                retweeted
+                lang
             }
         }
     `;

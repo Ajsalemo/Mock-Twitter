@@ -66,7 +66,7 @@ const SubmitTweet = props => {
                     )
                 }}
             </Query>
-            <Query query={GET_AUTHUSER_TWEETS}>
+            <Query query={GET_AUTHUSER_TWEETS} fetchPolicy='network-only'>
                 {({ loading, error, data }) => {
                     console.log(data)
                     return <div>test</div>

@@ -6,17 +6,17 @@ const Twitter = require('twitter');
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
-const Client = new Twitter({
-    consumer_key: `${process.env.REACT_APP_CLIENT_ID}`,
-    consumer_secret: `${process.env.REACT_APP_CLIENT_SECRET}`,
-    access_token_key: `${process.env.REACT_APP_ACCESS_KEY}`,
-    access_token_secret: `${process.env.REACT_APP_ACCESS_SECRET}`
+const client = new Twitter({
+    consumer_key: '',
+    consumer_secret: '',
+    access_token_key: '',
+    access_token_secret: ''
 });
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
-module.exports = Client;
+module.exports = client;
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
