@@ -23,6 +23,9 @@ export const GET_AUTHUSER_TWEETS =
     gql`
         query GetAuthUserTweets {
             currentUser {
+                picture
+                nickname
+                name
                 userTimelineTweets {
                     created_at
                     id
