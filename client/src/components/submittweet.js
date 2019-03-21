@@ -12,8 +12,11 @@ import Paper from '@material-ui/core/Paper';
 import Avatar from '@material-ui/core/Avatar';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
+// Components
+import Timeline from './timeline';
+
 // Apollo Queries
-import { GET_USER, GET_AUTHUSER_TWEETS } from '../apolloclient/apolloqueries';
+import { GET_USER } from '../apolloclient/apolloqueries';
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
@@ -62,18 +65,13 @@ const SubmitTweet = props => {
                                 variant="outlined"
                             />
                         </Paper>
+                        <Timeline />
                     </Grid>
                     )
                 }}
             </Query>
-            <Query query={GET_AUTHUSER_TWEETS} fetchPolicy='network-only'>
-                {({ loading, error, data }) => {
-                    console.log(data)
-                    return <div>test</div>
-                }}
-            </Query>
         </React.Fragment>
-    )
+    ) 
 };
 
 
