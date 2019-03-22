@@ -31,16 +31,22 @@ const styles = theme => ({
     paperOutline: {
         display: 'flex',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        backgroundColor: '#f0f8ff',
+        borderRadius: '0%'
     },
     formControl: {
         flexBasis: '80%',
         height: '2.1em',
-        margin: '0.6em'
+        margin: '0.6em',
+        backgroundColor: '#fff'
     },
     twitterAvatar: {
         width: 30,
         height: 30
+    },
+    placeholder: {
+        color: 'blue'
     }
 });
 
@@ -63,6 +69,11 @@ const SubmitTweet = props => {
                                 className={classes.formControl}
                                 placeholder="What's happening?"
                                 variant="outlined"
+                                InputProps={{ 
+                                    classes: {
+                                        input: classes.placeholder 
+                                    }
+                                }}
                             />
                         </Paper>
                         <Timeline />

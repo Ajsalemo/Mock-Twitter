@@ -24,6 +24,7 @@ const styles = () => ({
         flexDirection: 'row',
         padding: '1em',
         wordBreak: 'break-word',
+        borderRadius: '0%'
     },
     timelineAvatar: {
         marginRight: '0.5em'
@@ -40,6 +41,12 @@ const styles = () => ({
         fontWeight: '300'
     }
 });
+
+// ----------------------------------------------------------------------------------------------------- //
+
+// const tweetCreatedAtConversion = time => (
+
+// );
 
 // ----------------------------------------------------------------------------------------------------- //
 
@@ -61,7 +68,8 @@ const Timeline = props => {
                                     <Typography variant="subtitle2">
                                         <span>{data.currentUser.name}</span>
                                         <span className={classes.timelineHandleFont}>@{data.currentUser.nickname}</span>
-                                    </Typography>
+                                        <span className={classes.timelineHandleFont}>{timelineTweetInfo.created_at}</span>
+                                       </Typography>
                                     {/* Tweet body */}
                                     <Typography variant="body2" gutterBottom>
                                         <span className={classes.timelimeTweets}>{timelineTweetInfo.text}</span>
