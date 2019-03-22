@@ -3,6 +3,7 @@
 
 import React from 'react';
 import { Query } from "react-apollo";
+import Moment from 'react-moment';
 
 // Material-UI components
 import { withStyles } from '@material-ui/core/styles';
@@ -39,14 +40,11 @@ const styles = () => ({
     },
     timelimeTweets: {
         fontWeight: '300'
+    },
+    timelineDotSpacing: {
+        margin: '0em 0.4em'
     }
 });
-
-// ----------------------------------------------------------------------------------------------------- //
-
-// const tweetCreatedAtConversion = time => (
-
-// );
 
 // ----------------------------------------------------------------------------------------------------- //
 
@@ -68,7 +66,8 @@ const Timeline = props => {
                                     <Typography variant="subtitle2">
                                         <span>{data.currentUser.name}</span>
                                         <span className={classes.timelineHandleFont}>@{data.currentUser.nickname}</span>
-                                        <span className={classes.timelineHandleFont}>{timelineTweetInfo.created_at}</span>
+                                        <span className={classes.timelineDotSpacing}>&#8226;</span>
+                                        <span className={classes.timelineHandleFont}><Moment fromNow>{timelineTweetInfo.created_at}</Moment></span>
                                        </Typography>
                                     {/* Tweet body */}
                                     <Typography variant="body2" gutterBottom>
