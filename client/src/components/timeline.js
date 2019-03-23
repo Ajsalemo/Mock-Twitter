@@ -11,6 +11,10 @@ import Paper from '@material-ui/core/Paper';
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import ChatBubbleOutline from '@material-ui/icons/ChatBubbleOutline';
+import Repeat from '@material-ui/icons/Repeat';
+import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
+import BarChart from '@material-ui/icons/BarChart';
 
 // Apollo Queries
 import { GET_AUTHUSER_TWEETS } from '../apolloclient/apolloqueries';
@@ -43,6 +47,14 @@ const styles = () => ({
     },
     timelineDotSpacing: {
         margin: '0em 0.4em'
+    },
+    timelineIcons: {
+        fontSize: '1.3em',
+        marginRight: '2.7em',
+        '&:hover': {
+            cursor: 'pointer',
+            color: '#005aff59'
+        }
     }
 });
 
@@ -73,6 +85,12 @@ const Timeline = props => {
                                     <Typography variant="body2" gutterBottom>
                                         <span className={classes.timelimeTweets}>{timelineTweetInfo.text}</span>
                                     </Typography>
+                                    <Grid item>
+                                        <ChatBubbleOutline className={classes.timelineIcons} />
+                                        <Repeat className={classes.timelineIcons} />
+                                        <FavoriteBorder className={classes.timelineIcons} />
+                                        <BarChart className={classes.timelineIcons} />
+                                    </Grid>
                                 </Grid>
                             </Paper>
                         )

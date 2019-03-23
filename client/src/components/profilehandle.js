@@ -56,6 +56,9 @@ const styles = ()=> ({
         color: 'gray',
         textAlign: 'left'
     },
+    profileHandlePaper: {
+        borderRadius: '0%'
+    },
     profileTweetCount: {
         color: '#00acee',
         display: 'block',
@@ -80,7 +83,7 @@ const ProfileHandle = props => {
                 return (
                     <Grid item xs={8} sm={8} md={2} className={classes.profileHandlerGrid}>
                         <Paper>
-                            <Card>
+                            <Card className={classes.profileHandlePaper}>
                                 <CardContent className={classes.upperCardContent}></CardContent>          
                                 <Avatar alt="twitter avatar" src={data.currentUser.picture} className={classes.twitterAvatar} /> 
                                 <CardContent className={classes.rootClass}>

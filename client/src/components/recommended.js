@@ -26,6 +26,9 @@ const styles = () => ({
     },
     cardPadding: {
         padding: '15px'
+    },
+    recommendedCard: {
+        borderRadius: '0%'
     }
 });
 
@@ -36,7 +39,7 @@ const Recommended = props => {
     return (
         <Grid item xs={8} sm={8} md={2}>
             <Paper>
-                <Card>
+                <Card className={classes.recommendedCard}>
                     <CardContent classes={{ root: classes.cardPadding }}>
                         <Typography variant="h6" gutterBottom>
                             <span className={classes.spacing}>Who to follow</span> 
