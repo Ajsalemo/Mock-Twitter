@@ -2,7 +2,7 @@
 // ----------------------------------------------------------------------------------------------------- //
 
 import React from 'react';
-import { Query } from "react-apollo";
+import { Query } from 'react-apollo';
 import Moment from 'react-moment';
 
 // Material-UI components

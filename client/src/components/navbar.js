@@ -3,7 +3,7 @@
 
 import React from 'react';
 import classNames from 'classnames';
-import { Query } from "react-apollo";
+import { Query } from 'react-apollo';
 
 // Material-UI components
 import { withStyles } from '@material-ui/core/styles';

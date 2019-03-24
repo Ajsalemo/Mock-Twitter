@@ -7,10 +7,10 @@ const Twitter = require('twitter');
 // ----------------------------------------------------------------------------------------------------- //
 
 const client = new Twitter({
-    consumer_key: '',
-    consumer_secret: '',
-    access_token_key: '',
-    access_token_secret: ''
+    consumer_key: 'gVPa2mQvU0NMpYVgMyH2bdbiI',
+    consumer_secret: 'yAqrTk5KIubTgp7l6rfVF7IwkDxkDgo62HTWZ5TlRcTzQNwCWr',
+    access_token_key: '966801592073773056-iZXVMkV8gqz7VyBA1dcVA8JoEo4icBW',
+    access_token_secret: 'iUzuzDhiLLJOmWm7COtbZJULGZGudeWu8IEYsHwKiAchF'
 });
 
 // ----------------------------------------------------------------------------------------------------- //
