@@ -13,6 +13,10 @@ const typeDefs =
             currentUser: User
         }
 
+        type Mutation {
+            createTweet(text: String!): UserTimelineTweets
+        }
+
         type User {
             sub: String!
             nickname: String!
@@ -46,7 +50,7 @@ const resolvers = {
     Query: {
         // The 3rd argument(user) is being pulled off of the context in server.js
         currentUser: (parent, args, user) => {
-            return user
+            return user;
         }
     },
     User: {
@@ -54,6 +58,13 @@ const resolvers = {
             const requestUserTimelineTweets = await client.get('statuses/user_timeline', { screen_name: user.name });
             const responserUserTimelineTweets = await requestUserTimelineTweets;
             return responserUserTimelineTweets
+        }
+    },
+    Mutation: {
+        createTweet: async (parent, args, context) => {
+            const addNewTweetRequest = await client.post('statuses/update', { status: args.text });
+            const addNewTweetResponse = await addNewTweetRequest;
+            return addNewTweetResponse;
         }
     }
 };
