@@ -14,7 +14,7 @@ import Avatar from '@material-ui/core/Avatar';
 import { withStyles } from '@material-ui/core/styles';
 
 // Apollo Mutations
-import { CREATE_USER_TWEET } from '../apolloclient/apolloqueries';
+import { CREATE_USER_TWEET, GET_AUTHUSER_TWEETS } from '../apolloclient/apolloqueries';
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
@@ -71,7 +71,7 @@ const SubmitTweetForm = props => {
     const { classes, data } = props;
     return (
         <React.Fragment>
-            <Mutation mutation={CREATE_USER_TWEET}>
+            <Mutation mutation={CREATE_USER_TWEET} refetchQueries={[{ query: GET_AUTHUSER_TWEETS }]}>
                 {(createTweetProp, { loading }) => (
                     <Formik
                         initialValues={{ tweet: '' }}

@@ -58,13 +58,17 @@ const styles = () => ({
     }
 });
 
+const pollMinute = (a, b) => {
+    return a * b;
+};
+
 // ----------------------------------------------------------------------------------------------------- //
 
 const Timeline = props => {
     const { classes } = props;
     return (
         <React.Fragment>
-            <Query query={GET_AUTHUSER_TWEETS} fetchPolicy='network-only'>
+            <Query query={GET_AUTHUSER_TWEETS} pollInterval={pollMinute(1000, 60)} fetchPolicy='network-only'>
                 {({ loading, error, data }) => {
                     if (loading) return <div><CircularProgress /></div>;
                     if (error) console.log(error);
