@@ -13,6 +13,7 @@ import ProfileHandle from '../../components/profilehandle';
 import Grid from '@material-ui/core/Grid';
 import SubmitTweet from '../../components/submittweet';
 import Recommended from '../../components/recommended';
+import Trending from '../../components/trending';
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
@@ -21,6 +22,9 @@ const styles = () => ({
     containerStyle: {
         marginTop: '3.5em',
         justifyContent: 'center'
+    },
+    profileHandlerGrid: {
+        width: 'auto'
     }
 });
 
@@ -33,7 +37,10 @@ class Main extends Component {
             <React.Fragment>
                 <Navbar />
                 <Grid container className={classes.containerStyle}>
-                    <ProfileHandle />
+                    <Grid item xs={8} sm={8} md={2} className={classes.profileHandlerGrid}>
+                        <ProfileHandle />
+                        <Trending />
+                    </Grid>
                     <SubmitTweet />
                     <Recommended />
                 </Grid>
