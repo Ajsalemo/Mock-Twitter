@@ -17,7 +17,7 @@ import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
 import BarChart from '@material-ui/icons/BarChart';
 
 // Apollo Queries
-import { GET_AUTHUSER_TWEETS } from '../apolloclient/apolloqueries';
+import { GET_AUTHUSER_TWEETS, GET_TRENDING_TOPICS } from '../apolloclient/apolloqueries';
 import { Grid } from '@material-ui/core';
 
 // ----------------------------------------------------------------------------------------------------- //

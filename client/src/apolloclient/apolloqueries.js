@@ -46,6 +46,23 @@ export const GET_AUTHUSER_TWEETS =
             }
         }
     `;
+
+export const GET_TRENDING_TOPICS =
+    gql`
+        query GetTrendingTopics {
+            currentUser {
+                trendingTopics {   
+                    trends {
+                        name
+                        url
+                        promoted_content
+                        query
+                        tweet_volume
+                    } 
+                }
+            }
+        }
+    `;
 // ------------------------------------------------------------------------------------------------------ //
 // ---------------------------------------------- Mutations --------------------------------------------- //
 

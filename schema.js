@@ -9,14 +9,17 @@ const client = require('./client/src/twitterkeys');
 
 const typeDefs =
     gql`
+        # Root Query
         type Query {
             currentUser: User
         }
 
+        # Root Mutation
         type Mutation {
             createTweet(text: String!): UserTimelineTweets
         }
 
+        # User Object
         type User {
             sub: String!
             nickname: String!
@@ -24,6 +27,11 @@ const typeDefs =
             picture: String!
             updated_at: String!
             userTimelineTweets: [UserTimelineTweets]
+            trendingTopics: [trendsWrapper]
+        }
+
+        type trendsWrapper {
+            trends: [TrendingTopics]
         }
 
         # Object for the API call to Twitters 'Statuses/user_timeline' path
@@ -44,6 +52,14 @@ const typeDefs =
             retweeted: String,
             lang: String
         }
+
+        type TrendingTopics {
+            name: String
+            url: String
+            promoted_content: String
+            query: String
+            tweet_volume: String
+        }
     `;
 
 const resolvers = {
@@ -58,6 +74,11 @@ const resolvers = {
             const requestUserTimelineTweets = await client.get('statuses/user_timeline', { screen_name: user.name });
             const responserUserTimelineTweets = await requestUserTimelineTweets;
             return responserUserTimelineTweets
+        },
+        trendingTopics: async (parent, args, context) => {
+            const getTrendingTopicsRequest = await client.get('trends/place', { id: 1 });
+            const getTrendingTopicsResponse = await getTrendingTopicsRequest;
+            return getTrendingTopicsResponse
         }
     },
     Mutation: {
