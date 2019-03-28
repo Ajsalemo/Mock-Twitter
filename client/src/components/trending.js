@@ -33,7 +33,11 @@ const styles = () => ({
         paddingBottom: '0.5em'
     },
     trendingNamesColor: {
-        color: '#00acee'
+        color: '#00acee',
+        textDecoration: 'none',
+        '&:hover': {
+            textDecoration: 'underline'
+        }
     },
     trendingTweetNumber: {
         lineHeight: '0.75'
@@ -67,15 +71,15 @@ const Trending = props => {
                                     console.log(trendingArrayInner.promoted_content)
                                     return (
                                         <React.Fragment>
-                                            <CardContent className={classes.cardContentBottom} key={i}>
-                                                <Typography variant="subtitle2"className={classes.trendingNamesColor}>
-                                                    {trendingArrayInner.name}
+                                            <CardContent className={classes.cardContentBottom} key={j}>
+                                                <Typography variant="subtitle2">
+                                                <a href={trendingArrayInner.url} className={classes.trendingNamesColor}>{trendingArrayInner.name}</a>
                                                 </Typography>
                                                 <Typography variant="subtitle1" gutterBottom className={classes.trendingTweetNumber}>
                                                     {trendingArrayInner.tweet_volume
                                                         ?
                                                     <span className={classes.trendingTweetsFont}>
-                                                        {trendingArrayInner.tweet_volume}K Tweets
+                                                        {trendingArrayInner.tweet_volume} Tweets
                                                     </span>
                                                         :
                                                     null}
