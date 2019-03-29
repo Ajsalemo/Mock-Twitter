@@ -72,7 +72,6 @@ const Timeline = props => {
                 {({ loading, error, data }) => {
                     if (loading) return <div><CircularProgress /></div>;
                     if (error) console.log(error);
-
                     return data.currentUser.userTimelineTweets.map((timelineTweetInfo, i) => {
                         return (
                             <Paper className={classes.timelinePaper} key={i}>

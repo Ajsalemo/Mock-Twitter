@@ -68,7 +68,6 @@ const Trending = props => {
                             </CardContent>
                             {data.currentUser.trendingTopics.map((trendingArray, i) => {
                                 return trendingArray.trends.map((trendingArrayInner, j) => {
-                                    console.log(trendingArrayInner.promoted_content)
                                     return (
                                         <React.Fragment>
                                             <CardContent className={classes.cardContentBottom} key={j}>

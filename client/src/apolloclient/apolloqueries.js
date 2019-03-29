@@ -42,6 +42,9 @@ export const GET_AUTHUSER_TWEETS =
                     favorited
                     retweeted
                     lang
+                    user {
+                        statuses_count
+                    }
                 }
             }
         }

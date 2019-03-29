@@ -51,6 +51,11 @@ const typeDefs =
             favorited: String,
             retweeted: String,
             lang: String
+            user: StatusCount
+        }
+
+        type StatusCount {
+            statuses_count: String
         }
 
         type TrendingTopics {

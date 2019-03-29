@@ -94,6 +94,9 @@ const styles = theme => ({
     },
     toolBar: {
         justifyContent: 'center'
+    },
+    navTextField: {
+        height: '-webkit-fill-available'
     }
 });
 
@@ -143,7 +146,10 @@ const Navbar = props => {
                                             >
                                             </Search>
                                         </InputAdornment>
-                                        )
+                                        ),
+                                        classes: {
+                                            root: classes.navTextField
+                                        }
                                     }}
                                 />
                                 <Avatar alt="twitter avatar" src={data.currentUser.picture} className={classNames(classes.twitterAvatar, classes.avatarMediaQuery)} /> 

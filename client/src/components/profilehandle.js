@@ -14,7 +14,7 @@ import Typography from '@material-ui/core/Typography';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 // Apollo Queries
-import { GET_USER } from '../apolloclient/apolloqueries';
+import { GET_USER, GET_AUTHUSER_TWEETS } from '../apolloclient/apolloqueries';
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
@@ -89,10 +89,22 @@ const ProfileHandle = props => {
                                     </div>
                                 </Typography>
                                 <Typography variant="subtitle2" gutterBottom>
-                                    <div className={classes.profileTweetSpan}>
-                                        <span>Tweets</span>
-                                        <span className={classes.profileTweetCount}>5</span>
-                                    </div>
+                                    {/* Nested Query to retrieve total tweet count for the account */}
+                                    <Query query={GET_AUTHUSER_TWEETS}>
+                                        {({ loading, error, data }) => {
+                                            if (loading) return <div><CircularProgress /></div>;
+                                            if (error) console.log(error);
+
+                                            return (
+                                                <div className={classes.profileTweetSpan}>
+                                                    <span>Tweets</span>
+                                                    <span className={classes.profileTweetCount}>
+                                                        {data.currentUser.userTimelineTweets[0].user.statuses_count}
+                                                    </span>
+                                                </div>        
+                                            )
+                                        }}
+                                    </Query>
                                 </Typography>
                             </CardContent>
                         </Card>

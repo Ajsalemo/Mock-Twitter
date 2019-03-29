@@ -46,7 +46,7 @@ const styles = () => ({
         marginTop: '0.5em'
     },
     placeholder: {
-        color: 'blue',
+        color: 'blue'
     },
     activeInputField: {
         width: '100%',
@@ -101,7 +101,8 @@ const SubmitTweetForm = props => {
                                         onChange={props.handleChange}
                                         InputProps={{ 
                                             classes: {
-                                                input: props.values.tweet ? classNames(classes.placeholder, classes.activeTextField) : classes.placeholder
+                                                input: props.values.tweet ? classNames(classes.placeholder, classes.activeTextField) : classes.placeholder,
+                                                root: classes.activeTextField
                                             }
                                         }}
                                     />
