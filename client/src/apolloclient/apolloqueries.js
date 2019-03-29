@@ -66,6 +66,19 @@ export const GET_TRENDING_TOPICS =
             }
         }
     `;
+
+export const GET_SUGGESTED_CATEGORIES = 
+    gql`
+        query GetSuggestedCategories {
+            currentUser {
+                suggestedCategory {
+                    name
+                    slug
+                    size
+                }
+            }
+        }
+    `;
 // ------------------------------------------------------------------------------------------------------ //
 // ---------------------------------------------- Mutations --------------------------------------------- //
 

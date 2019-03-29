@@ -14,7 +14,7 @@ import Typography from '@material-ui/core/Typography';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 // Apollo Queries
-import { GET_USER, GET_AUTHUSER_TWEETS } from '../apolloclient/apolloqueries';
+import { GET_USER, GET_AUTHUSER_TWEETS, GET_SUGGESTED_CATEGORIES } from '../apolloclient/apolloqueries';
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
@@ -102,6 +102,16 @@ const ProfileHandle = props => {
                                                         {data.currentUser.userTimelineTweets[0].user.statuses_count}
                                                     </span>
                                                 </div>        
+                                            )
+                                        }}
+                                    </Query>
+                                    <Query query={GET_SUGGESTED_CATEGORIES}>
+                                        {({ loading, error, data }) => {
+                                            if (loading) return <div><CircularProgress /></div>;
+                                            if (error) console.log(error);   
+                                            console.log(data)
+                                            return (
+                                                <div>test</div>
                                             )
                                         }}
                                     </Query>

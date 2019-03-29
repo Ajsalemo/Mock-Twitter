@@ -28,8 +28,10 @@ const typeDefs =
             updated_at: String!
             userTimelineTweets: [UserTimelineTweets]
             trendingTopics: [trendsWrapper]
+            suggestedCategory: [SuggestedCategory]
         }
 
+        # Object wrapper to iterate
         type trendsWrapper {
             trends: [TrendingTopics]
         }
@@ -41,29 +43,38 @@ const typeDefs =
             id_str: String
             text: String
             truncated: String
-            geo: String,
-            coordinates: String,
-            place: String,
-            contributors: String,
-            is_quote_status: String,
-            retweet_count: String,
-            favorite_count: String,
-            favorited: String,
-            retweeted: String,
+            geo: String
+            coordinates: String
+            place: String
+            contributors: String
+            is_quote_status: String
+            retweet_count: String
+            favorite_count: String
+            favorited: String
+            retweeted: String
             lang: String
             user: StatusCount
         }
 
+        # Total tweets for the users account
         type StatusCount {
             statuses_count: String
         }
 
+        # Currently trending topics
         type TrendingTopics {
             name: String
             url: String
             promoted_content: String
             query: String
             tweet_volume: String
+        }
+
+        # Suggested categories to follow
+        type SuggestedCategory {
+            name: String
+            slug: String
+            size: String
         }
     `;
 
@@ -84,6 +95,12 @@ const resolvers = {
             const getTrendingTopicsRequest = await client.get('trends/place', { id: 1 });
             const getTrendingTopicsResponse = await getTrendingTopicsRequest;
             return getTrendingTopicsResponse
+        },
+        suggestedCategory: async (parent, args, user) => {
+            const suggestedCategoryRequest = await client.get('users/suggestions', { screen_name: user.name });
+            const suggestedCategoryResponse = await suggestedCategoryRequest;
+            console.log(suggestedCategoryResponse)
+            return suggestedCategoryResponse
         }
     },
     Mutation: {
