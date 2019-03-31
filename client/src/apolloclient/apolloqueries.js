@@ -79,6 +79,22 @@ export const GET_SUGGESTED_CATEGORIES =
             }
         }
     `;
+
+export const GET_SUGGESTED_CATEGORIES_MEMBERS_GROUP =
+    gql`
+        query GetSuggestedCategoriesMembersGroup($slug: String!) {
+            currentUser {
+                suggestedCategorySlug(slug: $slug) {
+                    users {
+                        name
+                        screen_name
+                        profile_image_url_https
+                        verified
+                    }
+                }
+            }
+        }
+    `;
 // ------------------------------------------------------------------------------------------------------ //
 // ---------------------------------------------- Mutations --------------------------------------------- //
 

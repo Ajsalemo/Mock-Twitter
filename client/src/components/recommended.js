@@ -19,7 +19,10 @@ import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 // Apollo Queries
-import { GET_SUGGESTED_CATEGORIES } from '../apolloclient/apolloqueries';
+import { GET_SUGGESTED_CATEGORIES, GET_SUGGESTED_CATEGORIES_MEMBERS_GROUP } from '../apolloclient/apolloqueries';
+
+// Components
+import SuggestedUsers from '../components/suggestedusers';
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
@@ -52,6 +55,10 @@ const styles = () => ({
         '&:before': {
             backgroundColor: '#fff'
         }
+    },
+    expansionPanelDetails: {
+        display: 'flex',
+        flexDirection: 'column'
     }
 });
 
@@ -60,28 +67,28 @@ const styles = () => ({
 const Recommended = props => {
     const { classes } = props;
     return (
-        <Grid item xs={8} sm={8} md={2}>
-            <Paper>
-                <Card className={classes.recommendedCard}>
-                    <CardContent classes={{ root: classes.cardPadding }}>
-                        <Typography variant="h6" gutterBottom>
-                            <span className={classes.spacing}>Who to follow</span> 
-                            &#8226;
-                            <span className={classes.spanLink}>
-                                <Link to='#/' className={classes.links}>Refresh</Link>
-                            </span>
-                            &#8226;
-                            <span className={classes.spanLink}>
-                                <Link to='#/' className={classes.links}>View all</Link>
-                            </span>
-                        </Typography>
-                        <Query query={GET_SUGGESTED_CATEGORIES}>
-                            {({ loading, error, data }) => {
-                                if (loading) return <div><CircularProgress /></div>;
-                                if (error) console.log(error);   
-                                
-                                return (
-                                    data.currentUser.suggestedCategory.map((categories, i) => {
+        <React.Fragment>
+            <Grid item xs={8} sm={8} md={2}>
+                <Paper>
+                    <Card className={classes.recommendedCard}>
+                        <CardContent classes={{ root: classes.cardPadding }}>
+                            <Typography variant="h6" gutterBottom>
+                                <span className={classes.spacing}>Who to follow</span>
+                                &#8226;
+                                <span className={classes.spanLink}>
+                                    <Link to='#/' className={classes.links}>Refresh</Link>
+                                </span>
+                                &#8226;
+                                <span className={classes.spanLink}>
+                                    <Link to='#/' className={classes.links}>View all</Link>
+                                </span>
+                            </Typography>
+                            <Query query={GET_SUGGESTED_CATEGORIES}>
+                                {({ loading, error, data }) => {
+                                    if (loading) return <div><CircularProgress /></div>;
+                                    if (error) console.log(error);
+
+                                    return data.currentUser.suggestedCategory.map((categories, i) => {
                                         return (
                                             <ExpansionPanel key={i} classes={{ root: classes.expansionpanel }}>
                                                 <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
@@ -89,19 +96,34 @@ const Recommended = props => {
                                                         {categories.name}
                                                     </Typography>
                                                 </ExpansionPanelSummary>
-                                                <ExpansionPanelDetails>
-                                                    TBD
+                                                <ExpansionPanelDetails className={classes.expansionPanelDetails}>
+                                                    <Query query={GET_SUGGESTED_CATEGORIES_MEMBERS_GROUP} variables={{ slug: categories.slug }}>
+                                                        {({ loading, error, data }) => {
+                                                            if (loading) return <div><CircularProgress /></div>;
+                                                            if (error) console.log(error);
+                                                            console.log(data)
+                                                            return data.currentUser.suggestedCategorySlug.users.map((userInfo, j) => {
+                                                                return (
+                                                                    <SuggestedUsers
+                                                                        key={j}
+                                                                        alt={userInfo.name}
+                                                                        src={userInfo.profile_image_url_https}
+                                                                    />
+                                                                )
+                                                            })
+                                                        }}
+                                                    </Query>
                                                 </ExpansionPanelDetails>
                                             </ExpansionPanel>
                                         )
                                     })
-                                )   
-                            }}
-                        </Query>
-                    </CardContent>
-                </Card>
-            </Paper>
-        </Grid>
+                                }}
+                            </Query>
+                        </CardContent>
+                    </Card>
+                </Paper>
+            </Grid>
+        </React.Fragment>
     )
 };
 

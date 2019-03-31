@@ -29,6 +29,7 @@ const typeDefs =
             userTimelineTweets: [UserTimelineTweets]
             trendingTopics: [trendsWrapper]
             suggestedCategory: [SuggestedCategory]
+            suggestedCategorySlug(slug: String!): SuggestedCategorySlug
         }
 
         # Object wrapper to iterate
@@ -76,6 +77,49 @@ const typeDefs =
             slug: String
             size: String
         }
+
+        # Suggested categories to follow
+        type SuggestedCategorySlug {
+            name: String
+            slug: String
+            size: String
+            users: [UserObject]
+        }
+
+        # Suggested catergory members 
+        type UserObject {
+            id: String
+            id_str: String
+            name: String
+            screen_name: String
+            location: String
+            url: String
+            description: String
+            derived: String
+            verified: Boolean
+            followers_count: String
+            friends_count: Int
+            listed_count: Int
+            favourites_count: Int
+            statuses_count: Int
+            created_at: String
+            geo_enabled: Boolean
+            lang: String
+            profile_background_color: String
+            profile_background_image_url: String
+            profile_background_image_url_https: String
+            profile_background_tile: String
+            profile_banner_url: String
+            profile_image_url: String
+            profile_image_url_https: String
+            profile_link_color: String
+            profile_sidebar_border_color: String
+            profile_sidebar_fill_color: String
+            profile_text_color: String
+            profile_use_background_image: String
+            default_profile: Boolean
+            default_profile_image: Boolean
+        }
     `;
 
 const resolvers = {
@@ -99,8 +143,13 @@ const resolvers = {
         suggestedCategory: async (parent, args, user) => {
             const suggestedCategoryRequest = await client.get('users/suggestions', { screen_name: user.name });
             const suggestedCategoryResponse = await suggestedCategoryRequest;
-            console.log(suggestedCategoryResponse)
             return suggestedCategoryResponse
+        },
+        suggestedCategorySlug: async (parent, args, user) => {
+            const categorySlugRequest = await client.get(`users/suggestions/${args.slug}`, { screen_name: user.name });
+            const categorySlugResponse = await categorySlugRequest;
+            console.log(categorySlugResponse)
+            return categorySlugResponse
         }
     },
     Mutation: {
