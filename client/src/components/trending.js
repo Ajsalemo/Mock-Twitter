@@ -72,7 +72,7 @@ const Trending = props => {
                                         <React.Fragment>
                                             <CardContent className={classes.cardContentBottom} key={j}>
                                                 <Typography variant="subtitle2">
-                                                <a href={trendingArrayInner.url} className={classes.trendingNamesColor}>{trendingArrayInner.name}</a>
+                                                    <a href={trendingArrayInner.url} className={classes.trendingNamesColor}>{trendingArrayInner.name}</a>
                                                 </Typography>
                                                 <Typography variant="subtitle1" gutterBottom className={classes.trendingTweetNumber}>
                                                     {trendingArrayInner.tweet_volume

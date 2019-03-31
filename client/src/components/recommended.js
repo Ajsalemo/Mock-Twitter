@@ -2,6 +2,7 @@
 // ----------------------------------------------------------------------------------------------------- //
 
 import React from 'react';
+import { Query } from 'react-apollo';
 import { Link } from 'react-router-dom';
 
 // Material-UI components
@@ -11,6 +12,14 @@ import Paper from '@material-ui/core/Paper';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import ExpansionPanel from '@material-ui/core/ExpansionPanel';
+import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+
+// Apollo Queries
+import { GET_SUGGESTED_CATEGORIES } from '../apolloclient/apolloqueries';
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
@@ -29,6 +38,20 @@ const styles = () => ({
     },
     recommendedCard: {
         borderRadius: '0%'
+    },
+    categoriesName: {
+        color: '#00acee',
+        textDecoration: 'none',
+        '&:hover': {
+            textDecoration: 'underline',
+            cursor: 'pointer'
+        }
+    },
+    expansionpanel: {
+        boxShadow: 'none',
+        '&:before': {
+            backgroundColor: '#fff'
+        }
     }
 });
 
@@ -52,6 +75,29 @@ const Recommended = props => {
                                 <Link to='#/' className={classes.links}>View all</Link>
                             </span>
                         </Typography>
+                        <Query query={GET_SUGGESTED_CATEGORIES}>
+                            {({ loading, error, data }) => {
+                                if (loading) return <div><CircularProgress /></div>;
+                                if (error) console.log(error);   
+                                
+                                return (
+                                    data.currentUser.suggestedCategory.map((categories, i) => {
+                                        return (
+                                            <ExpansionPanel key={i} classes={{ root: classes.expansionpanel }}>
+                                                <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+                                                    <Typography variant="subtitle2" className={classes.categoriesName}>
+                                                        {categories.name}
+                                                    </Typography>
+                                                </ExpansionPanelSummary>
+                                                <ExpansionPanelDetails>
+                                                    TBD
+                                                </ExpansionPanelDetails>
+                                            </ExpansionPanel>
+                                        )
+                                    })
+                                )   
+                            }}
+                        </Query>
                     </CardContent>
                 </Card>
             </Paper>
