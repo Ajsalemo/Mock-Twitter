@@ -58,7 +58,10 @@ const styles = () => ({
     },
     expansionPanelDetails: {
         display: 'flex',
-        flexDirection: 'column'
+        flexDirection: 'column',
+        padding: '0em',
+        whiteSpace: 'nowrap',
+        overflow: 'hidden'
     }
 });
 
@@ -97,6 +100,7 @@ const Recommended = props => {
                                                     </Typography>
                                                 </ExpansionPanelSummary>
                                                 <ExpansionPanelDetails className={classes.expansionPanelDetails}>
+                                                    {/* Nested Query to display twitter users of the categories being looped over */}
                                                     <Query query={GET_SUGGESTED_CATEGORIES_MEMBERS_GROUP} variables={{ slug: categories.slug }}>
                                                         {({ loading, error, data }) => {
                                                             if (loading) return <div><CircularProgress /></div>;
@@ -106,8 +110,10 @@ const Recommended = props => {
                                                                 return (
                                                                     <SuggestedUsers
                                                                         key={j}
-                                                                        alt={userInfo.name}
+                                                                        name={userInfo.name}
+                                                                        screen_name={userInfo.screen_name}
                                                                         src={userInfo.profile_image_url_https}
+                                                                        verified={userInfo.verified}
                                                                     />
                                                                 )
                                                             })
