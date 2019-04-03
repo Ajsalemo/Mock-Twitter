@@ -2,6 +2,7 @@
 // ----------------------------------------------------------------------------------------------------- //
 
 import React from 'react';
+import { Mutation } from 'react-apollo';
 
 // Material-UI components
 import Avatar from '@material-ui/core/Avatar';
@@ -12,6 +13,7 @@ import { withStyles } from '@material-ui/core/styles';
 
 // Images
 import verifiedIcon from '../images/verifiedicon.png';
+import { FOLLOW_USER } from '../apolloclient/apolloqueries';
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
@@ -54,31 +56,42 @@ const styles = () => ({
 // ----------------------------------------------------------------------------------------------------- //
 
 const SuggestedUsers = props => {
-    const { src, name, classes, verified, screen_name } = props;
+    const { src, name, classes, verified, screen_name, id } = props;
     return (
-        <Grid item className={classes.suggestedUsersGrid}>
-            <Avatar alt={`${name} avatar`} src={src} />
-            <Typography variant="subtitle2" className={classes.suggestedUsersNameContainer}>
-                <span className={classes.suggestUsersName}>
-                    {name}
-                    {verified === true 
-                        ? 
-                    <img src={verifiedIcon} className={classes.verifiedIcon} alt="verified account" />
-                        : 
-                    null}
-                    <span className={classes.suggestUsersScreenName}>@{screen_name}</span>
-                </span>
-                <Fab 
-                    variant="extended" 
-                    aria-label="Follow user"
-                    classes={{
-                        root: classes.followUserButton
-                    }}
-                >
-                    Follow
-                </Fab>
-            </Typography>
-        </Grid>
+        <React.Fragment>
+            <Mutation mutation={FOLLOW_USER}>
+                {(followUserProp, { loading }) => (
+                    <Grid item className={classes.suggestedUsersGrid}>
+                        <Avatar alt={`${name} avatar`} src={src} />
+                        <Typography variant="subtitle2" className={classes.suggestedUsersNameContainer}>
+                            <span className={classes.suggestUsersName}>
+                                {name}
+                                {verified === true 
+                                    ? 
+                                <img src={verifiedIcon} className={classes.verifiedIcon} alt="verified account" />
+                                    : 
+                                null}
+                                <span className={classes.suggestUsersScreenName}>@{screen_name}</span>
+                            </span>
+                            <Fab 
+                                onClick={() => followUserProp({
+                                    variables: {
+                                        id: id
+                                    }
+                                })}
+                                variant="extended" 
+                                aria-label="Follow user"
+                                classes={{
+                                    root: classes.followUserButton
+                                }}
+                            >
+                                Follow
+                            </Fab>
+                        </Typography>
+                    </Grid>                
+                )}
+            </Mutation>
+        </React.Fragment>
     )
 };
 

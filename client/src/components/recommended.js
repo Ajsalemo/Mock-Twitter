@@ -110,6 +110,7 @@ const Recommended = props => {
                                                                 return (
                                                                     <SuggestedUsers
                                                                         key={j}
+                                                                        id={userInfo.id}
                                                                         name={userInfo.name}
                                                                         screen_name={userInfo.screen_name}
                                                                         src={userInfo.profile_image_url_https}

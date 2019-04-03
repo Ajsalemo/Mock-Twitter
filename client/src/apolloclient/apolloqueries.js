@@ -86,6 +86,7 @@ export const GET_SUGGESTED_CATEGORIES_MEMBERS_GROUP =
             currentUser {
                 suggestedCategorySlug(slug: $slug) {
                     users {
+                        id
                         name
                         screen_name
                         profile_image_url_https
@@ -103,6 +104,17 @@ export const CREATE_USER_TWEET =
         mutation CreateTweet($text: String!) {
             createTweet(text: $text) {
                 text
+            }
+        }
+    `;
+
+export const FOLLOW_USER = 
+    gql`
+        mutation FollowUser($id: String!) {
+            followUser(id: $id) {
+                id
+                name
+                screen_name
             }
         }
     `;

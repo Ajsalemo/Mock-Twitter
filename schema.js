@@ -17,6 +17,7 @@ const typeDefs =
         # Root Mutation
         type Mutation {
             createTweet(text: String!): UserTimelineTweets
+            followUser(id: String!): UserObject
         }
 
         # User Object
@@ -148,7 +149,6 @@ const resolvers = {
         suggestedCategorySlug: async (parent, args, user) => {
             const categorySlugRequest = await client.get(`users/suggestions/${args.slug}`, { screen_name: user.name });
             const categorySlugResponse = await categorySlugRequest;
-            console.log(categorySlugResponse)
             return categorySlugResponse
         }
     },
@@ -157,6 +157,12 @@ const resolvers = {
             const addNewTweetRequest = await client.post('statuses/update', { status: args.text });
             const addNewTweetResponse = await addNewTweetRequest;
             return addNewTweetResponse;
+        },
+        followUser: async (parent, args, user) => {
+            const followUserRequest = await client.post('friendships/create', { id: args.id, scree_name: user.name });
+            const followUserResponse = await followUserRequest;
+            console.log(followUserResponse);
+            return followUserResponse
         }
     }
 };
