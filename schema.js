@@ -31,6 +31,7 @@ const typeDefs =
             trendingTopics: [trendsWrapper]
             suggestedCategory: [SuggestedCategory]
             suggestedCategorySlug(slug: String!): SuggestedCategorySlug
+            compareRelationship(target_screenName: String!, source_screenName: String!): RelationshipWrapper 
         }
 
         # Object wrapper to iterate
@@ -121,7 +122,34 @@ const typeDefs =
             default_profile: Boolean
             default_profile_image: Boolean
         }
+
+        # Friendship/followers relationship object wrapper
+        type RelationshipWrapper {
+            relationship: Relationship
+        }
+
+        # Friendship/followers relationship object
+        type Relationship {
+            source: Source
+            target: Target
+        }
+
+        # Friendship/followers comparison
+        type Source {
+            id: String!
+            screen_name: String!
+            following: Boolean
+        }
+
+        # Friendship/followers comparison
+        type Target {
+            id: String!
+            screen_name: String!
+        }
     `;
+
+// ----------------------------------------------------------------------------------------------------- //
+// ----------------------------------------------------------------------------------------------------- //
 
 const resolvers = {
     Query: {
@@ -150,6 +178,12 @@ const resolvers = {
             const categorySlugRequest = await client.get(`users/suggestions/${args.slug}`, { screen_name: user.name });
             const categorySlugResponse = await categorySlugRequest;
             return categorySlugResponse
+        },
+        compareRelationship: async (parent, args, user) => {
+            const compareRelationshipRequest = await client.get(`friendships/show`, { source_screen_name: args.source_screenName, target_screen_name: args.target_screenName });
+            const compareRelationshipResponse = await compareRelationshipRequest;
+            console.log(compareRelationshipResponse)
+            return compareRelationshipResponse
         }
     },
     Mutation: {
@@ -161,7 +195,6 @@ const resolvers = {
         followUser: async (parent, args, user) => {
             const followUserRequest = await client.post('friendships/create', { id: args.id, scree_name: user.name });
             const followUserResponse = await followUserRequest;
-            console.log(followUserResponse);
             return followUserResponse
         }
     }

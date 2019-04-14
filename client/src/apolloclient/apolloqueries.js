@@ -96,6 +96,27 @@ export const GET_SUGGESTED_CATEGORIES_MEMBERS_GROUP =
             }
         }
     `;
+
+export const GET_FRIENDSHIP_COMPARISONS = 
+    gql`
+        query GetFriendshipComparisons($target_screenName: String!, $source_screenName: String!) {
+            currentUser {
+                compareRelationship(target_screenName: $target_screenName, source_screenName: $source_screenName) {
+                    relationship {
+                        source {
+                            id
+                            screen_name
+                            following
+                        }
+                        target {
+                            id
+                            screen_name
+                        }
+                    }
+                }
+            }
+        }
+    `;
 // ------------------------------------------------------------------------------------------------------ //
 // ---------------------------------------------- Mutations --------------------------------------------- //
 

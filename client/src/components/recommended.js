@@ -104,10 +104,8 @@ const Recommended = props => {
                                                     <Query query={GET_SUGGESTED_CATEGORIES_MEMBERS_GROUP} variables={{ slug: categories.slug }}>
                                                         {({ loading, error, data }) => {
                                                             if (loading) return <div><CircularProgress /></div>;
-                                                            if (error) console.log(error);
-                                                            console.log(data)
-                                                            return data.currentUser.suggestedCategorySlug.users.map((userInfo, j) => {
-                                                                return (
+                                                            if (error) console.log(error);                                                            return data.currentUser.suggestedCategorySlug.users.map((userInfo, j) => {
+                                                            return (
                                                                     <SuggestedUsers
                                                                         key={j}
                                                                         id={userInfo.id}
