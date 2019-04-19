@@ -17,10 +17,13 @@ import { UNFOLLOW_USER, COMPARE_FRIENDSHIPS} from '../apolloclient/apolloqueries
 
 const styles = () => ({
     followUserButton: {
-        backgroundColor: '#fff',
-        color: '#00acee',
+        backgroundColor: '#00acee',
+        color: '#fff',
         height: '2em',
-        width: '5em'
+        width: '6em',
+        '&:hover': {
+            backgroundColor: '#800000b3'
+        }
     }
 });
 

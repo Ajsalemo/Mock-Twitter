@@ -201,7 +201,7 @@ const resolvers = {
             return followUserResponse;
         },
         unfollowUser: async (parent, args, user) => {
-            const unfollowUserRequest = await client.post('freindships/destroy', { user_id: args.id });
+            const unfollowUserRequest = await client.post('freindships/destroy', { id: args.id });
             const unfollowUserResponse = await unfollowUserRequest;
             console.log(unfollowUserResponse)
             return unfollowUserResponse;

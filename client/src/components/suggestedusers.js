@@ -62,6 +62,8 @@ const SuggestedUsers = props => {
                 if (error) return console.log(error);
 
                 return (
+                    // Looping over the compared relationships
+                    // These are to check if the user's account is following/not following the suggested Twitter accounts listed
                     Object.entries(data).map((info, i) => {
                         return (
                             <Grid item className={classes.suggestedUsersGrid} key={i}>
