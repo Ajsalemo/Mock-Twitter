@@ -14,11 +14,10 @@ import { withStyles } from '@material-ui/core/styles';
 // Images
 import verifiedIcon from '../images/verifiedicon.png';
 
-// Apollo Queries
-import { GET_FRIENDSHIP_COMPARISONS } from '../apolloclient/apolloqueries';
-
 // Components
 import FollowUser from './followuser';
+import UnfollowUser from './unfollowuser';
+import { COMPARE_FRIENDSHIPS } from '../apolloclient/apolloqueries';
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
@@ -55,38 +54,52 @@ const styles = () => ({
 // ----------------------------------------------------------------------------------------------------- //
 
 const SuggestedUsers = props => {
-    const { src, name, classes, verified, screen_name, id } = props;
+    const { src, name, classes, verified, screen_name, id, currentUser } = props;
     return (
-        <React.Fragment>
-            <Query query={GET_FRIENDSHIP_COMPARISONS} variables={{ target_screenName: screen_name, source_screenName: 'Letterman Icon' }}>
-                {({ loading, error, data }) => {
-                    if (loading) return <div><CircularProgress /></div>;
-                    if (error) console.log(error);
-                    console.log(data)
-                    return (
-                        <Grid item className={classes.suggestedUsersGrid}>
-                            <Avatar alt={`${name} avatar`} src={src} />
-                            <Typography variant="subtitle2" className={classes.suggestedUsersNameContainer}>
-                                <span className={classes.suggestUsersName}>
-                                    {name}
-                                    {verified === true 
-                                        ? 
-                                    <img src={verifiedIcon} className={classes.verifiedIcon} alt="verified account" />
-                                        : 
-                                    null}
-                                    <span className={classes.suggestUsersScreenName}>@{screen_name}</span>
-                                </span>
-                                {/* If authenticated user is not following this account - give the user the option to follow them */}
-                                <FollowUser
-                                    id={id}
-                                />
-                            </Typography>
-                        </Grid>                
-                    )
-                }}
-            </Query>
-        </React.Fragment>
-    )
+        <Query query={COMPARE_FRIENDSHIPS} variables={{ target_screenName: screen_name, source_screenName: currentUser}} fetchPolicy='cache-first'>
+            {({ loading, error, data }) => {
+                if (loading) return <div><CircularProgress /></div>;
+                if (error) return console.log(error);
+
+                return (
+                    Object.entries(data).map((info, i) => {
+                        return (
+                            <Grid item className={classes.suggestedUsersGrid} key={i}>
+                                <Avatar alt={`${name} avatar`} src={src} />
+                                <Typography variant="subtitle2" className={classes.suggestedUsersNameContainer}>
+                                    <span className={classes.suggestUsersName}>
+                                        {name}
+                                        {/* If the Twitter account is verified - display the blue 'check' icon */}
+                                        {verified === true 
+                                            ? 
+                                        <img src={verifiedIcon} className={classes.verifiedIcon} alt="verified account" />
+                                            : 
+                                        null}
+                                        <span className={classes.suggestUsersScreenName}>@{screen_name}</span>
+                                    </span>
+                                    {/* If authenticated user is not following this account - give the user the option to follow them */}
+                                    {info[1].compareRelationship.relationship.target.followed_by === true
+                                            ? 
+                                        <UnfollowUser 
+                                            id={id}
+                                            screen_name={screen_name}
+                                            currentUser={currentUser}
+                                        />
+                                            :
+                                        <FollowUser
+                                            id={id}
+                                            screen_name={screen_name}
+                                            currentUser={currentUser}
+                                        />
+                                    }                                
+                                </Typography>
+                            </Grid>   
+                        );        
+                    })
+                );
+            }}
+        </Query>             
+    );
 };
 
 // ----------------------------------------------------------------------------------------------------- //

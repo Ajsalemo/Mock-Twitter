@@ -19,10 +19,10 @@ import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 // Apollo Queries
-import { GET_SUGGESTED_CATEGORIES, GET_SUGGESTED_CATEGORIES_MEMBERS_GROUP } from '../apolloclient/apolloqueries';
+import { GET_SUGGESTED_CATEGORIES } from '../apolloclient/apolloqueries';
 
 // Components
-import SuggestedUsers from '../components/suggestedusers';
+import SuggestedCategories from '../components/suggestedcategories';
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
@@ -91,37 +91,25 @@ const Recommended = props => {
                                     if (loading) return <div><CircularProgress /></div>;
                                     if (error) console.log(error);
 
-                                    return data.currentUser.suggestedCategory.map((categories, i) => {
-                                        return (
-                                            <ExpansionPanel key={i} classes={{ root: classes.expansionpanel }}>
-                                                <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                                                    <Typography variant="subtitle2" className={classes.categoriesName}>
-                                                        {categories.name}
-                                                    </Typography>
-                                                </ExpansionPanelSummary>
-                                                <ExpansionPanelDetails className={classes.expansionPanelDetails}>
-                                                    {/* Nested Query to display twitter users of the categories being looped over */}
-                                                    <Query query={GET_SUGGESTED_CATEGORIES_MEMBERS_GROUP} variables={{ slug: categories.slug }}>
-                                                        {({ loading, error, data }) => {
-                                                            if (loading) return <div><CircularProgress /></div>;
-                                                            if (error) console.log(error);                                                            return data.currentUser.suggestedCategorySlug.users.map((userInfo, j) => {
-                                                            return (
-                                                                    <SuggestedUsers
-                                                                        key={j}
-                                                                        id={userInfo.id}
-                                                                        name={userInfo.name}
-                                                                        screen_name={userInfo.screen_name}
-                                                                        src={userInfo.profile_image_url_https}
-                                                                        verified={userInfo.verified}
-                                                                    />
-                                                                )
-                                                            })
-                                                        }}
-                                                    </Query>
-                                                </ExpansionPanelDetails>
-                                            </ExpansionPanel>
-                                        )
-                                    })
+                                    return (
+                                        data.currentUser.suggestedCategory.map((categories, i) => {
+                                            return (
+                                                <ExpansionPanel key={i} classes={{ root: classes.expansionpanel }}>
+                                                    <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+                                                        <Typography variant="subtitle2" className={classes.categoriesName}>
+                                                            {categories.name}
+                                                        </Typography>
+                                                    </ExpansionPanelSummary>
+                                                    <ExpansionPanelDetails className={classes.expansionPanelDetails}>
+                                                        {/* Nested Query to display twitter users of the categories being looped over */}
+                                                        <SuggestedCategories
+                                                            categories={categories.slug}
+                                                        />
+                                                    </ExpansionPanelDetails>
+                                                </ExpansionPanel>
+                                            );
+                                        })
+                                    );
                                 }}
                             </Query>
                         </CardContent>
@@ -129,7 +117,7 @@ const Recommended = props => {
                 </Paper>
             </Grid>
         </React.Fragment>
-    )
+    );
 };
 
 

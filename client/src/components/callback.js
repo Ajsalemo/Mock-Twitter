@@ -49,7 +49,7 @@ class CallBack extends Component {
                     </Typography>
                 </Grid>
             </Grid>
-        )
+        );
     }
 };
 

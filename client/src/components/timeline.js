@@ -72,36 +72,38 @@ const Timeline = props => {
                 {({ loading, error, data }) => {
                     if (loading) return <div><CircularProgress /></div>;
                     if (error) console.log(error);
-                    return data.currentUser.userTimelineTweets.map((timelineTweetInfo, i) => {
-                        return (
-                            <Paper className={classes.timelinePaper} key={i}>
-                                <Avatar alt="twitter avatar" src={data.currentUser.picture} className={classes.timelineAvatar}/>
-                                <Grid item className={classes.timelineGrid}>
-                                    {/* Name and handle */}
-                                    <Typography variant="subtitle2">
-                                        <span>{data.currentUser.name}</span>
-                                        <span className={classes.timelineHandleFont}>@{data.currentUser.nickname}</span>
-                                        <span className={classes.timelineDotSpacing}>&#8226;</span>
-                                        <span className={classes.timelineHandleFont}><Moment fromNow>{timelineTweetInfo.created_at}</Moment></span>
-                                       </Typography>
-                                    {/* Tweet body */}
-                                    <Typography variant="body2" gutterBottom>
-                                        <span className={classes.timelimeTweets}>{timelineTweetInfo.text}</span>
-                                    </Typography>
-                                    <Grid item>
-                                        <ChatBubbleOutline className={classes.timelineIcons} />
-                                        <Repeat className={classes.timelineIcons} />
-                                        <FavoriteBorder className={classes.timelineIcons} />
-                                        <BarChart className={classes.timelineIcons} />
+                    return (
+                        data.currentUser.userTimelineTweets.map((timelineTweetInfo, i) => {
+                            return (
+                                <Paper className={classes.timelinePaper} key={i}>
+                                    <Avatar alt="twitter avatar" src={data.currentUser.picture} className={classes.timelineAvatar}/>
+                                    <Grid item className={classes.timelineGrid}>
+                                        {/* Name and handle */}
+                                        <Typography variant="subtitle2">
+                                            <span>{data.currentUser.name}</span>
+                                            <span className={classes.timelineHandleFont}>@{data.currentUser.nickname}</span>
+                                            <span className={classes.timelineDotSpacing}>&#8226;</span>
+                                            <span className={classes.timelineHandleFont}><Moment fromNow>{timelineTweetInfo.created_at}</Moment></span>
+                                           </Typography>
+                                        {/* Tweet body */}
+                                        <Typography variant="body2" gutterBottom>
+                                            <span className={classes.timelimeTweets}>{timelineTweetInfo.text}</span>
+                                        </Typography>
+                                        <Grid item>
+                                            <ChatBubbleOutline className={classes.timelineIcons} />
+                                            <Repeat className={classes.timelineIcons} />
+                                            <FavoriteBorder className={classes.timelineIcons} />
+                                            <BarChart className={classes.timelineIcons} />
+                                        </Grid>
                                     </Grid>
-                                </Grid>
-                            </Paper>
-                        )
-                    });
+                                </Paper>
+                            );
+                        })
+                    );
                 }}
             </Query>
         </React.Fragment>
-    )
+    );
 };
 
 // ----------------------------------------------------------------------------------------------------- //

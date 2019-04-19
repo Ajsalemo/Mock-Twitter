@@ -6,10 +6,11 @@ import { Mutation } from 'react-apollo';
 
 // Material-UI components
 import Fab from '@material-ui/core/Fab';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import { withStyles } from '@material-ui/core/styles';
 
 // Apollo Mutations
-import { FOLLOW_USER } from '../apolloclient/apolloqueries';
+import { FOLLOW_USER, COMPARE_FRIENDSHIPS } from '../apolloclient/apolloqueries';
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
@@ -26,10 +27,23 @@ const styles = () => ({
 // ----------------------------------------------------------------------------------------------------- //
 
 const FollowUser = props => {
-    const { classes, id } = props;
+    const { classes, id, screen_name, currentUser } = props;
     return (
-        <Mutation mutation={FOLLOW_USER}>
+        <Mutation 
+            mutation={FOLLOW_USER} 
+            refetchQueries={[{ 
+                query: COMPARE_FRIENDSHIPS, 
+                variables: {
+                    target_screenName: screen_name,
+                    source_screenName: currentUser
+                }
+            }]}
+        >
             {(followUserProp, { loading }) => (
+                loading 
+                    ? 
+                <CircularProgress />
+                    :
                 <Fab
                     onClick={() => followUserProp({
                         variables: {
@@ -46,7 +60,7 @@ const FollowUser = props => {
                 </Fab>
             )}
         </Mutation>
-    )
+    );
 };
 
 // ----------------------------------------------------------------------------------------------------- //

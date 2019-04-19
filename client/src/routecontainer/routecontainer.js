@@ -57,7 +57,7 @@ class RouteContainer extends Component  {
                         <Route path='/' component={Home} />
                     </Switch>
                 </React.Fragment>
-            )
+            );
         }
         return <Loading />;
     }

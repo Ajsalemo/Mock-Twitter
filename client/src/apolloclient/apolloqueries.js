@@ -1,4 +1,4 @@
- // --------------------------------------------- Imports ----------------------------------------------- //
+// --------------------------------------------- Imports ----------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
 import { gql } from "apollo-boost";
@@ -6,7 +6,7 @@ import { gql } from "apollo-boost";
 // ----------------------------------------------------------------------------------------------------- //
 // ---------------------------------------------- Queries --------------------------------------------- //
 
-export const GET_USER = 
+export const GET_USER =
     gql`
         query GetUser {
             currentUser {
@@ -19,7 +19,7 @@ export const GET_USER =
         }
     `;
 
-export const GET_AUTHUSER_TWEETS = 
+export const GET_AUTHUSER_TWEETS =
     gql`
         query GetAuthUserTweets {
             currentUser {
@@ -67,7 +67,7 @@ export const GET_TRENDING_TOPICS =
         }
     `;
 
-export const GET_SUGGESTED_CATEGORIES = 
+export const GET_SUGGESTED_CATEGORIES =
     gql`
         query GetSuggestedCategories {
             currentUser {
@@ -84,6 +84,7 @@ export const GET_SUGGESTED_CATEGORIES_MEMBERS_GROUP =
     gql`
         query GetSuggestedCategoriesMembersGroup($slug: String!) {
             currentUser {
+                nickname
                 suggestedCategorySlug(slug: $slug) {
                     users {
                         id
@@ -97,20 +98,23 @@ export const GET_SUGGESTED_CATEGORIES_MEMBERS_GROUP =
         }
     `;
 
-export const GET_FRIENDSHIP_COMPARISONS = 
+export const COMPARE_FRIENDSHIPS = 
     gql`
-        query GetFriendshipComparisons($target_screenName: String!, $source_screenName: String!) {
+        query CompareRelationship($target_screenName: String!, $source_screenName: String!) {
             currentUser {
+                nickname
                 compareRelationship(target_screenName: $target_screenName, source_screenName: $source_screenName) {
                     relationship {
+                        target {
+                            id
+                            screen_name
+                            following
+                            followed_by
+                        }
                         source {
                             id
                             screen_name
                             following
-                        }
-                        target {
-                            id
-                            screen_name
                         }
                     }
                 }
@@ -120,7 +124,7 @@ export const GET_FRIENDSHIP_COMPARISONS =
 // ------------------------------------------------------------------------------------------------------ //
 // ---------------------------------------------- Mutations --------------------------------------------- //
 
-export const CREATE_USER_TWEET =  
+export const CREATE_USER_TWEET =
     gql`
         mutation CreateTweet($text: String!) {
             createTweet(text: $text) {
@@ -129,11 +133,22 @@ export const CREATE_USER_TWEET =
         }
     `;
 
-export const FOLLOW_USER = 
+export const FOLLOW_USER =
     gql`
         mutation FollowUser($id: String!) {
             followUser(id: $id) {
                 id
+                name
+                screen_name
+            }
+        }
+    `;
+
+export const UNFOLLOW_USER =
+    gql`
+        mutation UnfollowUser($id: String!) {
+            unfollowUser(id: $id) {
+                id 
                 name
                 screen_name
             }

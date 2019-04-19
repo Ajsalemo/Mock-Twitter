@@ -18,6 +18,7 @@ const typeDefs =
         type Mutation {
             createTweet(text: String!): UserTimelineTweets
             followUser(id: String!): UserObject
+            unfollowUser(id: String!): UserObject
         }
 
         # User Object
@@ -145,6 +146,8 @@ const typeDefs =
         type Target {
             id: String!
             screen_name: String!
+            following: Boolean
+            followed_by: Boolean
         }
     `;
 
@@ -162,28 +165,28 @@ const resolvers = {
         userTimelineTweets: async (parent, args, user) => {
             const requestUserTimelineTweets = await client.get('statuses/user_timeline', { screen_name: user.name });
             const responserUserTimelineTweets = await requestUserTimelineTweets;
-            return responserUserTimelineTweets
+            return responserUserTimelineTweets;
         },
         trendingTopics: async (parent, args, context) => {
             const getTrendingTopicsRequest = await client.get('trends/place', { id: 1 });
             const getTrendingTopicsResponse = await getTrendingTopicsRequest;
-            return getTrendingTopicsResponse
+            return getTrendingTopicsResponse;
         },
         suggestedCategory: async (parent, args, user) => {
             const suggestedCategoryRequest = await client.get('users/suggestions', { screen_name: user.name });
             const suggestedCategoryResponse = await suggestedCategoryRequest;
-            return suggestedCategoryResponse
+            return suggestedCategoryResponse;
         },
         suggestedCategorySlug: async (parent, args, user) => {
             const categorySlugRequest = await client.get(`users/suggestions/${args.slug}`, { screen_name: user.name });
             const categorySlugResponse = await categorySlugRequest;
-            return categorySlugResponse
+            return categorySlugResponse;
         },
         compareRelationship: async (parent, args, user) => {
-            const compareRelationshipRequest = await client.get(`friendships/show`, { source_screen_name: args.source_screenName, target_screen_name: args.target_screenName });
+            const compareRelationshipRequest = await client.get('friendships/show', { source_screen_name: args.source_screenName, target_screen_name: args.target_screenName });
             const compareRelationshipResponse = await compareRelationshipRequest;
             console.log(compareRelationshipResponse)
-            return compareRelationshipResponse
+            return compareRelationshipResponse;
         }
     },
     Mutation: {
@@ -193,9 +196,15 @@ const resolvers = {
             return addNewTweetResponse;
         },
         followUser: async (parent, args, user) => {
-            const followUserRequest = await client.post('friendships/create', { id: args.id, scree_name: user.name });
+            const followUserRequest = await client.post('friendships/create', { id: args.id });
             const followUserResponse = await followUserRequest;
-            return followUserResponse
+            return followUserResponse;
+        },
+        unfollowUser: async (parent, args, user) => {
+            const unfollowUserRequest = await client.post('freindships/destroy', { user_id: args.id });
+            const unfollowUserResponse = await unfollowUserRequest;
+            console.log(unfollowUserResponse)
+            return unfollowUserResponse;
         }
     }
 };
