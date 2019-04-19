@@ -149,8 +149,6 @@ export const UNFOLLOW_USER =
         mutation UnfollowUser($id: String!) {
             unfollowUser(id: $id) {
                 id 
-                name
-                screen_name
             }
         }
     `;

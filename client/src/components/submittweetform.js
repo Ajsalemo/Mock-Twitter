@@ -11,6 +11,7 @@ import TextField from '@material-ui/core/TextField';
 import Fab from '@material-ui/core/Fab';
 import Grid from '@material-ui/core/Grid';
 import Avatar from '@material-ui/core/Avatar';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import { withStyles } from '@material-ui/core/styles';
 
 // Apollo Mutations
@@ -107,6 +108,9 @@ const SubmitTweetForm = props => {
                                         }}
                                     />
                                     <Grid item className={props.values.tweet ? classes.tweetButtonGrid : classes.tweetButtonGridHidden}>
+                                    {loading ?
+                                        <CircularProgress />
+                                            :
                                         <Fab 
                                             size="small" 
                                             variant="extended" 
@@ -117,6 +121,8 @@ const SubmitTweetForm = props => {
                                         >
                                             Tweet
                                         </Fab>
+                                    }
+
                                     </Grid>
                                 </Form>
                             </React.Fragment>
