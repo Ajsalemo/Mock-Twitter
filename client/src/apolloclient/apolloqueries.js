@@ -148,7 +148,7 @@ export const UNFOLLOW_USER =
     gql`
         mutation UnfollowUser($id: String!) {
             unfollowUser(id: $id) {
-                id 
+                id
             }
         }
     `;

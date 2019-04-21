@@ -17,6 +17,9 @@ import verifiedIcon from '../images/verifiedicon.png';
 // Components
 import FollowUser from './followuser';
 import UnfollowUser from './unfollowuser';
+import Error from './error';
+
+// Apollo Queries
 import { COMPARE_FRIENDSHIPS } from '../apolloclient/apolloqueries';
 
 // ----------------------------------------------------------------------------------------------------- //
@@ -56,10 +59,10 @@ const styles = () => ({
 const SuggestedUsers = props => {
     const { src, name, classes, verified, screen_name, id, currentUser } = props;
     return (
-        <Query query={COMPARE_FRIENDSHIPS} variables={{ target_screenName: screen_name, source_screenName: currentUser}} fetchPolicy='cache-first'>
+        <Query query={COMPARE_FRIENDSHIPS} variables={{ target_screenName: screen_name, source_screenName: currentUser}} fetchPolicy='cache-and-network'>
             {({ loading, error, data }) => {
                 if (loading) return <div><CircularProgress /></div>;
-                if (error) return console.log(error);
+                if (error) if (error) return <Error error={error.message} />
 
                 return (
                     // Looping over the compared relationships

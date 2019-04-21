@@ -185,7 +185,6 @@ const resolvers = {
         compareRelationship: async (parent, args, user) => {
             const compareRelationshipRequest = await client.get('friendships/show', { source_screen_name: args.source_screenName, target_screen_name: args.target_screenName });
             const compareRelationshipResponse = await compareRelationshipRequest;
-            console.log(compareRelationshipResponse)
             return compareRelationshipResponse;
         }
     },
@@ -203,7 +202,6 @@ const resolvers = {
         unfollowUser: async (parent, args, user) => {
             const unfollowUserRequest = await client.post('freindships/destroy', { id: args.id });
             const unfollowUserResponse = await unfollowUserRequest;
-            console.log(unfollowUserResponse)
             return unfollowUserResponse;
         }
     }

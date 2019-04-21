@@ -23,6 +23,7 @@ import { GET_SUGGESTED_CATEGORIES } from '../apolloclient/apolloqueries';
 
 // Components
 import SuggestedCategories from '../components/suggestedcategories';
+import Error from './error';
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
@@ -86,10 +87,10 @@ const Recommended = props => {
                                     <Link to='#/' className={classes.links}>View all</Link>
                                 </span>
                             </Typography>
-                            <Query query={GET_SUGGESTED_CATEGORIES}>
+                            <Query query={GET_SUGGESTED_CATEGORIES} fetchPolicy='cache-and-network'>
                                 {({ loading, error, data }) => {
                                     if (loading) return <div><CircularProgress /></div>;
-                                    if (error) console.log(error);
+                                    if (error) return <Error error={error.message} />
 
                                     return (
                                         data.currentUser.suggestedCategory.map((categories, i) => {

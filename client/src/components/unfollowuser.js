@@ -30,7 +30,7 @@ const styles = () => ({
 // ----------------------------------------------------------------------------------------------------- //
 
 const UnfollowUser = props => {
-    const { classes, id, screen_name, currentUser } = props;
+    const { classes, id_str, screen_name, currentUser } = props;
     return (
         <Mutation 
             mutation={UNFOLLOW_USER} 
@@ -50,7 +50,7 @@ const UnfollowUser = props => {
                 <Fab
                     onClick={() => unfollowUserProp({
                         variables: {
-                            id: id
+                            id: id_str
                         }
                     })}
                     variant="extended"
