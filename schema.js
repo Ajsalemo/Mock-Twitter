@@ -18,7 +18,7 @@ const typeDefs =
         type Mutation {
             createTweet(text: String!): UserTimelineTweets
             followUser(id: String!): UserObject
-            unfollowUser(id: String!): UserObject
+            unfollowUserReqest(id: String!): UserObject
         }
 
         # User Object
@@ -182,7 +182,7 @@ const resolvers = {
             const categorySlugResponse = await categorySlugRequest;
             return categorySlugResponse;
         },
-        compareRelationship: async (parent, args, user) => {
+        compareRelationship: async (parent, args, context) => {
             const compareRelationshipRequest = await client.get('friendships/show', { source_screen_name: args.source_screenName, target_screen_name: args.target_screenName });
             const compareRelationshipResponse = await compareRelationshipRequest;
             return compareRelationshipResponse;
@@ -194,13 +194,13 @@ const resolvers = {
             const addNewTweetResponse = await addNewTweetRequest;
             return addNewTweetResponse;
         },
-        followUser: async (parent, args, user) => {
+        followUser: async (parent, args, context) => {
             const followUserRequest = await client.post('friendships/create', { id: args.id });
             const followUserResponse = await followUserRequest;
             return followUserResponse;
         },
-        unfollowUser: async (parent, args, user) => {
-            const unfollowUserRequest = await client.post('freindships/destroy', { id: args.id });
+        unfollowUserReqest: async (parent, args, context) => {
+            const unfollowUserRequest = await client.post('friendships/destroy', { id: args.id });
             const unfollowUserResponse = await unfollowUserRequest;
             return unfollowUserResponse;
         }

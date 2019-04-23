@@ -87,7 +87,7 @@ const Recommended = props => {
                                     <Link to='#/' className={classes.links}>View all</Link>
                                 </span>
                             </Typography>
-                            <Query query={GET_SUGGESTED_CATEGORIES} fetchPolicy='cache-and-network'>
+                            <Query query={GET_SUGGESTED_CATEGORIES}>
                                 {({ loading, error, data }) => {
                                     if (loading) return <div><CircularProgress /></div>;
                                     if (error) return <Error error={error.message} />

@@ -59,7 +59,7 @@ const styles = () => ({
 const SuggestedUsers = props => {
     const { src, name, classes, verified, screen_name, id, currentUser } = props;
     return (
-        <Query query={COMPARE_FRIENDSHIPS} variables={{ target_screenName: screen_name, source_screenName: currentUser}} fetchPolicy='cache-and-network'>
+        <Query query={COMPARE_FRIENDSHIPS} variables={{ target_screenName: screen_name, source_screenName: currentUser}}>
             {({ loading, error, data }) => {
                 if (loading) return <div><CircularProgress /></div>;
                 if (error) if (error) return <Error error={error.message} />

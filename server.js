@@ -30,6 +30,10 @@ const getKey = (header, cb) => {
 const server = new ApolloServer({
     typeDefs,
     resolvers,
+    formatError: error => {
+        console.log(error);
+        return new Error('Internal server error');
+    },
     context: ({ req }) => {
         // simple auth check on every request
         const token = req.headers.authorization;
