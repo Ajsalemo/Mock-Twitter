@@ -21,20 +21,14 @@ import { CREATE_USER_TWEET, GET_AUTHUSER_TWEETS } from '../apolloclient/apolloqu
 // ----------------------------------------------------------------------------------------------------- //
 
 const styles = () => ({
-    formControl: {
-        width: '100%',
-        height: '2.1em',
-        margin: '0.6em',
-        backgroundColor: '#fff',
+    tweetModalFormElement: {
+        flexBasis: '90%'
     },
-    formElement: {
-        flexBasis: '80%'
-    },
-    tweetButtonMain: {
+    tweetModalFormButtonMain: {
         backgroundColor: '#00acee',
         color: '#fff'
     },
-    tweetButtonGrid: {
+    tweetModalButtonGrid: {
         display: 'flex',
         justifyContent: 'flex-end',
         paddingBottom: '0.7em'
@@ -42,48 +36,43 @@ const styles = () => ({
     tweetButtonGridHidden: {
         display: 'none'
     },
-    tweetAvatarActiveInput: {
-        alignSelf: 'flex-start',
-        marginTop: '0.5em'
-    },
-    placeholder: {
+    tweetModalFormPlaceholder: {
         color: 'blue'
     },
-    activeInputField: {
+    tweetModaActiveInput: {
         width: '100%',
         height: '4em',
         margin: '0.6em',
         backgroundColor: '#fff',
     },
-    activeTextField: {
+    tweetModalActiveTextfield: {
         height: '-webkit-fill-available'
     },
-    twitterAvatar: {
+    tweetModalAvatar: {
         width: 30,
         height: 30,
-        display: 'flex',
-        flexDirection: 'start'
+        margin: '0.5em 0 0.5em 0.5em'
     }
 });
 
 // ----------------------------------------------------------------------------------------------------- //
 
-const SubmitTweetForm = props => {
-    const { classes, data } = props;
+const TweetModalForm = props => {
+    const { classes, avatar } = props;
     return (
         <React.Fragment>
             <Mutation mutation={CREATE_USER_TWEET} refetchQueries={[{ query: GET_AUTHUSER_TWEETS }]}>
-                {(createTweetProp, { loading }) => (
+                {(createModalTweetProp, { loading }) => (
                     <Formik
-                        initialValues={{ tweet: '' }}
+                        initialValues={{ tweetModalForm: '' }}
                         onSubmit={ async(values, { resetForm, setSubmitting }) => {
                             try {
-                                await createTweetProp({
+                                await createModalTweetProp({
                                     variables: {
-                                        text: values.tweet
+                                        text: values.tweetModalForm
                                     }
                                 });
-                                resetForm({ tweet: '' });
+                                resetForm({ tweetModalForm: '' });
                             } catch(error) {
                                 setSubmitting(false);
                                 console.log(error)
@@ -91,23 +80,23 @@ const SubmitTweetForm = props => {
                         }}
                         render={props => (
                             <React.Fragment>
-                                <Avatar alt="twitter avatar" src={data.currentUser.picture} className={props.values.tweet ? classes.tweetAvatarActiveInput : classes.twitterAvatar} /> 
-                                <Form className={classes.formElement}>
+                                <Avatar alt="twitter avatar" src={avatar} className={classes.tweetModalAvatar} /> 
+                                <Form className={classes.tweetModalFormElement}>
                                     <TextField
-                                        className={props.values.tweet ? classes.activeInputField : classes.formControl}
+                                        className={classes.tweetModaActiveInput}
                                         placeholder="What's happening?"
                                         variant="outlined"
-                                        name="tweet"
-                                        value={props.values.tweet}
+                                        name="tweetModalForm"
+                                        value={props.values.tweetModalForm}
                                         onChange={props.handleChange}
                                         InputProps={{ 
                                             classes: {
-                                                input: props.values.tweet ? classNames(classes.placeholder, classes.activeTextField) : classes.placeholder,
-                                                root: classes.activeTextField
+                                                input: classNames(classes.tweetModalFormPlaceholder, classes.tweetModalActiveTextfield),
+                                                root: classes.tweetModalActiveTextfield
                                             }
                                         }}
                                     />
-                                    <Grid item className={props.values.tweet ? classes.tweetButtonGrid : classes.tweetButtonGridHidden}>
+                                    <Grid item className={classes.tweetModalButtonGrid}>
                                         {loading ?
                                             <CircularProgress />
                                                 :
@@ -115,8 +104,8 @@ const SubmitTweetForm = props => {
                                                 size="small" 
                                                 variant="extended" 
                                                 aria-label="Add Tweet" 
-                                                className={classes.tweetButtonMain} 
-                                                disabled={loading || !props.values.tweet}
+                                                className={classes.tweetModalFormButtonMain} 
+                                                disabled={loading || !props.values.tweetModalForm}
                                                 type="submit"
                                             >
                                                 Tweet
@@ -136,7 +125,7 @@ const SubmitTweetForm = props => {
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
-export default withStyles(styles)(SubmitTweetForm);
+export default withStyles(styles)(TweetModalForm);
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //

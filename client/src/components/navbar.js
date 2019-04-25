@@ -8,7 +8,6 @@ import { Query } from 'react-apollo';
 // Material-UI components
 import { withStyles } from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
-import Fab from '@material-ui/core/Fab';
 import AppBar from '@material-ui/core/AppBar';
 import Typography from '@material-ui/core/Typography';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -26,6 +25,9 @@ import twitterminilogo from '../images/twitterminilogo.png';
 
 // Apollo Queries
 import { GET_USER } from '../apolloclient/apolloqueries';
+
+// Components
+import TweetModal from '../components/tweetmodal';
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
@@ -153,9 +155,8 @@ const Navbar = props => {
                                     }}
                                 />
                                 <Avatar alt="twitter avatar" src={data.currentUser.picture} className={classNames(classes.twitterAvatar, classes.avatarMediaQuery)} /> 
-                                <Fab size="small" variant="extended" aria-label="Add Tweet" className={classes.tweetButton}>
-                                    Tweet
-                                </Fab>
+                                {/* Classes component for the modal to submit tweets */}
+                                <TweetModal />
                             </div>
                         </Toolbar>
                     </AppBar>
