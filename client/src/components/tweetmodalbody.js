@@ -75,6 +75,8 @@ const TweetModalBody = props => {
                         <Grid item className={classes.tweetModalGrid}>
                             <TweetModalForm
                                 avatar={data.currentUser.picture}
+                                // Passed from the 'TweetModal' component
+                                onClose={onClose}
                             />
                         </Grid>
                     </Paper>

@@ -12,6 +12,7 @@ import Fab from '@material-ui/core/Fab';
 import Grid from '@material-ui/core/Grid';
 import Avatar from '@material-ui/core/Avatar';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 
 // Apollo Mutations
@@ -52,13 +53,20 @@ const styles = () => ({
         width: 30,
         height: 30,
         margin: '0.5em 0 0.5em 0.5em'
+    },
+    tweetModalSubmitGrid: {
+        display: 'flex',
+        flexDirection: 'row'
+    },
+    tweetModalSubmittingText: {
+        paddingLeft: '1em'
     }
 });
 
 // ----------------------------------------------------------------------------------------------------- //
 
 const TweetModalForm = props => {
-    const { classes, avatar } = props;
+    const { classes, avatar, onClose } = props;
     return (
         <React.Fragment>
             <Mutation mutation={CREATE_USER_TWEET} refetchQueries={[{ query: GET_AUTHUSER_TWEETS }]}>
@@ -73,6 +81,9 @@ const TweetModalForm = props => {
                                     }
                                 });
                                 resetForm({ tweetModalForm: '' });
+                                // After submitting the form - call this function to close the form
+                                // This sets the modal 'state' to the opposite of the 'handleOpen' function - which opens the modal 
+                                onClose()
                             } catch(error) {
                                 setSubmitting(false);
                                 console.log(error)
@@ -98,7 +109,12 @@ const TweetModalForm = props => {
                                     />
                                     <Grid item className={classes.tweetModalButtonGrid}>
                                         {loading ?
-                                            <CircularProgress />
+                                            <Grid item className={classes.tweetModalSubmitGrid}>
+                                                <CircularProgress />
+                                                <Typography variant='h6' className={classes.tweetModalSubmittingText}>
+                                                    Sending your tweet..
+                                                </Typography>
+                                            </Grid>
                                                 :
                                             <Fab 
                                                 size="small" 
