@@ -33,6 +33,12 @@ const typeDefs =
             suggestedCategory: [SuggestedCategory]
             suggestedCategorySlug(slug: String!): SuggestedCategorySlug
             compareRelationship(target_screenName: String!, source_screenName: String!): RelationshipWrapper 
+            userTweetStatusCount: [UserTimelineTweets]
+        }
+
+        # The authenticated users status(tweet) count
+        type StatusesCount {
+            statuses_count: String
         }
 
         # Object wrapper to iterate
@@ -57,12 +63,7 @@ const typeDefs =
             favorited: String
             retweeted: String
             lang: String
-            user: StatusCount
-        }
-
-        # Total tweets for the users account
-        type StatusCount {
-            statuses_count: String
+            user: UserTweetObject
         }
 
         # Currently trending topics
@@ -124,6 +125,48 @@ const typeDefs =
             default_profile_image: Boolean
         }
 
+        # Object that is generated inside timeline tweet responses
+        type UserTweetObject {
+            name: String 
+            profile_sidebar_fill_color: String
+            profile_background_tile: String
+            profile_sidebar_border_color: String 
+            profile_image_url: String 
+            created_at: String 
+            location: String 
+            follow_request_sent: String 
+            id_str: String
+            is_translator: Boolean
+            profile_link_color: String 
+            default_profile: Boolean
+            url: String
+            contributors_enabled: Boolean
+            favourites_count: String
+            utc_offset: String
+            profile_image_url_https: String
+            id: String
+            listed_count: String
+            profile_use_background_image: String
+            profile_text_color: String
+            followers_count: String
+            lang: String
+            protected: Boolean
+            geo_enabled: Boolean
+            notifications: Boolean
+            description: String
+            profile_background_color: String
+            verified: Boolean
+            time_zone: String
+            profile_background_image_url_https: String
+            statuses_count: String
+            profile_background_image_url: String
+            default_profile_image: Boolean
+            friends_count: String
+            following: Boolean
+            show_all_inline_media: Boolean
+            screen_name: String
+        }
+
         # Friendship/followers relationship object wrapper
         type RelationshipWrapper {
             relationship: Relationship
@@ -163,9 +206,15 @@ const resolvers = {
     },
     User: {
         userTimelineTweets: async (parent, args, user) => {
-            const requestUserTimelineTweets = await client.get('statuses/user_timeline', { screen_name: user.name });
+            const requestUserTimelineTweets = await client.get('statuses/home_timeline', { screen_name: user.name });
             const responserUserTimelineTweets = await requestUserTimelineTweets;
             return responserUserTimelineTweets;
+        },
+        userTweetStatusCount: async (parent, args, user) => {
+            const userTweetStatusRequest = await client.get('statuses/user_timeline', { screen_name: user.name });
+            const userTweetStatusResponse = await userTweetStatusRequest;
+            console.log(userTweetStatusResponse);
+            return userTweetStatusResponse;
         },
         trendingTopics: async (parent, args, context) => {
             const getTrendingTopicsRequest = await client.get('trends/place', { id: 1 });

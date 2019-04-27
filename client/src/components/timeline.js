@@ -76,12 +76,12 @@ const Timeline = props => {
                         data.currentUser.userTimelineTweets.map((timelineTweetInfo, i) => {
                             return (
                                 <Paper className={classes.timelinePaper} key={i}>
-                                    <Avatar alt="twitter avatar" src={data.currentUser.picture} className={classes.timelineAvatar}/>
+                                    <Avatar alt="twitter avatar" src={timelineTweetInfo.user.profile_image_url_https} className={classes.timelineAvatar}/>
                                     <Grid item className={classes.timelineGrid}>
                                         {/* Name and handle */}
                                         <Typography variant="subtitle2">
-                                            <span>{data.currentUser.name}</span>
-                                            <span className={classes.timelineHandleFont}>@{data.currentUser.nickname}</span>
+                                            <span>{timelineTweetInfo.user.name}</span>
+                                            <span className={classes.timelineHandleFont}>@{timelineTweetInfo.user.nickname}</span>
                                             <span className={classes.timelineDotSpacing}>&#8226;</span>
                                             <span className={classes.timelineHandleFont}><Moment fromNow>{timelineTweetInfo.created_at}</Moment></span>
                                            </Typography>

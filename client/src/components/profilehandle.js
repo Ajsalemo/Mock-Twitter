@@ -14,7 +14,7 @@ import Typography from '@material-ui/core/Typography';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 // Apollo Queries
-import { GET_USER, GET_AUTHUSER_TWEETS } from '../apolloclient/apolloqueries';
+import { GET_USER, GET_USER_STATUS_COUNT } from '../apolloclient/apolloqueries';
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
@@ -90,7 +90,7 @@ const ProfileHandle = props => {
                                 </Typography>
                                 <Typography variant="subtitle2" gutterBottom>
                                     {/* Nested Query to retrieve total tweet count for the account */}
-                                    <Query query={GET_AUTHUSER_TWEETS}>
+                                    <Query query={GET_USER_STATUS_COUNT}>
                                         {({ loading, error, data }) => {
                                             if (loading) return <div><CircularProgress /></div>;
                                             if (error) console.log(error);
@@ -99,7 +99,7 @@ const ProfileHandle = props => {
                                                 <div className={classes.profileTweetSpan}>
                                                     <span>Tweets</span>
                                                     <span className={classes.profileTweetCount}>
-                                                        {data.currentUser.userTimelineTweets[0].user.statuses_count}
+                                                        {data.currentUser.userTweetStatusCount[0].user.statuses_count}
                                                     </span>
                                                 </div>        
                                             )

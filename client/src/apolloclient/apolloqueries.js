@@ -19,6 +19,34 @@ export const GET_USER =
         }
     `;
 
+export const GET_USER_STATUS_COUNT =
+    gql`
+        query GetUserStatusCount {
+            currentUser {
+                userTweetStatusCount {
+                    created_at
+                    id
+                    id_str
+                    text
+                    truncated
+                    geo
+                    coordinates
+                    place
+                    contributors
+                    is_quote_status
+                    retweet_count
+                    favorite_count
+                    favorited
+                    retweeted
+                    lang
+                    user {
+                        statuses_count
+                    }
+                }
+            }
+        }
+    `;
+
 export const GET_AUTHUSER_TWEETS =
     gql`
         query GetAuthUserTweets {
@@ -43,7 +71,12 @@ export const GET_AUTHUSER_TWEETS =
                     retweeted
                     lang
                     user {
+                        id
+                        name
+                        screen_name
+                        verified
                         statuses_count
+                        profile_image_url_https
                     }
                 }
             }
