@@ -80,7 +80,7 @@ const SubmitTweetForm = props => {
                             try {
                                 await createTweetProp({
                                     variables: {
-                                        text: values.tweet
+                                        full_text: values.tweet
                                     }
                                 });
                                 resetForm({ tweet: '' });

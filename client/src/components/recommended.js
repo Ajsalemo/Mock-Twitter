@@ -90,7 +90,7 @@ const Recommended = props => {
                             <Query query={GET_SUGGESTED_CATEGORIES}>
                                 {({ loading, error, data }) => {
                                     if (loading) return <div><CircularProgress /></div>;
-                                    if (error) return <Error error={error.message} />
+                                    if (error) return <Error />
 
                                     return (
                                         data.currentUser.suggestedCategory.map((categories, i) => {

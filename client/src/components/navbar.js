@@ -28,6 +28,7 @@ import { GET_USER } from '../apolloclient/apolloqueries';
 
 // Components
 import TweetModal from '../components/tweetmodal';
+import Error from '../components/error';
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
@@ -111,7 +112,7 @@ const Navbar = props => {
             <Query query={GET_USER}>
                 {({ loading, error, data }) => {
                     if (loading) return <div><CircularProgress /></div>;
-                    if (error) console.log(error);
+                    if (error) return <div><Error /></div>;
 
                 return (
                     <AppBar className={classes.appBar}>

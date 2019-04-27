@@ -77,7 +77,7 @@ const TweetModalForm = props => {
                             try {
                                 await createModalTweetProp({
                                     variables: {
-                                        text: values.tweetModalForm
+                                        full_text: values.tweetModalForm
                                     }
                                 });
                                 resetForm({ tweetModalForm: '' });

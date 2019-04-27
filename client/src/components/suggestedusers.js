@@ -62,7 +62,7 @@ const SuggestedUsers = props => {
         <Query query={COMPARE_FRIENDSHIPS} variables={{ target_screenName: screen_name, source_screenName: currentUser}}>
             {({ loading, error, data }) => {
                 if (loading) return <div><CircularProgress /></div>;
-                if (error) if (error) return <Error error={error.message} />
+                if (error) return <Error />;
 
                 return (
                     // Looping over the compared relationships

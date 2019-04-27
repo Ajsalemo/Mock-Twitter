@@ -48,6 +48,8 @@ class TweetModal extends Component {
           open: false 
         });
     };
+
+    // ----------------------------------------------------------------------------------------------------- //
   
     render() {
         const { classes } = this.props;

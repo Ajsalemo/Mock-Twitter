@@ -27,7 +27,6 @@ export const GET_USER_STATUS_COUNT =
                     created_at
                     id
                     id_str
-                    text
                     truncated
                     geo
                     coordinates
@@ -58,7 +57,7 @@ export const GET_AUTHUSER_TWEETS =
                     created_at
                     id
                     id_str
-                    text
+                    full_text
                     truncated
                     geo
                     coordinates
@@ -77,6 +76,15 @@ export const GET_AUTHUSER_TWEETS =
                         verified
                         statuses_count
                         profile_image_url_https
+                    }
+                    entities {
+                        hashtags {
+                            text
+                        }
+                        media {
+                            display_url
+                            media_url_https
+                        }
                     }
                 }
             }
@@ -159,9 +167,9 @@ export const COMPARE_FRIENDSHIPS =
 
 export const CREATE_USER_TWEET =
     gql`
-        mutation CreateTweet($text: String!) {
-            createTweet(text: $text) {
-                text
+        mutation CreateTweet($full_text: String!) {
+            createTweet(full_text: $full_text) {
+                full_text
             }
         }
     `;

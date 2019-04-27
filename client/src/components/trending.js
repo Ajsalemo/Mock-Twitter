@@ -15,6 +15,9 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 // Apollo Queries
 import { GET_TRENDING_TOPICS } from '../apolloclient/apolloqueries';
 
+// Components 
+import Error from '../components/error';
+
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
@@ -56,7 +59,7 @@ const Trending = props => {
         <Query query={GET_TRENDING_TOPICS}>
             {({ loading, error, data }) => {
                 if (loading) return <div><CircularProgress /></div>;
-                if (error) console.log(error);
+                if (error) return <div><Error /></div>;
 
                 return (
                     <Paper className={classes.trendingPaper}>

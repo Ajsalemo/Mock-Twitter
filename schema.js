@@ -16,7 +16,7 @@ const typeDefs =
 
         # Root Mutation
         type Mutation {
-            createTweet(text: String!): UserTimelineTweets
+            createTweet(full_text: String!): UserTimelineTweets
             followUser(id: String!): UserObject
             unfollowUserReqest(id: String!): UserObject
         }
@@ -36,11 +36,6 @@ const typeDefs =
             userTweetStatusCount: [UserTimelineTweets]
         }
 
-        # The authenticated users status(tweet) count
-        type StatusesCount {
-            statuses_count: String
-        }
-
         # Object wrapper to iterate
         type trendsWrapper {
             trends: [TrendingTopics]
@@ -51,7 +46,7 @@ const typeDefs =
             created_at: String
             id: String
             id_str: String
-            text: String
+            full_text: String
             truncated: String
             geo: String
             coordinates: String
@@ -64,6 +59,22 @@ const typeDefs =
             retweeted: String
             lang: String
             user: UserTweetObject
+            entities: Entities
+        }
+
+        # Object that holds arrays for hashtags, medias or user mentions
+        type Entities {
+            hashtags: [Hashtag]
+            media: [Media]
+        }
+
+        type Hashtag {
+            text: String
+        }
+
+        type Media {
+            display_url: String
+            media_url_https: String
         }
 
         # Currently trending topics
@@ -206,14 +217,14 @@ const resolvers = {
     },
     User: {
         userTimelineTweets: async (parent, args, user) => {
-            const requestUserTimelineTweets = await client.get('statuses/home_timeline', { screen_name: user.name });
+            const requestUserTimelineTweets = await client.get('statuses/home_timeline', { screen_name: user.name, tweet_mode: 'extended' });
             const responserUserTimelineTweets = await requestUserTimelineTweets;
             return responserUserTimelineTweets;
         },
         userTweetStatusCount: async (parent, args, user) => {
             const userTweetStatusRequest = await client.get('statuses/user_timeline', { screen_name: user.name });
             const userTweetStatusResponse = await userTweetStatusRequest;
-            console.log(userTweetStatusResponse);
+            console.log(userTweetStatusResponse)
             return userTweetStatusResponse;
         },
         trendingTopics: async (parent, args, context) => {
@@ -239,7 +250,7 @@ const resolvers = {
     },
     Mutation: {
         createTweet: async (parent, args, context) => {
-            const addNewTweetRequest = await client.post('statuses/update', { status: args.text });
+            const addNewTweetRequest = await client.post('statuses/update', { status: args.full_text });
             const addNewTweetResponse = await addNewTweetRequest;
             return addNewTweetResponse;
         },

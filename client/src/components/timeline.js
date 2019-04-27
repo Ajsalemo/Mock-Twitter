@@ -15,10 +15,17 @@ import ChatBubbleOutline from '@material-ui/icons/ChatBubbleOutline';
 import Repeat from '@material-ui/icons/Repeat';
 import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
 import BarChart from '@material-ui/icons/BarChart';
+import Grid from '@material-ui/core/Grid';
+import CardMedia from '@material-ui/core/CardMedia';
 
 // Apollo Queries
 import { GET_AUTHUSER_TWEETS } from '../apolloclient/apolloqueries';
-import { Grid } from '@material-ui/core';
+
+// Components
+import Error from '../components/error';
+
+// Images
+import verifiedIcon from '../images/verifiedicon.png';
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
@@ -55,8 +62,19 @@ const styles = () => ({
             cursor: 'pointer',
             color: '#005aff59'
         }
+    },
+    verifiedTimelineIcon: {
+        height: '1em',
+        width: '1em',
+        marginLeft: '0.4em'
+    },
+    mediaCard: {
+        margin: '1em 0',
+        height: '20em'    
     }
 });
+
+// ----------------------------------------------------------------------------------------------------- //
 
 const pollMinute = (a, b) => {
     return a * b;
@@ -71,7 +89,7 @@ const Timeline = props => {
             <Query query={GET_AUTHUSER_TWEETS} pollInterval={pollMinute(1000, 60)} fetchPolicy='network-only'>
                 {({ loading, error, data }) => {
                     if (loading) return <div><CircularProgress /></div>;
-                    if (error) console.log(error);
+                    if (error) return <Error />;
                     return (
                         data.currentUser.userTimelineTweets.map((timelineTweetInfo, i) => {
                             return (
@@ -81,14 +99,32 @@ const Timeline = props => {
                                         {/* Name and handle */}
                                         <Typography variant="subtitle2">
                                             <span>{timelineTweetInfo.user.name}</span>
+                                            {/* If the Twitter account is verified - display the blue 'check' icon */}
+                                            {timelineTweetInfo.user.verified === true 
+                                                ? 
+                                            <img src={verifiedIcon} className={classes.verifiedTimelineIcon} alt="verified account" />
+                                                : 
+                                            null}
                                             <span className={classes.timelineHandleFont}>@{timelineTweetInfo.user.nickname}</span>
                                             <span className={classes.timelineDotSpacing}>&#8226;</span>
                                             <span className={classes.timelineHandleFont}><Moment fromNow>{timelineTweetInfo.created_at}</Moment></span>
                                            </Typography>
                                         {/* Tweet body */}
                                         <Typography variant="body2" gutterBottom>
-                                            <span className={classes.timelimeTweets}>{timelineTweetInfo.text}</span>
+                                            <span className={classes.timelimeTweets}>{timelineTweetInfo.full_text}</span>
                                         </Typography>
+                                        {/* Tweet Media */}
+                                        {timelineTweetInfo.entities.media ?
+                                            <CardMedia
+                                                component="img"
+                                                alt="Twitter post's related media"
+                                                className={classes.mediaCard}
+                                                image={timelineTweetInfo.entities.media[0].media_url_https}
+                                                title="Twitter post's related media"
+                                            />
+                                                :
+                                            null
+                                        }
                                         <Grid item>
                                             <ChatBubbleOutline className={classes.timelineIcons} />
                                             <Repeat className={classes.timelineIcons} />

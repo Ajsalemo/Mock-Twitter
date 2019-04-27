@@ -16,6 +16,9 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 // Apollo Queries
 import { GET_USER, GET_USER_STATUS_COUNT } from '../apolloclient/apolloqueries';
 
+// Components
+import Error from '../components/error';
+
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
@@ -93,7 +96,7 @@ const ProfileHandle = props => {
                                     <Query query={GET_USER_STATUS_COUNT}>
                                         {({ loading, error, data }) => {
                                             if (loading) return <div><CircularProgress /></div>;
-                                            if (error) console.log(error);
+                                            if (error) return <Error error={error.message} />;
 
                                             return (
                                                 <div className={classes.profileTweetSpan}>
@@ -102,7 +105,7 @@ const ProfileHandle = props => {
                                                         {data.currentUser.userTweetStatusCount[0].user.statuses_count}
                                                     </span>
                                                 </div>        
-                                            )
+                                            );
                                         }}
                                     </Query>
                                 </Typography>

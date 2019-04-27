@@ -4,7 +4,6 @@
 import React from 'react';
 
 // Material-UI components
-import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 
 // Images
@@ -25,12 +24,11 @@ const styles = () => ({
 // ----------------------------------------------------------------------------------------------------- //
 
 const Error = props => {
-    const { error, classes } = props;
+    const { classes } = props;
     return (
-        <Typography variant="subtitle2">
+        <div>
             An error has occured: <img src={errorImage} className={classes.errorImage} alt="an error has occured" />
-            <span className={classes.errorSpan}>{error}</span>
-        </Typography>
+        </div>
     )
 };
 
