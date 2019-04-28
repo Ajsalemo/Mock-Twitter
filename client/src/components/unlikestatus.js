@@ -1,63 +1,56 @@
 // --------------------------------------------- Imports ----------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
-
+ 
 import React from 'react';
 import { Mutation } from 'react-apollo';
 
 // Material-UI components
-import Fab from '@material-ui/core/Fab';
+import Favorite from '@material-ui/icons/FavoriteBorder';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { withStyles } from '@material-ui/core/styles';
 
-// Apollo Mutations and Queries
-import { FOLLOW_USER, COMPARE_FRIENDSHIPS, GET_USER_STATUS_COUNT } from '../apolloclient/apolloqueries';
+// Apollo Queries
+import { UNLIKE_STATUS, GET_AUTHUSER_TWEETS } from '../apolloclient/apolloqueries';
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
 const styles = () => ({
-    followUserButton: {
-        backgroundColor: '#fff',
-        color: '#00acee',
-        height: '2em',
-        width: '5em'
+    unlikeStatusButtonSpacing: {
+        marginRight: '2em'
+    },
+    unlikeStatusIcon: {
+        fontSize: '1.3em',
+        marginRight: '0.5em',
     }
 });
 
 // ----------------------------------------------------------------------------------------------------- //
 
-const FollowUser = props => {
-    const { classes, id, screen_name, currentUser } = props;
+const UnLikeStatus = props => {
+    const { id, favorite_count, classes } = props;
     return (
-        <Mutation 
-            mutation={FOLLOW_USER} 
-            refetchQueries={[{ 
-                query: COMPARE_FRIENDSHIPS, GET_USER_STATUS_COUNT,
-                variables: {
-                    target_screenName: screen_name,
-                    source_screenName: currentUser
-                }
+        <Mutation
+            mutation={UNLIKE_STATUS}
+            refetchQueries={[{
+                query: GET_AUTHUSER_TWEETS
             }]}
         >
-            {(followUserProp, { loading }) => (
-                loading 
-                    ? 
+            {(unlikeStatusProp, { loading }) => (
+                loading
+                    ?
                 <CircularProgress />
                     :
-                <Fab
-                    onClick={() => followUserProp({
-                        variables: {
-                            id: id
-                        }
-                    })}
-                    variant="extended"
-                    aria-label="Follow user"
-                    classes={{
-                        root: classes.followUserButton
-                    }}
-                >
-                    Follow
-                </Fab>
+                <React.Fragment>
+                    <Favorite className={classes.unlikeStatusIcon} 
+                        onClick={() => unlikeStatusProp({
+                            variables: {
+                                id: id
+                            }
+                        })}
+                    />
+                    <div className={classes.unlikeStatusButtonSpacing}>{favorite_count}</div>
+                </React.Fragment>
             )}
         </Mutation>
     );
@@ -66,7 +59,7 @@ const FollowUser = props => {
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
-export default withStyles(styles)(FollowUser);
+export default withStyles(styles)(UnLikeStatus);
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //

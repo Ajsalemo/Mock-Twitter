@@ -19,6 +19,8 @@ const typeDefs =
             createTweet(full_text: String!): UserTimelineTweets
             followUser(id: String!): UserObject
             unfollowUserReqest(id: String!): UserObject
+            likeStatus(id: String!): UserObject
+            unlikeStatus(id: String!): UserObject
         }
 
         # User Object
@@ -55,7 +57,7 @@ const typeDefs =
             is_quote_status: String
             retweet_count: String
             favorite_count: String
-            favorited: String
+            favorited: Boolean
             retweeted: String
             lang: String
             user: UserTweetObject
@@ -263,6 +265,17 @@ const resolvers = {
             const unfollowUserRequest = await client.post('friendships/destroy', { id: args.id });
             const unfollowUserResponse = await unfollowUserRequest;
             return unfollowUserResponse;
+        },
+        likeStatus: async (parent, args, context) => {
+            const likeStatusRequest = await client.post('favorites/create', { id: args.id });
+            const likeStatusResponse = await likeStatusRequest;
+            return likeStatusResponse;
+        },
+        unlikeStatus: async (parent, args, context) => {
+            const unlikeStatusRequest = await client.post('favorites/destroy', { id: args.id });
+            const unlikeStatusResponse = await unlikeStatusRequest;
+            console.log(unlikeStatusResponse);
+            return unlikeStatusResponse;
         }
     }
 };

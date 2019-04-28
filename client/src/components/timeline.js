@@ -14,7 +14,6 @@ import Typography from '@material-ui/core/Typography';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import ChatBubbleOutline from '@material-ui/icons/ChatBubbleOutline';
 import Repeat from '@material-ui/icons/Repeat';
-import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
 import BarChart from '@material-ui/icons/BarChart';
 import Grid from '@material-ui/core/Grid';
 import CardMedia from '@material-ui/core/CardMedia';
@@ -24,6 +23,8 @@ import { GET_AUTHUSER_TWEETS } from '../apolloclient/apolloqueries';
 
 // Components
 import Error from '../components/error';
+import LikeStatus from '../components/likestatus';
+import UnLikeStatus from '../components/unlikestatus';
 
 // Images
 import verifiedIcon from '../images/verifiedicon.png';
@@ -157,8 +158,17 @@ const Timeline = props => {
                                                     <div className={classes.buttonOptionsSpacing}>{timelineTweetInfo.retweet_count}</div>
                                                 </div>
                                                 <div className={classNames(classes.buttonOptionsGrid, classes.buttonOptionsHover)}>
-                                                    <FavoriteBorder className={classes.timelineIcons} />
-                                                    <div className={classes.buttonOptionsSpacing}>{timelineTweetInfo.favorite_count}</div>
+                                                    {timelineTweetInfo.favorited === true
+                                                        ?
+                                                    <UnLikeStatus
+                                                        id={timelineTweetInfo.id}
+                                                        favorite_count={timelineTweetInfo.favorite_count}    
+                                                    />
+                                                        :
+                                                    <LikeStatus 
+                                                        id={timelineTweetInfo.id}
+                                                        favorite_count={timelineTweetInfo.favorite_count}
+                                                    />}
                                                 </div>
                                                 <BarChart className={classNames(classes.timelineIcons, classes.buttonOptionsHover)} />
                                             </Typography>
