@@ -56,7 +56,7 @@ const styles = () => ({
 const Trending = props => {
     const { classes } = props;
     return (
-        <Query query={GET_TRENDING_TOPICS}>
+        <Query query={GET_TRENDING_TOPICS} fetchPolicy='cache-and-network'>
             {({ loading, error, data }) => {
                 if (loading) return <div><CircularProgress /></div>;
                 if (error) return <div><Error /></div>;

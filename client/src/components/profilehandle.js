@@ -65,6 +65,11 @@ const styles = () => ({
     },
     rootClass: {
         paddingTop: '0em'
+    },
+    profileHandleTypography: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-around'
     }
 });
 
@@ -77,7 +82,7 @@ const ProfileHandle = props => {
             <Query query={GET_USER}>
                 {({ loading, error, data }) => {
                     if (loading) return <div><CircularProgress /></div>;
-                    if (error) console.log(error);
+                    if (error) return <div><Error /></div>;
 
                 return (
                     <Paper>
@@ -91,20 +96,34 @@ const ProfileHandle = props => {
                                         <span className={classes.handleTextLower}>@{data.currentUser.nickname}</span>
                                     </div>
                                 </Typography>
-                                <Typography variant="subtitle2" gutterBottom>
+                                <Typography variant="subtitle2" className={classes.profileHandleTypography} gutterBottom>
                                     {/* Nested Query to retrieve total tweet count for the account */}
-                                    <Query query={GET_USER_STATUS_COUNT}>
+                                    <Query query={GET_USER_STATUS_COUNT} fetchPolicy='cache-and-network'>
                                         {({ loading, error, data }) => {
                                             if (loading) return <div><CircularProgress /></div>;
-                                            if (error) return <Error error={error.message} />;
+                                            if (error) return <Error />;
 
                                             return (
-                                                <div className={classes.profileTweetSpan}>
-                                                    <span>Tweets</span>
-                                                    <span className={classes.profileTweetCount}>
-                                                        {data.currentUser.userTweetStatusCount[0].user.statuses_count}
-                                                    </span>
-                                                </div>        
+                                                <React.Fragment>
+                                                    <div className={classes.profileTweetSpan}>
+                                                        <span>Tweets</span>
+                                                        <span className={classes.profileTweetCount}>
+                                                            {data.currentUser.userTweetStatusCount[0].user.statuses_count}
+                                                        </span>
+                                                    </div> 
+                                                    <div className={classes.profileTweetSpan}>
+                                                        <span>Following</span>
+                                                        <span className={classes.profileTweetCount}>
+                                                            {data.currentUser.userTweetStatusCount[0].user.friends_count}
+                                                        </span>
+                                                    </div>  
+                                                    <div className={classes.profileTweetSpan}>
+                                                        <span>Followers</span>
+                                                        <span className={classes.profileTweetCount}>
+                                                            {data.currentUser.userTweetStatusCount[0].user.followers_count}
+                                                        </span>
+                                                    </div>  
+                                                </React.Fragment>   
                                             );
                                         }}
                                     </Query>

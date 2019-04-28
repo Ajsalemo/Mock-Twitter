@@ -27,6 +27,9 @@ import Error from '../components/error';
 // Images
 import verifiedIcon from '../images/verifiedicon.png';
 
+// Imported functions
+import { pollMinute } from '../apolloclient/apolloclient';
+
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
@@ -36,7 +39,11 @@ const styles = () => ({
         flexDirection: 'row',
         padding: '1em',
         wordBreak: 'break-word',
-        borderRadius: '0%'
+        borderRadius: '0%',
+        '&:hover': {
+            backgroundColor: '#8080801f',
+            cursor: 'pointer'
+        }
     },
     timelineAvatar: {
         marginRight: '0.5em'
@@ -57,7 +64,7 @@ const styles = () => ({
     },
     timelineIcons: {
         fontSize: '1.3em',
-        marginRight: '2.7em',
+        marginRight: '0.5em',
         '&:hover': {
             cursor: 'pointer',
             color: '#005aff59'
@@ -70,26 +77,38 @@ const styles = () => ({
     },
     mediaCard: {
         margin: '1em 0',
-        height: '20em'    
+        height: '20em',
+        borderRadius: '3%'    
+    },
+    errorAndLoadingDiv: {
+        paddingTop: '1em',
+        display: 'flex',
+        justifyContent: 'center'
+    },
+    buttonOptionsGrid: {
+        display: 'flex',
+        flexDirection: 'row'
+    },
+    buttonOptionsSpacing: {
+        marginRight: '2em'
     }
 });
 
 // ----------------------------------------------------------------------------------------------------- //
-
-const pollMinute = (a, b) => {
-    return a * b;
-};
-
 // ----------------------------------------------------------------------------------------------------- //
 
 const Timeline = props => {
     const { classes } = props;
     return (
         <React.Fragment>
-            <Query query={GET_AUTHUSER_TWEETS} pollInterval={pollMinute(1000, 60)} fetchPolicy='network-only'>
+            <Query 
+                query={GET_AUTHUSER_TWEETS} 
+                pollInterval={pollMinute(1000, 60)} 
+                fetchPolicy='cache-and-network'
+            >
                 {({ loading, error, data }) => {
-                    if (loading) return <div><CircularProgress /></div>;
-                    if (error) return <Error />;
+                    if (loading) return <div className={classes.errorAndLoadingDiv}><CircularProgress /></div>;
+                    if (error) return <div className={classes.errorAndLoadingDiv}><Error /></div>;
                     return (
                         data.currentUser.userTimelineTweets.map((timelineTweetInfo, i) => {
                             return (
@@ -126,10 +145,20 @@ const Timeline = props => {
                                             null
                                         }
                                         <Grid item>
-                                            <ChatBubbleOutline className={classes.timelineIcons} />
-                                            <Repeat className={classes.timelineIcons} />
-                                            <FavoriteBorder className={classes.timelineIcons} />
-                                            <BarChart className={classes.timelineIcons} />
+                                            <Typography variant="subtitle2" className={classes.buttonOptionsGrid}>
+                                                <div className={classes.buttonOptionsSpacing}>
+                                                    <ChatBubbleOutline className={classes.timelineIcons} />
+                                                </div>
+                                                <div className={classes.buttonOptionsGrid}>
+                                                    <Repeat className={classes.timelineIcons} /> 
+                                                    <div className={classes.buttonOptionsSpacing}>{timelineTweetInfo.retweet_count}</div>
+                                                </div>
+                                                <div className={classes.buttonOptionsGrid}>
+                                                    <FavoriteBorder className={classes.timelineIcons} />
+                                                    <div className={classes.buttonOptionsSpacing}>{timelineTweetInfo.favorite_count}</div>
+                                                </div>
+                                                <BarChart className={classes.timelineIcons} />
+                                            </Typography>
                                         </Grid>
                                     </Grid>
                                 </Paper>

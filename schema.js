@@ -139,6 +139,7 @@ const typeDefs =
         # Object that is generated inside timeline tweet responses
         type UserTweetObject {
             name: String 
+            in_reply_to_status_id_str: String
             profile_sidebar_fill_color: String
             profile_background_tile: String
             profile_sidebar_border_color: String 
@@ -224,7 +225,6 @@ const resolvers = {
         userTweetStatusCount: async (parent, args, user) => {
             const userTweetStatusRequest = await client.get('statuses/user_timeline', { screen_name: user.name });
             const userTweetStatusResponse = await userTweetStatusRequest;
-            console.log(userTweetStatusResponse)
             return userTweetStatusResponse;
         },
         trendingTopics: async (parent, args, context) => {

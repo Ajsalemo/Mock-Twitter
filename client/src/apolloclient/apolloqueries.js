@@ -24,22 +24,10 @@ export const GET_USER_STATUS_COUNT =
         query GetUserStatusCount {
             currentUser {
                 userTweetStatusCount {
-                    created_at
-                    id
-                    id_str
-                    truncated
-                    geo
-                    coordinates
-                    place
-                    contributors
-                    is_quote_status
-                    retweet_count
-                    favorite_count
-                    favorited
-                    retweeted
-                    lang
                     user {
                         statuses_count
+                        followers_count
+                        friends_count
                     }
                 }
             }
@@ -76,6 +64,7 @@ export const GET_AUTHUSER_TWEETS =
                         verified
                         statuses_count
                         profile_image_url_https
+                        in_reply_to_status_id_str
                     }
                     entities {
                         hashtags {

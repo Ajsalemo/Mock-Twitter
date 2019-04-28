@@ -25,6 +25,9 @@ import { GET_SUGGESTED_CATEGORIES } from '../apolloclient/apolloqueries';
 import SuggestedCategories from '../components/suggestedcategories';
 import Error from './error';
 
+// Imported functions
+import { pollMinute } from '../apolloclient/apolloclient';
+
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
@@ -87,7 +90,11 @@ const Recommended = props => {
                                     <Link to='#/' className={classes.links}>View all</Link>
                                 </span>
                             </Typography>
-                            <Query query={GET_SUGGESTED_CATEGORIES}>
+                            <Query 
+                                query={GET_SUGGESTED_CATEGORIES} 
+                                fetchPolicy='cache-and-network'
+                                pollInterval={pollMinute(1000, 60)} 
+                            >
                                 {({ loading, error, data }) => {
                                     if (loading) return <div><CircularProgress /></div>;
                                     if (error) return <Error />

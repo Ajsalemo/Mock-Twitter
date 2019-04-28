@@ -16,7 +16,7 @@ import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 
 // Apollo Mutations
-import { CREATE_USER_TWEET, GET_AUTHUSER_TWEETS } from '../apolloclient/apolloqueries';
+import { CREATE_USER_TWEET, GET_AUTHUSER_TWEETS, GET_USER_STATUS_COUNT } from '../apolloclient/apolloqueries';
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
@@ -69,7 +69,7 @@ const TweetModalForm = props => {
     const { classes, avatar, onClose } = props;
     return (
         <React.Fragment>
-            <Mutation mutation={CREATE_USER_TWEET} refetchQueries={[{ query: GET_AUTHUSER_TWEETS }]}>
+            <Mutation mutation={CREATE_USER_TWEET} refetchQueries={[{ query: GET_AUTHUSER_TWEETS, GET_USER_STATUS_COUNT }]}>
                 {(createModalTweetProp, { loading }) => (
                     <Formik
                         initialValues={{ tweetModalForm: '' }}

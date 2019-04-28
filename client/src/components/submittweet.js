@@ -13,6 +13,7 @@ import { withStyles } from '@material-ui/core/styles';
 // Components
 import Timeline from './timeline';
 import SubmitTweetForm from './submittweetform';
+import Error from './error';
 
 // Apollo Queries
 import { GET_USER } from '../apolloclient/apolloqueries';
@@ -45,7 +46,7 @@ const SubmitTweet = props => {
             <Query query={GET_USER}>
                 {({ loading, error, data }) => {
                     if (loading) return <div><CircularProgress /></div>;
-                    if (error) console.log(error);
+                    if (error) return <div><Error /></div>;
                 return (
                     <Grid item xs={10} sm={8} md={5} className={classes.gridItem}>
                         <Paper className={classes.paperOutline}>

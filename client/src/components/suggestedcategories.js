@@ -20,7 +20,11 @@ import Error from '../components/error';
 const SuggestedCategories = props => {
     const { categories } = props;
     return (
-        <Query query={GET_SUGGESTED_CATEGORIES_MEMBERS_GROUP} variables={{ slug: categories }}>
+        <Query 
+            query={GET_SUGGESTED_CATEGORIES_MEMBERS_GROUP} 
+            variables={{ slug: categories }}
+            fetchPolicy='cache-first'
+        >
             {({ loading, error, data }) => {
                 if (loading) return <div><CircularProgress /></div>;
                 if (error) return <Error />

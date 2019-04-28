@@ -10,7 +10,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import { withStyles } from '@material-ui/core/styles';
 
 // Apollo Mutations
-import { UNFOLLOW_USER, COMPARE_FRIENDSHIPS} from '../apolloclient/apolloqueries';
+import { UNFOLLOW_USER, COMPARE_FRIENDSHIPS, GET_USER_STATUS_COUNT } from '../apolloclient/apolloqueries';
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
@@ -35,7 +35,7 @@ const UnfollowUser = props => {
         <Mutation 
             mutation={UNFOLLOW_USER} 
             refetchQueries={[{ 
-                query: COMPARE_FRIENDSHIPS,
+                query: COMPARE_FRIENDSHIPS, GET_USER_STATUS_COUNT,
                 variables: {
                     target_screenName: screen_name,
                     source_screenName: currentUser
