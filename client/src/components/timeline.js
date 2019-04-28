@@ -4,6 +4,7 @@
 import React from 'react';
 import { Query } from 'react-apollo';
 import Moment from 'react-moment';
+import classNames from 'classnames';
 
 // Material-UI components
 import { withStyles } from '@material-ui/core/styles';
@@ -65,10 +66,6 @@ const styles = () => ({
     timelineIcons: {
         fontSize: '1.3em',
         marginRight: '0.5em',
-        '&:hover': {
-            cursor: 'pointer',
-            color: '#005aff59'
-        }
     },
     verifiedTimelineIcon: {
         height: '1em',
@@ -91,6 +88,12 @@ const styles = () => ({
     },
     buttonOptionsSpacing: {
         marginRight: '2em'
+    },
+    buttonOptionsHover: {
+        '&:hover': {
+            cursor: 'pointer',
+            color: '#005aff59'
+        }
     }
 });
 
@@ -146,18 +149,18 @@ const Timeline = props => {
                                         }
                                         <Grid item>
                                             <Typography variant="subtitle2" className={classes.buttonOptionsGrid}>
-                                                <div className={classes.buttonOptionsSpacing}>
+                                                <div className={classNames(classes.buttonOptionsSpacing, classes.buttonOptionsHover)}>
                                                     <ChatBubbleOutline className={classes.timelineIcons} />
                                                 </div>
-                                                <div className={classes.buttonOptionsGrid}>
+                                                <div className={classNames(classes.buttonOptionsGrid, classes.buttonOptionsHover)}>
                                                     <Repeat className={classes.timelineIcons} /> 
                                                     <div className={classes.buttonOptionsSpacing}>{timelineTweetInfo.retweet_count}</div>
                                                 </div>
-                                                <div className={classes.buttonOptionsGrid}>
+                                                <div className={classNames(classes.buttonOptionsGrid, classes.buttonOptionsHover)}>
                                                     <FavoriteBorder className={classes.timelineIcons} />
                                                     <div className={classes.buttonOptionsSpacing}>{timelineTweetInfo.favorite_count}</div>
                                                 </div>
-                                                <BarChart className={classes.timelineIcons} />
+                                                <BarChart className={classNames(classes.timelineIcons, classes.buttonOptionsHover)} />
                                             </Typography>
                                         </Grid>
                                     </Grid>
