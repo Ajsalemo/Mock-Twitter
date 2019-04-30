@@ -5,7 +5,7 @@ import React from 'react';
 import { Mutation } from 'react-apollo';
 
 // Material-UI components
-import Favorite from '@material-ui/icons/FavoriteBorder';
+import Favorite from '@material-ui/icons/Favorite';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { withStyles } from '@material-ui/core/styles';
 
@@ -42,7 +42,8 @@ const UnLikeStatus = props => {
                 <CircularProgress />
                     :
                 <React.Fragment>
-                    <Favorite className={classes.unlikeStatusIcon} 
+                    <Favorite 
+                        className={classes.unlikeStatusIcon} 
                         onClick={() => unlikeStatusProp({
                             variables: {
                                 id: id

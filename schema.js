@@ -19,8 +19,8 @@ const typeDefs =
             createTweet(full_text: String!): UserTimelineTweets
             followUser(id: String!): UserObject
             unfollowUserReqest(id: String!): UserObject
-            likeStatus(id: String!): UserObject
-            unlikeStatus(id: String!): UserObject
+            likeStatus(id: String!): UserTweetObject
+            unlikeStatus(id: String!): UserTweetObject
         }
 
         # User Object

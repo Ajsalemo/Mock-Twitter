@@ -42,10 +42,14 @@ const LikeStatus = props => {
                 <CircularProgress />
                     :
                 <React.Fragment>
-                    <FavoriteBorder className={classes.likeStatusIcon} 
+                    <FavoriteBorder 
+                        className={classes.likeStatusIcon} 
                         onClick={() => likeStatusProp({
                             variables: {
                                 id: id
+                            },
+                            update: (proxy, { data: { likeStatusProp }}) => {
+                                console.log("Update: ", likeStatusProp);
                             }
                         })}
                     />
