@@ -22,6 +22,7 @@ const styles = () => ({
     unlikeStatusIcon: {
         fontSize: '1.3em',
         marginRight: '0.5em',
+        color: '#8b000094'
     }
 });
 

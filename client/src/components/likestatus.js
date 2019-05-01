@@ -47,9 +47,6 @@ const LikeStatus = props => {
                         onClick={() => likeStatusProp({
                             variables: {
                                 id: id
-                            },
-                            update: (proxy, { data: { likeStatusProp }}) => {
-                                console.log("Update: ", likeStatusProp);
                             }
                         })}
                     />

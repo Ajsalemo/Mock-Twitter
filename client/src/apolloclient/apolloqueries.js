@@ -189,9 +189,9 @@ export const LIKE_STATUS =
     gql`
         mutation likeStatus($id: String!) {
             likeStatus(id: $id) {
-                created_at 
-                id_str
                 id
+                name
+                screen_name
             }
         }
     `;
@@ -200,9 +200,9 @@ export const UNLIKE_STATUS =
     gql`
         mutation unlikeStatus($id: String!) {
             unlikeStatus(id: $id) {
-                created_at 
-                id_str
                 id
+                name
+                screen_name
             }
         }
     `;

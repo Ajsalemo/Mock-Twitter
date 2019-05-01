@@ -161,12 +161,12 @@ const Timeline = props => {
                                                     {timelineTweetInfo.favorited === true
                                                         ?
                                                     <UnLikeStatus
-                                                        id={timelineTweetInfo.id}
+                                                        id={timelineTweetInfo.id_str}
                                                         favorite_count={timelineTweetInfo.favorite_count}    
                                                     />
                                                         :
                                                     <LikeStatus 
-                                                        id={timelineTweetInfo.id}
+                                                        id={timelineTweetInfo.id_str}
                                                         favorite_count={timelineTweetInfo.favorite_count}
                                                     />}
                                                 </div>

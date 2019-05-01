@@ -19,8 +19,8 @@ const typeDefs =
             createTweet(full_text: String!): UserTimelineTweets
             followUser(id: String!): UserObject
             unfollowUserReqest(id: String!): UserObject
-            likeStatus(id: String!): UserTweetObject
-            unlikeStatus(id: String!): UserTweetObject
+            likeStatus(id: String!): UserObject
+            unlikeStatus(id: String!): UserObject
         }
 
         # User Object
@@ -274,7 +274,6 @@ const resolvers = {
         unlikeStatus: async (parent, args, context) => {
             const unlikeStatusRequest = await client.post('favorites/destroy', { id: args.id });
             const unlikeStatusResponse = await unlikeStatusRequest;
-            console.log(unlikeStatusResponse);
             return unlikeStatusResponse;
         }
     }
