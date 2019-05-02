@@ -21,6 +21,7 @@ const typeDefs =
             unfollowUserReqest(id: String!): UserObject
             likeStatus(id: String!): UserObject
             unlikeStatus(id: String!): UserObject
+            retweet(id: String!): RetweetObject
         }
 
         # User Object
@@ -206,6 +207,22 @@ const typeDefs =
             following: Boolean
             followed_by: Boolean
         }
+
+        # Retweet Object
+        type RetweetObject {
+            tweet: RetweetObjectWrapper
+        }
+
+        # Retweet Object Wrapper
+        type RetweetObjectWrapper {
+            text: String
+            user: TweetedUser
+        }
+
+        # User property
+        type TweetedUser {
+            screen_name: String
+        }
     `;
 
 // ----------------------------------------------------------------------------------------------------- //
@@ -275,6 +292,11 @@ const resolvers = {
             const unlikeStatusRequest = await client.post('favorites/destroy', { id: args.id });
             const unlikeStatusResponse = await unlikeStatusRequest;
             return unlikeStatusResponse;
+        },
+        retweet: async (parent, args, context) => {
+            const retweetRequest = await client.post('statuses/retweet', { id: args.id });
+            const retweetResponse = await retweetRequest;
+            return retweetResponse;
         }
     }
 };
