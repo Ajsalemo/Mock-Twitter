@@ -296,6 +296,7 @@ const resolvers = {
         retweet: async (parent, args, context) => {
             const retweetRequest = await client.post('statuses/retweet', { id: args.id });
             const retweetResponse = await retweetRequest;
+            console.log(retweetResponse);
             return retweetResponse;
         }
     }

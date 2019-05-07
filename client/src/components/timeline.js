@@ -3,7 +3,6 @@
 
 import React from 'react';
 import { Query } from 'react-apollo';
-import Moment from 'react-moment';
 import classNames from 'classnames';
 
 // Material-UI components
@@ -13,7 +12,6 @@ import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import ChatBubbleOutline from '@material-ui/icons/ChatBubbleOutline';
-import Repeat from '@material-ui/icons/Repeat';
 import BarChart from '@material-ui/icons/BarChart';
 import Grid from '@material-ui/core/Grid';
 import CardMedia from '@material-ui/core/CardMedia';
@@ -25,9 +23,8 @@ import { GET_AUTHUSER_TWEETS } from '../apolloclient/apolloqueries';
 import Error from '../components/error';
 import LikeStatus from '../components/likestatus';
 import UnLikeStatus from '../components/unlikestatus';
-
-// Images
-import verifiedIcon from '../images/verifiedicon.png';
+import RetweetModal from '../components/retweetmodal';
+import Tweettext from '../components/tweettext';
 
 // Imported functions
 import { pollMinute } from '../apolloclient/apolloclient';
@@ -119,23 +116,14 @@ const Timeline = props => {
                                 <Paper className={classes.timelinePaper} key={i}>
                                     <Avatar alt="twitter avatar" src={timelineTweetInfo.user.profile_image_url_https} className={classes.timelineAvatar}/>
                                     <Grid item className={classes.timelineGrid}>
-                                        {/* Name and handle */}
-                                        <Typography variant="subtitle2">
-                                            <span>{timelineTweetInfo.user.name}</span>
-                                            {/* If the Twitter account is verified - display the blue 'check' icon */}
-                                            {timelineTweetInfo.user.verified === true 
-                                                ? 
-                                            <img src={verifiedIcon} className={classes.verifiedTimelineIcon} alt="verified account" />
-                                                : 
-                                            null}
-                                            <span className={classes.timelineHandleFont}>@{timelineTweetInfo.user.nickname}</span>
-                                            <span className={classes.timelineDotSpacing}>&#8226;</span>
-                                            <span className={classes.timelineHandleFont}><Moment fromNow>{timelineTweetInfo.created_at}</Moment></span>
-                                           </Typography>
-                                        {/* Tweet body */}
-                                        <Typography variant="body2" gutterBottom>
-                                            <span className={classes.timelimeTweets}>{timelineTweetInfo.full_text}</span>
-                                        </Typography>
+                                        {/* Tweet text body */}
+                                        <Tweettext
+                                            name={timelineTweetInfo.user.name}
+                                            verified={timelineTweetInfo.user.verified}
+                                            nickname={timelineTweetInfo.user.nickname}
+                                            created_at={timelineTweetInfo.created_at}
+                                            full_text={timelineTweetInfo.full_text}
+                                        />
                                         {/* Tweet Media */}
                                         {timelineTweetInfo.entities.media ?
                                             <CardMedia
@@ -154,8 +142,15 @@ const Timeline = props => {
                                                     <ChatBubbleOutline className={classes.timelineIcons} />
                                                 </div>
                                                 <div className={classNames(classes.buttonOptionsGrid, classes.buttonOptionsHover)}>
-                                                    <Repeat className={classes.timelineIcons} /> 
-                                                    <div className={classes.buttonOptionsSpacing}>{timelineTweetInfo.retweet_count}</div>
+                                                    <RetweetModal
+                                                        retweet_count={timelineTweetInfo.retweet_count}
+                                                        name={timelineTweetInfo.user.name}
+                                                        verified={timelineTweetInfo.user.verified}
+                                                        nickname={timelineTweetInfo.user.nickname}
+                                                        created_at={timelineTweetInfo.created_at}
+                                                        full_text={timelineTweetInfo.full_text}    
+                                                        srcImage={timelineTweetInfo.user.profile_image_url_https}        
+                                                    />
                                                 </div>
                                                 <div className={classNames(classes.buttonOptionsGrid, classes.buttonOptionsHover)}>
                                                     {timelineTweetInfo.favorited === true
