@@ -11,6 +11,7 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Avatar from '@material-ui/core/Avatar';
+import Fab from '@material-ui/core/Fab';
 import { withStyles } from '@material-ui/core/styles';
 
 // Components
@@ -45,9 +46,7 @@ const styles = () => ({
         flexBasis: '95%'
     },
     retweetModalGrid: {
-        backgroundColor: '#f0f8ff',
-        display: 'flex',
-        flexDirection: 'column'
+        flexBasis: '90%'
     },
     retweetModalTypographyGrid: {
         display: 'flex',
@@ -62,6 +61,23 @@ const styles = () => ({
     },
     retweetTimelineAvatar: {
         marginRight: '0.5em'
+    },
+    retweetBodyContainer: {
+        display: 'flex',
+        flexWrap: 'wrap',
+        padding: '1em'
+    },
+    retweetButton: {
+        backgroundColor: '#00acee',
+        color: '#fff',
+        '&:hover': {
+            cursor: 'pointer'
+        }
+    },
+    retweetButtonGrid: {
+        display: 'flex',
+        justifyContent: 'flex-end',
+        padding: '0 1em 1em 1em'
     }
 });
 
@@ -113,15 +129,29 @@ class RetweetModal extends Component {
                                 <Close />
                             </div>
                         </Grid>
-                        <Avatar alt="twitter avatar" src={srcImage} className={classes.retweetTimelineAvatar} />
-                        <Grid item className={classes.retweetModalGrid}>
-                            <Tweettext
-                                name={name}
-                                verified={verified}
-                                nickname={nickname}
-                                created_at={created_at}
-                                full_text={full_text}
-                            />
+                        <Grid container className={classes.retweetBodyContainer}>
+                            <Grid item>
+                                <Avatar alt="twitter avatar" src={srcImage} className={classes.retweetTimelineAvatar} />
+                            </Grid>
+                            <Grid item className={classes.retweetModalGrid}>
+                                <Tweettext
+                                    name={name}
+                                    verified={verified}
+                                    nickname={nickname}
+                                    created_at={created_at}
+                                    full_text={full_text}
+                                />
+                            </Grid>
+                        </Grid>
+                        <Grid item className={classes.retweetButtonGrid}>
+                            <Fab 
+                                size="small" 
+                                variant="extended" 
+                                aria-label="Add Tweet" 
+                                className={classes.retweetButton}
+                            >
+                                Retweet
+                            </Fab>
                         </Grid>
                     </Paper>
                 </Modal>
