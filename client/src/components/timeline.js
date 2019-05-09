@@ -6,8 +6,8 @@ import { Query } from 'react-apollo';
 import classNames from 'classnames';
 
 // Material-UI components
-import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
+import Repeat from '@material-ui/icons/Repeat';
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -15,6 +15,7 @@ import ChatBubbleOutline from '@material-ui/icons/ChatBubbleOutline';
 import BarChart from '@material-ui/icons/BarChart';
 import Grid from '@material-ui/core/Grid';
 import CardMedia from '@material-ui/core/CardMedia';
+import { withStyles } from '@material-ui/core/styles';
 
 // Apollo Queries
 import { GET_AUTHUSER_TWEETS } from '../apolloclient/apolloqueries';
@@ -92,6 +93,13 @@ const styles = () => ({
             cursor: 'pointer',
             color: '#005aff59'
         }
+    },
+    destroyRetweetButton: {
+        fontSize: '1.3em',
+        marginRight: '0.5em'
+    },
+    destroyRetweetModalButtonSpacing: {
+        marginRight: '2em'
     }
 });
 
@@ -142,6 +150,19 @@ const Timeline = props => {
                                                     <ChatBubbleOutline className={classes.timelineIcons} />
                                                 </div>
                                                 <div className={classNames(classes.buttonOptionsGrid, classes.buttonOptionsHover)}>
+                                                    {/* This ternary block displays the option to whether or not to retweet a status */} 
+                                                    {/* Depending on the returned boolean from the API call */}
+                                                    {timelineTweetInfo.retweeted === true
+                                                    // If this status has been retweeted, give the choice to unlike it 
+                                                        ?
+                                                    <React.Fragment>
+                                                        <Repeat 
+                                                            className={classes.destroyRetweetButton}
+                                                        />
+                                                        <div className={classes.destroyRetweetModalButtonSpacing}>{timelineTweetInfo.retweet_count}</div>
+                                                    </React.Fragment>
+                                                        :
+                                                    // Else, if it hasn't been retweeted - give the option to be able to retweet it
                                                     <RetweetModal
                                                         retweet_count={timelineTweetInfo.retweet_count}
                                                         name={timelineTweetInfo.user.name}
@@ -149,16 +170,21 @@ const Timeline = props => {
                                                         nickname={timelineTweetInfo.user.nickname}
                                                         created_at={timelineTweetInfo.created_at}
                                                         full_text={timelineTweetInfo.full_text}    
-                                                        srcImage={timelineTweetInfo.user.profile_image_url_https}        
-                                                    />
+                                                        srcImage={timelineTweetInfo.user.profile_image_url_https}  
+                                                        id={timelineTweetInfo.id_str}      
+                                                    />}
                                                 </div>
                                                 <div className={classNames(classes.buttonOptionsGrid, classes.buttonOptionsHover)}>
+                                                    {/* This ternary block displays the option to whether or not to like a status */} 
+                                                    {/* Depending on the returned boolean from the API call */}
                                                     {timelineTweetInfo.favorited === true
+                                                    // If this status has been liked alread - give the option to unline it
                                                         ?
                                                     <UnLikeStatus
                                                         id={timelineTweetInfo.id_str}
                                                         favorite_count={timelineTweetInfo.favorite_count}    
                                                     />
+                                                    // Else, if it hasn't been liked - give the option to like the status
                                                         :
                                                     <LikeStatus 
                                                         id={timelineTweetInfo.id_str}

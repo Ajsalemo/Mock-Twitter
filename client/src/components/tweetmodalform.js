@@ -73,7 +73,7 @@ const TweetModalForm = props => {
                 {(createModalTweetProp, { loading }) => (
                     <Formik
                         initialValues={{ tweetModalForm: '' }}
-                        onSubmit={ async(values, { resetForm, setSubmitting }) => {
+                        onSubmit={ async (values, { resetForm, setSubmitting }) => {
                             try {
                                 await createModalTweetProp({
                                     variables: {

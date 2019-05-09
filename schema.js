@@ -59,7 +59,7 @@ const typeDefs =
             retweet_count: String
             favorite_count: String
             favorited: Boolean
-            retweeted: String
+            retweeted: Boolean
             lang: String
             user: UserTweetObject
             entities: Entities

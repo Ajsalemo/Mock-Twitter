@@ -2,6 +2,7 @@
 // ----------------------------------------------------------------------------------------------------- //
 
 import React, { Component } from 'react';
+import { Mutation } from 'react-apollo';
 
 // Material-UI components
 import Modal from '@material-ui/core/Modal';
@@ -12,10 +13,15 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Avatar from '@material-ui/core/Avatar';
 import Fab from '@material-ui/core/Fab';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import { withStyles } from '@material-ui/core/styles';
 
 // Components
 import Tweettext from '../components/tweettext';
+import Error from '../components/error';
+
+// Apollo Queries and Mutations 
+import { RETWEET_STATUS, GET_AUTHUSER_TWEETS } from '../apolloclient/apolloqueries';
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
@@ -103,7 +109,7 @@ class RetweetModal extends Component {
     // ----------------------------------------------------------------------------------------------------- //
   
     render() {
-        const { classes, retweet_count, name, verified, nickname, created_at, full_text, srcImage } = this.props;
+        const { classes, retweet_count, name, verified, nickname, created_at, full_text, srcImage, id } = this.props;
         return ( 
             <React.Fragment>
                 <Repeat 
@@ -144,14 +150,39 @@ class RetweetModal extends Component {
                             </Grid>
                         </Grid>
                         <Grid item className={classes.retweetButtonGrid}>
-                            <Fab 
-                                size="small" 
-                                variant="extended" 
-                                aria-label="Add Tweet" 
-                                className={classes.retweetButton}
+                            <Mutation 
+                                mutation={RETWEET_STATUS} 
+                                refetchQueries={[{ query: GET_AUTHUSER_TWEETS }]}
                             >
-                                Retweet
-                            </Fab>
+                                {(retweetStatusProp, { loading }) => (
+                                    loading 
+                                        ?
+                                    <CircularProgress />
+                                        :
+                                    <Fab 
+                                        size="small" 
+                                        variant="extended" 
+                                        aria-label="Add Tweet" 
+                                        className={classes.retweetButton}
+                                        onClick={ async () => {
+                                            try {
+                                                await retweetStatusProp({
+                                                    variables: {
+                                                        id: id
+                                                    }
+                                                });
+                                                // Closes the modal upon clicking the retweet button
+                                                this.handleClose()
+                                            } catch(error) {
+                                                console.log(error);
+                                                return <Error />;
+                                            }
+                                        }}
+                                    >
+                                        Retweet
+                                    </Fab>
+                                )}
+                            </Mutation>
                         </Grid>
                     </Paper>
                 </Modal>
