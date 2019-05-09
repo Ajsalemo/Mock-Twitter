@@ -69,7 +69,10 @@ const TweetModalForm = props => {
     const { classes, avatar, onClose } = props;
     return (
         <React.Fragment>
-            <Mutation mutation={CREATE_USER_TWEET} refetchQueries={[{ query: GET_AUTHUSER_TWEETS, GET_USER_STATUS_COUNT }]}>
+            <Mutation 
+                mutation={CREATE_USER_TWEET}
+                refetchQueries={[{ query: GET_AUTHUSER_TWEETS, GET_USER_STATUS_COUNT }]}
+            >
                 {(createModalTweetProp, { loading }) => (
                     <Formik
                         initialValues={{ tweetModalForm: '' }}

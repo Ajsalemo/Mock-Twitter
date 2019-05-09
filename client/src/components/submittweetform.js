@@ -72,7 +72,10 @@ const SubmitTweetForm = props => {
     const { classes, data } = props;
     return (
         <React.Fragment>
-            <Mutation mutation={CREATE_USER_TWEET} refetchQueries={[{ query: GET_AUTHUSER_TWEETS }]}>
+            <Mutation 
+                mutation={CREATE_USER_TWEET} 
+                refetchQueries={[{ query: GET_AUTHUSER_TWEETS }]}
+            >
                 {(createTweetProp, { loading }) => (
                     <Formik
                         initialValues={{ tweet: '' }}

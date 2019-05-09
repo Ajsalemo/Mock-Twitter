@@ -221,6 +221,17 @@ export const RETWEET_STATUS =
         }
     `;
 
+export const UNRETWEET_STATUS = 
+    gql`
+        mutation UnRetweetStatus($id: String!) {
+            unRetweet(id: $id) {
+                id
+                name
+                screen_name
+            }
+        }
+    `;
+
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 

@@ -7,7 +7,6 @@ import classNames from 'classnames';
 
 // Material-UI components
 import Paper from '@material-ui/core/Paper';
-import Repeat from '@material-ui/icons/Repeat';
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -26,6 +25,7 @@ import LikeStatus from '../components/likestatus';
 import UnLikeStatus from '../components/unlikestatus';
 import RetweetModal from '../components/retweetmodal';
 import Tweettext from '../components/tweettext';
+import UnRetweetStatus from '../components/unretweet';
 
 // Imported functions
 import { pollMinute } from '../apolloclient/apolloclient';
@@ -93,13 +93,6 @@ const styles = () => ({
             cursor: 'pointer',
             color: '#005aff59'
         }
-    },
-    destroyRetweetButton: {
-        fontSize: '1.3em',
-        marginRight: '0.5em'
-    },
-    destroyRetweetModalButtonSpacing: {
-        marginRight: '2em'
     }
 });
 
@@ -155,12 +148,10 @@ const Timeline = props => {
                                                     {timelineTweetInfo.retweeted === true
                                                     // If this status has been retweeted, give the choice to unlike it 
                                                         ?
-                                                    <React.Fragment>
-                                                        <Repeat 
-                                                            className={classes.destroyRetweetButton}
-                                                        />
-                                                        <div className={classes.destroyRetweetModalButtonSpacing}>{timelineTweetInfo.retweet_count}</div>
-                                                    </React.Fragment>
+                                                    <UnRetweetStatus
+                                                        id={timelineTweetInfo.id_str}
+                                                        retweet_count={timelineTweetInfo.retweet_count}
+                                                    />
                                                         :
                                                     // Else, if it hasn't been retweeted - give the option to be able to retweet it
                                                     <RetweetModal

@@ -22,6 +22,7 @@ const typeDefs =
             likeStatus(id: String!): UserObject
             unlikeStatus(id: String!): UserObject
             retweet(id: String!): RetweetObject
+            unRetweet(id: String!): UserTweetObject
         }
 
         # User Object
@@ -296,8 +297,13 @@ const resolvers = {
         retweet: async (parent, args, context) => {
             const retweetRequest = await client.post('statuses/retweet', { id: args.id });
             const retweetResponse = await retweetRequest;
-            console.log(retweetResponse);
             return retweetResponse;
+        },
+        unRetweet: async (parent, args, context) => {
+            const unRetweetRequest = await client.post('statuses/unretweet', { id: args.id });
+            const unRetweetResponse = unRetweetRequest;
+            console.log(unRetweetResponse);
+            return unRetweetResponse;
         }
     }
 };
