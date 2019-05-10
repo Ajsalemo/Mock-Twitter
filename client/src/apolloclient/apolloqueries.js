@@ -63,6 +63,8 @@ export const GET_AUTHUSER_TWEETS =
                         screen_name
                         verified
                         statuses_count
+                        friends_count
+                        followers_count
                         profile_image_url_https
                         in_reply_to_status_id_str
                     }

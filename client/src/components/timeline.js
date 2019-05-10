@@ -7,7 +7,6 @@ import classNames from 'classnames';
 
 // Material-UI components
 import Paper from '@material-ui/core/Paper';
-import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import ChatBubbleOutline from '@material-ui/icons/ChatBubbleOutline';
@@ -26,6 +25,7 @@ import UnLikeStatus from '../components/unlikestatus';
 import RetweetModal from '../components/retweetmodal';
 import Tweettext from '../components/tweettext';
 import UnRetweetStatus from '../components/unretweet';
+import ToolTipModal from '../components/tooltipmodal';
 
 // Imported functions
 import { pollMinute } from '../apolloclient/apolloclient';
@@ -115,13 +115,21 @@ const Timeline = props => {
                         data.currentUser.userTimelineTweets.map((timelineTweetInfo, i) => {
                             return (
                                 <Paper className={classes.timelinePaper} key={i}>
-                                    <Avatar alt="twitter avatar" src={timelineTweetInfo.user.profile_image_url_https} className={classes.timelineAvatar}/>
+                                    <ToolTipModal
+                                        name={timelineTweetInfo.user.name}
+                                        nickname={timelineTweetInfo.user.screen_name}
+                                        statuses_count={timelineTweetInfo.user.statuses_count}
+                                        friends_count={timelineTweetInfo.user.friends_count}
+                                        followers_count={timelineTweetInfo.user.followers_count}
+                                        imgSrc={timelineTweetInfo.user.profile_image_url_https}
+                                        id={timelineTweetInfo.id_str}      
+                                    />
                                     <Grid item className={classes.timelineGrid}>
                                         {/* Tweet text body */}
                                         <Tweettext
                                             name={timelineTweetInfo.user.name}
                                             verified={timelineTweetInfo.user.verified}
-                                            nickname={timelineTweetInfo.user.nickname}
+                                            nickname={timelineTweetInfo.user.screen_name}
                                             created_at={timelineTweetInfo.created_at}
                                             full_text={timelineTweetInfo.full_text}
                                         />

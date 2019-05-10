@@ -5,13 +5,13 @@ import React from 'react';
 import { Query } from 'react-apollo';
 
 // Material-UI components
-import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import { withStyles } from '@material-ui/core/styles';
 
 // Apollo Queries
 import { GET_USER, GET_USER_STATUS_COUNT } from '../apolloclient/apolloqueries';
