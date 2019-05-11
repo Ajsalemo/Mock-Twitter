@@ -118,11 +118,14 @@ const Timeline = props => {
                                     <ToolTipModal
                                         name={timelineTweetInfo.user.name}
                                         nickname={timelineTweetInfo.user.screen_name}
+                                        currentUser={data.currentUser.name}
                                         statuses_count={timelineTweetInfo.user.statuses_count}
                                         friends_count={timelineTweetInfo.user.friends_count}
                                         followers_count={timelineTweetInfo.user.followers_count}
                                         imgSrc={timelineTweetInfo.user.profile_image_url_https}
-                                        id={timelineTweetInfo.id_str}      
+                                        id={timelineTweetInfo.id_str}  
+                                        tweetUserId={timelineTweetInfo.user.id}
+                                        verified={timelineTweetInfo.user.verified}    
                                     />
                                     <Grid item className={classes.timelineGrid}>
                                         {/* Tweet text body */}

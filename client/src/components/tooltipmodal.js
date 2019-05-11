@@ -5,12 +5,16 @@ import React from 'react';
 
 // Material-UI components
 import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 import Tooltip from '@material-ui/core/Tooltip';
 import { withStyles } from '@material-ui/core/styles';
+
+// Components
+import TooltipFollowButton from './tooltipfollowbutton';
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
@@ -68,13 +72,17 @@ const styles = () => ({
     },
     ToolTipRootClass: {
         width: 'fit-content'
+    },
+    toolTipFollowGrid: {
+        display: 'flex',
+        justifyContent: 'flex-end'
     }
 });
 
 // ----------------------------------------------------------------------------------------------------- //
 
 const ToolTipModal = props => {
-    const { classes, name, nickname, statuses_count, friends_count, followers_count, imgSrc } = props;
+    const { classes, name, nickname, statuses_count, friends_count, followers_count, imgSrc, currentUser, tweetUserId } = props;
     return (
         <React.Fragment>
             <Tooltip 
@@ -90,6 +98,13 @@ const ToolTipModal = props => {
                                         <span className={classes.ToolTipHandleTextLower}>@{nickname}</span>
                                     </div>
                                 </Typography>
+                                <Grid item className={classes.toolTipFollowGrid}>
+                                    <TooltipFollowButton
+                                        currentUser={currentUser}
+                                        screen_name={nickname}
+                                        tweetUserId={tweetUserId}
+                                    />
+                                </Grid>
                                 <Typography variant="subtitle2" className={classes.ToolTipHandleTypography} gutterBottom>               
                                     <div className={classes.ToolTipTweetSpan}>
                                         <span>Tweets</span>
