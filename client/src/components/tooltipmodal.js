@@ -4,7 +4,6 @@
 import React from 'react';
 
 // Material-UI components
-import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -65,7 +64,8 @@ const styles = () => ({
     },
     ToolTipModalPaper: {
         backgroundColor: '#fff',
-        borderRadius: '0%'
+        borderRadius: '0%',
+        boxShadow: 'none'
     },
     ToolTipAvatarParent: {
         marginRight: '0.5em'
@@ -76,6 +76,14 @@ const styles = () => ({
     toolTipFollowGrid: {
         display: 'flex',
         justifyContent: 'flex-end'
+    },
+    toolTipBackground: {
+        backgroundColor: '#fff',
+        padding: '0em',
+        boxShadow: '1px 1px 1px #00000073'
+    },
+    popperClass: {
+        opacity: '1'
     }
 });
 
@@ -86,48 +94,50 @@ const ToolTipModal = props => {
     return (
         <React.Fragment>
             <Tooltip 
-                title={
-                    <Paper>
-                        <Card className={classes.ToolTipModalPaper}>
-                            <CardContent className={classes.ToolTipUpperCardContent}></CardContent>          
-                            <Avatar alt="twitter avatar" src={imgSrc} className={classes.ToolTipAvatar} /> 
-                            <CardContent className={classes.ToolTipContent}>
-                                <Typography variant="h6" gutterBottom className={classes.ToolTipUpperText}>
-                                    <div className={classes.ToolTipHandleTextUpperDiv}>
-                                        <span className={classes.ToolTipHandleTextUpper}>{name}</span>
-                                        <span className={classes.ToolTipHandleTextLower}>@{nickname}</span>
-                                    </div>
-                                </Typography>
-                                <Grid item className={classes.toolTipFollowGrid}>
-                                    <TooltipFollowButton
-                                        currentUser={currentUser}
-                                        screen_name={nickname}
-                                        tweetUserId={tweetUserId}
-                                    />
-                                </Grid>
-                                <Typography variant="subtitle2" className={classes.ToolTipHandleTypography} gutterBottom>               
-                                    <div className={classes.ToolTipTweetSpan}>
-                                        <span>Tweets</span>
-                                        <span className={classes.ToolTipTweetCount}>
-                                            {statuses_count}
-                                        </span>
-                                    </div> 
-                                    <div className={classes.ToolTipTweetSpan}>
-                                        <span>Following</span>
-                                        <span className={classes.ToolTipTweetCount}>
-                                            {friends_count}
-                                        </span>
-                                    </div>  
-                                    <div className={classes.ToolTipTweetSpan}>
-                                        <span>Followers</span>
-                                        <span className={classes.ToolTipTweetCount}>
-                                            {followers_count}
-                                        </span>
-                                    </div>  
-                                </Typography>
-                            </CardContent>
-                        </Card>
-                    </Paper>
+                classes={{
+                    popper: classes.popperClass,
+                    tooltip: classes.toolTipBackground
+                }}
+                title={ 
+                    <Card className={classes.ToolTipModalPaper}>
+                        <CardContent className={classes.ToolTipUpperCardContent}></CardContent>          
+                        <Avatar alt="twitter avatar" src={imgSrc} className={classes.ToolTipAvatar} /> 
+                        <CardContent className={classes.ToolTipContent}>
+                            <Typography variant="h6" gutterBottom className={classes.ToolTipUpperText}>
+                                <div className={classes.ToolTipHandleTextUpperDiv}>
+                                    <span className={classes.ToolTipHandleTextUpper}>{name}</span>
+                                    <span className={classes.ToolTipHandleTextLower}>@{nickname}</span>
+                                </div>
+                            </Typography>
+                            <Grid item className={classes.toolTipFollowGrid}>
+                                <TooltipFollowButton
+                                    currentUser={currentUser}
+                                    screen_name={nickname}
+                                    tweetUserId={tweetUserId}
+                                />
+                            </Grid>
+                            <Typography variant="subtitle2" className={classes.ToolTipHandleTypography} gutterBottom>               
+                                <div className={classes.ToolTipTweetSpan}>
+                                    <span>Tweets</span>
+                                    <span className={classes.ToolTipTweetCount}>
+                                        {statuses_count}
+                                    </span>
+                                </div> 
+                                <div className={classes.ToolTipTweetSpan}>
+                                    <span>Following</span>
+                                    <span className={classes.ToolTipTweetCount}>
+                                        {friends_count}
+                                    </span>
+                                </div>  
+                                <div className={classes.ToolTipTweetSpan}>
+                                    <span>Followers</span>
+                                    <span className={classes.ToolTipTweetCount}>
+                                        {followers_count}
+                                    </span>
+                                </div>  
+                            </Typography>
+                        </CardContent>
+                    </Card>
                 } 
                 interactive
             >

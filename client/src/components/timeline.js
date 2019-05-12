@@ -125,7 +125,7 @@ const Timeline = props => {
                                         imgSrc={timelineTweetInfo.user.profile_image_url_https}
                                         id={timelineTweetInfo.id_str}  
                                         tweetUserId={timelineTweetInfo.user.id}
-                                        verified={timelineTweetInfo.user.verified}    
+                                        verified={timelineTweetInfo.user.verified}  
                                     />
                                     <Grid item className={classes.timelineGrid}>
                                         {/* Tweet text body */}
