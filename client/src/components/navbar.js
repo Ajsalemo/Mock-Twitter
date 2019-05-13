@@ -2,7 +2,6 @@
 // ----------------------------------------------------------------------------------------------------- //
 
 import React from 'react';
-import classNames from 'classnames';
 import { Query } from 'react-apollo';
 
 // Material-UI components
@@ -29,6 +28,7 @@ import { GET_USER } from '../apolloclient/apolloqueries';
 // Components
 import TweetModal from '../components/tweetmodal';
 import Error from '../components/error';
+import ProfileAvatarModal from '../components/profileavatarmodal';
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
@@ -155,7 +155,9 @@ const Navbar = props => {
                                         }
                                     }}
                                 />
-                                <Avatar alt="twitter avatar" src={data.currentUser.picture} className={classNames(classes.twitterAvatar, classes.avatarMediaQuery)} /> 
+                                <ProfileAvatarModal
+                                    avatarImg={data.currentUser.picture}
+                                />
                                 {/* Classes component for the modal to submit tweets */}
                                 <TweetModal />
                             </div>
