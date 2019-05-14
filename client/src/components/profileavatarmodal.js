@@ -7,6 +7,7 @@ import classNames from 'classnames';
 // Material-UI components
 import Button from '@material-ui/core/Button';
 import Avatar from '@material-ui/core/Avatar';
+import PersonOutline from '@material-ui/icons/PersonOutline';
 import Tooltip from '@material-ui/core/Tooltip';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import Grow from '@material-ui/core/Grow';
@@ -15,6 +16,7 @@ import Popper from '@material-ui/core/Popper';
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
 import Typography from '@material-ui/core/Typography';
+import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
 
 // ----------------------------------------------------------------------------------------------------- //
@@ -49,13 +51,21 @@ const styles = theme => ({
     menuHandleTextLower: {
         wordBreak: 'break-word',
         fontWeight: '200',
-        fontSize: '0.7em'
+        fontSize: '1em'
     },
     menuUpperText: {
         marginRight: '1em'
     },
     menuDivider: {
         borderBottom: '1px solid #80808026'
+    },
+    menuPersonOutline: {
+        color: '#000',
+        marginRight: '0.8em'
+    },
+    profileMenuGrid: {
+        display: 'flex',
+        justifyContent: 'space-around'
     }
 });
 
@@ -119,14 +129,22 @@ class ProfileAvatarModal extends Component {
                             <Paper>
                                 <ClickAwayListener onClickAway={this.handleClose}>
                                     <MenuList>
-                                    <MenuItem onClick={this.handleClose} className={classes.menuDivider}>
-                                        <Typography variant="subtitle2" className={classes.menuUpperText}>
-                                            <div className={classes.handleTextUpperDiv}>
-                                                <span className={classes.menuHandleTextUpper}>{name}</span>
-                                                <span className={classes.menuHandleTextLower}>@{nickname}</span>
-                                            </div>
-                                        </Typography>
-                                    </MenuItem>
+                                        <MenuItem onClick={this.handleClose} className={classes.menuDivider}>
+                                            <Typography variant="subtitle2" className={classes.menuUpperText}>
+                                                <div className={classes.handleTextUpperDiv}>
+                                                    <span className={classes.menuHandleTextUpper}>{name}</span>
+                                                    <span className={classes.menuHandleTextLower}>@{nickname}</span>
+                                                </div>
+                                            </Typography>
+                                        </MenuItem>
+                                        <MenuItem>
+                                            <Grid item className={classes.profileMenuGrid}>
+                                                <PersonOutline className={classes.menuPersonOutline} />
+                                                <Typography variant="subtitle1">
+                                                    Profile
+                                                </Typography>
+                                            </Grid>
+                                        </MenuItem>
                                     </MenuList>
                                 </ClickAwayListener>
                             </Paper>
