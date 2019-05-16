@@ -16,8 +16,10 @@ import Popper from '@material-ui/core/Popper';
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
 import Typography from '@material-ui/core/Typography';
-import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
+
+// Auth0
+import auth from '../auth';
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
@@ -66,6 +68,17 @@ const styles = theme => ({
     profileMenuGrid: {
         display: 'flex',
         justifyContent: 'space-around'
+    },
+    profileChildMenuGrid: {
+        borderBottom: '1px solid #80808026',
+        '&:hover': {
+            backgroundColor: '#00acee'
+        }
+    },
+    profileChildMenuGridText: {
+        '&:hover': {
+            color: '#fff'
+        }
     }
 });
 
@@ -137,13 +150,16 @@ class ProfileAvatarModal extends Component {
                                                 </div>
                                             </Typography>
                                         </MenuItem>
-                                        <MenuItem>
-                                            <Grid item className={classes.profileMenuGrid}>
-                                                <PersonOutline className={classes.menuPersonOutline} />
-                                                <Typography variant="subtitle1">
-                                                    Profile
-                                                </Typography>
-                                            </Grid>
+                                        <MenuItem onClick={this.handleClose} className={classNames(classes.menuDivider, classes.profileChildMenuGrid, classes.menuPersonOutline)}>
+                                            <PersonOutline className={classes.menuPersonOutline} />
+                                            <Typography variant="subtitle1" className={classes.profileChildMenuGridText}>
+                                                Profile
+                                            </Typography>
+                                        </MenuItem>
+                                        <MenuItem onClick={this.handleClose} className={classNames(classes.menuDivider, classes.profileChildMenuGrid)}>
+                                            <Typography variant="subtitle1" className={classes.profileChildMenuGridText} onClick={() => auth.logout()}>
+                                                Log Out @{nickname}
+                                            </Typography>
                                         </MenuItem>
                                     </MenuList>
                                 </ClickAwayListener>

@@ -56,7 +56,7 @@ class Auth {
         localStorage.setItem(this.authFlag, JSON.stringify(false));
         this.auth0.logout({
             returnTo: 'http://localhost:3000',
-            clientID: `${process.env.REACT_APP_CLIENT_ID}`,
+            clientID: `${process.env.REACT_APP_CLIENT_ID}`
         });
     }
 
