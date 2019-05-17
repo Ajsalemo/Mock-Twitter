@@ -40,9 +40,12 @@ const styles = theme => ({
     },
     notificationDiv: {
         display: 'flex',
-        paddingBottom: '0.6em',
+        paddingBottom: '0em',
         width: '25%',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+        [theme.breakpoints.up(599)]: {
+            paddingBottom: '0.6em'
+        }
     },
     innerText: {
         verticalAlign: 'super',
@@ -63,7 +66,10 @@ const styles = theme => ({
         width: '25%',
         display: 'flex',
         justifyContent: 'center',
-        paddingBottom: '1em'
+        paddingBottom: '0.5em',
+        [theme.breakpoints.up(599)]: {
+            paddingBottom: '1em'
+        }
     },
     twitterAvatar: {
         width: 30,
@@ -80,10 +86,15 @@ const styles = theme => ({
     },
     searchDiv: {
         display: 'flex',
-        paddingBottom: '1em',
+        marginTop: '0.5em',
         justifyContent: 'space-between',
         height: '3em',
-        width: 'auto'
+        width: 'auto',
+        paddingBottom: '1em',
+        [theme.breakpoints.up(599)]: {
+            marginTop: '0',
+            paddingBottom: '1em'
+        }
     },
     searchIconColor: {
         color: 'gray',
