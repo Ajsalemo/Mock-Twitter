@@ -82,6 +82,9 @@ const styles = theme => ({
     },
     buttonRefClass: {
         paddingTop: '0em'
+    },
+    popperRootClass: {
+        marginTop: '0.5em'
     }
 });
 
@@ -137,7 +140,13 @@ class ProfileAvatarModal extends Component {
                         />
                     </Button>
                 </Tooltip>
-                    <Popper open={open} anchorEl={this.anchorEl} transition disablePortal>
+                    <Popper 
+                        open={open} 
+                        anchorEl={this.anchorEl} 
+                        transition 
+                        disablePortal
+                        className={classes.popperRootClass}
+                    >
                         {({ TransitionProps, placement }) => (
                             <Grow
                                 {...TransitionProps}
