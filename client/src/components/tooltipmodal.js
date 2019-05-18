@@ -2,6 +2,8 @@
 // ----------------------------------------------------------------------------------------------------- //
 
 import React from 'react';
+import classNames from 'classnames';
+import { Link } from 'react-router-dom';
 
 // Material-UI components
 import Grid from '@material-ui/core/Grid';
@@ -84,6 +86,13 @@ const styles = () => ({
     },
     popperClass: {
         opacity: '1'
+    },
+    toolTilProfileLink: {
+        textDecoration: 'none',
+        color: '#000',
+        '&:hover': {
+            textDecoration: 'underline'
+        }
     }
 });
 
@@ -105,8 +114,8 @@ const ToolTipModal = props => {
                         <CardContent className={classes.ToolTipContent}>
                             <Typography variant="h6" gutterBottom className={classes.ToolTipUpperText}>
                                 <div className={classes.ToolTipHandleTextUpperDiv}>
-                                    <span className={classes.ToolTipHandleTextUpper}>{name}</span>
-                                    <span className={classes.ToolTipHandleTextLower}>@{nickname}</span>
+                                    <Link to={`userprofile/${nickname}`} className={classNames(classes.ToolTipHandleTextUpper, classes.toolTilProfileLink)}>{name}</Link>
+                                    <Link to={`userprofile/${nickname}`} className={classNames(classes.ToolTipHandleTextLower, classes.toolTilProfileLink)}>@{nickname}</Link>
                                 </div>
                             </Typography>
                             <Grid item className={classes.toolTipFollowGrid}>

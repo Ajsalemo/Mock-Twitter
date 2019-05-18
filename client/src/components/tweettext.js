@@ -3,6 +3,7 @@
 
 import React from 'react';
 import Moment from 'react-moment';
+import { Link } from 'react-router-dom';
 
 // Material-UI components
 import Typography from '@material-ui/core/Typography';
@@ -28,6 +29,13 @@ const styles = () => ({
     },
     timelimeTweets: {
         fontWeight: '300'
+    },
+    profileLink: {
+        textDecoration: 'none',
+        color: '#000',
+        '&:hover': {
+            color: '#00acee'
+        }
     }
 });
 
@@ -40,7 +48,7 @@ const Tweettext = props => {
         <React.Fragment>
             {/* Name and handle */}
             <Typography variant="subtitle2">
-                <span>{name}</span>
+                <Link to={`/userprofile/${nickname}`} className={classes.profileLink}>{name}</Link>
                 {/* If the Twitter account is verified - display the blue 'check' icon */}
                 {verified === true 
                     ? 

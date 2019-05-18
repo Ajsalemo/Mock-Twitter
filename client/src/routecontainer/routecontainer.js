@@ -14,6 +14,7 @@ import CallBack from '../components/callback';
 
 // Auth0
 import auth from '../auth';
+import PublicProfile from '../pages/main/publicprofile';
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
@@ -52,6 +53,7 @@ class RouteContainer extends Component  {
             return (
                 <React.Fragment>
                     <Switch>
+                        <Route path='/userprofile/:params' component={PublicProfile} />
                         <Route path='/main' component={Main} />
                         <Route path='/callback' component={CallBack} />
                         <Route path='/' component={Home} />
