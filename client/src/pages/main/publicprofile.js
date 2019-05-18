@@ -2,15 +2,11 @@
 // ----------------------------------------------------------------------------------------------------- //
 
 import React from 'react';
-import { Query } from 'react-apollo';
 import { withRouter } from 'react-router';
 
 // Components
 import Navbar from '../../components/navbar';
-import { GET_USERPROFILE_TWEETS } from '../../apolloclient/apolloqueries';
-
-// Imported functions
-import { pollMinute } from '../../apolloclient/apolloclient';
+import PublicProfileBanner from '../../components/publicprofilebanner';
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
@@ -21,21 +17,9 @@ const PublicProfile = props => {
     return (
         <React.Fragment>
             <Navbar /> 
-            <Query 
-                query={GET_USERPROFILE_TWEETS}
-                pollInterval={pollMinute(1000, 60)} 
-                fetchPolicy='cache-and-network'
-                variables={{
-                    screen_name: param
-                }}
-            >
-                {({ loading, error, data }) => {
-                    console.log(data)
-                    return (
-                        <div>test</div>
-                    );
-                }}
-            </Query>
+            <PublicProfileBanner
+                URLparam={param}
+            />
         </React.Fragment>
     );
 };
