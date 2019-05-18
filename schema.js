@@ -33,6 +33,7 @@ const typeDefs =
             picture: String!
             updated_at: String!
             userTimelineTweets: [UserTimelineTweets]
+            userProfileTweets(screen_name: String!): [UserProfileTimeline]
             trendingTopics: [trendsWrapper]
             suggestedCategory: [SuggestedCategory]
             suggestedCategorySlug(slug: String!): SuggestedCategorySlug
@@ -45,7 +46,7 @@ const typeDefs =
             trends: [TrendingTopics]
         }
 
-        # Object for the API call to Twitters 'Statuses/user_timeline' path
+        # Object for the API call to Twitters 'Statuses/home_timeline' path
         type UserTimelineTweets {
             created_at: String
             id: String
@@ -62,6 +63,27 @@ const typeDefs =
             favorited: Boolean
             retweeted: Boolean
             lang: String
+            user: UserTweetObject
+            entities: Entities
+        }
+
+        # Object for the API call to Twitters 'Statuses/user_timeline' path
+        type UserProfileTimeline {
+            created_at: String
+            id: String
+            id_str: String
+            full_text: String
+            geo: String
+            coordinates: String
+            truncated: Boolean
+            retweet_count: String
+            favorite_count: String
+            favorited: Boolean
+            retweeted: Boolean
+            is_quote_status: String
+            lang: String
+            contributors: String
+            place: String
             user: UserTweetObject
             entities: Entities
         }
@@ -241,6 +263,11 @@ const resolvers = {
             const requestUserTimelineTweets = await client.get('statuses/home_timeline', { screen_name: user.name, tweet_mode: 'extended' });
             const responserUserTimelineTweets = await requestUserTimelineTweets;
             return responserUserTimelineTweets;
+        },
+        userProfileTweets: async (parent, args, user) => {
+            const userProfileTweetsRequest = await client.get('statuses/user_timeline', { screen_name: args.screen_name, tweet_mode: 'extended' });
+            const userProfileTweetsResponse = userProfileTweetsRequest;
+            return userProfileTweetsResponse;
         },
         userTweetStatusCount: async (parent, args, user) => {
             const userTweetStatusRequest = await client.get('statuses/user_timeline', { screen_name: user.name });

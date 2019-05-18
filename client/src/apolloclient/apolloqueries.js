@@ -82,6 +82,54 @@ export const GET_AUTHUSER_TWEETS =
         }
     `;
 
+export const GET_USERPROFILE_TWEETS =
+    gql`
+        query GetUserProfileTweets($screen_name: String!) {
+            currentUser {
+                picture
+                nickname
+                name
+                userProfileTweets(screen_name: $screen_name) {
+                    created_at
+                    id
+                    id_str
+                    full_text
+                    truncated
+                    geo
+                    coordinates
+                    place
+                    contributors
+                    is_quote_status
+                    retweet_count
+                    favorite_count
+                    favorited
+                    retweeted
+                    lang
+                    user {
+                        id
+                        name
+                        screen_name
+                        verified
+                        statuses_count
+                        friends_count
+                        followers_count
+                        profile_image_url_https
+                         in_reply_to_status_id_str
+                    }
+                    entities {
+                        hashtags {
+                            text
+                        }
+                        media {
+                            display_url
+                            media_url_https
+                        }
+                    }
+                }
+            }
+        }
+    `;
+
 export const GET_TRENDING_TOPICS =
     gql`
         query GetTrendingTopics {

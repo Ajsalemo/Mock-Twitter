@@ -1,20 +1,43 @@
 // --------------------------------------------- Imports ----------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
-import React, { Component } from 'react';
+import React from 'react';
+import { Query } from 'react-apollo';
 import { withRouter } from 'react-router';
 
+// Components
+import Navbar from '../../components/navbar';
+import { GET_USERPROFILE_TWEETS } from '../../apolloclient/apolloqueries';
+
+// Imported functions
+import { pollMinute } from '../../apolloclient/apolloclient';
+
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
-class PublicProfile extends Component {
-    render() {
-        const param = this.props.match.params.params;            console.log(param)
-        console.log(param);
-        return (
-            <div>test</div>
-        );
-    }
+const PublicProfile = props => {
+    const param = props.match.params.params; 
+    console.log(param);
+    return (
+        <React.Fragment>
+            <Navbar /> 
+            <Query 
+                query={GET_USERPROFILE_TWEETS}
+                pollInterval={pollMinute(1000, 60)} 
+                fetchPolicy='cache-and-network'
+                variables={{
+                    screen_name: param
+                }}
+            >
+                {({ loading, error, data }) => {
+                    console.log(data)
+                    return (
+                        <div>test</div>
+                    );
+                }}
+            </Query>
+        </React.Fragment>
+    );
 };
 
 // ----------------------------------------------------------------------------------------------------- //
