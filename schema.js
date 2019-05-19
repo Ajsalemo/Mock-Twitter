@@ -198,6 +198,7 @@ const typeDefs =
             profile_background_image_url_https: String
             statuses_count: String
             profile_background_image_url: String
+            profile_banner_url: String
             default_profile_image: Boolean
             friends_count: String
             following: Boolean

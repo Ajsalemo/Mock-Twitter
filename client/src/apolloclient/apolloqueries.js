@@ -114,7 +114,8 @@ export const GET_USERPROFILE_TWEETS =
                         friends_count
                         followers_count
                         profile_image_url_https
-                         in_reply_to_status_id_str
+                        in_reply_to_status_id_str
+                        profile_banner_url
                     }
                     entities {
                         hashtags {

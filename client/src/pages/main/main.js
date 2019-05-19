@@ -5,12 +5,12 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 
 // Material-UI components
+import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
 
 // Components
 import Navbar from '../../components/navbar';
 import ProfileHandle from '../../components/profilehandle';
-import Grid from '@material-ui/core/Grid';
 import SubmitTweet from '../../components/submittweet';
 import Recommended from '../../components/recommended';
 import Trending from '../../components/trending';
