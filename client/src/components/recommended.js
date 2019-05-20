@@ -75,7 +75,7 @@ const Recommended = props => {
     const { classes } = props;
     return (
         <React.Fragment>
-            <Grid item>
+            <Grid>
                 <Paper>
                     <Card className={classes.recommendedCard}>
                         <CardContent classes={{ root: classes.cardPadding }}>

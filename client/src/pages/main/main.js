@@ -42,7 +42,9 @@ class Main extends Component {
                         <Trending />
                     </Grid>
                     <SubmitTweet />
-                    <Recommended />
+                    <Grid item xs={8} sm={8} md={2} className={classes.profileHandlerGrid}>
+                        <Recommended />
+                    </Grid>
                 </Grid>
             </React.Fragment>
         )

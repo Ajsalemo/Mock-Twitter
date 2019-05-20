@@ -77,7 +77,6 @@ const typeDefs =
             coordinates: String
             truncated: Boolean
             retweet_count: String
-            favorite_count: String
             favorited: Boolean
             retweeted: Boolean
             is_quote_status: String

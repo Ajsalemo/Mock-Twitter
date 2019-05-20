@@ -21,7 +21,11 @@ import Error from '../components/error';
 
 const styles = () => ({
     bannerHeight: {
-        backgroundColor: '#fff'
+        backgroundColor: '#007fec'
+    },
+    bannerPlaceholderImage: {
+        height: '15em',
+        backgroundColor: '#007fec'
     },
     bannerImage: {
         width: '-webkit-fill-available'
@@ -52,6 +56,8 @@ const PublicProfileBanner = props => {
                 if (error) return <div className={classes.bannerErrorAndLoadingDiv}><Error /></div>;
 
                 return (
+                    data.currentUser.userProfileTweets[0].user.profile_banner_url
+                        ?
                     <Grid item className={classes.bannerHeight}>
                         <img 
                             src={data.currentUser.userProfileTweets[0].user.profile_banner_url} 
@@ -59,6 +65,8 @@ const PublicProfileBanner = props => {
                             alt='User profile banner' 
                         />
                     </Grid>
+                        :
+                    <Grid item className={classes.bannerPlaceholderImage}></Grid>
                 );
             }}
         </Query>

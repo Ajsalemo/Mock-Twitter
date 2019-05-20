@@ -2,6 +2,7 @@
 // ----------------------------------------------------------------------------------------------------- //
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Query } from 'react-apollo';
 
 // Material-UI components
@@ -54,6 +55,7 @@ const styles = theme => ({
         }
     },
     colorDefault: {
+        textDecoration: 'none',
         color: 'gray',
         borderBottom: '3px solid #fff',
         '&:hover': {
@@ -129,8 +131,10 @@ const Navbar = props => {
                     <AppBar className={classes.appBar}>
                         <Toolbar className={classes.toolBar}>
                             <div className={classes.notificationDiv}>
-                                <Typography variant="subtitle2" className={classes.colorDefault}>
-                                    <Home /><span className={classes.innerText}>Home</span>
+                                <Typography variant="subtitle2">
+                                    <Link to='/main' className={classes.colorDefault}>
+                                        <Home /><span className={classes.innerText}>Home</span>
+                                    </Link>
                                 </Typography>
                                 <Typography variant="subtitle2" className={classes.colorDefault}>
                                     <OfflineBolt /><span className={classes.innerText}>Moments</span>

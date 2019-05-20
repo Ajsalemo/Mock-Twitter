@@ -42,13 +42,15 @@ let PublicProfile = props => {
             <PublicProfileBanner
                 URLparam={param}
             />
-            <ProfileBannerBar />
+            <ProfileBannerBar 
+                URLparam={param}
+            />
             <Grid container className={classes.publicProfileContainerStyle}>
                 <Grid item xs={8} sm={8} md={2} className={classes.publicProfileHandlerGrid}>
                     {/* This component is a place holder, for now */}
                     <ProfileHandle />
                 </Grid>
-                <Grid item>
+                <Grid item md={2}>
                     <Recommended />
                     <Trending />
                 </Grid>

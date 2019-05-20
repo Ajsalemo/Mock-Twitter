@@ -101,7 +101,6 @@ export const GET_USERPROFILE_TWEETS =
                     contributors
                     is_quote_status
                     retweet_count
-                    favorite_count
                     favorited
                     retweeted
                     lang
@@ -113,6 +112,8 @@ export const GET_USERPROFILE_TWEETS =
                         statuses_count
                         friends_count
                         followers_count
+                        favourites_count
+                        listed_count
                         profile_image_url_https
                         in_reply_to_status_id_str
                         profile_banner_url
