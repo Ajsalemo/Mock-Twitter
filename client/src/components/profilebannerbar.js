@@ -18,17 +18,21 @@ import { GET_USERPROFILE_TWEETS } from '../apolloclient/apolloqueries';
 // Components
 import Error from '../components/error';
 import TooltipFollowButton from '../components/tooltipfollowbutton';
+import { Avatar } from '@material-ui/core';
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
 const styles = () => ({
     bannerBarPlacement: {
-        marginTop: '-0.5em'
+        marginTop: '-0.5em',
+        height: '4em'
     },
     avatarBannerGrid: {
         display: 'flex',
-        flexBasis: '30%'
+        flexBasis: '30%',
+        justifyContent: 'center',
+        marginTop: '-4.5em'
     },
     avatarInfoGrid: {
         display: 'flex',
@@ -36,6 +40,10 @@ const styles = () => ({
         height: '4em',
         justifyContent: 'flex-start',
         paddingLeft: '2.5em'
+    },
+    profileAvatar: {
+        height: '10em',
+        width: '10em'
     },
     infoDescription: {
         fontSize: '0.6em',
@@ -79,11 +87,13 @@ const ProfileBannerBar = props => {
                 >
                 {({ loading, error, data }) => {
                     if (loading) return <div><CircularProgress /></div>;
-                    if (error) return <div><Error /></div>;         
+                    if (error) return <div><Error /></div>; 
+                    
+                    const filterProfileImageURL = data.currentUser.userProfileTweets[0].user.profile_image_url_https.replace('_normal.jpg', '.jpg');
                     return (
                         <React.Fragment>
                             <Grid item className={classes.avatarBannerGrid}>
-                                TEST
+                                <Avatar src={filterProfileImageURL} className={classes.profileAvatar} alt='User profile avatar' />
                             </Grid>
                             <Grid item className={classes.avatarInfoGrid}>
                                 <Typography variant="h6" color="inherit" className={classes.infoDescriptionTypography}>
