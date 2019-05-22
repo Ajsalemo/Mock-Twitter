@@ -5,6 +5,7 @@ import React from 'react';
 import { Query } from 'react-apollo';
 
 // Material-UI components
+import { Avatar } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -18,7 +19,6 @@ import { GET_USERPROFILE_TWEETS } from '../apolloclient/apolloqueries';
 // Components
 import Error from '../components/error';
 import TooltipFollowButton from '../components/tooltipfollowbutton';
-import { Avatar } from '@material-ui/core';
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
@@ -75,63 +75,59 @@ const styles = () => ({
 // ----------------------------------------------------------------------------------------------------- //
 
 const ProfileBannerBar = props => {
-    const { 
-        loading,
-        error,
-        classes, 
-        statuses_count,
-        friends_count,
-        currentUser,
-        followers_count,
-        favourites_count,
-        listed_count,
-        screen_name,
-        tweetUserId,
-        profileImageURL
-    } = props;
-
-    const filterProfileImageURL = profileImageURL.replace('_normal.jpg', '.jpg');
+    const { classes, URLparam } = props;
     return (
-        loading ? <div className={classes.bannerErrorAndLoadingDiv}><CircularProgress /></div>
-            :
-        error ? <div className={classes.bannerErrorAndLoadingDiv}><Error /></div>  
-            :   
         <AppBar position="static" color="default" className={classes.bannerBarPlacement}>
             <Toolbar>
-                <React.Fragment>
-                    <Grid item className={classes.avatarBannerGrid}>
-                        <Avatar src={filterProfileImageURL} className={classes.profileAvatar} alt='User profile avatar' />
-                    </Grid>
-                    <Grid item className={classes.avatarInfoGrid}>
-                        <Typography variant="h6" color="inherit" className={classes.infoDescriptionTypography}>
-                            <span className={classes.infoDescription}>Tweets</span>
-                            <span className={classes.infoNumbers}>{statuses_count}</span>
-                        </Typography> 
-                        <Typography variant="h6" color="inherit" className={classes.infoDescriptionTypography}>
-                            <span className={classes.infoDescription}>Following</span>
-                            <span className={classes.infoNumbers}>{friends_count}</span>
-                        </Typography>
-                        <Typography variant="h6" color="inherit" className={classes.infoDescriptionTypography}>
-                            <span className={classes.infoDescription}>Followers</span>
-                            <span className={classes.infoNumbers}>{followers_count}</span>
-                        </Typography>
-                        <Typography variant="h6" color="inherit" className={classes.infoDescriptionTypography}>
-                            <span className={classes.infoDescription}>Likes</span>
-                            <span className={classes.infoNumbers}>{favourites_count}</span>
-                        </Typography>
-                        <Typography variant="h6" color="inherit" className={classes.infoDescriptionTypography}>
-                            <span className={classes.infoDescription}>Lists</span>
-                            <span className={classes.infoNumbers}>{listed_count}</span>
-                        </Typography>
-                        <div className={classes.profileBannerFollowButton}>
-                            <TooltipFollowButton
-                                currentUser={currentUser}
-                                screen_name={screen_name}
-                                tweetUserId={tweetUserId}
-                            />
-                        </div>
-                    </Grid>
-                </React.Fragment>
+                <Query 
+                    query={GET_USERPROFILE_TWEETS}
+                    variables={{
+                        screen_name: URLparam
+                    }}
+                >
+                {({ loading, error, data }) => {
+                    if (loading) return <div><CircularProgress /></div>;
+                    if (error) return <div><Error /></div>; 
+                    
+                    const filterProfileImageURL = data.currentUser.userProfileTweets[0].user.profile_image_url_https.replace('_normal.jpg', '.jpg');
+                    return (
+                        <React.Fragment>
+                            <Grid item className={classes.avatarBannerGrid}>
+                                <Avatar src={filterProfileImageURL} className={classes.profileAvatar} alt='User profile avatar' />
+                            </Grid>
+                            <Grid item className={classes.avatarInfoGrid}>
+                                <Typography variant="h6" color="inherit" className={classes.infoDescriptionTypography}>
+                                    <span className={classes.infoDescription}>Tweets</span>
+                                    <span className={classes.infoNumbers}>{data.currentUser.userProfileTweets[0].user.statuses_count}</span>
+                                </Typography> 
+                                <Typography variant="h6" color="inherit" className={classes.infoDescriptionTypography}>
+                                    <span className={classes.infoDescription}>Following</span>
+                                    <span className={classes.infoNumbers}>{data.currentUser.userProfileTweets[0].user.friends_count}</span>
+                                </Typography>
+                                <Typography variant="h6" color="inherit" className={classes.infoDescriptionTypography}>
+                                    <span className={classes.infoDescription}>Followers</span>
+                                    <span className={classes.infoNumbers}>{data.currentUser.userProfileTweets[0].user.followers_count}</span>
+                                </Typography>
+                                <Typography variant="h6" color="inherit" className={classes.infoDescriptionTypography}>
+                                    <span className={classes.infoDescription}>Likes</span>
+                                    <span className={classes.infoNumbers}>{data.currentUser.userProfileTweets[0].user.favourites_count}</span>
+                                </Typography>
+                                <Typography variant="h6" color="inherit" className={classes.infoDescriptionTypography}>
+                                    <span className={classes.infoDescription}>Lists</span>
+                                    <span className={classes.infoNumbers}>{data.currentUser.userProfileTweets[0].user.listed_count}</span>
+                                </Typography>
+                                <div className={classes.profileBannerFollowButton}>
+                                    <TooltipFollowButton
+                                        currentUser={data.currentUser.nickname}
+                                        screen_name={data.currentUser.userProfileTweets[0].user.screen_name}
+                                        tweetUserId={data.currentUser.userProfileTweets[0].user.id}
+                                    />
+                                </div>
+                            </Grid>
+                        </React.Fragment>
+                        );
+                    }}
+                </Query>
             </Toolbar>
         </AppBar>    
     );
