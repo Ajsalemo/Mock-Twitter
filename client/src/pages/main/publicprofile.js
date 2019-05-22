@@ -25,7 +25,8 @@ const styles = () => ({
         justifyContent: 'space-around'
     },
     publicProfileHandlerGrid: {
-        width: 'auto'
+        width: 'auto',
+        paddingRight: '0em'
     }
 });
 

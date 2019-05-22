@@ -60,7 +60,7 @@ const styles = () => ({
 // ----------------------------------------------------------------------------------------------------- //
 
 const TweetModalForm = props => {
-    const { classes, avatar, onClose } = props;
+    const { classes, avatar, onClose, userScreenName } = props;
     return (
         <React.Fragment>
             <Mutation 
@@ -69,7 +69,11 @@ const TweetModalForm = props => {
             >
                 {(createModalTweetProp, { loading }) => (
                     <Formik
-                        initialValues={{ tweetModalForm: '' }}
+                        // the userScreenName prop is passed in from the publicProfileHandle component
+                        // This is so the component can be re-used, incase the authenticated user wants tweet directly at the profile in question
+                        initialValues={{ 
+                            tweetModalForm: userScreenName ? `@${userScreenName} ` : '' 
+                        }}
                         onSubmit={ async (values, { resetForm, setSubmitting }) => {
                             try {
                                 await createModalTweetProp({

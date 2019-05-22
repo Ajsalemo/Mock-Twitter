@@ -51,7 +51,7 @@ const styles = () => ({
 // ----------------------------------------------------------------------------------------------------- //
 
 const TweetModalBody = props => {
-    const { classes, onClose } = props;
+    const { classes, onClose, userScreenName } = props;
     return (
         <Query query={GET_USER}>
             {({ loading, error, data }) => {
@@ -62,7 +62,9 @@ const TweetModalBody = props => {
                     <Paper className={classes.tweetModalPaper} tabIndex='-1'>
                         <Grid item className={classes.tweetModalTypographyGrid}>
                             <Typography variant="subtitle2" className={classes.tweetModalHeader}>
-                                Compose new Tweet
+                                {/* If the authenticated user is tweeting directly to the account - display the name of said account */}
+                                {/* Else, display the defaulted text */}
+                                {userScreenName ? `Tweet to ${userScreenName}` : 'Compose new Tweet'}
                             </Typography>
                             <div onClick={onClose} className={classes.closeIcon}>
                                 <Close />
@@ -73,6 +75,8 @@ const TweetModalBody = props => {
                                 avatar={data.currentUser.picture}
                                 // Passed from the 'TweetModal' component
                                 onClose={onClose}
+                                // Passed from the 'PublicProfileHandle' component
+                                userScreenName={userScreenName}
                             />
                         </Grid>
                     </Paper>

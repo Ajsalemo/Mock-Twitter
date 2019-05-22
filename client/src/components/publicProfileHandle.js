@@ -14,6 +14,7 @@ import { GET_USERPROFILE_TWEETS } from '../apolloclient/apolloqueries';
 
 // Components
 import Error from './error';
+import TweetModal from './tweetmodal';
 
 // Images
 import verifiedIcon from '../images/verifiedicon.png';
@@ -62,6 +63,9 @@ const styles = () => ({
         display: 'block',
         wordBreak: 'break-word',
         padding: '0.5em 0'
+    },
+    publicProfileCardContent: {
+        padding: '2em 0.5em 0em'
     }
 });
 
@@ -82,7 +86,7 @@ const PublicProfileHandle = props => {
 
                 return (
                     <Card className={classes.publicProfileCard}>
-                        <CardContent>
+                        <CardContent className={classes.publicProfileCardContent}>
                             <Typography variant="h6" gutterBottom className={classes.publicProfileUpperText}>
                                 <span className={classes.publicProfileTextUpper}>{data.currentUser.userProfileTweets[0].user.name}</span>
                                 {data.currentUser.userProfileTweets[0].user.verified === true 
@@ -96,6 +100,10 @@ const PublicProfileHandle = props => {
                                 <span className={classes.publicProfileCreatedAt}>
                                     Joined <Moment format={'MMMM YYYY'}>{data.currentUser.userProfileTweets[0].user.created_at}</Moment>
                                 </span>
+                                <TweetModal 
+                                    userToReply={data.currentUser.userProfileTweets[0].user.name}
+                                    userScreenName={data.currentUser.userProfileTweets[0].user.screen_name}
+                                />
                             </Typography>
                         </CardContent>
                     </Card>

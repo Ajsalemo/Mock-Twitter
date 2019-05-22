@@ -14,6 +14,9 @@ import TweetModalBody from './tweetmodalbody';
 
 const styles = () => ({
     tweetButton: {
+        height: '2.4em',
+        width: 'max-content',
+        padding: '0em 0.4em',
         backgroundColor: '#00acee',
         color: '#fff',
         '&:hover': {
@@ -25,6 +28,9 @@ const styles = () => ({
         justifyContent: 'center',
         height: 'fit-content',
         marginTop: '2em'
+    },
+    tweetButtonRoot: {
+        width: 'max-content'
     }
 });
 
@@ -50,17 +56,16 @@ class TweetModal extends Component {
     // ----------------------------------------------------------------------------------------------------- //
   
     render() {
-        const { classes } = this.props;
+        const { classes, userToReply, userScreenName } = this.props;
         return (
             <React.Fragment>
                 <Fab 
-                    size="small" 
                     variant="extended" 
                     aria-label="Add Tweet" 
                     className={classes.tweetButton}
                     onClick={this.handleOpen}
                 >
-                    Tweet
+                    {userToReply ? `Tweet to ${userToReply}` : 'Tweet'}
                 </Fab>
                 <Modal
                     aria-labelledby="Modal Tweet window"
@@ -73,6 +78,8 @@ class TweetModal extends Component {
                 >
                     <TweetModalBody 
                         onClose={this.handleClose}
+                        // Passed from the 'PublicProfileHandle' component
+                        userScreenName={userScreenName}
                     />
                 </Modal>
             </React.Fragment>
