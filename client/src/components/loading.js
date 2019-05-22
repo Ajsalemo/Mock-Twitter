@@ -4,11 +4,7 @@
 import React from 'react';
 
 // Material-UI component
-import { withStyles } from '@material-ui/core/styles';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import Typography from '@material-ui/core/Typography';
-import { Grid } from '@material-ui/core';
-
+import { withStyles, CircularProgress, Typography, Grid } from '@material-ui/core';
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //

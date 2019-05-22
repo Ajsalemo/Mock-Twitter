@@ -5,11 +5,7 @@ import React from 'react';
 import { Query } from 'react-apollo';
 
 // Material-UI components
-import Avatar from '@material-ui/core/Avatar';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, Avatar, Grid, Typography, CircularProgress } from '@material-ui/core';
 
 // Images
 import verifiedIcon from '../images/verifiedicon.png';

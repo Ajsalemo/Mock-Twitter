@@ -7,6 +7,7 @@ import { withRouter, Switch, Route } from 'react-router-dom';
 // Pages
 import Home from '../pages/home/home';
 import Main from '../pages/main/main';
+import PublicProfile from '../pages/main/publicprofile';
 
 // Components
 import Loading from '../components/loading';
@@ -14,7 +15,6 @@ import CallBack from '../components/callback';
 
 // Auth0
 import auth from '../auth';
-import PublicProfile from '../pages/main/publicprofile';
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //

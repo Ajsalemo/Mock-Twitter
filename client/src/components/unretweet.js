@@ -5,11 +5,10 @@ import React from 'react';
 import { Mutation } from 'react-apollo';
 
 // Material-UI components
-import Repeat from '@material-ui/icons/Repeat';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import { withStyles } from '@material-ui/core';
+import { Repeat } from '@material-ui/icons';
+import { withStyles, CircularProgress } from '@material-ui/core';
 
-// Apollo Queries
+// Apollo Queries and Mutations
 import { UNRETWEET_STATUS, GET_AUTHUSER_TWEETS } from '../apolloclient/apolloqueries';
 
 // ----------------------------------------------------------------------------------------------------- //

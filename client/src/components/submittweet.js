@@ -5,10 +5,7 @@ import React from 'react';
 import { Query } from 'react-apollo';
 
 // Material-UI components
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, Grid, Paper, CircularProgress } from '@material-ui/core';
 
 // Components
 import Timeline from './timeline';

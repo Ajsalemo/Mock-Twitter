@@ -6,19 +6,8 @@ import { Link } from 'react-router-dom';
 import { Query } from 'react-apollo';
 
 // Material-UI components
-import { withStyles } from '@material-ui/core/styles';
-import Avatar from '@material-ui/core/Avatar';
-import AppBar from '@material-ui/core/AppBar';
-import Typography from '@material-ui/core/Typography';
-import Toolbar from '@material-ui/core/Toolbar';
-import TextField from '@material-ui/core/TextField';
-import Home from '@material-ui/icons/Home';
-import OfflineBolt from '@material-ui/icons/OfflineBolt';
-import NotificationsNone from '@material-ui/icons/NotificationsNone';
-import Message from '@material-ui/icons/Message';
-import Search from '@material-ui/icons/Search';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import CircularProgress from '@material-ui/core/CircularProgress';
+import { withStyles, Avatar, AppBar, Typography, Toolbar, TextField, InputAdornment,  CircularProgress } from '@material-ui/core';
+import { Home, OfflineBolt, NotificationsNone, Message, Search } from '@material-ui/icons';
 
 // Image
 import twitterminilogo from '../images/twitterminilogo.png';
@@ -57,11 +46,11 @@ const styles = theme => ({
     colorDefault: {
         textDecoration: 'none',
         color: 'gray',
-        borderBottom: '3px solid #fff',
+        paddingBottom: '0em',
         '&:hover': {
             color: '#00acee',
             cursor: 'pointer',
-            borderBottom: '3px solid #00acee'
+            borderBottom: '2px solid #00acee'
         }
     },
     avatarDiv: {
@@ -113,6 +102,9 @@ const styles = theme => ({
     },
     navTextField: {
         height: '-webkit-fill-available'
+    },
+    navAnchor: {
+        paddingTop: '0.3em'
     }
 });
 
@@ -131,7 +123,7 @@ const Navbar = props => {
                     <AppBar className={classes.appBar}>
                         <Toolbar className={classes.toolBar}>
                             <div className={classes.notificationDiv}>
-                                <Typography variant="subtitle2">
+                                <Typography variant="subtitle2" className={classes.navAnchor}>
                                     <Link to='/main' className={classes.colorDefault}>
                                         <Home /><span className={classes.innerText}>Home</span>
                                     </Link>

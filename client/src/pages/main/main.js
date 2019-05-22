@@ -5,8 +5,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 
 // Material-UI components
-import Grid from '@material-ui/core/Grid';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, Grid } from '@material-ui/core';
 
 // Components
 import Navbar from '../../components/navbar';

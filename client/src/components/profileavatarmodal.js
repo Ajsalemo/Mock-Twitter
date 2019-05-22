@@ -5,18 +5,8 @@ import React, { Component } from 'react';
 import classNames from 'classnames';
 
 // Material-UI components
-import Button from '@material-ui/core/Button';
-import Avatar from '@material-ui/core/Avatar';
-import PersonOutline from '@material-ui/icons/PersonOutline';
-import Tooltip from '@material-ui/core/Tooltip';
-import ClickAwayListener from '@material-ui/core/ClickAwayListener';
-import Grow from '@material-ui/core/Grow';
-import Paper from '@material-ui/core/Paper';
-import Popper from '@material-ui/core/Popper';
-import MenuItem from '@material-ui/core/MenuItem';
-import MenuList from '@material-ui/core/MenuList';
-import Typography from '@material-ui/core/Typography';
-import { withStyles } from '@material-ui/core/styles';
+import { Button, Avatar, Tooltip, ClickAwayListener, Grow, Paper, Popper, MenuItem, MenuList, Typography, withStyles } from '@material-ui/core';
+import { PersonOutline } from '@material-ui/icons';
 
 // Auth0
 import auth from '../auth';
@@ -24,7 +14,7 @@ import auth from '../auth';
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
-const styles = theme => ({
+const styles = () => ({
     twitterAvatar: {
         width: 30,
         height: 30,

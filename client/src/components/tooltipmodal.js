@@ -6,13 +6,7 @@ import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 
 // Material-UI components
-import Grid from '@material-ui/core/Grid';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import Avatar from '@material-ui/core/Avatar';
-import Typography from '@material-ui/core/Typography';
-import Tooltip from '@material-ui/core/Tooltip';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, Grid, Card, CardContent, Avatar, Typography, Tooltip } from '@material-ui/core';
 
 // Components
 import TooltipFollowButton from './tooltipfollowbutton';

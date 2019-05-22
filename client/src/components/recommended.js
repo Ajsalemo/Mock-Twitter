@@ -6,17 +6,8 @@ import { Query } from 'react-apollo';
 import { Link } from 'react-router-dom';
 
 // Material-UI components
-import { withStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import ExpansionPanel from '@material-ui/core/ExpansionPanel';
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import { withStyles, Grid, Paper, Card, CardContent, Typography, CircularProgress, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails } from '@material-ui/core';
+import { ExpandMore } from '@material-ui/icons';
 
 // Apollo Queries
 import { GET_SUGGESTED_CATEGORIES } from '../apolloclient/apolloqueries';
@@ -103,7 +94,7 @@ const Recommended = props => {
                                         data.currentUser.suggestedCategory.map((categories, i) => {
                                             return (
                                                 <ExpansionPanel key={i} classes={{ root: classes.expansionpanel }}>
-                                                    <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+                                                    <ExpansionPanelSummary expandIcon={<ExpandMore />}>
                                                         <Typography variant="subtitle2" className={classes.categoriesName}>
                                                             {categories.name}
                                                         </Typography>

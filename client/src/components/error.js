@@ -4,7 +4,7 @@
 import React from 'react';
 
 // Material-UI components
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core';
 
 // Images
 import errorImage from '../images/error-gasp-emoji.jpg';

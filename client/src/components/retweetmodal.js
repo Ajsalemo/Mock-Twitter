@@ -5,16 +5,8 @@ import React, { Component } from 'react';
 import { Mutation } from 'react-apollo';
 
 // Material-UI components
-import Modal from '@material-ui/core/Modal';
-import Repeat from '@material-ui/icons/Repeat';
-import Close from '@material-ui/icons/Close';
-import Typography from '@material-ui/core/Typography';
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import Avatar from '@material-ui/core/Avatar';
-import Fab from '@material-ui/core/Fab';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import { withStyles } from '@material-ui/core/styles';
+import { Modal, Typography, Grid, Paper, Avatar, Fab, CircularProgress, withStyles } from '@material-ui/core';
+import { Repeat, Close } from '@material-ui/icons';
 
 // Components
 import Tweettext from '../components/tweettext';

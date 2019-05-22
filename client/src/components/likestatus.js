@@ -5,9 +5,8 @@ import React from 'react';
 import { Mutation } from 'react-apollo';
 
 // Material-UI components
-import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import { withStyles } from '@material-ui/core/styles';
+import { FavoriteBorder } from '@material-ui/icons';
+import { withStyles, CircularProgress } from '@material-ui/core';
 
 // Apollo Queries
 import { LIKE_STATUS, GET_AUTHUSER_TWEETS } from '../apolloclient/apolloqueries';

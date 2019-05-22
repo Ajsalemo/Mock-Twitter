@@ -7,15 +7,9 @@ import { Formik, Form } from 'formik';
 import classNames from 'classnames';
 
 // Material-UI components
-import TextField from '@material-ui/core/TextField';
-import Fab from '@material-ui/core/Fab';
-import Grid from '@material-ui/core/Grid';
-import Avatar from '@material-ui/core/Avatar';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import Typography from '@material-ui/core/Typography';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, Typography, CircularProgress, Avatar, Grid, Fab, TextField } from '@material-ui/core';
 
-// Apollo Mutations
+// Apollo Queries and Mutations
 import { CREATE_USER_TWEET, GET_AUTHUSER_TWEETS, GET_USER_STATUS_COUNT } from '../apolloclient/apolloqueries';
 
 // ----------------------------------------------------------------------------------------------------- //

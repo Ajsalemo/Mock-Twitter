@@ -5,13 +5,7 @@ import React from 'react';
 import { Query } from 'react-apollo';
 
 // Material-UI components
-import { Avatar } from '@material-ui/core';
-import Grid from '@material-ui/core/Grid';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import { withStyles } from '@material-ui/core/styles';
+import { Avatar, Grid, AppBar, Toolbar, Typography, CircularProgress, withStyles } from '@material-ui/core';
 
 // Apollo Queries
 import { GET_USERPROFILE_TWEETS } from '../apolloclient/apolloqueries';
@@ -31,7 +25,7 @@ const styles = () => ({
     avatarBannerGrid: {
         display: 'flex',
         flexBasis: '30%',
-        justifyContent: 'center',
+        justifyContent: 'flex-end',
         marginTop: '-4.5em'
     },
     avatarInfoGrid: {

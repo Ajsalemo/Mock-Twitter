@@ -5,12 +5,7 @@ import React from 'react';
 import { Query } from 'react-apollo';
 
 // Material-UI components
-import { withStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
-import CircularProgress from '@material-ui/core/CircularProgress';
+import { withStyles, Paper, Card, CardContent, Typography, CircularProgress } from '@material-ui/core';
 
 // Apollo Queries
 import { GET_TRENDING_TOPICS } from '../apolloclient/apolloqueries';

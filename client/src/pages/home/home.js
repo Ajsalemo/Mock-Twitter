@@ -8,17 +8,8 @@ import classNames from 'classnames';
 import Login from '../../components/login';
 
 // Material-UI components
-import { withStyles } from '@material-ui/core/styles';
-import Search from '@material-ui/icons/Search';
-import PeopleOutline from '@material-ui/icons/PeopleOutline';
-import ChatBubbleOutline from '@material-ui/icons/ChatBubbleOutline';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import Avatar from '@material-ui/core/Avatar';
-import Fab from '@material-ui/core/Fab';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-
+import { withStyles, Grid, Typography, Avatar, Fab, AppBar, Toolbar } from '@material-ui/core';
+import { Search, PeopleOutline, ChatBubbleOutline } from '@material-ui/icons';
 
 // Image
 import twitterlogo from '../../images/twitterlogo.jpg';

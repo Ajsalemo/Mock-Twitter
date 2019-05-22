@@ -5,14 +5,13 @@ import React from 'react';
 import { withRouter } from 'react-router';
 
 // Material-UI components
-import Grid from '@material-ui/core/Grid';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, Grid } from '@material-ui/core';
 
 // Components
 import Navbar from '../../components/navbar';
 import PublicProfileBanner from '../../components/publicprofilebanner';
 import ProfileBannerBar from '../../components/profilebannerbar';
-import ProfileHandle from '../../components/profilehandle';
+import PublicProfileHandle from '../../components/publicprofilehandle';
 import Recommended from '../../components/recommended';
 import Trending from '../../components/trending';
 
@@ -47,7 +46,9 @@ let PublicProfile = props => {
             <Grid container className={classes.publicProfileContainerStyle}>
                 <Grid item xs={8} sm={8} md={2} className={classes.publicProfileHandlerGrid}>
                     {/* This component is a place holder, for now */}
-                    <ProfileHandle />
+                    <PublicProfileHandle 
+                        URLparam={param}
+                    />
                 </Grid>
                 <Grid item md={2}>
                     <Recommended />

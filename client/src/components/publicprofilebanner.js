@@ -5,10 +5,7 @@ import React from 'react';
 import { Query } from 'react-apollo';
 
 // Material-UI components
-import Grid from '@material-ui/core/Grid';
-import Toolbar from '@material-ui/core/Toolbar';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, CircularProgress, Grid } from '@material-ui/core';
 
 // Apollo Queries
 import { GET_USERPROFILE_TWEETS } from '../apolloclient/apolloqueries';

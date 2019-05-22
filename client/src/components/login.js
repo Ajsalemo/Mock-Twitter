@@ -5,10 +5,7 @@ import React from 'react';
 import classNames from 'classnames';
 
 // Material-UI components
-import { withStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
-import Grid from '@material-ui/core/Grid';
-import Fab from '@material-ui/core/Fab';
+import { withStyles, TextField, Grid, Fab } from '@material-ui/core';
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //

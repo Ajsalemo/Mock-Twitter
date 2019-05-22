@@ -4,9 +4,7 @@
 import React, { Component } from 'react';
 
 // Material-UI components
-import Modal from '@material-ui/core/Modal';
-import Fab from '@material-ui/core/Fab';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, Fab, Modal } from '@material-ui/core';
 
 // Components
 import TweetModalBody from './tweetmodalbody';

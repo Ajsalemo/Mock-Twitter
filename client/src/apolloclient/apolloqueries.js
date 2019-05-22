@@ -117,6 +117,8 @@ export const GET_USERPROFILE_TWEETS =
                         profile_image_url_https
                         in_reply_to_status_id_str
                         profile_banner_url
+                        created_at
+                        description
                     }
                     entities {
                         hashtags {

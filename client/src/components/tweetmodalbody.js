@@ -5,12 +5,8 @@ import React from 'react';
 import { Query } from 'react-apollo';
 
 // Material-UI components
-import Typography from '@material-ui/core/Typography';
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import Close from '@material-ui/icons/Close';
-import { withStyles } from '@material-ui/core/styles';
+import { Close } from '@material-ui/icons';
+import { withStyles, CircularProgress, Paper, Grid, Typography } from '@material-ui/core';
 
 // Components
 import TweetModalForm from '../components/tweetmodalform';

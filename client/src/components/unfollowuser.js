@@ -5,9 +5,7 @@ import React from 'react';
 import { Mutation } from 'react-apollo';
 
 // Material-UI components
-import Fab from '@material-ui/core/Fab';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, Fab, CircularProgress } from '@material-ui/core';
 
 // Apollo Mutations
 import { UNFOLLOW_USER, COMPARE_FRIENDSHIPS, GET_USER_STATUS_COUNT } from '../apolloclient/apolloqueries';

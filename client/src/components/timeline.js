@@ -6,14 +6,8 @@ import { Query } from 'react-apollo';
 import classNames from 'classnames';
 
 // Material-UI components
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import ChatBubbleOutline from '@material-ui/icons/ChatBubbleOutline';
-import BarChart from '@material-ui/icons/BarChart';
-import Grid from '@material-ui/core/Grid';
-import CardMedia from '@material-ui/core/CardMedia';
-import { withStyles } from '@material-ui/core/styles';
+import { ChatBubbleOutline, BarChart } from '@material-ui/icons';
+import { withStyles, Paper, Typography, CircularProgress, Grid, CardMedia } from '@material-ui/core';
 
 // Apollo Queries
 import { GET_AUTHUSER_TWEETS } from '../apolloclient/apolloqueries';

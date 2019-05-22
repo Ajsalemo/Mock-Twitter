@@ -5,13 +5,12 @@ import React from 'react';
 import { Query } from 'react-apollo';
 
 // Material-UI components
-import CircularProgress from '@material-ui/core/CircularProgress';
+import { CircularProgress } from '@material-ui/core';
 
 // Components
 import FollowUser from './followuser';
 import UnfollowUser from './unfollowuser';
 import Error from './error';
-
 
 // Apollo Queries
 import { COMPARE_FRIENDSHIPS } from '../apolloclient/apolloqueries';
