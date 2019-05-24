@@ -9,7 +9,7 @@ import { Repeat } from '@material-ui/icons';
 import { withStyles, CircularProgress } from '@material-ui/core';
 
 // Apollo Queries and Mutations
-import { UNRETWEET_STATUS, GET_AUTHUSER_TWEETS } from '../apolloclient/apolloqueries';
+import { UNRETWEET_STATUS, GET_AUTHUSER_TWEETS, GET_USERPROFILE_TWEETS } from '../apolloclient/apolloqueries';
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //

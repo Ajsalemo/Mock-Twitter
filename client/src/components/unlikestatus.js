@@ -9,7 +9,7 @@ import { Favorite } from '@material-ui/icons';
 import { withStyles, CircularProgress } from '@material-ui/core';
 
 // Apollo Queries
-import { UNLIKE_STATUS, GET_AUTHUSER_TWEETS } from '../apolloclient/apolloqueries';
+import { UNLIKE_STATUS, GET_AUTHUSER_TWEETS, GET_USERPROFILE_TWEETS } from '../apolloclient/apolloqueries';
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //

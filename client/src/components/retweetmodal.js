@@ -13,7 +13,7 @@ import Tweettext from '../components/tweettext';
 import Error from '../components/error';
 
 // Apollo Queries and Mutations 
-import { RETWEET_STATUS, GET_AUTHUSER_TWEETS } from '../apolloclient/apolloqueries';
+import { RETWEET_STATUS, GET_AUTHUSER_TWEETS, GET_USERPROFILE_TWEETS } from '../apolloclient/apolloqueries';
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //

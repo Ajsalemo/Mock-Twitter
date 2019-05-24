@@ -102,6 +102,7 @@ export const GET_USERPROFILE_TWEETS =
                     is_quote_status
                     retweet_count
                     favorited
+                    favorite_count
                     retweeted
                     lang
                     user {
