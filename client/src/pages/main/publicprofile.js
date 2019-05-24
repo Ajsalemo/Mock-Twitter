@@ -14,6 +14,7 @@ import ProfileBannerBar from '../../components/profilebannerbar';
 import PublicProfileHandle from '../../components/publicprofilehandle';
 import Recommended from '../../components/recommended';
 import Trending from '../../components/trending';
+import PublicProfileTimeline from '../../components/publicprofiletimeline';
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
@@ -22,11 +23,14 @@ const styles = () => ({
     publicProfileContainerStyle: {
         marginTop: '0.7em',
         display: 'flex',
-        justifyContent: 'space-around'
+        justifyContent: 'center'
     },
     publicProfileHandlerGrid: {
         width: 'auto',
         paddingRight: '0em'
+    },
+    publicProfileTimelineItem: {
+        marginRight: '0.6em'
     }
 });
 
@@ -46,8 +50,12 @@ let PublicProfile = props => {
             />
             <Grid container className={classes.publicProfileContainerStyle}>
                 <Grid item xs={8} sm={8} md={2} className={classes.publicProfileHandlerGrid}>
-                    {/* This component is a place holder, for now */}
                     <PublicProfileHandle 
+                        URLparam={param}
+                    />
+                </Grid>
+                <Grid item md={4} className={classes.publicProfileTimelineItem}>
+                    <PublicProfileTimeline
                         URLparam={param}
                     />
                 </Grid>
