@@ -28,13 +28,21 @@ const styles = () => ({
 // ----------------------------------------------------------------------------------------------------- //
 
 const UnLikeStatus = props => {
-    const { id, favorite_count, classes } = props;
+    const { id, favorite_count, classes, URLparam } = props;
     return (
         <Mutation
             mutation={UNLIKE_STATUS}
-            refetchQueries={[{
-                query: GET_AUTHUSER_TWEETS
-            }]}
+            refetchQueries={[
+                {
+                    query: GET_AUTHUSER_TWEETS
+                },
+                {
+                    query: GET_USERPROFILE_TWEETS,
+                    variables: {
+                        screen_name: URLparam
+                    }
+                }
+            ]}
         >
             {(unlikeStatusProp, { loading }) => (
                 loading

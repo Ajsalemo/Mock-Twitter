@@ -94,7 +94,6 @@ const PublicProfileTimeline = props => {
                 if (error) return <div className={classes.publicTimelineLoadingDiv}><Error /></div>;
                 return (
                     data.currentUser.userProfileTweets.map((userTweetInfo, i) => {
-                        console.log(userTweetInfo);
                         return (
                             <Paper className={classes.publicTimelinePaper} key={i}>
                                 <Avatar src={userTweetInfo.user.profile_image_url_https} alt='User profile avatar' />
@@ -133,6 +132,7 @@ const PublicProfileTimeline = props => {
                                                 <UnRetweetStatus
                                                     id={userTweetInfo.id_str}
                                                     retweet_count={userTweetInfo.retweet_count}
+                                                    URLparam={URLparam}
                                                 />
                                                     :
                                                 // Else, if it hasn't been retweeted - give the option to be able to retweet it
@@ -145,6 +145,7 @@ const PublicProfileTimeline = props => {
                                                     full_text={userTweetInfo.full_text}    
                                                     srcImage={userTweetInfo.user.profile_image_url_https}  
                                                     id={userTweetInfo.id_str}      
+                                                    URLparam={URLparam}
                                                 />}
                                             </div>
                                             <div className={classNames(classes.profileButtonOptionsGrid, classes.profileButtonOptionsHover)}>
@@ -155,13 +156,15 @@ const PublicProfileTimeline = props => {
                                                     ?
                                                 <UnLikeStatus
                                                     id={userTweetInfo.id_str}
-                                                    favorite_count={userTweetInfo.favorite_count}    
+                                                    favorite_count={userTweetInfo.favorite_count} 
+                                                    URLparam={URLparam}   
                                                 />
                                                 // Else, if it hasn't been liked - give the option to like the status
                                                     :
                                                 <LikeStatus 
                                                     id={userTweetInfo.id_str}
                                                     favorite_count={userTweetInfo.favorite_count}
+                                                    URLparam={URLparam}
                                                 />}
                                             </div>
                                             <BarChart className={classNames(classes.profileTimelineIcons, classes.profileButtonOptionsHover)} />

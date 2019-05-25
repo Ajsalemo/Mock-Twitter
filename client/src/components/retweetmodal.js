@@ -101,7 +101,7 @@ class RetweetModal extends Component {
     // ----------------------------------------------------------------------------------------------------- //
   
     render() {
-        const { classes, retweet_count, name, verified, nickname, created_at, full_text, srcImage, id } = this.props;
+        const { classes, retweet_count, name, verified, nickname, created_at, full_text, srcImage, id, URLparam } = this.props;
         return ( 
             <React.Fragment>
                 <Repeat 
@@ -144,7 +144,17 @@ class RetweetModal extends Component {
                         <Grid item className={classes.retweetButtonGrid}>
                             <Mutation 
                                 mutation={RETWEET_STATUS} 
-                                refetchQueries={[{ query: GET_AUTHUSER_TWEETS }]}
+                                refetchQueries={[
+                                    { 
+                                        query: GET_AUTHUSER_TWEETS 
+                                    },
+                                    {
+                                        query: GET_USERPROFILE_TWEETS,
+                                        variables: {
+                                            screen_name: URLparam
+                                        }
+                                    }
+                                ]}
                             >
                                 {(retweetStatusProp, { loading }) => (
                                     loading 

@@ -28,13 +28,21 @@ const styles = () => ({
 // ----------------------------------------------------------------------------------------------------- //
 
 const UnRetweetStatus = props => {
-    const { classes, id, retweet_count } = props;
+    const { classes, id, retweet_count, URLparam } = props;
     return (
         <Mutation 
             mutation={UNRETWEET_STATUS} 
-            refetchQueries={[{
-                query: GET_AUTHUSER_TWEETS
-            }]}
+            refetchQueries={[
+                {
+                    query: GET_AUTHUSER_TWEETS
+                },
+                {
+                    query: GET_USERPROFILE_TWEETS,
+                    variables: {
+                        screen_name: URLparam
+                    }
+                }
+            ]}
         >
             {(unRetweetStatusProp, { loading }) => (
                 loading

@@ -49,7 +49,6 @@ const PublicProfileBanner = props => {
         {({ loading, error, data }) => {
             if (loading) return <div className={classes.bannerErrorAndLoadingDiv}><CircularProgress /></div>;
             if (error) return <div className={classes.bannerErrorAndLoadingDiv}><Error /></div>; 
-            console.log(data)
             return (
                     data.currentUser.userProfileTweets[0].user.profile_banner_url
                         ?
