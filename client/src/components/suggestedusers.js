@@ -2,6 +2,7 @@
 // ----------------------------------------------------------------------------------------------------- //
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Query } from 'react-apollo';
 
 // Material-UI components
@@ -41,7 +42,16 @@ const styles = () => ({
     },
     suggestUsersScreenName: {
         fontWeight: '100',
-        marginLeft: '0.3em'
+        marginLeft: '0.3em',
+        textDecoration: 'none',
+        color: '#000'
+    },
+    suggestUsersNameMain: {
+        textDecoration: 'none',
+        color: '#000',
+        '&:hover': {
+            color: '#00acee'
+        }
     },
     verifiedIcon: {
         height: '1em',
@@ -73,14 +83,14 @@ const SuggestedUsers = props => {
                                 <Avatar alt={`${name} avatar`} src={src} />
                                 <Typography variant="subtitle2" className={classes.suggestedUsersNameContainer}>
                                     <span className={classes.suggestUsersName}>
-                                        {name}
+                                        <Link to={`/userprofile/${screen_name}`} className={classes.suggestUsersNameMain}> {name}</Link>
                                         {/* If the Twitter account is verified - display the blue 'check' icon */}
                                         {verified === true 
                                             ? 
                                         <img src={verifiedIcon} className={classes.verifiedIcon} alt="verified account" />
                                             : 
                                         null}
-                                        <span className={classes.suggestUsersScreenName}>@{screen_name}</span>
+                                        <Link to={`/userprofile/${screen_name}`} className={classes.suggestUsersScreenName}>@{screen_name}</Link>
                                     </span>
                                     {/* If authenticated user is not following this account - give the user the option to follow them */}
                                     {info[1].compareRelationship.relationship.target.followed_by === true
