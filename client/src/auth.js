@@ -42,11 +42,13 @@ class Auth {
                 this.setSession(authResult);
                 resolve();
             });
-        })
+        });
     }
 
-    setSession = authResult => {
+    setSession(authResult) {
         this.idToken = authResult.idToken;
+        this.accessToken = authResult.accessToken;
+        console.log(this.accessToken)
         // set the time that the id token will expire at
         this.expiresAt = authResult.expiresIn * 1000 + new Date().getTime();
         localStorage.setItem(this.authFlag, JSON.stringify(true));
@@ -83,13 +85,10 @@ class Auth {
 }
 
 // ----------------------------------------------------------------------------------------------------- //
-
-const auth = new Auth();
-
-// ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
-export default auth;
+export const auth = new Auth();
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
+

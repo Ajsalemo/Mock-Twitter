@@ -16,7 +16,7 @@ import twitterlogo from '../../images/twitterlogo.jpg';
 import twitterminilogo from '../../images/twitterminilogo.png';
 
 // Auth0
-import auth from '../../auth';
+import { auth } from '../../auth';
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //

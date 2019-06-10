@@ -95,8 +95,10 @@ const ProfileHandle = props => {
                                     {({ loading, error, data }) => {
                                         if (loading) return <div><CircularProgress /></div>;
                                         if (error) return <Error />;
-
+ 
                                         return (
+                                            data.length 
+                                                ?
                                             <React.Fragment>
                                                 <div className={classes.profileTweetSpan}>
                                                     <span>Tweets</span>
@@ -117,6 +119,8 @@ const ProfileHandle = props => {
                                                     </span>
                                                 </div>  
                                             </React.Fragment>   
+                                                :
+                                            null
                                         );
                                     }}
                                 </Query>

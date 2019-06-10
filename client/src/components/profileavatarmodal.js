@@ -9,7 +9,7 @@ import { Button, Avatar, Tooltip, ClickAwayListener, Grow, Paper, Popper, MenuIt
 import { PersonOutline } from '@material-ui/icons';
 
 // Auth0
-import auth from '../auth';
+import { auth } from '../auth';
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //

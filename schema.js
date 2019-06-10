@@ -2,7 +2,7 @@
 // ----------------------------------------------------------------------------------------------------- //
 
 const { gql } = require('apollo-server');
-const client = require('./client/src/twitterkeys');
+const client = require('./client/src/twitterkeys').default;
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
@@ -261,11 +261,11 @@ const resolvers = {
     },
     User: {
         userTimelineTweets: async (parent, args, user) => {
-            const requestUserTimelineTweets = await client.get('statuses/home_timeline', { screen_name: user.name, tweet_mode: 'extended' });
+            const requestUserTimelineTweets = await client.get('statuses/home_timeline', { tweet_mode: 'extended' });
             const responserUserTimelineTweets = await requestUserTimelineTweets;
             return responserUserTimelineTweets;
         },
-        userProfileTweets: async (parent, args, user) => {
+        userProfileTweets: async (parent, args, context) => {
             const userProfileTweetsRequest = await client.get('statuses/user_timeline', { screen_name: args.screen_name, tweet_mode: 'extended' });
             const userProfileTweetsResponse = userProfileTweetsRequest;
             return userProfileTweetsResponse;

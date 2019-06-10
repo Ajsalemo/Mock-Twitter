@@ -173,10 +173,13 @@ export const GET_SUGGESTED_CATEGORIES_MEMBERS_GROUP =
                 suggestedCategorySlug(slug: $slug) {
                     users {
                         id
+                        id_str
                         name
                         screen_name
                         profile_image_url_https
                         verified
+                        statuses_count
+                        friends_count
                     }
                 }
             }

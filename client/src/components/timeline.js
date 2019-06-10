@@ -100,11 +100,12 @@ const Timeline = props => {
             <Query 
                 query={GET_AUTHUSER_TWEETS} 
                 pollInterval={pollMinute(1000, 60)} 
-                fetchPolicy='cache-and-network'
+                fetchPolicy='network-only'
             >
                 {({ loading, error, data }) => {
                     if (loading) return <div className={classes.errorAndLoadingDiv}><CircularProgress /></div>;
                     if (error) return <div className={classes.errorAndLoadingDiv}><Error /></div>;
+                    console.log(data)
                     return (
                         data.currentUser.userTimelineTweets.map((timelineTweetInfo, i) => {
                             return (

@@ -8,7 +8,7 @@ import { withRouter } from 'react-router-dom';
 import { withStyles, CircularProgress, Typography, Grid } from '@material-ui/core';
 
 // Auth0
-import auth from '../auth';
+import { auth } from '../auth';
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //

@@ -9,6 +9,7 @@ const { typeDefs, resolvers } = require('./schema');
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
+
 const options = {
     audience: `${process.env.REACT_APP_CLIENT_ID}`,
     issuer: `https://${process.env.REACT_APP_DOMAIN}/`,
@@ -25,7 +26,6 @@ const getKey = (header, cb) => {
         cb(null, signingKey);
     });
 };
-
 
 const server = new ApolloServer({
     typeDefs,
