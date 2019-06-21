@@ -15,9 +15,6 @@ import { Search, PeopleOutline, ChatBubbleOutline } from '@material-ui/icons';
 import twitterlogo from '../../images/twitterlogo.jpg';
 import twitterminilogo from '../../images/twitterminilogo.png';
 
-// Auth0
-import { auth } from '../../auth';
-
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
@@ -122,7 +119,6 @@ const Home = props => {
                             variant="extended"
                             aria-label="Log In"
                             className={classNames(classes.button, classes.signInButton)}
-                            onClick={() => auth.login()}
                         >
                             Log in
                         </Fab>

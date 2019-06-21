@@ -8,9 +8,6 @@ import classNames from 'classnames';
 import { Button, Avatar, Tooltip, ClickAwayListener, Grow, Paper, Popper, MenuItem, MenuList, Typography, withStyles } from '@material-ui/core';
 import { PersonOutline } from '@material-ui/icons';
 
-// Auth0
-import { auth } from '../auth';
-
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
@@ -161,7 +158,7 @@ class ProfileAvatarModal extends Component {
                                             </Typography>
                                         </MenuItem>
                                         <MenuItem onClick={this.handleClose} className={classNames(classes.menuDivider, classes.profileChildMenuGrid)}>
-                                            <Typography variant="subtitle1" className={classes.profileChildMenuGridText} onClick={() => auth.logout()}>
+                                            <Typography variant="subtitle1" className={classes.profileChildMenuGridText}>
                                                 Log Out @{nickname}
                                             </Typography>
                                         </MenuItem>

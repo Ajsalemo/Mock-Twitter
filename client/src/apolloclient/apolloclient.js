@@ -5,9 +5,6 @@ import ApolloClient from 'apollo-boost'
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { persistCache } from 'apollo-cache-persist';
 
-// Auth0
-import { auth } from '../auth';
-
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
@@ -28,8 +25,7 @@ export const client = new ApolloClient({
   request: operation => {
     operation.setContext(context => ({
       headers: {
-        ...context.headers,
-        authorization: auth.getIdToken()
+        ...context.headers
       }
     }));
   }

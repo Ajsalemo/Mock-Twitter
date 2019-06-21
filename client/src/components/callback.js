@@ -7,9 +7,6 @@ import { withRouter } from 'react-router-dom';
 // Material-UI component
 import { withStyles, CircularProgress, Typography, Grid } from '@material-ui/core';
 
-// Auth0
-import { auth } from '../auth';
-
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
@@ -31,7 +28,6 @@ const styles = () => ({
 
 class CallBack extends Component {
     async componentDidMount() {
-        await auth.handleAuthentication();
         this.props.history.replace('/main');
     }
 
