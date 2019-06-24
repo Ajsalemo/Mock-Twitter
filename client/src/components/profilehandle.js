@@ -86,7 +86,7 @@ const ProfileHandle = props => {
                             <Typography variant="h6" gutterBottom className={classes.upperText}>
                                 <div className={classes.handleTextUpperDiv}>
                                     <span className={classes.handleTextUpper}>{data.currentUser.name}</span>
-                                    <span className={classes.handleTextLower}>@{data.currentUser.nickname}</span>
+                                    <span className={classes.handleTextLower}>@{data.currentUser.name}</span>
                                 </div>
                             </Typography>
                             <Typography variant="subtitle2" className={classes.profileHandleTypography} gutterBottom>

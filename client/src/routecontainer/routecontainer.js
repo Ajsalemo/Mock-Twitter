@@ -13,10 +13,26 @@ import PublicProfile from '../pages/main/publicprofile';
 import Loading from '../components/loading';
 import CallBack from '../components/callback';
 
+// Firebase
+import firebaseClass from '../firebase';
+
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
-class RouteContainer extends Component  {
+class RouteContainer extends Component {
+    async componentDidMount() {
+        await firebaseClass.firebaseAuth().onAuthStateChanged(user => {
+            if (user) {
+                // User is signed in.
+                console.log(user)
+                this.props.history.push('/callback');
+            } else {
+                // No user is signed in.
+                this.props.history.push('/');
+            }
+        });
+    };
+
     render() {
         return (
             <React.Fragment>

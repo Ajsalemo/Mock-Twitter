@@ -3,10 +3,44 @@
 
 require('dotenv').config();
 const { ApolloServer } = require('apollo-server');
+const admin = require('firebase-admin');
+const serviceAccount = require('./firebaseKey.json');
 const { typeDefs, resolvers } = require('./schema');
 
 // ----------------------------------------------------------------------------------------------------- //
+
+admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount),
+    databaseURL: "https://twitter-graphql.firebaseio.com"
+});
+
 // ----------------------------------------------------------------------------------------------------- //
+// ----------------------------------------------------------------------------------------------------- //
+
+// This function returns the user provided by firebase
+// The token is added to the authorization headers by the client in 'apolloclient.js'
+// The server request is passed in as a parameter, which is added when this function is called in Apollos Context
+const getUid = async (req) => {
+    // If headers exists, set idToken to that value - else it returns null if it doesn't exist
+    let idToken = (req.headers && req.headers.authorization) ? req.headers.authorization : null;
+    // Throw an error message if a token isn't found
+    if (!idToken) {
+        console.log('no token found');
+        return null;
+    }
+    console.log(idToken)
+    const newToken = idToken.split('Bearer ')[1];
+
+    // Firebase SDK admin is called here to use its method to verify the token
+    let user = await admin.auth().verifyIdToken(newToken)
+        .then(decodedToken => {
+            const user = decodedToken;
+            return user;
+        }).catch(err => {
+            return err;
+        });
+    return user;
+}
 
 const server = new ApolloServer({
     typeDefs,
@@ -16,7 +50,8 @@ const server = new ApolloServer({
         return new Error('Internal server error');
     },
     context: ({ req }) => {
-        console.log(req)
+        const user = getUid(req);
+        return user;
     }
 });
 

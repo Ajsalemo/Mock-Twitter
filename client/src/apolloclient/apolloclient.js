@@ -4,6 +4,7 @@
 import ApolloClient from 'apollo-boost'
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { persistCache } from 'apollo-cache-persist';
+import firebaseClass from '../firebase';
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
@@ -16,16 +17,18 @@ persistCache({
 });
 
 export const client = new ApolloClient({
-  uri: "http://localhost:4000/graphql",
+  uri: process.env.REACT_APP_APOLLO_URI,
   onError: ({ networkError, graphQLErrors }) => {
     console.log('graphQLErrors', graphQLErrors)
     console.log('networkError', networkError)
   },
   cache,
-  request: operation => {
+  request: async operation => {
+    const firebaseToken = await firebaseClass.getTokenForValidation();
     operation.setContext(context => ({
       headers: {
-        ...context.headers
+        ...context.headers,
+        authorization: firebaseToken ? `Bearer ${firebaseToken}` : null
       }
     }));
   }

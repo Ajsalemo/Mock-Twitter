@@ -28,10 +28,9 @@ const typeDefs =
         # User Object
         type User {
             sub: String!
-            nickname: String!
+            user_id: String!
             name: String!
             picture: String!
-            updated_at: String!
             userTimelineTweets: [UserTimelineTweets]
             userProfileTweets(screen_name: String!): [UserProfileTimeline]
             trendingTopics: [trendsWrapper]
@@ -286,6 +285,7 @@ const resolvers = {
             return suggestedCategoryResponse;
         },
         suggestedCategorySlug: async (parent, args, user) => {
+            console.log(user.name)
             const categorySlugRequest = await client.get(`users/suggestions/${args.slug}`, { screen_name: user.name });
             const categorySlugResponse = await categorySlugRequest;
             return categorySlugResponse;

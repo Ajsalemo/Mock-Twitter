@@ -11,10 +11,9 @@ export const GET_USER =
         query GetUser {
             currentUser {
                 sub
-                nickname
                 name
                 picture
-                updated_at
+                user_id
             }
         }
     `;
@@ -39,7 +38,6 @@ export const GET_AUTHUSER_TWEETS =
         query GetAuthUserTweets {
             currentUser {
                 picture
-                nickname
                 name
                 userTimelineTweets {
                     created_at
@@ -87,7 +85,6 @@ export const GET_USERPROFILE_TWEETS =
         query GetUserProfileTweets($screen_name: String!) {
             currentUser {
                 picture
-                nickname
                 name
                 userProfileTweets(screen_name: $screen_name) {
                     created_at
@@ -169,7 +166,7 @@ export const GET_SUGGESTED_CATEGORIES_MEMBERS_GROUP =
     gql`
         query GetSuggestedCategoriesMembersGroup($slug: String!) {
             currentUser {
-                nickname
+                name
                 suggestedCategorySlug(slug: $slug) {
                     users {
                         id
@@ -190,7 +187,7 @@ export const COMPARE_FRIENDSHIPS =
     gql`
         query CompareRelationship($target_screenName: String!, $source_screenName: String!) {
             currentUser {
-                nickname
+                name
                 compareRelationship(target_screenName: $target_screenName, source_screenName: $source_screenName) {
                     relationship {
                         target {

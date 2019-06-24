@@ -28,7 +28,7 @@ const styles = () => ({
 
 class CallBack extends Component {
     async componentDidMount() {
-        this.props.history.replace('/main');
+        await this.props.history.push('/main');
     }
 
     render() {
