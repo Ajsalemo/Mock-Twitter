@@ -22,15 +22,12 @@ import firebaseClass from '../firebase';
 class RouteContainer extends Component {
     async componentDidMount() {
         await firebaseClass.firebaseAuth().onAuthStateChanged(user => {
-            if (user) {
-                // User is signed in.
-                console.log(user)
-                this.props.history.push('/callback');
-            } else {
-                // No user is signed in.
+            if(user && this.props.location.pathname === '/') {
+                this.props.history.push('/main');
+            } else if(!user) {
                 this.props.history.push('/');
             }
-        });
+        })
     };
 
     render() {

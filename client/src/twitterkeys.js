@@ -7,10 +7,10 @@ const Twitter = require('twitter-lite');
 // ----------------------------------------------------------------------------------------------------- //
 
 const client = new Twitter({
-    consumer_key: process.env.REACT_APP_TWITTER_CONSUMER_KEY,
-    consumer_secret: process.env.REACT_APP_TWITTER_CONSUMER_SECRET,
-    access_token_key: process.env.REACT_APP_TWITTER_ACCESS_TOKEN_KEY,
-    access_token_secret: process.env.REACT_APP_TWITTER_ACCESS_TOKEN_SECRET
+    consumer_key: "tvrtcXy0Ll0eoP4GhYvOZbTbk",
+    consumer_secret: "MrJ7RTXpe9VizuARQU9b5e3cJjOWmWqAWrmpa7C9JkT7yYaBmY",
+    access_token_key: "966801592073773056-iZXVMkV8gqz7VyBA1dcVA8JoEo4icBW",
+    access_token_secret: "iUzuzDhiLLJOmWm7COtbZJULGZGudeWu8IEYsHwKiAchF"
 });
 
 

@@ -1,12 +1,12 @@
 {
   "type": "",
-  "project_id": "",
-  "private_key_id": "",
-  "private_key": "",
-  "client_email": "",
-  "client_id": "",
-  "auth_uri": "",
-  "token_uri": "",
-  "auth_provider_x509_cert_url": "",
-  "client_x509_cert_url": ""
+  "project_id": "twitter-graphql",
+  "private_key_id": "86f1c3865abe6f76dd0fa580da7f44856fa70567",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCNkmFeA8cmjn6V\nGyO6bHOT90lB/Ykd4svTav8Nn6u/UxZl/1+9nrBZV91H7wa1NTT0lPXsrn6GNX5V\nfa6/YO90UYYIaw2gGKO8ICGkfYsliryO9ZzgQcQuKU+i/EHvh7VqiX0bulIQKq+o\nRiu4eSfMb1/Y0LZayOub/b/5rgulEyQ+zxlQJTCtFKzjUbVkwTB3ALdJVVdzoUk1\nKPLj6IrrLD+C3T5Aj8Fd81sO9EcTHw4hLwEpm+2S7rbkDAeX4LbcjgwXQa6xzpgS\nvxU4eZcIWGFGTBqnnwcp7jEDBDdqQSWGTSHGdOEKDJMFFwkfoMG8spqaddXIf9be\nlspWsQJNAgMBAAECggEAK0kkaCBzlcBfx6tCo09hj04+oeSpNfAQLhY64al+U8NN\nx+XrGgkZFlgdGk9lF6arCFU7VCCOIu7cL7t74Jv82u3KM2y3/8lI1s5kOuz/zHy8\n5mEGlDLHju2mocjLSDeQKoDbNc0kJjlG+AZse7zfhExRW/OErgFcuJc/SVID0Xay\nZIkmhO5uRU1qSOagazJB/KEDiin8dGAnQLL7yM0y0o84EMEMUgPmh4RFu6J/Uz6s\nNGl7YobGs84CIbPqq2jdflC7X17MFS0A1Sn3uuE2vFZ10aK2cz+daPyQHy+QxZll\nGm4W/uZAQkr2zeclExErPWiqTBEoOrS+bVBRPW6e6QKBgQDAKxxQNtqbcJTePmLD\npCr6dHXm5nI0DTXZCYenwk74ZJAMLKGHkG/0rYOBxp9eyTOnY0BJvNqSYLAS4+/z\n+Zt5w1Y3CLAkp8FIP/THebf/UVAaaa9vEGdD7dBjfdnwXV5ssZcPk+eFekUtgc3X\naKQBlJPQU6tx2cPz6Wk8vyY9ewKBgQC8mNPI15yqFvfaa2E+o406MGTx0W3MUOxT\nDnKAqg7BkbLu75q5yqtaycycMLGR+q88FStNNROdwBjm5deYD138iltnY4ZhVg2+\n/uG/nfy5PoQzCFlq8i4fDx7jKlv5xJKpCtbpezrp8/NUvXERSYwdqutb2/4TwPwB\nl9rCYmwg1wKBgQCr1iD0TYi/lDVaYjjYrvVLjlZbide3WdS75fyq82LAVNRGPqaW\nXX7vMTU2F9Es5gfNdz/mb/yXBeSMj8xiwuHXSOfQQHGZ5XQ9UgtlUB9LLH/Pjo+0\nZduhb4d3X/NBL4ye71KgOGbAAazYW4kgRM7bJuviTt8w6ESD2EUlb9wW/wKBgF9e\nGJoTDZGlE6hLbF00bxHhrunpMVCECzzkrVoKpHOVrZnNZ7xTk9rQ+LpylRhwX3RO\ncBsWn9jBbtYzm5W1D53IiPf7B9ToowLV+GnhBg7WYhs8OZsu48uo5cGRhfkDQfZh\nGNPwEJaFWaKcOTS4sDXAXEuTLyPmDojvtRtekbb5AoGBAKQj7aMvyvevyouLTmqp\nILYKNktY/yOwmSzVyrYLKNA9R1pXtdnlBArf0tjkY6Y6SimPki0ITm4c/4Z+n8CS\nNDLDvcL1IIPuaEjXZApR/f9jLCxTPhG0tc/OBycdL3G1Msmo3SBUwTiaY+tIobDJ\nRLJ0LsVawckT8tqjys1MoZAP\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-bki0q@twitter-graphql.iam.gserviceaccount.com",
+  "client_id": "101732525089685984019",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-bki0q%40twitter-graphql.iam.gserviceaccount.com"
 }

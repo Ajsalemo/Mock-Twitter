@@ -29,6 +29,8 @@ class FirebaseHelperClass {
     constructor() {
         this.twitterSignIn = this.twitterSignIn.bind(this);
         this.firebaseAuth = this.firebaseAuth.bind(this);
+        this.signOut = this.signOut.bind(this);
+        this.persistAuthentication = this.persistAuthentication.bind(this);
     }
 
     firebaseAuth = () => {
@@ -54,14 +56,26 @@ class FirebaseHelperClass {
     getTokenForValidation = () => {
         const verifyToken = this.firebaseAuth().currentUser.getIdToken(/* forceRefresh */ true)
             .then(idToken => {
-            console.log(idToken)
-            return idToken
+                return idToken;
         }).catch(err => {
             // Handle error
             console.log(err);
         });
         return verifyToken;
     };
+
+    persistAuthentication = () => {
+        this.firebaseAuth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
+            .then(() => {
+                return this.twitterSignIn();
+            }).catch(err => {
+                console.log(err);
+            });
+    }
+
+    signOut = () => {
+        this.firebaseAuth().signOut();
+    }
 };
 
 // ----------------------------------------------------------------------------------------------------- //

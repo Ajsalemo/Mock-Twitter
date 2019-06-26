@@ -122,7 +122,7 @@ const Home = props => {
                             variant="extended"
                             aria-label="Log In"
                             className={classNames(classes.button, classes.signInButton)}
-                            onClick={() => firebaseClass.twitterSignIn()}
+                            onClick={() => firebaseClass.persistAuthentication()}
                         >
                             Log in
                         </Fab>

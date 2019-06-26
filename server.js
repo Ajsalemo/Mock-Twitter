@@ -28,7 +28,6 @@ const getUid = async (req) => {
         console.log('no token found');
         return null;
     }
-    console.log(idToken)
     const newToken = idToken.split('Bearer ')[1];
 
     // Firebase SDK admin is called here to use its method to verify the token
