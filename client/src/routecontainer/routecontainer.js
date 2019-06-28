@@ -11,7 +11,6 @@ import PublicProfile from '../pages/main/publicprofile';
 
 // Components
 import Loading from '../components/loading';
-import CallBack from '../components/callback';
 
 // Firebase
 import firebaseClass from '../firebase';
@@ -21,13 +20,21 @@ import firebaseClass from '../firebase';
 
 class RouteContainer extends Component {
     async componentDidMount() {
+        // When the routes mount - push the authenicated user to the home page
+        // Else if the user is unAuthenticated(i.e, logs out) - push them to the log in page
         await firebaseClass.firebaseAuth().onAuthStateChanged(user => {
             if(user && this.props.location.pathname === '/') {
                 this.props.history.push('/main');
             } else if(!user) {
                 this.props.history.push('/');
             }
-        })
+        });
+        // Work around to prevent the getTokenId method on the firebase constructor from becoming null
+        // If the page hard refreshes, it pushes it to a loading indicator page
+        // Which then pushes back to the previous page, unless the route is the log in route
+        if(window.location.reload && this.props.location.pathname !== '/') {
+            this.props.history.push('/loading');
+        }
     };
 
     render() {
@@ -37,7 +44,7 @@ class RouteContainer extends Component {
                     <Route path='/userprofile/:params' component={PublicProfile} />
                     <Route path='/userprofile/tweets/:params' />
                     <Route path='/main' component={Main} />
-                    <Route path='/callback' component={CallBack} />
+                    <Route path='/loading' component={Loading} />
                     <Route path='/' component={Home} />
                 </Switch>
             </React.Fragment>

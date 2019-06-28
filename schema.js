@@ -285,7 +285,6 @@ const resolvers = {
             return suggestedCategoryResponse;
         },
         suggestedCategorySlug: async (parent, args, user) => {
-            console.log(user.name)
             const categorySlugRequest = await client.get(`users/suggestions/${args.slug}`, { screen_name: user.name });
             const categorySlugResponse = await categorySlugRequest;
             return categorySlugResponse;

@@ -54,14 +54,15 @@ class FirebaseHelperClass {
     };
 
     getTokenForValidation = () => {
-        const verifyToken = this.firebaseAuth().currentUser.getIdToken(/* forceRefresh */ true)
+        const verifyToken = this.firebaseAuth().currentUser.getIdToken()
             .then(idToken => {
+                console.log(idToken)
                 return idToken;
-        }).catch(err => {
-            // Handle error
-            console.log(err);
-        });
-        return verifyToken;
+            }).catch(err => {
+                // Handle error
+                console.log(err);
+            });
+            return verifyToken;
     };
 
     persistAuthentication = () => {
