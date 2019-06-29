@@ -55,14 +55,17 @@ class FirebaseHelperClass {
             });
     };
 
+    // Returns Twitters Access Token Key
     getAccessToken = token => {
         return token;
     }
 
+    // Returns Twitters Access Token Secret
     getAccessSecret = secret => {
         return secret;
     }
 
+    // Retrieves a JWT token to be associated with the user
     getTokenForValidation = () => {
         const verifyToken = this.firebaseAuth().currentUser.getIdToken()
             .then(idToken => {
@@ -74,9 +77,13 @@ class FirebaseHelperClass {
             return verifyToken;
     };
 
+    // This function sets the persistence of the authenticated session
+    // SESSION - lets the user stay authenticated through a page refresh
+    // But will clear the users session if the tab or browser is closed
     persistAuthentication = () => {
         this.firebaseAuth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
             .then(() => {
+                // After setting persistance, call the log in popup
                 return this.twitterSignIn();
             }).catch(err => {
                 console.log(err);
@@ -84,6 +91,8 @@ class FirebaseHelperClass {
     }
 
     signOut = () => {
+        // Clear out any history in local storage
+        localStorage.clear();
         this.firebaseAuth().signOut();
     }
 };

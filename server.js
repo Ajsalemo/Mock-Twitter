@@ -11,7 +11,7 @@ const { typeDefs, resolvers } = require('./schema');
 
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
-    databaseURL: "https://twitter-graphql.firebaseio.com"
+    databaseURL: process.env.REACT_APP_FIREBASE_DATABASE_URL
 });
 
 // ----------------------------------------------------------------------------------------------------- //

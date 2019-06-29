@@ -6,8 +6,11 @@ import Moment from 'react-moment';
 import { Link } from 'react-router-dom';
 
 // Material-UI components
-import { Typography } from '@material-ui/core';
+import { Typography, Grid } from '@material-ui/core';
 import { withStyles } from '@material-ui/core';
+
+// Components
+import EditPost from '../components/editposts';
 
 // Images
 import verifiedIcon from '../images/verifiedicon.png';
@@ -36,6 +39,10 @@ const styles = () => ({
         '&:hover': {
             color: '#00acee'
         }
+    },
+    nameAndHandleGrid: {
+        display: 'flex',
+        justifyContent: 'space-between'
     }
 });
 
@@ -47,18 +54,23 @@ const Tweettext = props => {
     return (
         <React.Fragment>
             {/* Name and handle */}
-            <Typography variant="subtitle2">
-                <Link to={`/userprofile/${nickname}`} className={classes.profileLink}>{name}</Link>
-                {/* If the Twitter account is verified - display the blue 'check' icon */}
-                {verified === true 
-                    ? 
-                <img src={verifiedIcon} className={classes.verifiedTimelineIcon} alt="verified account" />
-                    : 
-                null}
-                <span className={classes.timelineHandleFont}>@{nickname}</span>
-                <span className={classes.timelineDotSpacing}>&#8226;</span>
-                <span className={classes.timelineHandleFont}><Moment fromNow>{created_at}</Moment></span>
-            </Typography>
+            <Grid item className={classes.nameAndHandleGrid}>
+                <Typography variant="subtitle2">
+                    <Link to={`/userprofile/${nickname}`} className={classes.profileLink}>{name}</Link>
+                    {/* If the Twitter account is verified - display the blue 'check' icon */}
+                    {verified === true 
+                        ? 
+                    <img src={verifiedIcon} className={classes.verifiedTimelineIcon} alt="verified account" />
+                        : 
+                    null}
+                    <span className={classes.timelineHandleFont}>@{nickname}</span>
+                    <span className={classes.timelineDotSpacing}>&#8226;</span>
+                    <span className={classes.timelineHandleFont}><Moment fromNow>{created_at}</Moment></span>
+                </Typography>
+                <Grid item>
+                    <EditPost />
+                </Grid>
+            </Grid>
             {/* Tweet body */}
             <Typography variant="body2" gutterBottom>
                 <span className={classes.timelimeTweets}>{full_text}</span>

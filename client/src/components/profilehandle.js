@@ -95,8 +95,9 @@ const ProfileHandle = props => {
                                     {({ loading, error, data }) => {
                                         if (loading) return <div><CircularProgress /></div>;
                                         if (error) return <Error />;
+                                        console.log(data.currentUser.userTweetStatusCount[0])
                                         return (
-                                            data.length 
+                                            data.currentUser.userTweetStatusCount[0] 
                                                 ?
                                             <React.Fragment>
                                                 <div className={classes.profileTweetSpan}>

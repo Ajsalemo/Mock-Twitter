@@ -329,7 +329,6 @@ const resolvers = {
         unRetweet: async (parent, args, context) => {
             const unRetweetRequest = await twitterNetworkCall(context.access_token, context.access_secret).post('statuses/unretweet', { id: args.id });
             const unRetweetResponse = unRetweetRequest;
-            console.log(unRetweetResponse);
             return unRetweetResponse;
         }
     }

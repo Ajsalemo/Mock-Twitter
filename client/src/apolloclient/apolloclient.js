@@ -13,6 +13,7 @@ import firebaseClass from '../firebase';
 
 const cache = new InMemoryCache();
 
+// This keeps Apollo queries or mutations in memory(local storage) through hard refreshes or state changes
 persistCache({
   cache,
   storage: window.localStorage,
@@ -20,12 +21,14 @@ persistCache({
 
 export const client = new ApolloClient({
   uri: process.env.REACT_APP_APOLLO_URI,
+  // When Apollo encounters an error, this will log it in the browser console
   onError: ({ networkError, graphQLErrors }) => {
     console.log('graphQLErrors', graphQLErrors)
     console.log('networkError', networkError)
   },
   cache,
   request: async operation => {
+    // Create variables for the tokens to be sent across the request headers
     const twitter_token = window.localStorage.getItem('access_token');
     const twitter_secret = window.localStorage.getItem('access_secret');
     const firebaseToken = await firebaseClass.getTokenForValidation();

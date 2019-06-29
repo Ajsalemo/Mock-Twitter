@@ -34,7 +34,7 @@ class Loading extends Component {
         // Unless the page is the log in route
         // Else push the unAuthenticated user back to log in
         await firebaseClass.firebaseAuth().onAuthStateChanged(user => {
-            if(user) {
+            if(user && this.props.location.pathname !== '/') {
                 this.props.history.goBack();
             } else if(!user) {
                 this.props.history.push('/');
