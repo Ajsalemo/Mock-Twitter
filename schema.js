@@ -2,7 +2,7 @@
 // ----------------------------------------------------------------------------------------------------- //
 
 const { gql } = require('apollo-server');
-const client = require('./client/src/twitterkeys.js');
+const twitterNetworkCall = require('./client/src/twitterkeys.js');
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
@@ -255,79 +255,79 @@ const resolvers = {
     Query: {
         // The 3rd argument(user) is being pulled off of the context in server.js
         currentUser: (parent, args, user) => {
-            return user;
+            return user.decodedToken;
         }
     },
     User: {
         userTimelineTweets: async (parent, args, user) => {
-            const requestUserTimelineTweets = await client.get('statuses/home_timeline', { tweet_mode: 'extended' });
+            const requestUserTimelineTweets = await twitterNetworkCall(user.access_token, user.access_secret).get('statuses/home_timeline', { tweet_mode: 'extended' });
             const responserUserTimelineTweets = await requestUserTimelineTweets;
             return responserUserTimelineTweets;
         },
         userProfileTweets: async (parent, args, context) => {
-            const userProfileTweetsRequest = await client.get('statuses/user_timeline', { screen_name: args.screen_name, tweet_mode: 'extended' });
+            const userProfileTweetsRequest = await twitterNetworkCall(context.access_token, context.access_secret).get('statuses/user_timeline', { screen_name: args.screen_name, tweet_mode: 'extended' });
             const userProfileTweetsResponse = userProfileTweetsRequest;
             return userProfileTweetsResponse;
         },
         userTweetStatusCount: async (parent, args, user) => {
-            const userTweetStatusRequest = await client.get('statuses/user_timeline', { screen_name: user.name });
+            const userTweetStatusRequest = await twitterNetworkCall(user.access_token, user.access_secret).get('statuses/user_timeline', { screen_name: user.decodedToken.name });
             const userTweetStatusResponse = await userTweetStatusRequest;
             return userTweetStatusResponse;
         },
         trendingTopics: async (parent, args, context) => {
-            const getTrendingTopicsRequest = await client.get('trends/place', { id: 1 });
+            const getTrendingTopicsRequest = await twitterNetworkCall(context.access_token, context.access_secret).get('trends/place', { id: 1 });
             const getTrendingTopicsResponse = await getTrendingTopicsRequest;
             return getTrendingTopicsResponse;
         },
         suggestedCategory: async (parent, args, user) => {
-            const suggestedCategoryRequest = await client.get('users/suggestions', { screen_name: user.name });
+            const suggestedCategoryRequest = await twitterNetworkCall(user.access_token, user.access_secret).get('users/suggestions', { screen_name: user.decodedToken.name });
             const suggestedCategoryResponse = await suggestedCategoryRequest;
             return suggestedCategoryResponse;
         },
         suggestedCategorySlug: async (parent, args, user) => {
-            const categorySlugRequest = await client.get(`users/suggestions/${args.slug}`, { screen_name: user.name });
+            const categorySlugRequest = await twitterNetworkCall(user.access_token, user.access_secret).get(`users/suggestions/${args.slug}`, { screen_name: user.decodedToken.name });
             const categorySlugResponse = await categorySlugRequest;
             return categorySlugResponse;
         },
         compareRelationship: async (parent, args, context) => {
-            const compareRelationshipRequest = await client.get('friendships/show', { source_screen_name: args.source_screenName, target_screen_name: args.target_screenName });
+            const compareRelationshipRequest = await twitterNetworkCall(context.access_token, context.access_secret).get('friendships/show', { source_screen_name: args.source_screenName, target_screen_name: args.target_screenName });
             const compareRelationshipResponse = await compareRelationshipRequest;
             return compareRelationshipResponse;
         }
     },
     Mutation: {
         createTweet: async (parent, args, context) => {
-            const addNewTweetRequest = await client.post('statuses/update', { status: args.full_text });
+            const addNewTweetRequest = await twitterNetworkCall(context.access_token, context.access_secret).post('statuses/update', { status: args.full_text });
             const addNewTweetResponse = await addNewTweetRequest;
             return addNewTweetResponse;
         },
         followUser: async (parent, args, context) => {
-            const followUserRequest = await client.post('friendships/create', { id: args.id });
+            const followUserRequest = await twitterNetworkCall(context.access_token, context.access_secret).post('friendships/create', { id: args.id });
             const followUserResponse = await followUserRequest;
             return followUserResponse;
         },
         unfollowUserReqest: async (parent, args, context) => {
-            const unfollowUserRequest = await client.post('friendships/destroy', { id: args.id });
+            const unfollowUserRequest = await twitterNetworkCall(context.access_token, context.access_secret).post('friendships/destroy', { id: args.id });
             const unfollowUserResponse = await unfollowUserRequest;
             return unfollowUserResponse;
         },
         likeStatus: async (parent, args, context) => {
-            const likeStatusRequest = await client.post('favorites/create', { id: args.id });
+            const likeStatusRequest = await twitterNetworkCall(context.access_token, context.access_secret).post('favorites/create', { id: args.id });
             const likeStatusResponse = await likeStatusRequest;
             return likeStatusResponse;
         },
         unlikeStatus: async (parent, args, context) => {
-            const unlikeStatusRequest = await client.post('favorites/destroy', { id: args.id });
+            const unlikeStatusRequest = await twitterNetworkCall(context.access_token, context.access_secret).post('favorites/destroy', { id: args.id });
             const unlikeStatusResponse = await unlikeStatusRequest;
             return unlikeStatusResponse;
         },
         retweet: async (parent, args, context) => {
-            const retweetRequest = await client.post('statuses/retweet', { id: args.id });
+            const retweetRequest = await twitterNetworkCall(context.access_token, context.access_secret).post('statuses/retweet', { id: args.id });
             const retweetResponse = await retweetRequest;
             return retweetResponse;
         },
         unRetweet: async (parent, args, context) => {
-            const unRetweetRequest = await client.post('statuses/unretweet', { id: args.id });
+            const unRetweetRequest = await twitterNetworkCall(context.access_token, context.access_secret).post('statuses/unretweet', { id: args.id });
             const unRetweetResponse = unRetweetRequest;
             console.log(unRetweetResponse);
             return unRetweetResponse;

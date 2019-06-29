@@ -31,6 +31,8 @@ class FirebaseHelperClass {
         this.firebaseAuth = this.firebaseAuth.bind(this);
         this.signOut = this.signOut.bind(this);
         this.persistAuthentication = this.persistAuthentication.bind(this);
+        this.getAccessToken = this.getAccessToken.bind(this);
+        this.getAccessSecret = this.getAccessSecret.bind(this);
     }
 
     firebaseAuth = () => {
@@ -43,9 +45,9 @@ class FirebaseHelperClass {
                 // This gives you a the Twitter OAuth 1.0 Access Token and Secret.
                 // You can use these server side with your app's credentials to access the Twitter API.
                 const token = result.credential.accessToken;
-                console.log(token)
+                localStorage.setItem('access_token', token)
                 const secret = result.credential.secret;
-                console.log(secret)
+                localStorage.setItem('access_secret', secret)
             }).catch(function (error) {
                 const errorMessage = error.message;
                 console.log(errorMessage)
@@ -53,10 +55,17 @@ class FirebaseHelperClass {
             });
     };
 
+    getAccessToken = token => {
+        return token;
+    }
+
+    getAccessSecret = secret => {
+        return secret;
+    }
+
     getTokenForValidation = () => {
         const verifyToken = this.firebaseAuth().currentUser.getIdToken()
             .then(idToken => {
-                console.log(idToken)
                 return idToken;
             }).catch(err => {
                 // Handle error

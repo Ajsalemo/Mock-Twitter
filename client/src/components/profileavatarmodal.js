@@ -100,7 +100,7 @@ class ProfileAvatarModal extends Component {
     // ----------------------------------------------------------------------------------------------------- //
 
     render() {
-        const { classes, avatarImg, name, nickname } = this.props;
+        const { classes, avatarImg, name } = this.props;
         const { open } = this.state;
         return (
             <React.Fragment>
@@ -150,7 +150,7 @@ class ProfileAvatarModal extends Component {
                                             <Typography variant="subtitle2" className={classes.menuUpperText}>
                                                 <div className={classes.handleTextUpperDiv}>
                                                     <span className={classes.menuHandleTextUpper}>{name}</span>
-                                                    <span className={classes.menuHandleTextLower}>@{nickname}</span>
+                                                    <span className={classes.menuHandleTextLower}>@{name}</span>
                                                 </div>
                                             </Typography>
                                         </MenuItem>
@@ -166,7 +166,7 @@ class ProfileAvatarModal extends Component {
                                                 className={classes.profileChildMenuGridText}
                                                 onClick={() => firebaseClass.signOut()}
                                             >
-                                                Log Out @{nickname}
+                                                Log Out @{name}
                                             </Typography>
                                         </MenuItem>
                                     </MenuList>

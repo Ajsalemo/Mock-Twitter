@@ -6,18 +6,20 @@ const Twitter = require('twitter-lite');
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
-const client = new Twitter({
-    consumer_key: "",
-    consumer_secret: "",
-    access_token_key: "",
-    access_token_secret: ""
-});
-
+// Exported function which takes two arguments, these are added in server.js by pulling them off of the headers
+const twitterNetworkCall = (token, secret) => {
+    return client = new Twitter({
+        consumer_key: "tvrtcXy0Ll0eoP4GhYvOZbTbk",
+        consumer_secret: "MrJ7RTXpe9VizuARQU9b5e3cJjOWmWqAWrmpa7C9JkT7yYaBmY",
+        access_token_key: token,
+        access_token_secret: secret
+    });
+};
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
-module.exports = client;
+module.exports = twitterNetworkCall;
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //

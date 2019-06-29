@@ -29,12 +29,16 @@ const getUid = async (req) => {
         return null;
     }
     const newToken = idToken.split('Bearer ')[1];
-
     // Firebase SDK admin is called here to use its method to verify the token
     let user = await admin.auth().verifyIdToken(newToken)
         .then(decodedToken => {
-            const user = decodedToken;
-            return user;
+            // Pulling twitters access_token, access_secret and the decoded user off of the headers
+            const decodedInformation = {
+                access_token: req.headers.access_token,
+                access_secret: req.headers.access_secret,
+                decodedToken: decodedToken
+            }
+            return decodedInformation;
         }).catch(err => {
             return err;
         });
