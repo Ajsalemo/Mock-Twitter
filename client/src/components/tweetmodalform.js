@@ -78,8 +78,7 @@ const TweetModalForm = props => {
                             try {
                                 await createModalTweetProp({
                                     variables: {
-                                        full_text: values.tweetModalForm
-                                    }
+                                        full_text: values.tweetModalForm                                    }
                                 });
                                 resetForm({ tweetModalForm: '' });
                                 // After submitting the form - call this function to close the form

@@ -23,6 +23,7 @@ const typeDefs =
             unlikeStatus(id: String!): UserObject
             retweet(id: String!): RetweetObject
             unRetweet(id: String!): UserTweetObject
+            deleteStatus(id: String!): UserTweetObject
         }
 
         # User Object
@@ -38,6 +39,7 @@ const typeDefs =
             suggestedCategorySlug(slug: String!): SuggestedCategorySlug
             compareRelationship(target_screenName: String!, source_screenName: String!): RelationshipWrapper 
             userTweetStatusCount: [UserTimelineTweets]
+            verifyCredentials: UserObject
         }
 
         # Object wrapper to iterate
@@ -330,6 +332,12 @@ const resolvers = {
             const unRetweetRequest = await twitterNetworkCall(context.access_token, context.access_secret).post('statuses/unretweet', { id: args.id });
             const unRetweetResponse = unRetweetRequest;
             return unRetweetResponse;
+        },
+        deleteStatus: async (parent, args, context) => {
+            const deleteStatusRequest = await twitterNetworkCall(context.access_token, context.access_secret).post('statuses/destroy', { id: args.id });
+            const deleteStatusResponse = await deleteStatusRequest;
+            console.log(deleteStatusResponse);
+            return deleteStatusResponse;
         }
     }
 };

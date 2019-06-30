@@ -50,7 +50,7 @@ const styles = () => ({
 // ----------------------------------------------------------------------------------------------------- //
 
 const Tweettext = props => {
-    const { classes, name, verified, nickname, created_at, full_text } = props;
+    const { classes, name, verified, nickname, created_at, full_text, id } = props;
     return (
         <React.Fragment>
             {/* Name and handle */}
@@ -68,7 +68,10 @@ const Tweettext = props => {
                     <span className={classes.timelineHandleFont}><Moment fromNow>{created_at}</Moment></span>
                 </Typography>
                 <Grid item>
-                    <EditPost />
+                    <EditPost
+                        // This is the tweet Id passed in from 'timeline.js' 
+                        id={id}
+                    />
                 </Grid>
             </Grid>
             {/* Tweet body */}

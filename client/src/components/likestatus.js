@@ -8,7 +8,7 @@ import { Mutation } from 'react-apollo';
 import { FavoriteBorder } from '@material-ui/icons';
 import { withStyles, CircularProgress } from '@material-ui/core';
 
-// Apollo Queries
+// Apollo Mutation and Queries
 import { LIKE_STATUS, GET_AUTHUSER_TWEETS, GET_USERPROFILE_TWEETS } from '../apolloclient/apolloqueries';
 
 // ----------------------------------------------------------------------------------------------------- //

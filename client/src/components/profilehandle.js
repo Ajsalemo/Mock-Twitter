@@ -95,7 +95,7 @@ const ProfileHandle = props => {
                                     {({ loading, error, data }) => {
                                         if (loading) return <div><CircularProgress /></div>;
                                         if (error) return <Error />;
-                                        console.log(data.currentUser.userTweetStatusCount[0])
+                                        
                                         return (
                                             data.currentUser.userTweetStatusCount[0] 
                                                 ?

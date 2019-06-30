@@ -130,6 +130,8 @@ const Timeline = props => {
                                             nickname={timelineTweetInfo.user.screen_name}
                                             created_at={timelineTweetInfo.created_at}
                                             full_text={timelineTweetInfo.full_text}
+                                            id={timelineTweetInfo.id_str}
+                                            tweetUserId={timelineTweetInfo.user.id}
                                         />
                                         {/* Tweet Media */}
                                         {timelineTweetInfo.entities.media ?

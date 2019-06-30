@@ -4,8 +4,11 @@
 import React, { Component } from 'react';
 
 // Material-UI components
-import { Button, Avatar, Tooltip, ClickAwayListener, Grow, Paper, Popper, MenuItem, MenuList, Typography, withStyles } from '@material-ui/core';
+import { Button, ClickAwayListener, Grow, Paper, Popper, withStyles } from '@material-ui/core';
 import { ExpandMore } from '@material-ui/icons';
+
+// Components
+import EditPostsMenuList from './editpostsmenulist';
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
@@ -38,7 +41,7 @@ class EditPost extends Component {
     // ----------------------------------------------------------------------------------------------------- //
 
     render() {
-        const { classes } = this.props;
+        const { classes, id } = this.props;
         const { open } = this.state;
         return (
             <React.Fragment>
@@ -70,8 +73,11 @@ class EditPost extends Component {
                             >
                             <Paper>
                                 <ClickAwayListener onClickAway={this.handleClose}>
-                                    <MenuList>
-                                    </MenuList>
+                                    <EditPostsMenuList 
+                                        // Passed in from 'tweettext.js'
+                                        id={id}
+                                        handleClose={this.handleClose}
+                                    />
                                 </ClickAwayListener>
                             </Paper>
                         </Grow>
