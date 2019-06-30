@@ -10,7 +10,7 @@ import classNames from 'classnames';
 import { withStyles, Typography, CircularProgress, Avatar, Grid, Fab, TextField } from '@material-ui/core';
 
 // Apollo Queries and Mutations
-import { CREATE_USER_TWEET, GET_AUTHUSER_TWEETS, GET_USER_STATUS_COUNT } from '../apolloclient/apolloqueries';
+import { CREATE_USER_TWEET, GET_AUTHUSER_TWEETS, GET_USER } from '../apolloclient/apolloqueries';
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
@@ -65,7 +65,7 @@ const TweetModalForm = props => {
         <React.Fragment>
             <Mutation 
                 mutation={CREATE_USER_TWEET}
-                refetchQueries={[{ query: GET_AUTHUSER_TWEETS, GET_USER_STATUS_COUNT }]}
+                refetchQueries={[{ query: GET_AUTHUSER_TWEETS, GET_USER }]}
             >
                 {(createModalTweetProp, { loading }) => (
                     <Formik

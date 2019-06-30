@@ -5,7 +5,7 @@ import React from 'react';
 import { Mutation } from 'react-apollo';
 
 // Material-UI components
-import { MenuItem, MenuList, CircularProgress } from '@material-ui/core';
+import { MenuItem, MenuList, CircularProgress, withStyles } from '@material-ui/core';
 
 // Apollo Mutation and Queries
 import { DELETE_STATUS, GET_AUTHUSER_TWEETS } from '../apolloclient/apolloqueries';
@@ -13,8 +13,19 @@ import { DELETE_STATUS, GET_AUTHUSER_TWEETS } from '../apolloclient/apolloquerie
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
+const styles = () => ({
+    menuListItem: {
+        '&:hover': {
+            backgroundColor: '#007fec',
+            color: '#fff'
+        }
+    }
+});
+
+// ----------------------------------------------------------------------------------------------------- //
+
 const EditPostsMenuList = props => {
-    const { id, handleClose } = props;
+    const { id, handleClose, classes } = props;
     return (
         <Mutation
             mutation={DELETE_STATUS}
@@ -32,6 +43,7 @@ const EditPostsMenuList = props => {
                                 id: id
                             }
                         })}
+                        className={classes.menuListItem}
                     >
                         Delete Tweet
                     </MenuItem>
@@ -45,7 +57,7 @@ const EditPostsMenuList = props => {
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
-export default EditPostsMenuList;
+export default withStyles(styles)(EditPostsMenuList);
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //

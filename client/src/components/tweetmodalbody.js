@@ -72,7 +72,7 @@ const TweetModalBody = props => {
                         </Grid>
                         <Grid item className={classes.tweetModalGrid}>
                             <TweetModalForm
-                                avatar={data.currentUser.picture}
+                                avatar={data.currentUser.profile_image_url_https}
                                 // Passed from the 'TweetModal' component
                                 onClose={onClose}
                                 // Passed from the 'PublicProfileHandle' component

@@ -39,7 +39,7 @@ const SuggestedCategories = props => {
                                 screen_name={userInfo.screen_name}
                                 src={userInfo.profile_image_url_https}
                                 verified={userInfo.verified}
-                                currentUser={data.currentUser.name}
+                                currentUser={data.currentUser.screen_name}
                             />
                         );
                     })

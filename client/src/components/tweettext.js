@@ -50,7 +50,7 @@ const styles = () => ({
 // ----------------------------------------------------------------------------------------------------- //
 
 const Tweettext = props => {
-    const { classes, name, verified, nickname, created_at, full_text, id } = props;
+    const { classes, name, verified, nickname, created_at, full_text, id, tweetUserId } = props;
     return (
         <React.Fragment>
             {/* Name and handle */}
@@ -71,6 +71,8 @@ const Tweettext = props => {
                     <EditPost
                         // This is the tweet Id passed in from 'timeline.js' 
                         id={id}
+                        // This is the tweet author's Id passed in from 'timeline.js'
+                        tweetUserId={tweetUserId}
                     />
                 </Grid>
             </Grid>

@@ -55,7 +55,7 @@ const Trending = props => {
             {({ loading, error, data }) => {
                 if (loading) return <div><CircularProgress /></div>;
                 if (error) return <div><Error /></div>;
-
+                console.log(data)
                 return (
                     <Paper className={classes.trendingPaper}>
                         <Card className={classes.trendingCard}> 

@@ -163,8 +163,9 @@ const Navbar = props => {
                                     }}
                                 />
                                 <ProfileAvatarModal
-                                    avatarImg={data.currentUser.picture}
+                                    avatarImg={data.currentUser.profile_image_url_https}
                                     name={data.currentUser.name}
+                                    screen_name={data.currentUser.screen_name}
                                 />
                                 {/* Classes component for the modal to submit tweets */}
                                 <TweetModal />

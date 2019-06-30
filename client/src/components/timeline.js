@@ -108,12 +108,13 @@ const Timeline = props => {
                     console.log(data)
                     return (
                         data.currentUser.userTimelineTweets.map((timelineTweetInfo, i) => {
+                            console.log(timelineTweetInfo)
                             return (
                                 <Paper className={classes.timelinePaper} key={i}>
                                     <ToolTipModal
                                         name={timelineTweetInfo.user.name}
                                         nickname={timelineTweetInfo.user.screen_name}
-                                        currentUser={data.currentUser.name}
+                                        currentUser={data.currentUser.screen_name}
                                         statuses_count={timelineTweetInfo.user.statuses_count}
                                         friends_count={timelineTweetInfo.user.friends_count}
                                         followers_count={timelineTweetInfo.user.followers_count}

@@ -112,7 +112,7 @@ const ProfileBannerBar = props => {
                                 </Typography>
                                 <div className={classes.profileBannerFollowButton}>
                                     <TooltipFollowButton
-                                        currentUser={data.currentUser.nickname}
+                                        currentUser={data.currentUser.screen_name}
                                         screen_name={data.currentUser.userProfileTweets[0].user.screen_name}
                                         tweetUserId={data.currentUser.userProfileTweets[0].user.id}
                                     />

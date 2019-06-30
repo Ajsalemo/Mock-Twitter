@@ -10,25 +10,19 @@ export const GET_USER =
     gql`
         query GetUser {
             currentUser {
-                sub
+                id
+                id_str
                 name
-                picture
-                user_id
-            }
-        }
-    `;
-
-export const GET_USER_STATUS_COUNT =
-    gql`
-        query GetUserStatusCount {
-            currentUser {
-                userTweetStatusCount {
-                    user {
-                        statuses_count
-                        followers_count
-                        friends_count
-                    }
-                }
+                screen_name
+                verified
+                followers_count
+                friends_count
+                listed_count
+                favourites_count
+                statuses_count
+                created_at
+                profile_banner_url
+                profile_image_url_https
             }
         }
     `;
@@ -37,8 +31,19 @@ export const GET_AUTHUSER_TWEETS =
     gql`
         query GetAuthUserTweets {
             currentUser {
-                picture
+                id
+                id_str
                 name
+                screen_name
+                verified
+                followers_count
+                friends_count
+                listed_count
+                favourites_count
+                statuses_count
+                created_at
+                profile_banner_url
+                profile_image_url_https
                 userTimelineTweets {
                     created_at
                     id
@@ -84,8 +89,19 @@ export const GET_USERPROFILE_TWEETS =
     gql`
         query GetUserProfileTweets($screen_name: String!) {
             currentUser {
-                picture
+                id
+                id_str
                 name
+                screen_name
+                verified
+                followers_count
+                friends_count
+                listed_count
+                favourites_count
+                statuses_count
+                created_at
+                profile_banner_url
+                profile_image_url_https
                 userProfileTweets(screen_name: $screen_name) {
                     created_at
                     id
@@ -136,6 +152,19 @@ export const GET_TRENDING_TOPICS =
     gql`
         query GetTrendingTopics {
             currentUser {
+                id
+                id_str
+                name
+                screen_name
+                verified
+                followers_count
+                friends_count
+                listed_count
+                favourites_count
+                statuses_count
+                created_at
+                profile_banner_url
+                profile_image_url_https
                 trendingTopics {   
                     trends {
                         name
@@ -153,6 +182,19 @@ export const GET_SUGGESTED_CATEGORIES =
     gql`
         query GetSuggestedCategories {
             currentUser {
+                id
+                id_str
+                name
+                screen_name
+                verified
+                followers_count
+                friends_count
+                listed_count
+                favourites_count
+                statuses_count
+                created_at
+                profile_banner_url
+                profile_image_url_https
                 suggestedCategory {
                     name
                     slug
@@ -166,7 +208,19 @@ export const GET_SUGGESTED_CATEGORIES_MEMBERS_GROUP =
     gql`
         query GetSuggestedCategoriesMembersGroup($slug: String!) {
             currentUser {
+                id
+                id_str
                 name
+                screen_name
+                verified
+                followers_count
+                friends_count
+                listed_count
+                favourites_count
+                statuses_count
+                created_at
+                profile_banner_url
+                profile_image_url_https
                 suggestedCategorySlug(slug: $slug) {
                     users {
                         id
@@ -187,7 +241,19 @@ export const COMPARE_FRIENDSHIPS =
     gql`
         query CompareRelationship($target_screenName: String!, $source_screenName: String!) {
             currentUser {
+                id
+                id_str
                 name
+                screen_name
+                verified
+                followers_count
+                friends_count
+                listed_count
+                favourites_count
+                statuses_count
+                created_at
+                profile_banner_url
+                profile_image_url_https
                 compareRelationship(target_screenName: $target_screenName, source_screenName: $source_screenName) {
                     relationship {
                         target {

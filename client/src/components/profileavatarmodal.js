@@ -100,7 +100,7 @@ class ProfileAvatarModal extends Component {
     // ----------------------------------------------------------------------------------------------------- //
 
     render() {
-        const { classes, avatarImg, name } = this.props;
+        const { classes, avatarImg, name, screen_name } = this.props;
         const { open } = this.state;
         return (
             <React.Fragment>
@@ -150,7 +150,7 @@ class ProfileAvatarModal extends Component {
                                             <Typography variant="subtitle2" className={classes.menuUpperText}>
                                                 <div className={classes.handleTextUpperDiv}>
                                                     <span className={classes.menuHandleTextUpper}>{name}</span>
-                                                    <span className={classes.menuHandleTextLower}>@{name}</span>
+                                                    <span className={classes.menuHandleTextLower}>@{screen_name}</span>
                                                 </div>
                                             </Typography>
                                         </MenuItem>

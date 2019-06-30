@@ -28,10 +28,19 @@ const typeDefs =
 
         # User Object
         type User {
-            sub: String!
-            user_id: String!
-            name: String!
-            picture: String!
+            id: String
+            id_str: String
+            name: String
+            screen_name: String
+            verified: Boolean
+            followers_count: String
+            friends_count: Int
+            listed_count: Int
+            favourites_count: Int
+            statuses_count: Int
+            created_at: String
+            profile_banner_url: String
+            profile_image_url_https: String
             userTimelineTweets: [UserTimelineTweets]
             userProfileTweets(screen_name: String!): [UserProfileTimeline]
             trendingTopics: [trendsWrapper]
@@ -39,7 +48,6 @@ const typeDefs =
             suggestedCategorySlug(slug: String!): SuggestedCategorySlug
             compareRelationship(target_screenName: String!, source_screenName: String!): RelationshipWrapper 
             userTweetStatusCount: [UserTimelineTweets]
-            verifyCredentials: UserObject
         }
 
         # Object wrapper to iterate
@@ -256,8 +264,10 @@ const typeDefs =
 const resolvers = {
     Query: {
         // The 3rd argument(user) is being pulled off of the context in server.js
-        currentUser: (parent, args, user) => {
-            return user.decodedToken;
+        currentUser: async (parent, args, user) => {
+            const verifyCredentialsRequest = await twitterNetworkCall(user.access_token, user.access_secret).get('account/verify_credentials');
+            const verifyCredentialsResponse = await verifyCredentialsRequest;
+            return verifyCredentialsResponse;
         }
     },
     User: {
@@ -266,18 +276,13 @@ const resolvers = {
             const responserUserTimelineTweets = await requestUserTimelineTweets;
             return responserUserTimelineTweets;
         },
-        userProfileTweets: async (parent, args, context) => {
-            const userProfileTweetsRequest = await twitterNetworkCall(context.access_token, context.access_secret).get('statuses/user_timeline', { screen_name: args.screen_name, tweet_mode: 'extended' });
+        userProfileTweets: async (parent, args, user) => {
+            const userProfileTweetsRequest = await twitterNetworkCall(user.access_token, user.access_secret).get('statuses/user_timeline', { screen_name: args.screen_name, tweet_mode: 'extended' });
             const userProfileTweetsResponse = userProfileTweetsRequest;
             return userProfileTweetsResponse;
         },
-        userTweetStatusCount: async (parent, args, user) => {
-            const userTweetStatusRequest = await twitterNetworkCall(user.access_token, user.access_secret).get('statuses/user_timeline', { screen_name: user.decodedToken.name });
-            const userTweetStatusResponse = await userTweetStatusRequest;
-            return userTweetStatusResponse;
-        },
-        trendingTopics: async (parent, args, context) => {
-            const getTrendingTopicsRequest = await twitterNetworkCall(context.access_token, context.access_secret).get('trends/place', { id: 1 });
+        trendingTopics: async (parent, args, user) => {
+            const getTrendingTopicsRequest = await twitterNetworkCall(user.access_token, user.access_secret).get('trends/place', { id: 1 });
             const getTrendingTopicsResponse = await getTrendingTopicsRequest;
             return getTrendingTopicsResponse;
         },
@@ -291,52 +296,51 @@ const resolvers = {
             const categorySlugResponse = await categorySlugRequest;
             return categorySlugResponse;
         },
-        compareRelationship: async (parent, args, context) => {
-            const compareRelationshipRequest = await twitterNetworkCall(context.access_token, context.access_secret).get('friendships/show', { source_screen_name: args.source_screenName, target_screen_name: args.target_screenName });
+        compareRelationship: async (parent, args, user) => {
+            const compareRelationshipRequest = await twitterNetworkCall(user.access_token, user.access_secret).get('friendships/show', { source_screen_name: args.source_screenName, target_screen_name: args.target_screenName });
             const compareRelationshipResponse = await compareRelationshipRequest;
             return compareRelationshipResponse;
         }
     },
     Mutation: {
-        createTweet: async (parent, args, context) => {
-            const addNewTweetRequest = await twitterNetworkCall(context.access_token, context.access_secret).post('statuses/update', { status: args.full_text });
+        createTweet: async (parent, args, user) => {
+            const addNewTweetRequest = await twitterNetworkCall(user.access_token, user.access_secret).post('statuses/update', { status: args.full_text });
             const addNewTweetResponse = await addNewTweetRequest;
             return addNewTweetResponse;
         },
-        followUser: async (parent, args, context) => {
-            const followUserRequest = await twitterNetworkCall(context.access_token, context.access_secret).post('friendships/create', { id: args.id });
+        followUser: async (parent, args, user) => {
+            const followUserRequest = await twitterNetworkCall(user.access_token, user.access_secret).post('friendships/create', { id: args.id });
             const followUserResponse = await followUserRequest;
             return followUserResponse;
         },
-        unfollowUserReqest: async (parent, args, context) => {
-            const unfollowUserRequest = await twitterNetworkCall(context.access_token, context.access_secret).post('friendships/destroy', { id: args.id });
+        unfollowUserReqest: async (parent, args, user) => {
+            const unfollowUserRequest = await twitterNetworkCall(user.access_token, user.access_secret).post('friendships/destroy', { id: args.id });
             const unfollowUserResponse = await unfollowUserRequest;
             return unfollowUserResponse;
         },
-        likeStatus: async (parent, args, context) => {
-            const likeStatusRequest = await twitterNetworkCall(context.access_token, context.access_secret).post('favorites/create', { id: args.id });
+        likeStatus: async (parent, args, user) => {
+            const likeStatusRequest = await twitterNetworkCall(user.access_token, user.access_secret).post('favorites/create', { id: args.id });
             const likeStatusResponse = await likeStatusRequest;
             return likeStatusResponse;
         },
-        unlikeStatus: async (parent, args, context) => {
-            const unlikeStatusRequest = await twitterNetworkCall(context.access_token, context.access_secret).post('favorites/destroy', { id: args.id });
+        unlikeStatus: async (parent, args, user) => {
+            const unlikeStatusRequest = await twitterNetworkCall(user.access_token, user.access_secret).post('favorites/destroy', { id: args.id });
             const unlikeStatusResponse = await unlikeStatusRequest;
             return unlikeStatusResponse;
         },
-        retweet: async (parent, args, context) => {
-            const retweetRequest = await twitterNetworkCall(context.access_token, context.access_secret).post('statuses/retweet', { id: args.id });
+        retweet: async (parent, args, user) => {
+            const retweetRequest = await twitterNetworkCall(user.access_token, user.access_secret).post('statuses/retweet', { id: args.id });
             const retweetResponse = await retweetRequest;
             return retweetResponse;
         },
-        unRetweet: async (parent, args, context) => {
-            const unRetweetRequest = await twitterNetworkCall(context.access_token, context.access_secret).post('statuses/unretweet', { id: args.id });
+        unRetweet: async (parent, args, user) => {
+            const unRetweetRequest = await twitterNetworkCall(user.access_token, user.access_secret).post('statuses/unretweet', { id: args.id });
             const unRetweetResponse = unRetweetRequest;
             return unRetweetResponse;
         },
-        deleteStatus: async (parent, args, context) => {
-            const deleteStatusRequest = await twitterNetworkCall(context.access_token, context.access_secret).post('statuses/destroy', { id: args.id });
+        deleteStatus: async (parent, args, user) => {
+            const deleteStatusRequest = await twitterNetworkCall(user.access_token, user.access_secret).post('statuses/destroy', { id: args.id });
             const deleteStatusResponse = await deleteStatusRequest;
-            console.log(deleteStatusResponse);
             return deleteStatusResponse;
         }
     }

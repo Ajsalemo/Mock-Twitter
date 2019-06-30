@@ -8,7 +8,7 @@ import { Query } from 'react-apollo';
 import { withStyles, Paper, Card, CardContent, Avatar, Typography, CircularProgress } from '@material-ui/core';
 
 // Apollo Queries
-import { GET_USER, GET_USER_STATUS_COUNT } from '../apolloclient/apolloqueries';
+import { GET_USER } from '../apolloclient/apolloqueries';
 
 // Components
 import Error from '../components/error';
@@ -76,58 +76,44 @@ const ProfileHandle = props => {
             {({ loading, error, data }) => {
                 if (loading) return <div><CircularProgress /></div>;
                 if (error) return <div><Error /></div>;
-
-            return (
-                <Paper>
-                    <Card className={classes.profileHandlePaper}>
-                        <CardContent className={classes.upperCardContent}></CardContent>          
-                        <Avatar alt="twitter avatar" src={data.currentUser.picture} className={classes.twitterAvatar} /> 
-                        <CardContent className={classes.rootClass}>
-                            <Typography variant="h6" gutterBottom className={classes.upperText}>
-                                <div className={classes.handleTextUpperDiv}>
-                                    <span className={classes.handleTextUpper}>{data.currentUser.name}</span>
-                                    <span className={classes.handleTextLower}>@{data.currentUser.name}</span>
-                                </div>
-                            </Typography>
-                            <Typography variant="subtitle2" className={classes.profileHandleTypography} gutterBottom>
-                                {/* Nested Query to retrieve total tweet count for the account */}
-                                <Query query={GET_USER_STATUS_COUNT} fetchPolicy='cache-and-network'>
-                                    {({ loading, error, data }) => {
-                                        if (loading) return <div><CircularProgress /></div>;
-                                        if (error) return <Error />;
-                                        
-                                        return (
-                                            data.currentUser.userTweetStatusCount[0] 
-                                                ?
-                                            <React.Fragment>
-                                                <div className={classes.profileTweetSpan}>
-                                                    <span>Tweets</span>
-                                                    <span className={classes.profileTweetCount}>
-                                                        {data.currentUser.userTweetStatusCount[0].user.statuses_count}
-                                                    </span>
-                                                </div> 
-                                                <div className={classes.profileTweetSpan}>
-                                                    <span>Following</span>
-                                                    <span className={classes.profileTweetCount}>
-                                                        {data.currentUser.userTweetStatusCount[0].user.friends_count}
-                                                    </span>
-                                                </div>  
-                                                <div className={classes.profileTweetSpan}>
-                                                    <span>Followers</span>
-                                                    <span className={classes.profileTweetCount}>
-                                                        {data.currentUser.userTweetStatusCount[0].user.followers_count}
-                                                    </span>
-                                                </div>  
-                                            </React.Fragment>   
-                                                :
-                                            null
-                                        );
-                                    }}
-                                </Query>
-                            </Typography>
-                        </CardContent>
-                    </Card>
-                </Paper>
+                console.log(data)
+                return (
+                    <Paper>
+                        <Card className={classes.profileHandlePaper}>
+                            <CardContent className={classes.upperCardContent}></CardContent>          
+                            <Avatar alt="twitter avatar" src={data.currentUser.profile_image_url_https} className={classes.twitterAvatar} /> 
+                            <CardContent className={classes.rootClass}>
+                                <Typography variant="h6" gutterBottom className={classes.upperText}>
+                                    <div className={classes.handleTextUpperDiv}>
+                                        <span className={classes.handleTextUpper}>{data.currentUser.name}</span>
+                                        <span className={classes.handleTextLower}>@{data.currentUser.screen_name}</span>
+                                    </div>
+                                </Typography>
+                                <Typography variant="subtitle2" className={classes.profileHandleTypography} gutterBottom>
+                                    <React.Fragment>
+                                        <div className={classes.profileTweetSpan}>
+                                            <span>Tweets</span>
+                                            <span className={classes.profileTweetCount}>
+                                                {data.currentUser.statuses_count}
+                                            </span>
+                                        </div> 
+                                        <div className={classes.profileTweetSpan}>
+                                            <span>Following</span>
+                                            <span className={classes.profileTweetCount}>
+                                                {data.currentUser.friends_count}
+                                            </span>
+                                        </div>  
+                                        <div className={classes.profileTweetSpan}>
+                                            <span>Followers</span>
+                                            <span className={classes.profileTweetCount}>
+                                                {data.currentUser.followers_count}
+                                            </span>
+                                        </div>  
+                                    </React.Fragment>   
+                                </Typography>
+                            </CardContent>
+                        </Card>
+                    </Paper>
                 );
             }}
         </Query>
