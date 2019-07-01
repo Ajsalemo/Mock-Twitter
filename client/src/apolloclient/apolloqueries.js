@@ -10,19 +10,8 @@ export const GET_USER =
     gql`
         query GetUser {
             currentUser {
-                id
-                id_str
+                user_id
                 name
-                screen_name
-                verified
-                followers_count
-                friends_count
-                listed_count
-                favourites_count
-                statuses_count
-                created_at
-                profile_banner_url
-                profile_image_url_https
             }
         }
     `;
@@ -31,19 +20,8 @@ export const GET_AUTHUSER_TWEETS =
     gql`
         query GetAuthUserTweets {
             currentUser {
-                id
-                id_str
+                user_id
                 name
-                screen_name
-                verified
-                followers_count
-                friends_count
-                listed_count
-                favourites_count
-                statuses_count
-                created_at
-                profile_banner_url
-                profile_image_url_https
                 userTimelineTweets {
                     created_at
                     id
@@ -89,19 +67,8 @@ export const GET_USERPROFILE_TWEETS =
     gql`
         query GetUserProfileTweets($screen_name: String!) {
             currentUser {
-                id
-                id_str
+                user_id
                 name
-                screen_name
-                verified
-                followers_count
-                friends_count
-                listed_count
-                favourites_count
-                statuses_count
-                created_at
-                profile_banner_url
-                profile_image_url_https
                 userProfileTweets(screen_name: $screen_name) {
                     created_at
                     id
@@ -152,19 +119,8 @@ export const GET_TRENDING_TOPICS =
     gql`
         query GetTrendingTopics {
             currentUser {
-                id
-                id_str
+                user_id
                 name
-                screen_name
-                verified
-                followers_count
-                friends_count
-                listed_count
-                favourites_count
-                statuses_count
-                created_at
-                profile_banner_url
-                profile_image_url_https
                 trendingTopics {   
                     trends {
                         name
@@ -182,19 +138,8 @@ export const GET_SUGGESTED_CATEGORIES =
     gql`
         query GetSuggestedCategories {
             currentUser {
-                id
-                id_str
+                user_id
                 name
-                screen_name
-                verified
-                followers_count
-                friends_count
-                listed_count
-                favourites_count
-                statuses_count
-                created_at
-                profile_banner_url
-                profile_image_url_https
                 suggestedCategory {
                     name
                     slug
@@ -208,19 +153,8 @@ export const GET_SUGGESTED_CATEGORIES_MEMBERS_GROUP =
     gql`
         query GetSuggestedCategoriesMembersGroup($slug: String!) {
             currentUser {
-                id
-                id_str
+                user_id
                 name
-                screen_name
-                verified
-                followers_count
-                friends_count
-                listed_count
-                favourites_count
-                statuses_count
-                created_at
-                profile_banner_url
-                profile_image_url_https
                 suggestedCategorySlug(slug: $slug) {
                     users {
                         id
@@ -241,19 +175,8 @@ export const COMPARE_FRIENDSHIPS =
     gql`
         query CompareRelationship($target_screenName: String!, $source_screenName: String!) {
             currentUser {
-                id
-                id_str
+                user_id
                 name
-                screen_name
-                verified
-                followers_count
-                friends_count
-                listed_count
-                favourites_count
-                statuses_count
-                created_at
-                profile_banner_url
-                profile_image_url_https
                 compareRelationship(target_screenName: $target_screenName, source_screenName: $source_screenName) {
                     relationship {
                         target {
@@ -268,6 +191,49 @@ export const COMPARE_FRIENDSHIPS =
                             following
                         }
                     }
+                }
+            }
+        }
+    `;
+
+export const VERIFY_USER =
+    gql`
+        query VerifyUser {
+            currentUser {
+                user_id
+                name
+                verifyCredentials {
+                    id
+                    id_str
+                    name
+                    screen_name
+                    location
+                    url
+                    description
+                    derived
+                    verified
+                    followers_count
+                    friends_count
+                    listed_count
+                    favourites_count
+                    statuses_count
+                    created_at
+                    geo_enabled
+                    lang
+                    profile_background_color
+                    profile_background_image_url
+                    profile_background_image_url_https
+                    profile_background_tile
+                    profile_banner_url
+                    profile_image_url
+                    profile_image_url_https
+                    profile_link_color
+                    profile_sidebar_border_color
+                    profile_sidebar_fill_color
+                    profile_text_color
+                    profile_use_background_image
+                    default_profile
+                    default_profile_image
                 }
             }
         }

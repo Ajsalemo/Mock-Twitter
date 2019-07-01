@@ -12,7 +12,7 @@ import { ExpandMore } from '@material-ui/icons';
 import EditPostsMenuList from './editpostsmenulist';
 
 // Apollo Query
-import { GET_USER } from '../apolloclient/apolloqueries';
+import { VERIFY_USER } from '../apolloclient/apolloqueries';
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
@@ -48,11 +48,11 @@ class EditPost extends Component {
         const { classes, id, tweetUserId } = this.props;
         const { open } = this.state;
         return (
-            <Query query={GET_USER}>
+            <Query query={VERIFY_USER}>
                 {({ loading, error, data }) => {
                     return (
                         <React.Fragment>
-                            {tweetUserId === data.currentUser.id
+                            {tweetUserId === data.currentUser.verifyCredentials.id
                                 ?
                             <React.Fragment>
                                 <Button 

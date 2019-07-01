@@ -13,7 +13,7 @@ import SubmitTweetForm from './submittweetform';
 import Error from './error';
 
 // Apollo Queries
-import { GET_USER } from '../apolloclient/apolloqueries';
+import { VERIFY_USER } from '../apolloclient/apolloqueries';
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
@@ -40,7 +40,7 @@ const SubmitTweet = props => {
     const { classes } = props;
     return (
         <React.Fragment>
-            <Query query={GET_USER}>
+            <Query query={VERIFY_USER}>
                 {({ loading, error, data }) => {
                     if (loading) return <div><CircularProgress /></div>;
                     if (error) return <div><Error /></div>;

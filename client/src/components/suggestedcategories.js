@@ -18,17 +18,16 @@ import Error from '../components/error';
 // ----------------------------------------------------------------------------------------------------- //
 
 const SuggestedCategories = props => {
-    const { categories } = props;
+    const { categories, currentUser } = props;
     return (
         <Query 
             query={GET_SUGGESTED_CATEGORIES_MEMBERS_GROUP} 
             variables={{ slug: categories }}
-            fetchPolicy='cache-first'
+            fetchPolicy='cache-and-network'
         >
             {({ loading, error, data }) => {
                 if (loading) return <div><CircularProgress /></div>;
                 if (error) return <Error />
-
                 return (
                     data.currentUser.suggestedCategorySlug.users.map((userInfo, j) => {
                         return (
@@ -39,7 +38,8 @@ const SuggestedCategories = props => {
                                 screen_name={userInfo.screen_name}
                                 src={userInfo.profile_image_url_https}
                                 verified={userInfo.verified}
-                                currentUser={data.currentUser.screen_name}
+                                // This is passed from 'recommended.js'
+                                currentUser={currentUser}
                             />
                         );
                     })

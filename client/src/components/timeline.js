@@ -105,10 +105,8 @@ const Timeline = props => {
                 {({ loading, error, data }) => {
                     if (loading) return <div className={classes.errorAndLoadingDiv}><CircularProgress /></div>;
                     if (error) return <div className={classes.errorAndLoadingDiv}><Error /></div>;
-                    console.log(data)
                     return (
                         data.currentUser.userTimelineTweets.map((timelineTweetInfo, i) => {
-                            console.log(timelineTweetInfo)
                             return (
                                 <Paper className={classes.timelinePaper} key={i}>
                                     <ToolTipModal

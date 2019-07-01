@@ -3,9 +3,10 @@
 
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+import { Query } from 'react-apollo';
 
 // Material-UI components
-import { withStyles, Grid } from '@material-ui/core';
+import { withStyles, Grid, CircularProgress } from '@material-ui/core';
 
 // Components
 import Navbar from '../../components/navbar';
@@ -13,6 +14,10 @@ import ProfileHandle from '../../components/profilehandle';
 import SubmitTweet from '../../components/submittweet';
 import Recommended from '../../components/recommended';
 import Trending from '../../components/trending';
+import Error from '../../components/error';
+
+// Apollo Query
+import { VERIFY_USER } from '../../apolloclient/apolloqueries';
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
@@ -42,7 +47,18 @@ class Main extends Component {
                     </Grid>
                     <SubmitTweet />
                     <Grid item xs={8} sm={8} md={2} className={classes.profileHandlerGrid}>
-                        <Recommended />
+                        <Query query={VERIFY_USER}>
+                            {({ loading, error, data }) => {
+                                if (loading) return <div><CircularProgress /></div>;
+                                if (error) return <div><Error /></div>;
+                                
+                                return(
+                                    <Recommended 
+                                        currentUser={data.currentUser.verifyCredentials.screen_name}
+                                    />
+                                );
+                            }}
+                        </Query>
                     </Grid>
                 </Grid>
             </React.Fragment>

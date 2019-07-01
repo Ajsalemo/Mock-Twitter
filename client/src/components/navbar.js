@@ -13,7 +13,7 @@ import { Home, OfflineBolt, NotificationsNone, Message, Search } from '@material
 import twitterminilogo from '../images/twitterminilogo.png';
 
 // Apollo Queries
-import { GET_USER } from '../apolloclient/apolloqueries';
+import { VERIFY_USER } from '../apolloclient/apolloqueries';
 
 // Components
 import TweetModal from '../components/tweetmodal';
@@ -114,7 +114,7 @@ const Navbar = props => {
     const { classes } = props;
     return (
         <React.Fragment>
-            <Query query={GET_USER}>
+            <Query query={VERIFY_USER}>
                 {({ loading, error, data }) => {
                     if (loading) return <div><CircularProgress /></div>;
                     if (error) return <div><Error /></div>;
@@ -163,9 +163,9 @@ const Navbar = props => {
                                     }}
                                 />
                                 <ProfileAvatarModal
-                                    avatarImg={data.currentUser.profile_image_url_https}
-                                    name={data.currentUser.name}
-                                    screen_name={data.currentUser.screen_name}
+                                    avatarImg={data.currentUser.verifyCredentials.profile_image_url_https}
+                                    name={data.currentUser.verifyCredentials.name}
+                                    screen_name={data.currentUser.verifyCredentials.screen_name}
                                 />
                                 {/* Classes component for the modal to submit tweets */}
                                 <TweetModal />

@@ -8,7 +8,7 @@ import { Query } from 'react-apollo';
 import { withStyles, Paper, Card, CardContent, Avatar, Typography, CircularProgress } from '@material-ui/core';
 
 // Apollo Queries
-import { GET_USER } from '../apolloclient/apolloqueries';
+import { VERIFY_USER } from '../apolloclient/apolloqueries';
 
 // Components
 import Error from '../components/error';
@@ -72,21 +72,20 @@ const styles = () => ({
 const ProfileHandle = props => {
     const { classes } = props;
     return (
-        <Query query={GET_USER}>
+        <Query query={VERIFY_USER}>
             {({ loading, error, data }) => {
                 if (loading) return <div><CircularProgress /></div>;
                 if (error) return <div><Error /></div>;
-                console.log(data)
                 return (
                     <Paper>
                         <Card className={classes.profileHandlePaper}>
                             <CardContent className={classes.upperCardContent}></CardContent>          
-                            <Avatar alt="twitter avatar" src={data.currentUser.profile_image_url_https} className={classes.twitterAvatar} /> 
+                            <Avatar alt="twitter avatar" src={data.currentUser.verifyCredentials.profile_image_url_https} className={classes.twitterAvatar} /> 
                             <CardContent className={classes.rootClass}>
                                 <Typography variant="h6" gutterBottom className={classes.upperText}>
                                     <div className={classes.handleTextUpperDiv}>
-                                        <span className={classes.handleTextUpper}>{data.currentUser.name}</span>
-                                        <span className={classes.handleTextLower}>@{data.currentUser.screen_name}</span>
+                                        <span className={classes.handleTextUpper}>{data.currentUser.verifyCredentials.name}</span>
+                                        <span className={classes.handleTextLower}>@{data.currentUser.verifyCredentials.screen_name}</span>
                                     </div>
                                 </Typography>
                                 <Typography variant="subtitle2" className={classes.profileHandleTypography} gutterBottom>
@@ -94,19 +93,19 @@ const ProfileHandle = props => {
                                         <div className={classes.profileTweetSpan}>
                                             <span>Tweets</span>
                                             <span className={classes.profileTweetCount}>
-                                                {data.currentUser.statuses_count}
+                                                {data.currentUser.verifyCredentials.statuses_count}
                                             </span>
                                         </div> 
                                         <div className={classes.profileTweetSpan}>
                                             <span>Following</span>
                                             <span className={classes.profileTweetCount}>
-                                                {data.currentUser.friends_count}
+                                                {data.currentUser.verifyCredentials.friends_count}
                                             </span>
                                         </div>  
                                         <div className={classes.profileTweetSpan}>
                                             <span>Followers</span>
                                             <span className={classes.profileTweetCount}>
-                                                {data.currentUser.followers_count}
+                                                {data.currentUser.verifyCredentials.followers_count}
                                             </span>
                                         </div>  
                                     </React.Fragment>   

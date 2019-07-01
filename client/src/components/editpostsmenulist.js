@@ -32,11 +32,11 @@ const EditPostsMenuList = props => {
             refetchQueries={[{ query: GET_AUTHUSER_TWEETS }]}
         >
             {(deleteStatusProp, { loading }) => (
-                loading 
-                    ?
-                <CircularProgress />
-                    :
                 <MenuList onClick={handleClose}>
+                    {loading 
+                        ?
+                    <CircularProgress />
+                        :
                     <MenuItem 
                         onClick={() => deleteStatusProp({
                             variables: {
@@ -46,7 +46,7 @@ const EditPostsMenuList = props => {
                         className={classes.menuListItem}
                     >
                         Delete Tweet
-                    </MenuItem>
+                    </MenuItem>}
                 </MenuList>
         
             )}

@@ -67,8 +67,8 @@ const SuggestedUsers = props => {
     return (
         <Query 
             query={COMPARE_FRIENDSHIPS} 
-            variables={{ target_screenName: screen_name, source_screenName: currentUser}}
-            fetchPolicy='cache-first'
+            variables={{ target_screenName: screen_name, source_screenName: currentUser }}
+            fetchPolicy='cache-and-network'
         >
             {({ loading, error, data }) => {
                 if (loading) return <div><CircularProgress /></div>;
@@ -98,12 +98,14 @@ const SuggestedUsers = props => {
                                         <UnfollowUser 
                                             id={id}
                                             screen_name={screen_name}
+                                            // This is passed from 'suggestedcategories.js'
                                             currentUser={currentUser}
                                         />
                                             :
                                         <FollowUser
                                             id={id}
                                             screen_name={screen_name}
+                                            // This is passed from 'suggestedcategories.js'
                                             currentUser={currentUser}
                                         />
                                     }                                

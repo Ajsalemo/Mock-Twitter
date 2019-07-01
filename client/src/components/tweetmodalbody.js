@@ -13,7 +13,7 @@ import TweetModalForm from '../components/tweetmodalform';
 import Error from '../components/error';
 
 // Apollo Queries
-import { GET_USER } from '../apolloclient/apolloqueries';
+import { VERIFY_USER } from '../apolloclient/apolloqueries';
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
@@ -53,7 +53,7 @@ const styles = () => ({
 const TweetModalBody = props => {
     const { classes, onClose, userScreenName } = props;
     return (
-        <Query query={GET_USER}>
+        <Query query={VERIFY_USER}>
             {({ loading, error, data }) => {
                 if (loading) return <div><CircularProgress /></div>;
                 if (error) return <Error />;
@@ -72,7 +72,7 @@ const TweetModalBody = props => {
                         </Grid>
                         <Grid item className={classes.tweetModalGrid}>
                             <TweetModalForm
-                                avatar={data.currentUser.profile_image_url_https}
+                                avatar={data.currentUser.verifyCredentials.profile_image_url_https}
                                 // Passed from the 'TweetModal' component
                                 onClose={onClose}
                                 // Passed from the 'PublicProfileHandle' component

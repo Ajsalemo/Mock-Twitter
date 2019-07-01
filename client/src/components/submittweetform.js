@@ -89,7 +89,7 @@ const SubmitTweetForm = props => {
                         }}
                         render={props => (
                             <React.Fragment>
-                                <Avatar alt="twitter avatar" src={data.currentUser.profile_image_url_https} className={props.values.tweet ? classes.tweetAvatarActiveInput : classes.twitterAvatar} /> 
+                                <Avatar alt="twitter avatar" src={data.currentUser.verifyCredentials.profile_image_url_https} className={props.values.tweet ? classes.tweetAvatarActiveInput : classes.twitterAvatar} /> 
                                 <Form className={classes.formElement}>
                                     <TextField
                                         className={props.values.tweet ? classes.activeInputField : classes.formControl}

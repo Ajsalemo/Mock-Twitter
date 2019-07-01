@@ -28,19 +28,8 @@ const typeDefs =
 
         # User Object
         type User {
-            id: String
-            id_str: String
+            user_id: String
             name: String
-            screen_name: String
-            verified: Boolean
-            followers_count: String
-            friends_count: Int
-            listed_count: Int
-            favourites_count: Int
-            statuses_count: Int
-            created_at: String
-            profile_banner_url: String
-            profile_image_url_https: String
             userTimelineTweets: [UserTimelineTweets]
             userProfileTweets(screen_name: String!): [UserProfileTimeline]
             trendingTopics: [trendsWrapper]
@@ -48,6 +37,7 @@ const typeDefs =
             suggestedCategorySlug(slug: String!): SuggestedCategorySlug
             compareRelationship(target_screenName: String!, source_screenName: String!): RelationshipWrapper 
             userTweetStatusCount: [UserTimelineTweets]
+            verifyCredentials: UserObject
         }
 
         # Object wrapper to iterate
@@ -265,9 +255,7 @@ const resolvers = {
     Query: {
         // The 3rd argument(user) is being pulled off of the context in server.js
         currentUser: async (parent, args, user) => {
-            const verifyCredentialsRequest = await twitterNetworkCall(user.access_token, user.access_secret).get('account/verify_credentials');
-            const verifyCredentialsResponse = await verifyCredentialsRequest;
-            return verifyCredentialsResponse;
+            return user.decodedToken;
         }
     },
     User: {
@@ -300,7 +288,13 @@ const resolvers = {
             const compareRelationshipRequest = await twitterNetworkCall(user.access_token, user.access_secret).get('friendships/show', { source_screen_name: args.source_screenName, target_screen_name: args.target_screenName });
             const compareRelationshipResponse = await compareRelationshipRequest;
             return compareRelationshipResponse;
+        },
+        verifyCredentials: async (parent, args, user) => {
+            const verifyCredentialsRequest = await twitterNetworkCall(user.access_token, user.access_secret).get('account/verify_credentials');
+            const verifyCredentialsResponse = await verifyCredentialsRequest;
+            return verifyCredentialsResponse;
         }
+
     },
     Mutation: {
         createTweet: async (parent, args, user) => {

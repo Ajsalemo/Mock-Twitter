@@ -63,7 +63,7 @@ const styles = () => ({
 // ----------------------------------------------------------------------------------------------------- //
 
 const Recommended = props => {
-    const { classes } = props;
+    const { classes, currentUser } = props;
     return (
         <React.Fragment>
             <Grid>
@@ -103,6 +103,8 @@ const Recommended = props => {
                                                         {/* Nested Query to display twitter users of the categories being looped over */}
                                                         <SuggestedCategories
                                                             categories={categories.slug}
+                                                            // This is passed from 'main.js'
+                                                            currentUser={currentUser}
                                                         />
                                                     </ExpansionPanelDetails>
                                                 </ExpansionPanel>
