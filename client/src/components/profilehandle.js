@@ -3,6 +3,7 @@
 
 import React from 'react';
 import { Query } from 'react-apollo';
+import { Link } from 'react-router-dom';
 
 // Material-UI components
 import { withStyles, Paper, Card, CardContent, Avatar, Typography, CircularProgress } from '@material-ui/core';
@@ -64,6 +65,13 @@ const styles = () => ({
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-around'
+    },
+    linkToProfileStats: {
+        textDecoration: 'none',
+        color: 'inherit',
+        '&:hover': {
+            color: '#00acee'
+        }
     }
 });
 
@@ -91,10 +99,12 @@ const ProfileHandle = props => {
                                 <Typography variant="subtitle2" className={classes.profileHandleTypography} gutterBottom>
                                     <React.Fragment>
                                         <div className={classes.profileTweetSpan}>
-                                            <span>Tweets</span>
-                                            <span className={classes.profileTweetCount}>
-                                                {data.currentUser.verifyCredentials.statuses_count}
-                                            </span>
+                                            <Link to={`userprofile/${data.currentUser.verifyCredentials.screen_name}`} className={classes.linkToProfileStats}>
+                                                <span>Tweets</span>
+                                                <span className={classes.profileTweetCount}>
+                                                    {data.currentUser.verifyCredentials.statuses_count}
+                                                </span>
+                                            </Link>
                                         </div> 
                                         <div className={classes.profileTweetSpan}>
                                             <span>Following</span>

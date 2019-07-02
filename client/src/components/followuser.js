@@ -8,7 +8,7 @@ import { Mutation } from 'react-apollo';
 import { withStyles, CircularProgress, Fab } from '@material-ui/core';
 
 // Apollo Mutations and Queries
-import { FOLLOW_USER, COMPARE_FRIENDSHIPS, GET_USER } from '../apolloclient/apolloqueries';
+import { FOLLOW_USER, COMPARE_FRIENDSHIPS } from '../apolloclient/apolloqueries';
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
@@ -30,7 +30,7 @@ const FollowUser = props => {
         <Mutation 
             mutation={FOLLOW_USER} 
             refetchQueries={[{ 
-                query: COMPARE_FRIENDSHIPS, GET_USER,
+                query: COMPARE_FRIENDSHIPS,
                 variables: {
                     target_screenName: screen_name,
                     source_screenName: currentUser

@@ -31,6 +31,10 @@ const TooltipFollowButton = props => {
                 if (error) return <Error />;
                 
                 return (
+                    screen_name === currentUser
+                        ?
+                        null
+                        :
                     data.currentUser.compareRelationship.relationship.target.followed_by === true
                         ?
                     <UnfollowUser

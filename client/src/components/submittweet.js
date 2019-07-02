@@ -49,9 +49,12 @@ const SubmitTweet = props => {
                         <Paper className={classes.paperOutline}>
                             <SubmitTweetForm 
                                 data={data}
+                                currentUser={data.currentUser.verifyCredentials.screen_name}
                             />
                         </Paper>
-                        <Timeline />
+                        <Timeline 
+                            currentUser={data.currentUser.verifyCredentials.screen_name}
+                        />
                     </Grid>
                     );
                 }}

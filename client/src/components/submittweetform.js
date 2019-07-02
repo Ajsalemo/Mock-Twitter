@@ -9,8 +9,8 @@ import classNames from 'classnames';
 // Material-UI components
 import { withStyles, TextField, Fab, Grid, Avatar, CircularProgress } from '@material-ui/core';
 
-// Apollo Mutations
-import { CREATE_USER_TWEET, GET_AUTHUSER_TWEETS } from '../apolloclient/apolloqueries';
+// Apollo Queries and Mutations
+import { CREATE_USER_TWEET, GET_AUTHUSER_TWEETS, GET_USERPROFILE_TWEETS } from '../apolloclient/apolloqueries';
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
@@ -64,12 +64,22 @@ const styles = () => ({
 // ----------------------------------------------------------------------------------------------------- //
 
 const SubmitTweetForm = props => {
-    const { classes, data } = props;
+    const { classes, data, currentUser } = props;
     return (
         <React.Fragment>
             <Mutation 
                 mutation={CREATE_USER_TWEET} 
-                refetchQueries={[{ query: GET_AUTHUSER_TWEETS }]}
+                refetchQueries={[
+                    { 
+                        query: GET_AUTHUSER_TWEETS 
+                    },
+                    {
+                        query: GET_USERPROFILE_TWEETS,
+                        variables: {
+                            screen_name: currentUser
+                        }
+                    }
+                ]}
             >
                 {(createTweetProp, { loading }) => (
                     <Formik

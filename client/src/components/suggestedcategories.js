@@ -18,7 +18,7 @@ import Error from '../components/error';
 // ----------------------------------------------------------------------------------------------------- //
 
 const SuggestedCategories = props => {
-    const { categories, currentUser } = props;
+    const { categories } = props;
     return (
         <Query 
             query={GET_SUGGESTED_CATEGORIES_MEMBERS_GROUP} 
@@ -38,8 +38,6 @@ const SuggestedCategories = props => {
                                 screen_name={userInfo.screen_name}
                                 src={userInfo.profile_image_url_https}
                                 verified={userInfo.verified}
-                                // This is passed from 'recommended.js'
-                                currentUser={currentUser}
                             />
                         );
                     })

@@ -69,7 +69,7 @@ const styles = () => ({
 // ----------------------------------------------------------------------------------------------------- //
 
 const ProfileBannerBar = props => {
-    const { classes, URLparam } = props;
+    const { classes, URLparam, currentUser } = props;
     return (
         <AppBar position="static" color="default" className={classes.bannerBarPlacement}>
             <Toolbar>
@@ -82,7 +82,6 @@ const ProfileBannerBar = props => {
                 {({ loading, error, data }) => {
                     if (loading) return <div><CircularProgress /></div>;
                     if (error) return <div><Error /></div>; 
-                    
                     const filterProfileImageURL = data.currentUser.userProfileTweets[0].user.profile_image_url_https.replace('_normal.jpg', '.jpg');
                     return (
                         <React.Fragment>
@@ -111,11 +110,16 @@ const ProfileBannerBar = props => {
                                     <span className={classes.infoNumbers}>{data.currentUser.userProfileTweets[0].user.listed_count}</span>
                                 </Typography>
                                 <div className={classes.profileBannerFollowButton}>
+                                    {/* If viewing the logged in users profile, hide this button */}
+                                    {currentUser === data.currentUser.userProfileTweets[0].user.screen_name
+                                        ?
+                                        null
+                                        :
                                     <TooltipFollowButton
-                                        currentUser={data.currentUser.screen_name}
+                                        currentUser={currentUser}
                                         screen_name={data.currentUser.userProfileTweets[0].user.screen_name}
                                         tweetUserId={data.currentUser.userProfileTweets[0].user.id}
-                                    />
+                                    />}
                                 </div>
                             </Grid>
                         </React.Fragment>

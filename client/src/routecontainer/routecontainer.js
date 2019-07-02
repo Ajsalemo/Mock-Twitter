@@ -42,7 +42,6 @@ class RouteContainer extends Component {
             <React.Fragment>
                 <Switch>
                     <Route path='/userprofile/:params' component={PublicProfile} />
-                    <Route path='/userprofile/tweets/:params' />
                     <Route path='/main' component={Main} />
                     <Route path='/loading' component={Loading} />
                     <Route path='/' component={Home} />
