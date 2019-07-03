@@ -243,7 +243,11 @@ export const USERS_FOLLOWERS =
     gql`
         query UsersFollowers($screen_name: String!) {
             currentUser {
+                user_id
+                name
                 usersFollowers(screen_name: $screen_name) {
+                    previous_cursor_str
+                    next_cursor_str
                     users {
                         id
                         id_str

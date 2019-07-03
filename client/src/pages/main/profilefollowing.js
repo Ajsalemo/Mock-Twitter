@@ -58,7 +58,7 @@ let ProfileFollowing = props => {
                 </Grid>
                 <Grid item md={6} className={classes.publicProfileTimelineItem}>
                     <UsersFollowingList
-                        screen_name={param}
+                        currentUser={param}
                     />
                 </Grid>
             </Grid>
