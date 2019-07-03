@@ -107,10 +107,12 @@ const ProfileHandle = props => {
                                             </Link>
                                         </div> 
                                         <div className={classes.profileTweetSpan}>
-                                            <span>Following</span>
-                                            <span className={classes.profileTweetCount}>
-                                                {data.currentUser.verifyCredentials.friends_count}
-                                            </span>
+                                            <Link to={`following/${data.currentUser.verifyCredentials.screen_name}`} className={classes.linkToProfileStats}>
+                                                <span>Following</span>
+                                                <span className={classes.profileTweetCount}>
+                                                    {data.currentUser.verifyCredentials.friends_count}
+                                                </span>
+                                            </Link>
                                         </div>  
                                         <div className={classes.profileTweetSpan}>
                                             <span>Followers</span>

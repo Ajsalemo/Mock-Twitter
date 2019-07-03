@@ -38,6 +38,7 @@ const typeDefs =
             compareRelationship(target_screenName: String!, source_screenName: String!): RelationshipWrapper 
             userTweetStatusCount: [UserTimelineTweets]
             verifyCredentials: UserObject
+            usersFollowers(screen_name: String!): UsersFollowers
         }
 
         # Object wrapper to iterate
@@ -245,6 +246,10 @@ const typeDefs =
         # User property
         type TweetedUser {
             screen_name: String
+        }  
+
+        type UsersFollowers {
+            users: [UserObject]
         }
     `;
 
@@ -293,8 +298,12 @@ const resolvers = {
             const verifyCredentialsRequest = await twitterNetworkCall(user.access_token, user.access_secret).get('account/verify_credentials');
             const verifyCredentialsResponse = await verifyCredentialsRequest;
             return verifyCredentialsResponse;
+        },
+        usersFollowers: async (parent, args, user) => {
+            const usersFollowersRequest = await twitterNetworkCall(user.access_token, user.access_secret).get('friends/list', { screen_name: args.screen_name });
+            const usersFollowersResponse = usersFollowersRequest;
+            return usersFollowersResponse;
         }
-
     },
     Mutation: {
         createTweet: async (parent, args, user) => {

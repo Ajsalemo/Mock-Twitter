@@ -79,7 +79,7 @@ const styles = () => ({
 // ----------------------------------------------------------------------------------------------------- //
 
 const PublicProfileTimeline = props => {
-    const { classes, URLparam, id } = props;
+    const { classes, URLparam } = props;
     return (
         <Query 
             query={GET_USERPROFILE_TWEETS} 
@@ -94,7 +94,6 @@ const PublicProfileTimeline = props => {
                 if (error) return <div className={classes.publicTimelineLoadingDiv}><Error /></div>;
                 return (
                     data.currentUser.userProfileTweets.map((userTweetInfo, i) => {
-                        console.log(userTweetInfo)
                         return (
                             <Paper className={classes.publicTimelinePaper} key={i}>
                                 <Avatar src={userTweetInfo.user.profile_image_url_https} alt='User profile avatar' />

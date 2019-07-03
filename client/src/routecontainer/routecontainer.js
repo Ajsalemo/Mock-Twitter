@@ -8,6 +8,7 @@ import { withRouter, Switch, Route } from 'react-router-dom';
 import Home from '../pages/home/home';
 import Main from '../pages/main/main';
 import PublicProfile from '../pages/main/publicprofile';
+import ProfileFollowing from '../pages/main/profilefollowing';
 
 // Components
 import Loading from '../components/loading';
@@ -42,6 +43,7 @@ class RouteContainer extends Component {
             <React.Fragment>
                 <Switch>
                     <Route path='/userprofile/:params' component={PublicProfile} />
+                    <Route path='/following/:params' component={ProfileFollowing} />
                     <Route path='/main' component={Main} />
                     <Route path='/loading' component={Loading} />
                     <Route path='/' component={Home} />
