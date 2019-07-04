@@ -24,16 +24,9 @@
     "apollo-cache-inmemory": "^1.5.1",
     "apollo-cache-persist": "^0.1.1",
     "apollo-server": "^2.4.8",
-    "apollo-server-express": "^2.4.8",
-    "axios": "^0.19.0",
     "dotenv": "^6.2.0",
-    "esm": "^3.2.25",
-    "express": "^4.16.4",
     "firebase-admin": "^8.2.0",
-    "graphql": "^14.1.1",
-    "jsonwebtoken": "^8.5.0",
-    "jwks-rsa": "^1.4.0",
-    "twitter": "^1.7.1"
+    "graphql": "^14.1.1"
   },
   "devDependencies": {
     "concurrently": "^4.1.0",

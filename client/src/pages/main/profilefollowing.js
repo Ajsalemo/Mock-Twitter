@@ -26,10 +26,8 @@ const styles = () => ({
     },
     publicProfileHandlerGrid: {
         width: 'auto',
-        paddingRight: '0em'
-    },
-    publicProfileTimelineItem: {
-        marginRight: '0.6em'
+        paddingRight: '2em',
+        marginLeft: '10em'
     }
 });
 
@@ -56,7 +54,7 @@ let ProfileFollowing = props => {
                     />
                     <Trending />
                 </Grid>
-                <Grid item md={6} className={classes.publicProfileTimelineItem}>
+                <Grid item md={7}>
                     <UsersFollowingList
                         currentUser={param}
                     />

@@ -8,7 +8,7 @@ import { Mutation } from 'react-apollo';
 import { withStyles, Fab, CircularProgress } from '@material-ui/core';
 
 // Apollo Mutations
-import { UNFOLLOW_USER, COMPARE_FRIENDSHIPS } from '../apolloclient/apolloqueries';
+import { UNFOLLOW_USER, COMPARE_FRIENDSHIPS, USERS_FOLLOWERS } from '../apolloclient/apolloqueries';
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
@@ -32,13 +32,21 @@ const UnfollowUser = props => {
     return (
         <Mutation 
             mutation={UNFOLLOW_USER} 
-            refetchQueries={[{ 
-                query: COMPARE_FRIENDSHIPS, 
-                variables: {
-                    target_screenName: screen_name,
-                    source_screenName: currentUser
+            refetchQueries={[
+                { 
+                    query: COMPARE_FRIENDSHIPS, 
+                    variables: {
+                        target_screenName: screen_name,
+                        source_screenName: currentUser
+                    }
+                },
+                {
+                    query: USERS_FOLLOWERS,
+                    variables: {
+                        screen_name: currentUser
+                    }
                 }
-            }]}
+            ]}
         >
             {(unfollowUserProp, { loading }) => (
                 loading 
