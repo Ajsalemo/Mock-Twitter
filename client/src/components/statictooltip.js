@@ -23,8 +23,7 @@ const styles = () => ({
     },
     staticToolTipUpperCardContent: {
         backgroundColor: '#007fec',
-        height: '6em',
-        padding: '0'
+        height: '6em'
     },
     staticToolTipUpperText: {
         textAlign: 'left'
@@ -63,9 +62,7 @@ const styles = () => ({
         backgroundColor: '#fff',
         borderRadius: '0%',
         boxShadow: 'none',
-        width: '16em',
-        display: 'inline-block',
-        margin: '0 1em 0.8em 0'
+        width: '16em'
     },
     staticToolTipAvatarParent: {
         marginRight: '0.5em'
@@ -85,36 +82,27 @@ const styles = () => ({
         '&:hover': {
             textDecoration: 'underline'
         }
-    },
-    followingBannerImage: {
-        height: 'inherit'
     }
 });
 
 // ----------------------------------------------------------------------------------------------------- //
 
 const StaticToolTip = props => {
-    const { classes, name, nickname, imgSrc, tweetUserId, statuses_count, followers_count, friends_count, bannerImageURL } = props;
+    const { classes, name, nickname, imgSrc, currentUser, tweetUserId, statuses_count, followers_count, friends_count } = props;
     return (
         <Card className={classes.staticToolTipModalPaper} >
-            <CardContent className={classes.staticToolTipUpperCardContent}>
-                <img
-                    // Alt is shown as an empty string due to these banners being a decorative image
-                    alt={''}
-                    src={bannerImageURL}
-                    className={classes.followingBannerImage}
-                />
-            </CardContent>          
-            <Avatar alt={`${nickname}'s profile avatar`} src={imgSrc} className={classes.staticToolTipAvatar} /> 
+            <CardContent className={classes.staticToolTipUpperCardContent}></CardContent>          
+            <Avatar alt="twitter avatar" src={imgSrc} className={classes.staticToolTipAvatar} /> 
             <CardContent className={classes.staticToolTipContent}>
                 <Typography variant="h6" gutterBottom className={classes.staticToolTipUpperText}>
                     <div className={classes.staticToolTipHandleTextUpperDiv}>
-                        <Link to={`/userprofile/${nickname}`} className={classNames(classes.staticToolTipHandleTextUpper, classes.toolTilProfileLink)}>{name}</Link>
-                        <Link to={`/userprofile/${nickname}`} className={classNames(classes.staticToolTipHandleTextLower, classes.toolTilProfileLink)}>@{nickname}</Link>
+                        <Link to={`userprofile/${nickname}`} className={classNames(classes.staticToolTipHandleTextUpper, classes.toolTilProfileLink)}>{name}</Link>
+                        <Link to={`userprofile/${nickname}`} className={classNames(classes.staticToolTipHandleTextLower, classes.toolTilProfileLink)}>@{nickname}</Link>
                     </div>
                 </Typography>
                 <Grid item className={classes.staticToolTipFollowGrid}>
                     <ToolTipFollowButton
+                        currentUser={currentUser}
                         screen_name={nickname}
                         tweetUserId={tweetUserId}
                     />

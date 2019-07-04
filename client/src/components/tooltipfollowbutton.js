@@ -13,53 +13,45 @@ import UnfollowUser from './unfollowuser';
 import Error from './error';
 
 // Apollo Queries
-import { COMPARE_FRIENDSHIPS, VERIFY_USER } from '../apolloclient/apolloqueries';
+import { COMPARE_FRIENDSHIPS } from '../apolloclient/apolloqueries';
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
 const TooltipFollowButton = props => {
-    const { screen_name, tweetUserId } = props;
+    const { screen_name, currentUser, tweetUserId } = props;
     return (
-        <Query query={VERIFY_USER}>
+        <Query 
+            query={COMPARE_FRIENDSHIPS} 
+            variables={{ target_screenName: screen_name, source_screenName: currentUser}}
+            fetchPolicy='cache-first'
+        >
             {({ loading, error, data }) => {
                 if (loading) return <div><CircularProgress /></div>;
                 if (error) return <Error />;
-                const currentAuthenticatedUser = data.currentUser.verifyCredentials.screen_name;
-            return (
-                <Query 
-                    query={COMPARE_FRIENDSHIPS} 
-                    variables={{ target_screenName: screen_name, source_screenName: currentAuthenticatedUser}}
-                    fetchPolicy='cache-first'
-                >
-                    {({ loading, error, data }) => {
-                        if (loading) return <div><CircularProgress /></div>;
-                        if (error) return <Error />;
-                        
-                        return (
-                            screen_name === currentAuthenticatedUser
-                                ?
-                                null
-                                :
-                            data.currentUser.compareRelationship.relationship.target.followed_by === true
-                                ?
-                            <UnfollowUser
-                                id={tweetUserId}
-                                screen_name={screen_name}
-                                currentUser={currentAuthenticatedUser}
-                            />
-                                :
-                            <FollowUser
-                                id={tweetUserId}
-                                screen_name={screen_name}
-                                currentUser={currentAuthenticatedUser}
-                            />
-                        )
-                    }}
-                </Query>
-            );
-        }}
+                
+                return (
+                    screen_name === currentUser
+                        ?
+                        null
+                        :
+                    data.currentUser.compareRelationship.relationship.target.followed_by === true
+                        ?
+                    <UnfollowUser
+                        id={tweetUserId}
+                        screen_name={screen_name}
+                        currentUser={currentUser}
+                    />
+                        :
+                    <FollowUser
+                        id={tweetUserId}
+                        screen_name={screen_name}
+                        currentUser={currentUser}
+                    />
+                )
+            }}
         </Query>
+
     );
 };
 

@@ -249,8 +249,8 @@ const typeDefs =
         }  
 
         type UsersFollowers {
-            previous_cursor_str: String
-            next_cursor_str: String
+            previous_cursor_str: String!
+            next_cursor_str: String!
             users: [UserObject]
         }
     `;
