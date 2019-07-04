@@ -26,10 +26,8 @@ const styles = () => ({
     },
     publicProfileHandlerGrid: {
         width: 'auto',
-        paddingRight: '0em'
-    },
-    publicProfileTimelineItem: {
-        marginRight: '0.6em'
+        paddingRight: '2em',
+        marginLeft: '10em'
     }
 });
 
@@ -37,7 +35,6 @@ const styles = () => ({
 
 let ProfileFollowing = props => {
     const param = props.match.params.params; 
-    console.log(param)
     const { classes } = props;
     return (
         <React.Fragment>
@@ -56,11 +53,12 @@ let ProfileFollowing = props => {
                     />
                     <Trending />
                 </Grid>
-                <Grid item md={6} className={classes.publicProfileTimelineItem}>
-                    <UsersFollowingList
-                        currentUser={param}
-                    />
-                </Grid>
+                    <Grid item md={7}>
+                        <UsersFollowingList
+                            // With this component - param is the screename passed through the URL, which can be dynamic, i.e - changing it to any screen name 
+                            currentUser={param}
+                        />
+                    </Grid>
             </Grid>
         </React.Fragment>
     );
