@@ -81,35 +81,8 @@ const Recommended = props => {
                                     <Link to='#/' className={classes.links}>View all</Link>
                                 </span>
                             </Typography>
-                            <Query 
-                                query={GET_SUGGESTED_CATEGORIES} 
-                                pollInterval={pollMinute(1000, 60)} 
-                            >
-                                {({ loading, error, data }) => {
-                                    if (loading) return <div><CircularProgress /></div>;
-                                    if (error) return <Error />
-
-                                    return (
-                                        data.currentUser.suggestedCategory.map((categories, i) => {
-                                            return (
-                                                <ExpansionPanel key={i} classes={{ root: classes.expansionpanel }}>
-                                                    <ExpansionPanelSummary expandIcon={<ExpandMore />}>
-                                                        <Typography variant="subtitle2" className={classes.categoriesName}>
-                                                            {categories.name}
-                                                        </Typography>
-                                                    </ExpansionPanelSummary>
-                                                    <ExpansionPanelDetails className={classes.expansionPanelDetails}>
-                                                        {/* Nested Query to display twitter users of the categories being looped over */}
-                                                        <SuggestedCategories
-                                                            categories={categories.slug}
-                                                        />
-                                                    </ExpansionPanelDetails>
-                                                </ExpansionPanel>
-                                            );
-                                        })
-                                    );
-                                }}
-                            </Query>
+                            {/* Suggested Users API has been depricated as of the latest Twitter API release */}
+                            <div>Placeholder</div>
                         </CardContent>
                     </Card>
                 </Paper>

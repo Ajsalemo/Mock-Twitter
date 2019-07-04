@@ -3,6 +3,7 @@
 
 import React from 'react';
 import { Query } from 'react-apollo';
+import { Link } from 'react-router-dom';
 
 // Material-UI components
 import { Avatar, Grid, AppBar, Toolbar, Typography, CircularProgress, withStyles } from '@material-ui/core';
@@ -63,6 +64,13 @@ const styles = () => ({
     profileBannerFollowButton: {
         alignSelf: 'center',
         paddingLeft: '10.5em'
+    },
+    publicProfileLinkToProfileStats: {
+        textDecoration: 'none',
+        color: 'inherit',
+        '&:hover': {
+            color: '#00acee'
+        }
     }
 });
 
@@ -90,12 +98,16 @@ const ProfileBannerBar = props => {
                             </Grid>
                             <Grid item className={classes.avatarInfoGrid}>
                                 <Typography variant="h6" color="inherit" className={classes.infoDescriptionTypography}>
-                                    <span className={classes.infoDescription}>Tweets</span>
-                                    <span className={classes.infoNumbers}>{data.currentUser.userProfileTweets[0].user.statuses_count}</span>
+                                    <Link to={`/userprofile/${URLparam}`} className={classes.publicProfileLinkToProfileStats}>
+                                        <span className={classes.infoDescription}>Tweets</span>
+                                        <span className={classes.infoNumbers}>{data.currentUser.userProfileTweets[0].user.statuses_count}</span>
+                                    </Link>
                                 </Typography> 
                                 <Typography variant="h6" color="inherit" className={classes.infoDescriptionTypography}>
-                                    <span className={classes.infoDescription}>Following</span>
-                                    <span className={classes.infoNumbers}>{data.currentUser.userProfileTweets[0].user.friends_count}</span>
+                                    <Link to={`/following/${URLparam}`} className={classes.publicProfileLinkToProfileStats}>
+                                        <span className={classes.infoDescription}>Following</span>
+                                        <span className={classes.infoNumbers}>{data.currentUser.userProfileTweets[0].user.friends_count}</span>
+                                    </Link>
                                 </Typography>
                                 <Typography variant="h6" color="inherit" className={classes.infoDescriptionTypography}>
                                     <span className={classes.infoDescription}>Followers</span>

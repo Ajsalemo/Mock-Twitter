@@ -24,7 +24,6 @@ const styles = () => ({
     staticToolTipUpperCardContent: {
         backgroundColor: '#007fec',
         height: '6em',
-        height: '6em',
         padding: '0'
     },
     staticToolTipUpperText: {

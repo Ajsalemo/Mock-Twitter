@@ -10,7 +10,7 @@ import { withStyles, Card, CardContent, Typography, CircularProgress } from '@ma
 import { CalendarToday } from '@material-ui/icons';
 
 // Apollo Queries
-import { GET_USERPROFILE_TWEETS } from '../apolloclient/apolloqueries';
+import { GET_USERPROFILE_TWEETS, VERIFY_USER } from '../apolloclient/apolloqueries';
 
 // Components
 import Error from './error';
@@ -74,39 +74,53 @@ const styles = () => ({
 const PublicProfileHandle = props => {
     const { classes, URLparam } = props;
     return (
-        <Query 
-            query={GET_USERPROFILE_TWEETS}
-            variables={{
-                screen_name: URLparam
-            }}
-        >
+        <Query query={VERIFY_USER}>
             {({ loading, error, data }) => {
-                if (loading) return <div><CircularProgress /></div>;
-                if (error) return <div><Error /></div>;
-
+                const publicProfileAuthUser = data.currentUser.verifyCredentials.screen_name;
                 return (
-                    <Card className={classes.publicProfileCard}>
-                        <CardContent className={classes.publicProfileCardContent}>
-                            <Typography variant="h6" gutterBottom className={classes.publicProfileUpperText}>
-                                <span className={classes.publicProfileTextUpper}>{data.currentUser.userProfileTweets[0].user.name}</span>
-                                {data.currentUser.userProfileTweets[0].user.verified === true 
-                                    ? 
-                                <img src={verifiedIcon} className={classes.verifiedPublicHandleIcon} alt="verified account" />
-                                    : 
-                                null}
-                                <span className={classes.publicProfileTextLower}>@{data.currentUser.userProfileTweets[0].user.screen_name}</span>
-                                <span className={classes.descriptionContent}>{data.currentUser.userProfileTweets[0].user.description}</span>
-                                <CalendarToday className={classes.createdAtIcon} />
-                                <span className={classes.publicProfileCreatedAt}>
-                                    Joined <Moment format={'MMMM YYYY'}>{data.currentUser.userProfileTweets[0].user.created_at}</Moment>
-                                </span>
-                                <TweetModal 
-                                    userToReply={data.currentUser.userProfileTweets[0].user.name}
-                                    userScreenName={data.currentUser.userProfileTweets[0].user.screen_name}
-                                />
-                            </Typography>
-                        </CardContent>
-                    </Card>
+                    <Query 
+                        query={GET_USERPROFILE_TWEETS}
+                        variables={{
+                            screen_name: URLparam
+                        }}
+                    >
+                        {({ loading, error, data }) => {
+                            if (loading) return <div><CircularProgress /></div>;
+                            if (error) return <div><Error /></div>;
+            
+                            return (
+                                <Card className={classes.publicProfileCard}>
+                                    <CardContent className={classes.publicProfileCardContent}>
+                                        <Typography variant="h6" gutterBottom className={classes.publicProfileUpperText}>
+                                            <span className={classes.publicProfileTextUpper}>{data.currentUser.userProfileTweets[0].user.name}</span>
+                                            {data.currentUser.userProfileTweets[0].user.verified === true 
+                                                ? 
+                                            <img src={verifiedIcon} className={classes.verifiedPublicHandleIcon} alt="verified account" />
+                                                : 
+                                            null}
+                                            <span className={classes.publicProfileTextLower}>@{data.currentUser.userProfileTweets[0].user.screen_name}</span>
+                                            <span className={classes.descriptionContent}>{data.currentUser.userProfileTweets[0].user.description}</span>
+                                            <CalendarToday className={classes.createdAtIcon} />
+                                            <span className={classes.publicProfileCreatedAt}>
+                                                Joined <Moment format={'MMMM YYYY'}>{data.currentUser.userProfileTweets[0].user.created_at}</Moment>
+                                            </span>
+                                            {/* If you're viewing your own profile, this component will be hidden */}
+                                            {/* Else if you're viewing someone elses profile, the 'tweet at' component will be displayed */}
+                                            {publicProfileAuthUser === URLparam
+                                                ?
+                                                null
+                                                :
+                                            <TweetModal 
+                                                userToReply={data.currentUser.userProfileTweets[0].user.name}
+                                                userScreenName={data.currentUser.userProfileTweets[0].user.screen_name}
+                                            />}
+                                            
+                                        </Typography>
+                                    </CardContent>
+                                </Card>
+                            );
+                        }}
+                    </Query>        
                 );
             }}
         </Query>

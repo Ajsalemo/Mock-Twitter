@@ -35,7 +35,6 @@ const styles = () => ({
 
 let ProfileFollowing = props => {
     const param = props.match.params.params; 
-    console.log(param)
     const { classes } = props;
     return (
         <React.Fragment>
