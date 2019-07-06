@@ -12,7 +12,7 @@ import Error from './error';
 import { CircularProgress } from '@material-ui/core';
 
 // Apollo Query
-import { USERS_FOLLOWERS } from '../apolloclient/apolloqueries';
+import { USERS_FOLLOWING } from '../apolloclient/apolloqueries';
 
 // Helper function
 import { extractAndReplaceNormalJPG } from '../apolloclient/apolloclient';
@@ -24,7 +24,7 @@ const UsersFollowingList = props => {
     const { currentUser } = props;
     return (
         <Query
-            query={USERS_FOLLOWERS}
+            query={USERS_FOLLOWING}
             variables={{
                 screen_name: currentUser
             }}
@@ -33,19 +33,19 @@ const UsersFollowingList = props => {
                 if (loading) return <div><CircularProgress /></div>;
                 if (error) return <Error />
                 
-                return data.currentUser.usersFollowers.users.map((userFollowersList, i) => {
+                return data.currentUser.usersFollowing.users.map((usersFollowersList, i) => {
                     return (
                         <StaticToolTip
                             key={i}
-                            name={userFollowersList.name}
-                            screen_name={userFollowersList.screen_name}
-                            nickname={userFollowersList.screen_name}
-                            imgSrc={userFollowersList.profile_image_url_https}
-                            tweetUserId={userFollowersList.id_str}
-                            statuses_count={userFollowersList.statuses_count}
-                            followers_count={userFollowersList.followers_count}
-                            friends_count={userFollowersList.friends_count}
-                            bannerImageURL={extractAndReplaceNormalJPG(userFollowersList.profile_banner_url)}
+                            name={usersFollowersList.name}
+                            screen_name={usersFollowersList.screen_name}
+                            nickname={usersFollowersList.screen_name}
+                            imgSrc={usersFollowersList.profile_image_url_https}
+                            tweetUserId={usersFollowersList.id_str}
+                            statuses_count={usersFollowersList.statuses_count}
+                            followers_count={usersFollowersList.followers_count}
+                            friends_count={usersFollowersList.friends_count}
+                            bannerImageURL={extractAndReplaceNormalJPG(usersFollowersList.profile_banner_url)}
                         />
                     );    
                 });

@@ -9,6 +9,7 @@ import Home from '../pages/home/home';
 import Main from '../pages/main/main';
 import PublicProfile from '../pages/main/publicprofile';
 import ProfileFollowing from '../pages/main/profilefollowing';
+import ProfileFollowers from '../pages/main/profilefollowers';
 
 // Components
 import Loading from '../components/loading';
@@ -44,6 +45,7 @@ class RouteContainer extends Component {
                 <Switch>
                     <Route path='/userprofile/:params' component={PublicProfile} />
                     <Route path='/following/:params' component={ProfileFollowing} />
+                    <Route path='/followers/:params' component={ProfileFollowers} />
                     <Route path='/main' component={Main} />
                     <Route path='/loading' component={Loading} />
                     <Route path='/' component={Home} />

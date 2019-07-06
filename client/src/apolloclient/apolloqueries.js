@@ -286,6 +286,54 @@ export const USERS_FOLLOWERS =
         }
     `;
 
+export const USERS_FOLLOWING =
+    gql`
+        query UsersFollowing($screen_name: String!) {
+            currentUser {
+                user_id
+                name
+                usersFollowing(screen_name: $screen_name) {
+                    previous_cursor_str
+                    next_cursor_str
+                    users {
+                        id
+                        id_str
+                        name
+                        screen_name
+                        location
+                        url
+                        description
+                        derived
+                        verified
+                        followers_count
+                        friends_count
+                        listed_count
+                        favourites_count
+                        statuses_count
+                        created_at
+                        geo_enabled
+                        lang
+                        profile_background_color
+                        profile_background_image_url
+                        profile_background_image_url_https
+                        profile_background_tile
+                        profile_banner_url
+                        profile_image_url
+                        profile_image_url_https
+                        profile_link_color
+                        profile_sidebar_border_color
+                        profile_sidebar_fill_color
+                        profile_text_color
+                        profile_use_background_image
+                        default_profile
+                        default_profile_image
+                    }
+                }
+            }
+        }
+    `;
+
+
 // ------------------------------------------------------------------------------------------------------ //
 // ---------------------------------------------- Mutations --------------------------------------------- //
 

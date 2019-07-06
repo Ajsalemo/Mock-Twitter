@@ -39,6 +39,7 @@ const typeDefs =
             userTweetStatusCount: [UserTimelineTweets]
             verifyCredentials: UserObject
             usersFollowers(screen_name: String!): UsersFollowers
+            usersFollowing(screen_name: String!): UsersFollowers
         }
 
         # Object wrapper to iterate
@@ -305,6 +306,11 @@ const resolvers = {
             const usersFollowersRequest = await twitterNetworkCall(user.access_token, user.access_secret).get('friends/list', { screen_name: args.screen_name });
             const usersFollowersResponse = usersFollowersRequest;
             return usersFollowersResponse;
+        },
+        usersFollowing: async (parent, args, user) => {
+            const usersFollowingRequest = await twitterNetworkCall(user.access_token, user.access_secret).get('followers/list', { screen_name: args.screen_name });
+            const usersFollowingResponse = usersFollowingRequest;
+            return usersFollowingResponse;
         }
     },
     Mutation: {

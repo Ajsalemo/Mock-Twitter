@@ -52,5 +52,17 @@ export const pollMinute = (a, b) => {
   return a * b;
 };
 
+// This function replaces the default picture size with a bigger one - the bigger one being a '.jpg' extension
+// If the 'profile_banner_url' property on the Schema UserObject returns null, then the function does nothing
+// This is so the profile banner image area will keep its defaulted blue color, this comes from the CSS class 'staticToolTipUpperCardContent' in 'statictooltip.js'
+export const extractAndReplaceNormalJPG = imageSrc => {
+  if(imageSrc !== null) {
+      return imageSrc.replace('_normal.jpg', '.jpg');
+  } else {
+      return;
+  }
+};
+
+// ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //

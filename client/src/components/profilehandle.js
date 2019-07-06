@@ -115,10 +115,12 @@ const ProfileHandle = props => {
                                             </Link>
                                         </div>  
                                         <div className={classes.profileTweetSpan}>
-                                            <span>Followers</span>
-                                            <span className={classes.profileTweetCount}>
-                                                {data.currentUser.verifyCredentials.followers_count}
-                                            </span>
+                                            <Link to={`followers/${data.currentUser.verifyCredentials.screen_name}`} className={classes.linkToProfileStats}>
+                                                <span>Followers</span>
+                                                <span className={classes.profileTweetCount}>
+                                                    {data.currentUser.verifyCredentials.followers_count}
+                                                </span>
+                                            </Link>
                                         </div>  
                                     </React.Fragment>   
                                 </Typography>
