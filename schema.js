@@ -40,6 +40,7 @@ const typeDefs =
             verifyCredentials: UserObject
             usersFollowers(screen_name: String!): UsersFollowers
             usersFollowing(screen_name: String!): UsersFollowers
+            getUsersFavorites(screen_name: String!): [UserTimelineTweets]
         }
 
         # Object wrapper to iterate
@@ -311,6 +312,11 @@ const resolvers = {
             const usersFollowingRequest = await twitterNetworkCall(user.access_token, user.access_secret).get('followers/list', { screen_name: args.screen_name });
             const usersFollowingResponse = usersFollowingRequest;
             return usersFollowingResponse;
+        },
+        getUsersFavorites: async (parent, args, user) => {
+            const getUsersFavoritesRequest = await twitterNetworkCall(user.access_token, user.access_secret).get('favorites/list', { screen_name: args.screen_name, tweet_mode: 'extended' });
+            const getUsersFavoritesResponse = getUsersFavoritesRequest;
+            return getUsersFavoritesResponse;
         }
     },
     Mutation: {

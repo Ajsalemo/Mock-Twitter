@@ -10,6 +10,7 @@ import Main from '../pages/main/main';
 import PublicProfile from '../pages/main/publicprofile';
 import ProfileFollowing from '../pages/main/profilefollowing';
 import ProfileFollowers from '../pages/main/profilefollowers';
+import ProfileLikes from '../pages/main/profilelikes';
 
 // Components
 import Loading from '../components/loading';
@@ -43,6 +44,7 @@ class RouteContainer extends Component {
         return (
             <React.Fragment>
                 <Switch>
+                    <Route path='/likes/:params' component={ProfileLikes} />
                     <Route path='/userprofile/:params' component={PublicProfile} />
                     <Route path='/following/:params' component={ProfileFollowing} />
                     <Route path='/followers/:params' component={ProfileFollowers} />

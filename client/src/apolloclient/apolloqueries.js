@@ -333,6 +333,52 @@ export const USERS_FOLLOWING =
         }
     `;
 
+export const GET_USERS_LIKES = 
+    gql`
+        query GetUsersFavorites($screen_name: String!) {
+            currentUser {
+                user_id
+                name
+                getUsersFavorites(screen_name: $screen_name) {
+                    created_at
+                    id
+                    id_str
+                    full_text
+                    truncated
+                    geo
+                    coordinates
+                    place
+                    contributors
+                    is_quote_status
+                    retweet_count
+                    favorite_count
+                    favorited
+                    retweeted
+                    lang
+                    user {
+                        id
+                        name
+                        screen_name
+                        verified
+                        statuses_count
+                        friends_count
+                        followers_count
+                        profile_image_url_https
+                        in_reply_to_status_id_str
+                    }
+                    entities {
+                        hashtags {
+                            text
+                        }
+                        media {
+                            display_url
+                            media_url_https
+                        }
+                    }
+                }
+            }
+        }
+    `;
 
 // ------------------------------------------------------------------------------------------------------ //
 // ---------------------------------------------- Mutations --------------------------------------------- //

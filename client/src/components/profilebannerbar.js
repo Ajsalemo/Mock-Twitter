@@ -116,8 +116,10 @@ const ProfileBannerBar = props => {
                                     </Link>
                                 </Typography>
                                 <Typography variant="h6" color="inherit" className={classes.infoDescriptionTypography}>
-                                    <span className={classes.infoDescription}>Likes</span>
-                                    <span className={classes.infoNumbers}>{data.currentUser.userProfileTweets[0].user.favourites_count}</span>
+                                    <Link to={`/likes/${URLparam}`} className={classes.publicProfileLinkToProfileStats}>
+                                        <span className={classes.infoDescription}>Likes</span>
+                                        <span className={classes.infoNumbers}>{data.currentUser.userProfileTweets[0].user.favourites_count}</span>
+                                    </Link>
                                 </Typography>
                                 <Typography variant="h6" color="inherit" className={classes.infoDescriptionTypography}>
                                     <span className={classes.infoDescription}>Lists</span>
