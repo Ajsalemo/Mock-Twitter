@@ -143,7 +143,7 @@ export const GET_SUGGESTED_CATEGORIES =
                 suggestedCategory {
                     name
                     slug
-                    size
+                    id
                 }
             }
         }
@@ -374,6 +374,32 @@ export const GET_USERS_LIKES =
                             display_url
                             media_url_https
                         }
+                    }
+                }
+            }
+        }
+    `;
+
+export const GET_USER_LISTS = 
+    gql`
+        query GetUserLists($screen_name: String!) {
+            currentUser {
+                user_id
+                name
+                getLists(screen_name: $screen_name) {
+                    name
+                    slug
+                    id
+                    id_str
+                    subscriber_count
+                    member_count
+                    mode
+                    description
+                    full_name
+                    created_at
+                    following
+                    user {
+                        screen_name
                     }
                 }
             }

@@ -2,22 +2,10 @@
 // ----------------------------------------------------------------------------------------------------- //
 
 import React from 'react';
-import { Query } from 'react-apollo';
 import { Link } from 'react-router-dom';
 
 // Material-UI components
-import { withStyles, Grid, Paper, Card, CardContent, Typography, CircularProgress, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails } from '@material-ui/core';
-import { ExpandMore } from '@material-ui/icons';
-
-// Apollo Queries
-import { GET_SUGGESTED_CATEGORIES } from '../apolloclient/apolloqueries';
-
-// Components
-import SuggestedCategories from '../components/suggestedcategories';
-import Error from './error';
-
-// Imported functions
-import { pollMinute } from '../apolloclient/apolloclient';
+import { withStyles, Grid, Paper, Card, CardContent, Typography } from '@material-ui/core';
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //

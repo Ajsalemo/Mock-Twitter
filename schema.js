@@ -33,14 +33,13 @@ const typeDefs =
             userTimelineTweets: [UserTimelineTweets]
             userProfileTweets(screen_name: String!): [UserProfileTimeline]
             trendingTopics: [trendsWrapper]
-            suggestedCategory: [SuggestedCategory]
-            suggestedCategorySlug(slug: String!): SuggestedCategorySlug
             compareRelationship(target_screenName: String!, source_screenName: String!): RelationshipWrapper 
             userTweetStatusCount: [UserTimelineTweets]
             verifyCredentials: UserObject
             usersFollowers(screen_name: String!): UsersFollowers
             usersFollowing(screen_name: String!): UsersFollowers
             getUsersFavorites(screen_name: String!): [UserTimelineTweets]
+            getLists(screen_name: String!): [UsersLists]
         }
 
         # Object wrapper to iterate
@@ -121,12 +120,20 @@ const typeDefs =
             size: String
         }
 
-        # Suggested categories to follow
-        type SuggestedCategorySlug {
+        # Lists that users are subscribed to
+        type UsersLists {
             name: String
             slug: String
-            size: String
-            users: [UserObject]
+            id: String
+            id_str: String
+            subscriber_count: String
+            member_count: Int
+            mode: String
+            description: String
+            full_name: String
+            created_at: String
+            following: Boolean
+            user: UserObject
         }
 
         # Suggested catergory members 
@@ -283,16 +290,6 @@ const resolvers = {
             const getTrendingTopicsResponse = await getTrendingTopicsRequest;
             return getTrendingTopicsResponse;
         },
-        suggestedCategory: async (parent, args, user) => {
-            const suggestedCategoryRequest = await twitterNetworkCall(user.access_token, user.access_secret).get('users/suggestions', { screen_name: user.decodedToken.name });
-            const suggestedCategoryResponse = await suggestedCategoryRequest;
-            return suggestedCategoryResponse;
-        },
-        suggestedCategorySlug: async (parent, args, user) => {
-            const categorySlugRequest = await twitterNetworkCall(user.access_token, user.access_secret).get(`users/suggestions/${args.slug}`, { screen_name: user.decodedToken.name });
-            const categorySlugResponse = await categorySlugRequest;
-            return categorySlugResponse;
-        },
         compareRelationship: async (parent, args, user) => {
             const compareRelationshipRequest = await twitterNetworkCall(user.access_token, user.access_secret).get('friendships/show', { source_screen_name: args.source_screenName, target_screen_name: args.target_screenName });
             const compareRelationshipResponse = await compareRelationshipRequest;
@@ -317,6 +314,11 @@ const resolvers = {
             const getUsersFavoritesRequest = await twitterNetworkCall(user.access_token, user.access_secret).get('favorites/list', { screen_name: args.screen_name, tweet_mode: 'extended' });
             const getUsersFavoritesResponse = getUsersFavoritesRequest;
             return getUsersFavoritesResponse;
+        },
+        getLists: async (parent, args, user) => {
+            const getListsRequest = await twitterNetworkCall(user.access_token, user.access_secret).get('lists/list', { screen_name: args.screen_name });
+            const getListsResponse = getListsRequest;
+            return getListsResponse;
         }
     },
     Mutation: {
