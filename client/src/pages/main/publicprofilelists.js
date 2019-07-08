@@ -14,8 +14,8 @@ import PublicProfileBanner from '../../components/publicprofilebanner';
 import ProfileBannerBar from '../../components/profilebannerbar';
 import PublicProfileHandle from '../../components/publicprofilehandle';
 import Recommended from '../../components/recommended';
+import ListsComponent from '../../components/listscomponent';
 import Trending from '../../components/trending';
-import PublicProfileTimeline from '../../components/publicprofiletimeline';
 import Error from '../../components/error';
 
 // Apollo Query
@@ -25,23 +25,23 @@ import { VERIFY_USER } from '../../apolloclient/apolloqueries';
 // ----------------------------------------------------------------------------------------------------- //
 
 const styles = () => ({
-    publicProfileContainerStyle: {
+    publicListsContainerStyle: {
         marginTop: '0.7em',
         display: 'flex',
         justifyContent: 'center'
     },
-    publicProfileHandlerGrid: {
+    publicListsHandlerGrid: {
         width: 'auto',
         paddingRight: '0em'
     },
-    publicProfileTimelineItem: {
+    publicListsTimelineItem: {
         marginRight: '0.6em'
     }
 });
 
 // ----------------------------------------------------------------------------------------------------- //
 
-let PublicProfile = props => {
+let PublicProfileLists = props => {
     const param = props.match.params.params; 
     const { classes } = props;
     return (
@@ -61,14 +61,14 @@ let PublicProfile = props => {
                                 URLparam={param}
                                 currentUser={data.currentUser.verifyCredentials.screen_name}
                             />
-                            <Grid container className={classes.publicProfileContainerStyle}>
-                                <Grid item xs={8} sm={8} md={2} className={classes.publicProfileHandlerGrid}>
+                            <Grid container className={classes.publicListsContainerStyle}>
+                                <Grid item xs={8} sm={8} md={2} className={classes.publicListsHandlerGrid}>
                                     <PublicProfileHandle 
                                         URLparam={param}
                                     />
                                 </Grid>
-                                <Grid item md={4} className={classes.publicProfileTimelineItem}>
-                                    <PublicProfileTimeline
+                                <Grid item md={4} className={classes.publicListsTimelineItem}>
+                                    <ListsComponent 
                                         URLparam={param}
                                     />
                                 </Grid>
@@ -88,9 +88,9 @@ let PublicProfile = props => {
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
-PublicProfile = withStyles(styles)(PublicProfile);
+PublicProfileLists = withStyles(styles)(PublicProfileLists);
 
-export default withRouter(PublicProfile);
+export default withRouter(PublicProfileLists);
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //

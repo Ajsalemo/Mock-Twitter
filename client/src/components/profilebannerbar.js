@@ -122,8 +122,10 @@ const ProfileBannerBar = props => {
                                     </Link>
                                 </Typography>
                                 <Typography variant="h6" color="inherit" className={classes.infoDescriptionTypography}>
-                                    <span className={classes.infoDescription}>Lists</span>
-                                    <span className={classes.infoNumbers}>{data.currentUser.userProfileTweets[0].user.listed_count}</span>
+                                    <Link to={`/lists/${URLparam}`} className={classes.publicProfileLinkToProfileStats}>
+                                        <span className={classes.infoDescription}>Lists</span>
+                                        <span className={classes.infoNumbers}>{data.currentUser.userProfileTweets[0].user.listed_count}</span>
+                                    </Link>
                                 </Typography>
                                 <div className={classes.profileBannerFollowButton}>
                                     {/* If viewing the logged in users profile, hide this button */}
