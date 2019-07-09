@@ -12,6 +12,7 @@ import ProfileFollowing from '../pages/main/profilefollowing';
 import ProfileFollowers from '../pages/main/profilefollowers';
 import ProfileLikes from '../pages/main/profilelikes';
 import PublicProfileLists from '../pages/main/publicprofilelists';
+import ListsTimeline from '../pages/main/liststimeline';
 
 // Components
 import Loading from '../components/loading';
@@ -45,6 +46,7 @@ class RouteContainer extends Component {
         return (
             <React.Fragment>
                 <Switch>
+                    <Route path='/lists-statuses' component={ListsTimeline} />
                     <Route path='/lists/:params' component={PublicProfileLists} />
                     <Route path='/likes/:params' component={ProfileLikes} />
                     <Route path='/userprofile/:params' component={PublicProfile} />
