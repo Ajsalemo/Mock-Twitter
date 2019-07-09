@@ -32,8 +32,7 @@ const styles = () => ({
     listsComponentFontGrid: {
         borderBottom: '1px solid gray',
         width: '100%',
-        paddingLeft: '0.7em',
-        marginBottom: '1.5em'
+        paddingLeft: '0.7em'
     },
     listsComponentDataGrid: {
         paddingLeft: '0.7em'
@@ -46,11 +45,23 @@ const styles = () => ({
         paddingLeft: '0.4em'
     },
     listComponentDataTypography: {
-        display: 'flex'
+        display: 'flex',
+        margin: '1em 0'
     },
     listsComponentLink: {
         textDecoration: 'none',
-        color: 'inherit'
+        color: 'inherit',
+        paddingLeft: '0.4em',
+        '&:hover': {
+            textDecoration: 'underline'
+        }
+    },
+    listsComponentSpanMembers: {
+        color: '#6a6a6a',
+        display: 'inline',
+        fontSize: '1em',
+        fontWeight: '200',
+        paddingRight: '0.4em'
     }
 });
 
@@ -80,14 +91,18 @@ const ListsComponent = props => {
                         {
                             data.currentUser.getLists.map((lists, i) => {
                                 return (
-                                    <Grid className={classes.listsComponentDataGrid}>
+                                    <Grid className={classes.listsComponentDataGrid} key={i}>
                                         <Typography variant="subtitle2" gutterBottom className={classes.listComponentDataTypography}>
                                             {lists.name}
                                             <span className={classes.listsComponentSpan}>
+                                                by 
                                                 <Link to={`/userprofile/${lists.user.screen_name}`} className={classes.listsComponentLink}>
-                                                    by {lists.user.screen_name}
+                                                    {lists.user.screen_name}
                                                 </Link>
                                             </span>
+                                        </Typography>
+                                        <Typography variant="subtitle2" gutterBottom className={classes.listsComponentSpanMembers}>
+                                            <span>{lists.member_count}</span> members
                                         </Typography>
                                     </Grid>
                                 );
