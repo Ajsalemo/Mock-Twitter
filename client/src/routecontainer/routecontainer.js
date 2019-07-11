@@ -46,7 +46,7 @@ class RouteContainer extends Component {
         return (
             <React.Fragment>
                 <Switch>
-                    <Route path='/lists-statuses' component={ListsTimeline} />
+                    <Route path='/lists-statuses/:screen_name/:params' component={ListsTimeline} />
                     <Route path='/lists/:params' component={PublicProfileLists} />
                     <Route path='/likes/:params' component={ProfileLikes} />
                     <Route path='/userprofile/:params' component={PublicProfile} />

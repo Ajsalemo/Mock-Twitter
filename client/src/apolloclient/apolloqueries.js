@@ -406,6 +406,79 @@ export const GET_USER_LISTS =
         }
     `;
 
+export const GET_LISTS_TIMELINE = 
+    gql`
+        query GetListsTimeline($list_id: String!) {
+            currentUser {
+                user_id
+                name
+                getListsTimeline(list_id: $list_id) {
+                    created_at
+                    id
+                    id_str
+                    full_text
+                    truncated
+                    geo
+                    coordinates
+                    place
+                    contributors
+                    is_quote_status
+                    retweet_count
+                    favorite_count
+                    favorited
+                    retweeted
+                    lang
+                    user {
+                        id
+                        name
+                        screen_name
+                        verified
+                        statuses_count
+                        friends_count
+                        followers_count
+                        profile_image_url_https
+                        in_reply_to_status_id_str
+                    }
+                    entities {
+                        hashtags {
+                            text
+                        }
+                        media {
+                            display_url
+                            media_url_https
+                        }
+                    }
+                }
+            }
+        }
+    `;
+
+export const GET_LISTS_SHOW = 
+    gql`
+        query GetListsShow($list_id: String!) {
+            currentUser {
+                user_id
+                name
+                getListsShow(list_id: $list_id) {
+                    name
+                    slug
+                    id
+                    id_str
+                    subscriber_count
+                    member_count
+                    mode
+                    description
+                    full_name
+                    created_at
+                    following
+                    user {
+                        screen_name
+                    }
+                }
+            }
+        }
+    `;
+
 // ------------------------------------------------------------------------------------------------------ //
 // ---------------------------------------------- Mutations --------------------------------------------- //
 

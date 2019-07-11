@@ -62,6 +62,13 @@ const styles = () => ({
         fontSize: '1em',
         fontWeight: '200',
         paddingRight: '0.4em'
+    },
+    listsComponentName: {
+        color: 'inherit',
+        textDecoration: 'none',
+        '&:hover': {
+            textDecoration: 'underline'
+        }
     }
 });
 
@@ -93,7 +100,9 @@ const ListsComponent = props => {
                                 return (
                                     <Grid className={classes.listsComponentDataGrid} key={i}>
                                         <Typography variant="subtitle2" gutterBottom className={classes.listComponentDataTypography}>
-                                            {lists.name}
+                                            <Link to={`/lists-statuses/${lists.user.screen_name}/${lists.id}`} className={classes.listsComponentName}>
+                                                {lists.name}
+                                            </Link>
                                             <span className={classes.listsComponentSpan}>
                                                 by 
                                                 <Link to={`/userprofile/${lists.user.screen_name}`} className={classes.listsComponentLink}>
