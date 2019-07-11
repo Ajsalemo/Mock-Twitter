@@ -29,7 +29,7 @@ const styles = () => ({
     listsTimelineGrid: {
         display: 'flex',
         justifyContent: 'center',
-        margin: '0 2em'
+        margin: '1em 2em 0em 2em'
     },
     listsTimelineGridMain: {
         marginTop: '1em'

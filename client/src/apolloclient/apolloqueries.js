@@ -473,6 +473,7 @@ export const GET_LISTS_SHOW =
                     following
                     user {
                         screen_name
+                        profile_image_url_https
                     }
                 }
             }

@@ -128,7 +128,7 @@ const typeDefs =
             slug: String
             id: String
             id_str: String
-            subscriber_count: String
+            subscriber_count: Int
             member_count: Int
             mode: String
             description: String
