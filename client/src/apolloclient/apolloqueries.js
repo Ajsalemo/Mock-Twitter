@@ -400,6 +400,7 @@ export const GET_USER_LISTS =
                     following
                     user {
                         screen_name
+                        profile_image_url_https
                     }
                 }
             }
@@ -568,6 +569,30 @@ export const DELETE_STATUS =
                 id
                 name
                 screen_name
+            }
+        }
+    `;
+
+export const SUBSCRIBE_TO_LIST =
+    gql`
+        mutation SubscribeToList($list_id: String!) {
+            subscribeToList(list_id: $list_id) {
+                id
+                id_str
+                name
+                slug
+            }
+        }
+    `;
+
+export const UNSUBSCRIBE_TO_LIST =
+    gql`
+        mutation UnsubscribeToList($list_id: String!) {
+            unsubscribeToList(list_id: $list_id) {
+                id
+                id_str
+                name
+                slug
             }
         }
     `;

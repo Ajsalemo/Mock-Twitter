@@ -90,6 +90,7 @@ const ProfileBannerBar = props => {
                 {({ loading, error, data }) => {
                     if (loading) return <div><CircularProgress /></div>;
                     if (error) return <div><Error /></div>; 
+                    console.log(data)
                     const filterProfileImageURL = data.currentUser.userProfileTweets[0].user.profile_image_url_https.replace('_normal.jpg', '.jpg');
                     return (
                         <React.Fragment>

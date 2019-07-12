@@ -10,6 +10,8 @@ import { withStyles, Paper, Typography, CircularProgress, Grid, Card, CardConten
 
 // Components
 import Error from '../components/error';
+import SubscribeListButton from '../components/subscribelistbutton';
+import UnsubscribeListButton from '../components/unsubscribelistbutton';
 
 // Apollo Queries
 import { GET_LISTS_SHOW } from '../apolloclient/apolloqueries';
@@ -67,7 +69,7 @@ const styles = () => ({
 // ----------------------------------------------------------------------------------------------------- //
 
 const ListsProfileHandle = props => {
-    const { URLparam, classes } = props;
+    const { URLparam, classes, currentUser } = props;
     return (
         <Query 
             query={GET_LISTS_SHOW}
@@ -80,7 +82,6 @@ const ListsProfileHandle = props => {
             {({ loading, error, data }) => {
                 if (loading) return <div className={classes.errorAndLoadingDiv}><CircularProgress /></div>;
                 if (error) return <div className={classes.errorAndLoadingDiv}><Error /></div>;                
-                console.log(data)
                 return (
                     <Paper className={classes.listsProfilePaper}>
                         <Card className={classes.listsProfileCard}>
@@ -127,6 +128,20 @@ const ListsProfileHandle = props => {
                                             {data.currentUser.getListsShow.subscriber_count}
                                         </Typography>
                                     </Grid>
+                                </Grid>
+                                <Grid>
+                                    {data.currentUser.getListsShow.following === true
+                                        ?
+                                    <UnsubscribeListButton 
+                                        list_id={URLparam}
+                                        currentUser={currentUser}
+                                    />
+                                        :
+                                    <SubscribeListButton
+                                        list_id={URLparam}
+                                        currentUser={currentUser}
+                                    />
+                                    }
                                 </Grid>
                             </CardContent>
                             <Grid className={classes.listsProfileAvatarGrid}>

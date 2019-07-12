@@ -45,25 +45,26 @@ const ListsTimeline = props => {
         <React.Fragment>
             <Navbar />
             <Grid container className={classes.listsTimelineContainer}>
-                <Grid item xs={8} sm={8} md={2} className={classes.listsTimelineGrid}>
-                    {/* This is a placeholder while the informational component gets built */}
-                    {/* Using this to determine proper spacing */}
-                    <ListsProfileHandle 
-                        URLparam={param}
-                    />
-                </Grid>
                 <Query query={VERIFY_USER}>
                     {({ loading, error, data }) => {
                         if (loading) return <div><CircularProgress /></div>;
                         if (error) return <div><Error /></div>;
 
                         return (
-                            <Grid item md={6} className={classes.listsTimelineGridMain}>
-                                <ListsTimelineComponent
-                                    URLparam={param}
-                                    currentUser={data.currentUser.verifyCredentials.screen_name}
-                                />
-                            </Grid>
+                            <React.Fragment>
+                                <Grid item xs={8} sm={8} md={2} className={classes.listsTimelineGrid}>
+                                    <ListsProfileHandle 
+                                        URLparam={param}
+                                        currentUser={data.currentUser.verifyCredentials.screen_name}
+                                    />
+                                </Grid>
+                                <Grid item md={6} className={classes.listsTimelineGridMain}>
+                                    <ListsTimelineComponent
+                                        URLparam={param}
+                                        currentUser={data.currentUser.verifyCredentials.screen_name}
+                                    />
+                                </Grid>
+                            </React.Fragment>
                         );
                     }}
                 </Query>

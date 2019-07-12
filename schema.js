@@ -24,6 +24,8 @@ const typeDefs =
             retweet(id: String!): RetweetObject
             unRetweet(id: String!): UserTweetObject
             deleteStatus(id: String!): UserTweetObject
+            subscribeToList(list_id: String!): UsersLists
+            unsubscribeToList(list_id: String!): UsersLists
         }
 
         # User Object
@@ -279,8 +281,8 @@ const resolvers = {
     User: {
         userTimelineTweets: async (parent, args, user) => {
             const requestUserTimelineTweets = await twitterNetworkCall(user.access_token, user.access_secret).get('statuses/home_timeline', { tweet_mode: 'extended' });
-            const responserUserTimelineTweets = await requestUserTimelineTweets;
-            return responserUserTimelineTweets;
+            const responseUserTimelineTweets = await requestUserTimelineTweets;
+            return responseUserTimelineTweets;
         },
         userProfileTweets: async (parent, args, user) => {
             const userProfileTweetsRequest = await twitterNetworkCall(user.access_token, user.access_secret).get('statuses/user_timeline', { screen_name: args.screen_name, tweet_mode: 'extended' });
@@ -373,6 +375,16 @@ const resolvers = {
             const deleteStatusRequest = await twitterNetworkCall(user.access_token, user.access_secret).post('statuses/destroy', { id: args.id });
             const deleteStatusResponse = await deleteStatusRequest;
             return deleteStatusResponse;
+        },
+        subscribeToList: async (parent, args, user) => {
+            const subscribeToListRequest = await twitterNetworkCall(user.access_token, user.access_secret).post('lists/subscribers/create', { list_id: args.list_id });
+            const subscribeToListResponse = await subscribeToListRequest;
+            return subscribeToListResponse;
+        },
+        unsubscribeToList: async (parent, args, user) => {
+            const unsubscribeToListRequest = await twitterNetworkCall(user.access_token, user.access_secret).post('lists/subscribers/destroy', { list_id: args.list_id });
+            const unsubscribeToListResponse = await unsubscribeToListRequest;
+            return unsubscribeToListResponse;
         }
     }
 };
