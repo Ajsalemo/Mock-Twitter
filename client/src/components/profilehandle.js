@@ -29,7 +29,8 @@ const styles = () => ({
     },
     upperCardContent: {
         backgroundColor: '#007fec',
-        height: '6em'
+        height: '6em',
+        padding: '0em'
     },
     upperText: {
         textAlign: 'center'
@@ -54,7 +55,6 @@ const styles = () => ({
         borderRadius: '0%'
     },
     profileTweetCount: {
-        color: '#00acee',
         display: 'block',
         fontWeight: '700'
     },
@@ -72,6 +72,9 @@ const styles = () => ({
         '&:hover': {
             color: '#00acee'
         }
+    },
+    profileHandleImage: {
+        height: 'inherit'
     }
 });
 
@@ -87,13 +90,21 @@ const ProfileHandle = props => {
             {({ loading, error, data }) => {
                 if (loading) return <div><CircularProgress /></div>;
                 if (error) return <div><Error /></div>;
+                console.log(data)
                 return (
                     <Paper>
                         <Card className={classes.profileHandlePaper}>
-                            <CardContent className={classes.upperCardContent}></CardContent>  
-                                <Link to={`/userprofile/${data.currentUser.verifyCredentials.screen_name}`}>        
-                                    <Avatar alt="twitter avatar" src={data.currentUser.verifyCredentials.profile_image_url_https} className={classes.twitterAvatar} /> 
-                                </Link>
+                            <CardContent className={classes.upperCardContent}>
+                                <img 
+                                    // Alt is shown as an empty string due to these banners being a decorative image
+                                    alt={''}
+                                    src={data.currentUser.verifyCredentials.profile_banner_url}
+                                    className={classes.profileHandleImage}
+                                />
+                            </CardContent>  
+                            <Link to={`/userprofile/${data.currentUser.verifyCredentials.screen_name}`}>        
+                                <Avatar alt="twitter avatar" src={data.currentUser.verifyCredentials.profile_image_url_https} className={classes.twitterAvatar} /> 
+                            </Link>
                             <CardContent className={classes.rootClass}>
                                 <Typography variant="h6" gutterBottom className={classes.upperText}>
                                     <div className={classes.handleTextUpperDiv}>
@@ -106,7 +117,10 @@ const ProfileHandle = props => {
                                         <div className={classes.profileTweetSpan}>
                                             <Link to={`userprofile/${data.currentUser.verifyCredentials.screen_name}`} className={classes.linkToProfileStats}>
                                                 <span>Tweets</span>
-                                                <span className={classes.profileTweetCount}>
+                                                <span 
+                                                    className={classes.profileTweetCount}
+                                                    style={{ color: `#${data.currentUser.verifyCredentials.profile_link_color}` }}
+                                                >
                                                     {data.currentUser.verifyCredentials.statuses_count}
                                                 </span>
                                             </Link>
@@ -114,7 +128,10 @@ const ProfileHandle = props => {
                                         <div className={classes.profileTweetSpan}>
                                             <Link to={`following/${data.currentUser.verifyCredentials.screen_name}`} className={classes.linkToProfileStats}>
                                                 <span>Following</span>
-                                                <span className={classes.profileTweetCount}>
+                                                <span 
+                                                    className={classes.profileTweetCount}
+                                                    style={{ color: `#${data.currentUser.verifyCredentials.profile_link_color}` }}
+                                                >
                                                     {data.currentUser.verifyCredentials.friends_count}
                                                 </span>
                                             </Link>
@@ -122,7 +139,10 @@ const ProfileHandle = props => {
                                         <div className={classes.profileTweetSpan}>
                                             <Link to={`followers/${data.currentUser.verifyCredentials.screen_name}`} className={classes.linkToProfileStats}>
                                                 <span>Followers</span>
-                                                <span className={classes.profileTweetCount}>
+                                                <span 
+                                                    className={classes.profileTweetCount}
+                                                    style={{ color: `#${data.currentUser.verifyCredentials.profile_link_color}` }}
+                                                >
                                                     {data.currentUser.verifyCredentials.followers_count}
                                                 </span>
                                             </Link>

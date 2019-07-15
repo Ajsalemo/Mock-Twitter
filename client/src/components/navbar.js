@@ -171,7 +171,9 @@ const Navbar = props => {
                                     screen_name={data.currentUser.verifyCredentials.screen_name}
                                 />
                                 {/* Classes component for the modal to submit tweets */}
-                                <TweetModal />
+                                <TweetModal 
+                                    profileLinkColor={data.currentUser.verifyCredentials.profile_link_color}
+                                />
                             </div>
                         </Toolbar>
                     </AppBar>

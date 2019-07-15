@@ -17,7 +17,6 @@ const styles = () => ({
         height: '2.4em',
         width: 'max-content',
         padding: '0em 0.4em',
-        backgroundColor: '#00acee',
         color: '#fff',
         '&:hover': {
             cursor: 'pointer'
@@ -56,7 +55,7 @@ class TweetModal extends Component {
     // ----------------------------------------------------------------------------------------------------- //
   
     render() {
-        const { classes, userToReply, userScreenName } = this.props;
+        const { classes, userToReply, userScreenName, profileLinkColor } = this.props;
         return (
             <React.Fragment>
                 <Fab 
@@ -64,6 +63,9 @@ class TweetModal extends Component {
                     aria-label="Add Tweet" 
                     className={classes.tweetButton}
                     onClick={this.handleOpen}
+                    style={{ 
+                        backgroundColor: `#${profileLinkColor}`
+                    }}
                 >
                     {userToReply ? `Tweet to ${userToReply}` : 'Tweet'}
                 </Fab>

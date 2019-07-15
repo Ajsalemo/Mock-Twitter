@@ -100,6 +100,8 @@ export const GET_USERPROFILE_TWEETS =
                         profile_banner_url
                         created_at
                         description
+                        profile_background_color
+                        profile_background_image_url_https
                     }
                     entities {
                         hashtags {
