@@ -63,6 +63,10 @@ const styles = () => ({
     },
     listsProfilePaper: {
         height: 'fit-content'
+    },
+    listProfileButtonGrid: {
+        paddingTop: '0.5em',
+        borderTop: '1px solid #8080804f'
     }
 });
 
@@ -85,9 +89,7 @@ const ListsProfileHandle = props => {
                 return (
                     <Paper className={classes.listsProfilePaper}>
                         <Card className={classes.listsProfileCard}>
-                            <CardContent classes={{
-                                root: classes.cardContentRoot
-                            }}>
+                            <CardContent classes={{ root: classes.cardContentRoot }}>
                                 <Typography variant="h6" className={classes.listsProfileLineHeight}>
                                     {data.currentUser.getListsShow.name}
                                 </Typography>
@@ -112,7 +114,7 @@ const ListsProfileHandle = props => {
                                     {data.currentUser.getListsShow.description}
                                 </Typography>
                                 <Grid item className={classes.listProfileUserCountGrid}>
-                                <Grid item>
+                                    <Grid item>
                                         <Typography variant="subtitle2">
                                             Members
                                         </Typography>
@@ -129,7 +131,7 @@ const ListsProfileHandle = props => {
                                         </Typography>
                                     </Grid>
                                 </Grid>
-                                <Grid>
+                                <Grid className={classes.listProfileButtonGrid}>
                                     {data.currentUser.getListsShow.following === true
                                         ?
                                     <UnsubscribeListButton 
@@ -145,7 +147,9 @@ const ListsProfileHandle = props => {
                                 </Grid>
                             </CardContent>
                             <Grid className={classes.listsProfileAvatarGrid}>
-                                <Avatar src={data.currentUser.getListsShow.user.profile_image_url_https} alt={`${data.currentUser.getListsShow.user.screen_name} avatar`}/>
+                                <Link to={`/userprofile/${data.currentUser.getListsShow.user.screen_name}`}>
+                                    <Avatar src={data.currentUser.getListsShow.user.profile_image_url_https} alt={`${data.currentUser.getListsShow.user.screen_name} avatar`}/>
+                                </Link>
                             </Grid>
                         </Card>
                     </Paper>

@@ -4,9 +4,6 @@
 import React from 'react';
 import classNames from 'classnames';
 
-// Components
-import Login from '../../components/login';
-
 // Material-UI components
 import { withStyles, Grid, Typography, Avatar, Fab, AppBar, Toolbar } from '@material-ui/core';
 import { Search, PeopleOutline, ChatBubbleOutline } from '@material-ui/icons';
@@ -101,7 +98,6 @@ const Home = props => {
         <Grid container className={classes.mediaGrid}>
             {/* --------------------------------------------- Log in/ Sign up buttons ---------------------------------------------- */}
             <Grid item xs={12}>
-                <Login />
                 <Grid item className={classes.gridTwo}>
                     <Grid item md={4}>
                         <Avatar alt="twitter logo" src={twitterminilogo} className={classes.twitterAvatar} /> 

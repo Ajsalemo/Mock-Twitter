@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 import { Avatar, Grid, AppBar, Toolbar, Typography, CircularProgress, withStyles } from '@material-ui/core';
 
 // Apollo Queries
-import { GET_USERPROFILE_TWEETS } from '../apolloclient/apolloqueries';
+import { GET_USERPROFILE_TWEETS, GET_USER_LISTS } from '../apolloclient/apolloqueries';
 
 // Components
 import Error from '../components/error';
@@ -90,7 +90,6 @@ const ProfileBannerBar = props => {
                 {({ loading, error, data }) => {
                     if (loading) return <div><CircularProgress /></div>;
                     if (error) return <div><Error /></div>; 
-                    console.log(data)
                     const filterProfileImageURL = data.currentUser.userProfileTweets[0].user.profile_image_url_https.replace('_normal.jpg', '.jpg');
                     return (
                         <React.Fragment>
@@ -123,10 +122,23 @@ const ProfileBannerBar = props => {
                                     </Link>
                                 </Typography>
                                 <Typography variant="h6" color="inherit" className={classes.infoDescriptionTypography}>
-                                    <Link to={`/lists/${URLparam}`} className={classes.publicProfileLinkToProfileStats}>
-                                        <span className={classes.infoDescription}>Lists</span>
-                                        <span className={classes.infoNumbers}>{data.currentUser.userProfileTweets[0].user.listed_count}</span>
-                                    </Link>
+                                    <Query
+                                        query={GET_USER_LISTS}
+                                        variables={{
+                                            screen_name: URLparam
+                                        }}
+                                    >
+                                        {({ loading, error, data }) => {
+                                            return (
+                                                <Link to={`/lists/${URLparam}`} className={classes.publicProfileLinkToProfileStats}>
+                                                    <span className={classes.infoDescription}>Lists</span>
+                                                    <span className={classes.infoNumbers}>
+                                                        {data.currentUser ? data.currentUser.getLists.length : '0'}
+                                                    </span>
+                                                </Link>
+                                            );
+                                        }}
+                                    </Query>
                                 </Typography>
                                 <div className={classes.profileBannerFollowButton}>
                                     {/* If viewing the logged in users profile, hide this button */}

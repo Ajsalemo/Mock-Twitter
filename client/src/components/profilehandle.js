@@ -80,15 +80,20 @@ const styles = () => ({
 const ProfileHandle = props => {
     const { classes } = props;
     return (
-        <Query query={VERIFY_USER}>
+        <Query 
+            query={VERIFY_USER}
+            fetchPolicy='network-only'
+        >
             {({ loading, error, data }) => {
                 if (loading) return <div><CircularProgress /></div>;
                 if (error) return <div><Error /></div>;
                 return (
                     <Paper>
                         <Card className={classes.profileHandlePaper}>
-                            <CardContent className={classes.upperCardContent}></CardContent>          
-                            <Avatar alt="twitter avatar" src={data.currentUser.verifyCredentials.profile_image_url_https} className={classes.twitterAvatar} /> 
+                            <CardContent className={classes.upperCardContent}></CardContent>  
+                                <Link to={`/userprofile/${data.currentUser.verifyCredentials.screen_name}`}>        
+                                    <Avatar alt="twitter avatar" src={data.currentUser.verifyCredentials.profile_image_url_https} className={classes.twitterAvatar} /> 
+                                </Link>
                             <CardContent className={classes.rootClass}>
                                 <Typography variant="h6" gutterBottom className={classes.upperText}>
                                     <div className={classes.handleTextUpperDiv}>

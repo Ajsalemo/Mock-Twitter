@@ -114,7 +114,10 @@ const Navbar = props => {
     const { classes } = props;
     return (
         <React.Fragment>
-            <Query query={VERIFY_USER}>
+            <Query 
+                query={VERIFY_USER}
+                fetchPolicy='network-only'
+            >
                 {({ loading, error, data }) => {
                     if (loading) return <div><CircularProgress /></div>;
                     if (error) return <div><Error /></div>;
