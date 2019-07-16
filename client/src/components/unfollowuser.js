@@ -15,7 +15,6 @@ import { UNFOLLOW_USER, COMPARE_FRIENDSHIPS, USERS_FOLLOWERS } from '../apollocl
 
 const styles = () => ({
     followUserButton: {
-        backgroundColor: '#00acee',
         color: '#fff',
         height: '2em',
         width: '6em',
@@ -28,7 +27,7 @@ const styles = () => ({
 // ----------------------------------------------------------------------------------------------------- //
 
 const UnfollowUser = props => {
-    const { classes, id, screen_name, currentUser } = props;
+    const { classes, id, screen_name, currentUser, profileLinkColor } = props;
     return (
         <Mutation 
             mutation={UNFOLLOW_USER} 
@@ -64,6 +63,7 @@ const UnfollowUser = props => {
                     classes={{
                         root: classes.followUserButton
                     }}
+                    style={{ backgroundColor: `#${profileLinkColor}`}}
                 >
                     Following
                 </Fab>

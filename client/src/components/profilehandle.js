@@ -28,7 +28,6 @@ const styles = () => ({
         margin: '-1.5em 0 0 0.5em'
     },
     upperCardContent: {
-        backgroundColor: '#007fec',
         height: '6em',
         padding: '0em'
     },
@@ -90,11 +89,13 @@ const ProfileHandle = props => {
             {({ loading, error, data }) => {
                 if (loading) return <div><CircularProgress /></div>;
                 if (error) return <div><Error /></div>;
-                console.log(data)
                 return (
                     <Paper>
                         <Card className={classes.profileHandlePaper}>
-                            <CardContent className={classes.upperCardContent}>
+                            <CardContent 
+                                className={classes.upperCardContent}
+                                style={{ backgroundColor: `#${data.currentUser.verifyCredentials.profile_link_color}` }}
+                            >
                                 <img 
                                     // Alt is shown as an empty string due to these banners being a decorative image
                                     alt={''}

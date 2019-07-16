@@ -44,18 +44,20 @@ const SubmitTweet = props => {
                 {({ loading, error, data }) => {
                     if (loading) return <div><CircularProgress /></div>;
                     if (error) return <div><Error /></div>;
-                return (
-                    <Grid item xs={10} sm={8} md={5} className={classes.gridItem}>
-                        <Paper className={classes.paperOutline}>
-                            <SubmitTweetForm 
-                                data={data}
+                    return (
+                        <Grid item xs={10} sm={8} md={5} className={classes.gridItem}>
+                            <Paper className={classes.paperOutline}>
+                                <SubmitTweetForm 
+                                    data={data}
+                                    currentUser={data.currentUser.verifyCredentials.screen_name}
+                                    profileLinkColor={data.currentUser.verifyCredentials.profile_link_color}
+                                />
+                            </Paper>
+                            <Timeline 
                                 currentUser={data.currentUser.verifyCredentials.screen_name}
+                                profileLinkColor={data.currentUser.verifyCredentials.profile_link_color}
                             />
-                        </Paper>
-                        <Timeline 
-                            currentUser={data.currentUser.verifyCredentials.screen_name}
-                        />
-                    </Grid>
+                        </Grid>
                     );
                 }}
             </Query>

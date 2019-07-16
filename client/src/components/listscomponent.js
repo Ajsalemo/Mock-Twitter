@@ -64,7 +64,6 @@ const styles = () => ({
         paddingRight: '0.4em'
     },
     listsComponentName: {
-        color: 'inherit',
         textDecoration: 'none',
         '&:hover': {
             textDecoration: 'underline'
@@ -85,14 +84,12 @@ const ListsComponent = props => {
         >
             {({ loading, error, data }) => {
                 if (loading) return <div><CircularProgress /></div>;
-                if (error) return <div><Error /></div>; 
-                
-                console.log(data)
+                if (error) return <div><Error /></div>;    
                 return (
                     <Paper className={classes.listsComponentPaper}>
                         <Grid className={classes.listsComponentFontGrid}>
                             <Typography variant="h6">
-                                Subscribed to
+                                <span  style={{ color: `#${data.currentUser.getLists[0].user.profile_link_color}` }}>Subscribed to</span>
                             </Typography>
                         </Grid>
                         {
@@ -100,7 +97,11 @@ const ListsComponent = props => {
                                 return (
                                     <Grid className={classes.listsComponentDataGrid} key={i}>
                                         <Typography variant="subtitle2" gutterBottom className={classes.listComponentDataTypography}>
-                                            <Link to={`/lists-statuses/${lists.user.screen_name}/${lists.id}`} className={classes.listsComponentName}>
+                                            <Link 
+                                                to={`/lists-statuses/${lists.user.screen_name}/${lists.id}`} 
+                                                className={classes.listsComponentName}
+                                                style={{ color: `#${data.currentUser.getLists[0].user.profile_link_color}` }}
+                                            >
                                                 {lists.name}
                                             </Link>
                                             <span className={classes.listsComponentSpan}>

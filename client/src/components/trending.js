@@ -31,10 +31,10 @@ const styles = () => ({
         paddingBottom: '0.5em'
     },
     trendingNamesColor: {
-        color: '#00acee',
         textDecoration: 'none',
         '&:hover': {
-            textDecoration: 'underline'
+            textDecoration: 'underline',
+            cursor: 'pointer'
         }
     },
     trendingTweetNumber: {
@@ -49,7 +49,7 @@ const styles = () => ({
 // ----------------------------------------------------------------------------------------------------- //
 
 const Trending = props => {
-    const { classes } = props;
+    const { classes, profileLinkColor } = props;
     return (
         <Query query={GET_TRENDING_TOPICS} fetchPolicy='cache-and-network'>
             {({ loading, error, data }) => {
@@ -68,7 +68,12 @@ const Trending = props => {
                                     return (
                                         <CardContent className={classes.cardContentBottom} key={j}>
                                             <Typography variant="subtitle2">
-                                                <a href={trendingArrayInner.url} className={classes.trendingNamesColor}>{trendingArrayInner.name}</a>
+                                                <span 
+                                                    className={classes.trendingNamesColor}
+                                                    style={{ color: `#${profileLinkColor}` }}
+                                                >
+                                                    {trendingArrayInner.name}
+                                                </span>
                                             </Typography>
                                             <Typography variant="subtitle1" gutterBottom className={classes.trendingTweetNumber}>
                                                 {trendingArrayInner.tweet_volume

@@ -48,6 +48,7 @@ export const GET_AUTHUSER_TWEETS =
                         followers_count
                         profile_image_url_https
                         in_reply_to_status_id_str
+                        profile_link_color
                     }
                     entities {
                         hashtags {
@@ -94,14 +95,12 @@ export const GET_USERPROFILE_TWEETS =
                         friends_count
                         followers_count
                         favourites_count
-                        listed_count
                         profile_image_url_https
-                        in_reply_to_status_id_str
                         profile_banner_url
                         created_at
                         description
-                        profile_background_color
                         profile_background_image_url_https
+                        profile_link_color
                     }
                     entities {
                         hashtags {
@@ -403,6 +402,7 @@ export const GET_USER_LISTS =
                     user {
                         screen_name
                         profile_image_url_https
+                        profile_link_color
                     }
                 }
             }

@@ -13,7 +13,7 @@ import { Home, OfflineBolt, NotificationsNone, Message, Search } from '@material
 import twitterminilogo from '../images/twitterminilogo.png';
 
 // Apollo Queries
-import { VERIFY_USER } from '../apolloclient/apolloqueries';
+import { VERIFY_USER, GET_USERPROFILE_TWEETS } from '../apolloclient/apolloqueries';
 
 // Components
 import TweetModal from '../components/tweetmodal';
@@ -111,7 +111,7 @@ const styles = theme => ({
 // ----------------------------------------------------------------------------------------------------- //
 
 const Navbar = props => {
-    const { classes } = props;
+    const { classes, URLparam } = props;
     return (
         <React.Fragment>
             <Query 
@@ -121,63 +121,75 @@ const Navbar = props => {
                 {({ loading, error, data }) => {
                     if (loading) return <div><CircularProgress /></div>;
                     if (error) return <div><Error /></div>;
-
-                return (
-                    <AppBar className={classes.appBar}>
-                        <Toolbar className={classes.toolBar}>
-                            <div className={classes.notificationDiv}>
-                                <Typography variant="subtitle2" className={classes.navAnchor}>
-                                    <Link to='/main' className={classes.colorDefault}>
-                                        <Home /><span className={classes.innerText}>Home</span>
-                                    </Link>
-                                </Typography>
-                                <Typography variant="subtitle2" className={classes.colorDefault}>
-                                    <OfflineBolt /><span className={classes.innerText}>Moments</span>
-                                </Typography>
-                                <Typography variant="subtitle2" className={classes.colorDefault}>
-                                    <NotificationsNone /><span className={classes.innerText}>Notifications</span>
-                                </Typography>
-                                <Typography variant="subtitle2" className={classes.colorDefault}>
-                                    <Message /><span className={classes.innerText}>Messages</span>
-                                </Typography>
-                            </div>
-                            <div className={classes.avatarDiv}>
-                                <Avatar alt="twitter logo" src={twitterminilogo} className={classes.twitterAvatar} /> 
-                            </div>
-                            <div className={classes.searchDiv}>
-                                <TextField
-                                    placeholder="Search Twitter"
-                                    variant="outlined"
-                                    InputProps={{
-                                        endAdornment: (
-                                        <InputAdornment variant="filled" position="end">
-                                            <Search
-                                            aria-label="Search form submit"
-                                            classes={{
-                                                root: classes.searchIconColor
-                                            }}
-                                            >
-                                            </Search>
-                                        </InputAdornment>
-                                        ),
-                                        classes: {
-                                            root: classes.navTextField
-                                        }
-                                    }}
-                                />
-                                <ProfileAvatarModal
-                                    avatarImg={data.currentUser.verifyCredentials.profile_image_url_https}
-                                    name={data.currentUser.verifyCredentials.name}
-                                    screen_name={data.currentUser.verifyCredentials.screen_name}
-                                />
-                                {/* Classes component for the modal to submit tweets */}
-                                <TweetModal 
-                                    profileLinkColor={data.currentUser.verifyCredentials.profile_link_color}
-                                />
-                            </div>
-                        </Toolbar>
-                    </AppBar>
-                    )
+                    return (
+                        <AppBar className={classes.appBar}>
+                            <Toolbar className={classes.toolBar}>
+                                <div className={classes.notificationDiv}>
+                                    <Typography variant="subtitle2" className={classes.navAnchor}>
+                                        <Link to='/main' className={classes.colorDefault}>
+                                            <Home /><span className={classes.innerText}>Home</span>
+                                        </Link>
+                                    </Typography>
+                                    <Typography variant="subtitle2" className={classes.colorDefault}>
+                                        <OfflineBolt /><span className={classes.innerText}>Moments</span>
+                                    </Typography>
+                                    <Typography variant="subtitle2" className={classes.colorDefault}>
+                                        <NotificationsNone /><span className={classes.innerText}>Notifications</span>
+                                    </Typography>
+                                    <Typography variant="subtitle2" className={classes.colorDefault}>
+                                        <Message /><span className={classes.innerText}>Messages</span>
+                                    </Typography>
+                                </div>
+                                <div className={classes.avatarDiv}>
+                                    <Avatar alt="twitter logo" src={twitterminilogo} className={classes.twitterAvatar} /> 
+                                </div>
+                                <div className={classes.searchDiv}>
+                                    <TextField
+                                        placeholder="Search Twitter"
+                                        variant="outlined"
+                                        InputProps={{
+                                            endAdornment: (
+                                            <InputAdornment variant="filled" position="end">
+                                                <Search
+                                                aria-label="Search form submit"
+                                                classes={{
+                                                    root: classes.searchIconColor
+                                                }}
+                                                >
+                                                </Search>
+                                            </InputAdornment>
+                                            ),
+                                            classes: {
+                                                root: classes.navTextField
+                                            }
+                                        }}
+                                    />
+                                    <ProfileAvatarModal
+                                        avatarImg={data.currentUser.verifyCredentials.profile_image_url_https}
+                                        name={data.currentUser.verifyCredentials.name}
+                                        screen_name={data.currentUser.verifyCredentials.screen_name}
+                                    />
+                                    {/* Classes component for the modal to submit tweets */}
+                                    <Query
+                                        query={GET_USERPROFILE_TWEETS}
+                                        variables={{
+                                            screen_name: URLparam ? URLparam : data.currentUser.verifyCredentials.screen_name
+                                        }}
+                                    >
+                                        {({ loading, error, data }) => {
+                                            if (loading) return <div><CircularProgress /></div>;
+                                            if (error) return <div><Error /></div>;
+                                            return (
+                                                <TweetModal 
+                                                    profileLinkColor={data.currentUser.userProfileTweets[0].user.profile_link_color}                                                
+                                                />
+                                            );
+                                        }}
+                                    </Query>
+                                </div>
+                            </Toolbar>
+                        </AppBar>
+                    );
                 }}
             </Query>
         </React.Fragment>

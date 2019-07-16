@@ -21,8 +21,7 @@ const styles = () => ({
         backgroundColor: '#007fec'
     },
     bannerPlaceholderImage: {
-        height: '15em',
-        backgroundColor: '#007fec'
+        height: '15em'
     },
     bannerImage: {
         width: '-webkit-fill-available'
@@ -60,7 +59,12 @@ const PublicProfileBanner = props => {
                         />  
                     </Grid>   
                         :
-                    <Grid item className={classes.bannerPlaceholderImage}></Grid>  
+                    <Grid 
+                        item 
+                        className={classes.bannerPlaceholderImage}
+                        style={{ backgroundColor: `#${data.currentUser.userProfileTweets[0].user.profile_link_color}` }}
+                    >
+                    </Grid>  
                 );  
             }}
         </Query>

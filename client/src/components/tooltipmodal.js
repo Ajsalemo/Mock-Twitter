@@ -46,7 +46,6 @@ const styles = () => ({
         marginRight: '0.5em'
     },
     ToolTipTweetCount: {
-        color: '#00acee',
         display: 'block',
         fontWeight: '700'
     },
@@ -93,7 +92,7 @@ const styles = () => ({
 // ----------------------------------------------------------------------------------------------------- //
 
 const ToolTipModal = props => {
-    const { classes, name, nickname, statuses_count, friends_count, followers_count, imgSrc, currentUser, tweetUserId } = props;
+    const { classes, name, nickname, statuses_count, friends_count, followers_count, imgSrc, currentUser, tweetUserId, profileLinkColor } = props;
     return (
         <React.Fragment>
             <Tooltip 
@@ -108,33 +107,39 @@ const ToolTipModal = props => {
                         <CardContent className={classes.ToolTipContent}>
                             <Typography variant="h6" gutterBottom className={classes.ToolTipUpperText}>
                                 <div className={classes.ToolTipHandleTextUpperDiv}>
+                                    {/* These are passed in from 'timeline.js' */}
                                     <Link to={`userprofile/${nickname}`} className={classNames(classes.ToolTipHandleTextUpper, classes.toolTilProfileLink)}>{name}</Link>
                                     <Link to={`userprofile/${nickname}`} className={classNames(classes.ToolTipHandleTextLower, classes.toolTilProfileLink)}>@{nickname}</Link>
                                 </div>
                             </Typography>
                             <Grid item className={classes.toolTipFollowGrid}>
                                 <TooltipFollowButton
+                                    // These are passed in from 'timeline.js'
                                     currentUser={currentUser}
                                     screen_name={nickname}
                                     tweetUserId={tweetUserId}
+                                    profileLinkColor={profileLinkColor}
                                 />
                             </Grid>
                             <Typography variant="subtitle2" className={classes.ToolTipHandleTypography} gutterBottom>               
                                 <div className={classes.ToolTipTweetSpan}>
                                     <span>Tweets</span>
-                                    <span className={classes.ToolTipTweetCount}>
+                                    <span className={classes.ToolTipTweetCount} style={{ color: `#${profileLinkColor}` }}>
+                                        {/* This is passed in from 'timeline.js' */}
                                         {statuses_count}
                                     </span>
                                 </div> 
                                 <div className={classes.ToolTipTweetSpan}>
                                     <span>Following</span>
-                                    <span className={classes.ToolTipTweetCount}>
+                                    <span className={classes.ToolTipTweetCount} style={{ color: `#${profileLinkColor}` }}>
+                                        {/* This is passed in from 'timeline.js' */}
                                         {friends_count}
                                     </span>
                                 </div>  
                                 <div className={classes.ToolTipTweetSpan}>
                                     <span>Followers</span>
-                                    <span className={classes.ToolTipTweetCount}>
+                                    <span className={classes.ToolTipTweetCount} style={{ color: `#${profileLinkColor}` }}>
+                                        {/* This is passed in from 'timeline.js' */}
                                         {followers_count}
                                     </span>
                                 </div>  
@@ -146,6 +151,7 @@ const ToolTipModal = props => {
             >
                 <Avatar 
                     alt="twitter avatar" 
+                    // This is passed in from 'timeline.js' 
                     src={imgSrc} 
                     className={classes.ToolTipAvatarParent}
                 />

@@ -87,6 +87,7 @@ class EditPost extends Component {
                                                     // Passed in from 'tweettext.js'
                                                     id={id}
                                                     handleClose={this.handleClose}
+                                                    profileLinkColor={data.currentUser.verifyCredentials.profile_link_color}
                                                 />
                                             </ClickAwayListener>
                                         </Paper>

@@ -19,7 +19,7 @@ import { COMPARE_FRIENDSHIPS, VERIFY_USER } from '../apolloclient/apolloqueries'
 // ----------------------------------------------------------------------------------------------------- //
 
 const TooltipFollowButton = props => {
-    const { screen_name, tweetUserId } = props;
+    const { screen_name, tweetUserId, profileLinkColor } = props;
     return (
         <Query query={VERIFY_USER}>
             {({ loading, error, data }) => {
@@ -47,6 +47,7 @@ const TooltipFollowButton = props => {
                                     id={tweetUserId}
                                     screen_name={screen_name}
                                     currentUser={currentAuthenticatedUser}
+                                    profileLinkColor={profileLinkColor}
                                 />
                                     :
                                 <FollowUser

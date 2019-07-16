@@ -150,6 +150,7 @@ const ProfileBannerBar = props => {
                                         currentUser={currentUser}
                                         screen_name={data.currentUser.userProfileTweets[0].user.screen_name}
                                         tweetUserId={data.currentUser.userProfileTweets[0].user.id}
+                                        profileLinkColor={data.currentUser.userProfileTweets[0].user.profile_link_color}
                                     />}
                                 </div>
                             </Grid>

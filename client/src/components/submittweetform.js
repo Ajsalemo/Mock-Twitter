@@ -26,7 +26,6 @@ const styles = () => ({
         flexBasis: '80%'
     },
     tweetButtonMain: {
-        backgroundColor: '#00acee',
         color: '#fff'
     },
     tweetButtonGrid: {
@@ -64,7 +63,7 @@ const styles = () => ({
 // ----------------------------------------------------------------------------------------------------- //
 
 const SubmitTweetForm = props => {
-    const { classes, data, currentUser } = props;
+    const { classes, data, currentUser, profileLinkColor } = props;
     return (
         <React.Fragment>
             <Mutation 
@@ -110,9 +109,9 @@ const SubmitTweetForm = props => {
                                         onChange={props.handleChange}
                                         InputProps={{ 
                                             classes: {
-                                                input: props.values.tweet ? classNames(classes.placeholder, classes.activeTextField) : classes.placeholder,
+                                                input: props.values.tweet ? classNames(classes.activeTextField, classes.placeholder) : classes.placeholder,
                                                 root: classes.activeTextField
-                                            }
+                                            },
                                         }}
                                     />
                                     <Grid item className={props.values.tweet ? classes.tweetButtonGrid : classes.tweetButtonGridHidden}>
@@ -125,6 +124,7 @@ const SubmitTweetForm = props => {
                                                 aria-label="Add Tweet" 
                                                 className={classes.tweetButtonMain} 
                                                 disabled={loading || !props.values.tweet}
+                                                style={{ backgroundColor: `#${profileLinkColor}`}}
                                                 type="submit"
                                             >
                                                 Tweet

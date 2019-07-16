@@ -113,6 +113,7 @@ const PublicProfileHandle = props => {
                                             <TweetModal 
                                                 userToReply={data.currentUser.userProfileTweets[0].user.name}
                                                 userScreenName={data.currentUser.userProfileTweets[0].user.screen_name}
+                                                profileLinkColor={data.currentUser.userProfileTweets[0].user.profile_link_color}
                                             />}
                                             
                                         </Typography>

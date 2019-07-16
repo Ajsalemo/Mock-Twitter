@@ -94,7 +94,7 @@ const styles = () => ({
 // ----------------------------------------------------------------------------------------------------- //
 
 const Timeline = props => {
-    const { classes, currentUser } = props;
+    const { classes, currentUser, profileLinkColor } = props;
     return (
         <React.Fragment>
             <Query 
@@ -112,8 +112,6 @@ const Timeline = props => {
                                     <ToolTipModal
                                         name={timelineTweetInfo.user.name}
                                         nickname={timelineTweetInfo.user.screen_name}
-                                        // This is passed in from 'submittweet.js'
-                                        currentUser={currentUser}
                                         statuses_count={timelineTweetInfo.user.statuses_count}
                                         friends_count={timelineTweetInfo.user.friends_count}
                                         followers_count={timelineTweetInfo.user.followers_count}
@@ -121,6 +119,9 @@ const Timeline = props => {
                                         id={timelineTweetInfo.id_str}  
                                         tweetUserId={timelineTweetInfo.user.id}
                                         verified={timelineTweetInfo.user.verified}  
+                                        // These are passed in from 'submitweet.js'
+                                        profileLinkColor={profileLinkColor}
+                                        currentUser={currentUser}
                                     />
                                     <Grid item className={classes.timelineGrid}>
                                         {/* Tweet text body */}

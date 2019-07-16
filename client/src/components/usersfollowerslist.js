@@ -32,7 +32,6 @@ const UsersFollowingList = props => {
             {({ loading, data, error }) => {
                 if (loading) return <div><CircularProgress /></div>;
                 if (error) return <Error />
-                
                 return data.currentUser.usersFollowing.users.map((usersFollowersList, i) => {
                     return (
                         <StaticToolTip

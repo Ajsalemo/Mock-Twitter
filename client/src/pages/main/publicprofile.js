@@ -46,7 +46,9 @@ let PublicProfile = props => {
     const { classes } = props;
     return (
         <React.Fragment>
-            <Navbar /> 
+            <Navbar 
+                URLparam={param}
+            /> 
             <PublicProfileBanner
                 URLparam={param}
             />
@@ -74,7 +76,9 @@ let PublicProfile = props => {
                                 </Grid>
                                 <Grid item md={2}>
                                     <Recommended />
-                                    <Trending />
+                                    <Trending 
+                                        profileLinkColor={data.currentUser.verifyCredentials.profile_link_color}
+                                    />
                                 </Grid>
                             </Grid>
                         </React.Fragment>
