@@ -48,7 +48,6 @@ const styles = () => ({
         marginRight: '0.5em'
     },
     staticToolTipTweetCount: {
-        color: '#00acee',
         display: 'block',
         fontWeight: '700'
     },
@@ -95,7 +94,7 @@ const styles = () => ({
 // ----------------------------------------------------------------------------------------------------- //
 
 const StaticToolTip = props => {
-    const { classes, name, nickname, imgSrc, currentUser, tweetUserId, statuses_count, followers_count, friends_count, bannerImageURL } = props;
+    const { classes, name, imgSrc, currentUser, tweetUserId, statuses_count, followers_count, friends_count, bannerImageURL, screen_name, profileLinkColor } = props;
     return (
         <Card className={classes.staticToolTipModalPaper} >
             <CardContent className={classes.staticToolTipUpperCardContent}>
@@ -106,37 +105,47 @@ const StaticToolTip = props => {
                     className={classes.followingBannerImage}
                 />
             </CardContent>          
-            <Avatar alt={`${nickname}'s profile avatar`} src={imgSrc} className={classes.staticToolTipAvatar} /> 
+            <Avatar alt={`${screen_name}'s profile avatar`} src={imgSrc} className={classes.staticToolTipAvatar} /> 
             <CardContent className={classes.staticToolTipContent}>
                 <Typography variant="h6" gutterBottom className={classes.staticToolTipUpperText}>
                     <div className={classes.staticToolTipHandleTextUpperDiv}>
-                        <Link to={`/userprofile/${nickname}`} className={classNames(classes.staticToolTipHandleTextUpper, classes.toolTilProfileLink)}>{name}</Link>
-                        <Link to={`/userprofile/${nickname}`} className={classNames(classes.staticToolTipHandleTextLower, classes.toolTilProfileLink)}>@{nickname}</Link>
+                        <Link to={`/userprofile/${screen_name}`} className={classNames(classes.staticToolTipHandleTextUpper, classes.toolTilProfileLink)}>{name}</Link>
+                        <Link to={`/userprofile/${screen_name}`} className={classNames(classes.staticToolTipHandleTextLower, classes.toolTilProfileLink)}>@{screen_name}</Link>
                     </div>
                 </Typography>
                 <Grid item className={classes.staticToolTipFollowGrid}>
                     <ToolTipFollowButton
                         currentUser={currentUser}
-                        screen_name={nickname}
+                        screen_name={screen_name}
                         tweetUserId={tweetUserId}
+                        profileLinkColor={profileLinkColor}
                     />
                 </Grid>
                 <Typography variant="subtitle2" className={classes.staticToolTipHandleTypography} gutterBottom>               
                     <div className={classes.staticToolTipTweetSpan}>
                         <span>Tweets</span>
-                        <span className={classes.staticToolTipTweetCount}>
+                        <span 
+                            className={classes.staticToolTipTweetCount}
+                            style={{ color: `#${profileLinkColor}` }}
+                        >
                             {statuses_count}
                         </span>
                     </div> 
                     <div className={classes.staticToolTipTweetSpan}>
                         <span>Following</span>
-                        <span className={classes.staticToolTipTweetCount}>
+                        <span 
+                            className={classes.staticToolTipTweetCount}
+                            style={{ color: `#${profileLinkColor}` }}
+                        >
                             {friends_count}
                         </span>
                     </div>  
                     <div className={classes.staticToolTipTweetSpan}>
                         <span>Followers</span>
-                        <span className={classes.staticToolTipTweetCount}>
+                        <span 
+                            className={classes.staticToolTipTweetCount}
+                            style={{ color: `#${profileLinkColor}` }}
+                        >
                             {followers_count}
                         </span>
                     </div>  

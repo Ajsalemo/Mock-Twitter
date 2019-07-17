@@ -20,7 +20,6 @@ const styles = () => ({
         flexBasis: '90%'
     },
     tweetModalFormButtonMain: {
-        backgroundColor: '#00acee',
         color: '#fff'
     },
     tweetModalButtonGrid: {
@@ -60,7 +59,7 @@ const styles = () => ({
 // ----------------------------------------------------------------------------------------------------- //
 
 const TweetModalForm = props => {
-    const { classes, avatar, onClose, userScreenName, currentUser } = props;
+    const { classes, avatarImg, onClose, userScreenName, screenName, profileLinkColor } = props;
     return (
         <React.Fragment>
             <Mutation 
@@ -72,7 +71,7 @@ const TweetModalForm = props => {
                     {  
                         query: GET_USERPROFILE_TWEETS,
                         variables: {
-                            screen_name: currentUser
+                            screen_name: screenName
                         }
                     }
                 ]}
@@ -101,7 +100,7 @@ const TweetModalForm = props => {
                         }}
                         render={props => (
                             <React.Fragment>
-                                <Avatar alt="twitter avatar" src={avatar} className={classes.tweetModalAvatar} /> 
+                                <Avatar alt="twitter avatar" src={avatarImg} className={classes.tweetModalAvatar} /> 
                                 <Form className={classes.tweetModalFormElement}>
                                     <TextField
                                         className={classes.tweetModaActiveInput}
@@ -131,6 +130,7 @@ const TweetModalForm = props => {
                                                 variant="extended" 
                                                 aria-label="Add Tweet" 
                                                 className={classes.tweetModalFormButtonMain} 
+                                                style={{ backgroundColor: `#${profileLinkColor}`}}
                                                 disabled={loading || !props.values.tweetModalForm}
                                                 type="submit"
                                             >

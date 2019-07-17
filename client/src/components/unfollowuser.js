@@ -8,7 +8,7 @@ import { Mutation } from 'react-apollo';
 import { withStyles, Fab, CircularProgress } from '@material-ui/core';
 
 // Apollo Mutations
-import { UNFOLLOW_USER, COMPARE_FRIENDSHIPS, USERS_FOLLOWERS } from '../apolloclient/apolloqueries';
+import { UNFOLLOW_USER, COMPARE_FRIENDSHIPS, USERS_FOLLOWERS, USERS_FOLLOWING } from '../apolloclient/apolloqueries';
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
@@ -41,6 +41,12 @@ const UnfollowUser = props => {
                 },
                 {
                     query: USERS_FOLLOWERS,
+                    variables: {
+                        screen_name: currentUser
+                    }
+                },
+                {
+                    query: USERS_FOLLOWING,
                     variables: {
                         screen_name: currentUser
                     }

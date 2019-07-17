@@ -42,8 +42,9 @@ const typeDefs =
             usersFollowing(screen_name: String!): UsersFollowers
             getUsersFavorites(screen_name: String!): [UserTimelineTweets]
             getLists(screen_name: String!): [UsersLists]
-            getListsTimeline(list_id: String!): [UserTimelineTweets]
+            getListsTimeline(list_id: String): [UserTimelineTweets]
             getListsShow(list_id: String!): UsersLists
+            showUser(screen_name: String!): UserObject
         }
 
         # Object wrapper to iterate
@@ -333,6 +334,11 @@ const resolvers = {
             const getListsShowRequest = await twitterNetworkCall(user.access_token, user.access_secret).get('lists/show', { list_id: args.list_id });
             const getListsShowResponse = await getListsShowRequest;
             return getListsShowResponse;
+        },
+        showUser: async (parent, args, user) => {
+            const showUserRequest = await twitterNetworkCall(user.access_token, user.access_secret).get('users/show', { screen_name: args.screen_name });
+            const showUserResponse = await showUserRequest;
+            return showUserRequest;
         }
     },
     Mutation: {

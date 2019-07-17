@@ -15,7 +15,7 @@ import Error from '../../components/error';
 import ListsProfileHandle from '../../components/listsprofilehandle';
 
 // Apollo Query
-import { VERIFY_USER } from '../../apolloclient/apolloqueries';
+import { VERIFY_USER, SHOW_USER } from '../../apolloclient/apolloqueries';
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
@@ -41,38 +41,53 @@ const styles = () => ({
 const ListsTimeline = props => {
     const { classes } = props;
     const param = props.match.params.params;
+    const screenName = props.match.params.screen_name;
     return (
-        <React.Fragment>
-            <Navbar />
-            <Grid container className={classes.listsTimelineContainer}>
-                <Query query={VERIFY_USER}>
-                    {({ loading, error, data }) => {
-                        if (loading) return <div><CircularProgress /></div>;
-                        if (error) return <div><Error /></div>;
-
-                        return (
-                            <React.Fragment>
-                                <Grid item xs={8} sm={8} md={2} className={classes.listsTimelineGrid}>
-                                    <ListsProfileHandle 
-                                        URLparam={param}
-                                        currentUser={data.currentUser.verifyCredentials.screen_name}
+            <Query
+                query={SHOW_USER}
+                variables={{
+                    screen_name: screenName
+                }}
+            >
+                {({ loading: loadingOne, error: errorOne, data: one }) => (
+                    <Query query={VERIFY_USER}>
+                        {({ loading: loadingTwo, error: errorTwo, data: two }) => {
+                            if (loadingOne || loadingTwo) return <div><CircularProgress /></div>;
+                            if (errorOne || errorTwo) return <div><Error /></div>;
+                            return (
+                                <React.Fragment>
+                                    <Navbar 
+                                        profileLinkColor={one.currentUser.showUser.profile_link_color}
+                                        avatarImg={two.currentUser.verifyCredentials.profile_image_url_https}
+                                        name={two.currentUser.verifyCredentials.name}
+                                        screenName={two.currentUser.verifyCredentials.screen_name}
                                     />
-                                </Grid>
-                                <Grid item md={6} className={classes.listsTimelineGridMain}>
-                                    <ListsTimelineComponent
-                                        URLparam={param}
-                                        currentUser={data.currentUser.verifyCredentials.screen_name}
-                                    />
-                                </Grid>
-                            </React.Fragment>
-                        );
-                    }}
-                </Query>
-                <Grid item xs={8} sm={8} md={2} className={classes.listsTimelineGrid}>
-                    <Trending />
-                </Grid>
-            </Grid>
-        </React.Fragment>
+                                    <Grid container className={classes.listsTimelineContainer}>
+                                        <Grid item xs={8} sm={8} md={2} className={classes.listsTimelineGrid}>
+                                            <ListsProfileHandle 
+                                                URLparam={param}
+                                                currentUser={two.currentUser.verifyCredentials.screen_name}
+                                                profileLinkColor={one.currentUser.showUser.profile_link_color}
+                                            />
+                                        </Grid>
+                                        <Grid item md={6} className={classes.listsTimelineGridMain}>
+                                            <ListsTimelineComponent
+                                                URLparam={param}
+                                                currentUser={two.currentUser.verifyCredentials.screen_name}
+                                            />
+                                        </Grid>
+                                        <Grid item xs={8} sm={8} md={2} className={classes.listsTimelineGrid}>
+                                            <Trending 
+                                                profileLinkColor={one.currentUser.showUser.profile_link_color}
+                                            />
+                                        </Grid>
+                                    </Grid>
+                                </React.Fragment>
+                            );
+                        }}
+                    </Query>
+                )}
+            </Query>
     );
 };
 

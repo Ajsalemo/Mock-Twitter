@@ -73,7 +73,7 @@ const styles = () => ({
 // ----------------------------------------------------------------------------------------------------- //
 
 const ListsProfileHandle = props => {
-    const { URLparam, classes, currentUser } = props;
+    const { URLparam, classes, currentUser, profileLinkColor } = props;
     return (
         <Query 
             query={GET_LISTS_SHOW}
@@ -137,6 +137,7 @@ const ListsProfileHandle = props => {
                                     <UnsubscribeListButton 
                                         list_id={URLparam}
                                         currentUser={currentUser}
+                                        profileLinkColor={profileLinkColor}
                                     />
                                         :
                                     <SubscribeListButton

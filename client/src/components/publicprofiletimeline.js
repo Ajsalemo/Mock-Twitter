@@ -79,12 +79,12 @@ const styles = () => ({
 // ----------------------------------------------------------------------------------------------------- //
 
 const PublicProfileTimeline = props => {
-    const { classes, URLparam } = props;
+    const { classes, screenName, profileLinkColor } = props;
     return (
         <Query 
             query={GET_USERPROFILE_TWEETS} 
             variables={{
-                screen_name: URLparam
+                screen_name: screenName
             }}
             pollInterval={pollMinute(1000, 60)} 
             fetchPolicy='cache-and-network'
@@ -132,7 +132,7 @@ const PublicProfileTimeline = props => {
                                                 <UnRetweetStatus
                                                     id={userTweetInfo.id_str}
                                                     retweet_count={userTweetInfo.retweet_count}
-                                                    URLparam={URLparam}
+                                                    screenName={screenName}
                                                 />
                                                     :
                                                 // Else, if it hasn't been retweeted - give the option to be able to retweet it
@@ -145,7 +145,8 @@ const PublicProfileTimeline = props => {
                                                     full_text={userTweetInfo.full_text}    
                                                     srcImage={userTweetInfo.user.profile_image_url_https}  
                                                     id={userTweetInfo.id_str}      
-                                                    URLparam={URLparam}
+                                                    screenName={screenName}
+                                                    profileLinkColor={profileLinkColor}
                                                 />}
                                             </div>
                                             <div className={classNames(classes.profileButtonOptionsGrid, classes.profileButtonOptionsHover)}>
@@ -157,14 +158,14 @@ const PublicProfileTimeline = props => {
                                                 <UnLikeStatus
                                                     id={userTweetInfo.id_str}
                                                     favorite_count={userTweetInfo.favorite_count} 
-                                                    URLparam={URLparam}   
+                                                    screenName={screenName}   
                                                 />
                                                 // Else, if it hasn't been liked - give the option to like the status
                                                     :
                                                 <LikeStatus 
                                                     id={userTweetInfo.id_str}
                                                     favorite_count={userTweetInfo.favorite_count}
-                                                    URLparam={URLparam}
+                                                    screenName={screenName}
                                                 />}
                                             </div>
                                             <BarChart className={classNames(classes.profileTimelineIcons, classes.profileButtonOptionsHover)} />

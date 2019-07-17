@@ -47,8 +47,8 @@ export const GET_AUTHUSER_TWEETS =
                         friends_count
                         followers_count
                         profile_image_url_https
-                        in_reply_to_status_id_str
                         profile_link_color
+                        profile_banner_url
                     }
                     entities {
                         hashtags {
@@ -411,7 +411,7 @@ export const GET_USER_LISTS =
 
 export const GET_LISTS_TIMELINE = 
     gql`
-        query GetListsTimeline($list_id: String!) {
+        query GetListsTimeline($list_id: String) {
             currentUser {
                 user_id
                 name
@@ -440,7 +440,7 @@ export const GET_LISTS_TIMELINE =
                         friends_count
                         followers_count
                         profile_image_url_https
-                        in_reply_to_status_id_str
+                        profile_link_color
                     }
                     entities {
                         hashtags {
@@ -478,6 +478,34 @@ export const GET_LISTS_SHOW =
                         screen_name
                         profile_image_url_https
                     }
+                }
+            }
+        }
+    `;
+
+export const SHOW_USER =
+    gql`
+        query ShowUser($screen_name: String!) {
+            currentUser {
+                showUser(screen_name: $screen_name) {
+                    id
+                    id_str
+                    name
+                    screen_name
+                    description
+                    verified
+                    followers_count
+                    friends_count
+                    favourites_count
+                    statuses_count
+                    created_at
+                    profile_background_color
+                    profile_background_image_url
+                    profile_background_image_url_https
+                    profile_banner_url
+                    profile_image_url_https
+                    profile_link_color
+                    profile_text_color
                 }
             }
         }

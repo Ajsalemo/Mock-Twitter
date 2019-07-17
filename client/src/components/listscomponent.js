@@ -74,12 +74,12 @@ const styles = () => ({
 // ----------------------------------------------------------------------------------------------------- //
 
 const ListsComponent = props => {
-    const { classes, URLparam } = props;
+    const { classes, screenName, profileLinkColor } = props;
     return (
         <Query 
             query={GET_USER_LISTS}
             variables={{
-                screen_name: URLparam
+                screen_name: screenName
             }}
         >
             {({ loading, error, data }) => {
@@ -89,7 +89,7 @@ const ListsComponent = props => {
                     <Paper className={classes.listsComponentPaper}>
                         <Grid className={classes.listsComponentFontGrid}>
                             <Typography variant="h6">
-                                <span  style={{ color: `#${data.currentUser.getLists[0].user.profile_link_color}` }}>Subscribed to</span>
+                                <span  style={{ color: `#${profileLinkColor}` }}>Subscribed to</span>
                             </Typography>
                         </Grid>
                         {
@@ -100,7 +100,7 @@ const ListsComponent = props => {
                                             <Link 
                                                 to={`/lists-statuses/${lists.user.screen_name}/${lists.id}`} 
                                                 className={classes.listsComponentName}
-                                                style={{ color: `#${data.currentUser.getLists[0].user.profile_link_color}` }}
+                                                style={{ color: `#${profileLinkColor}` }}
                                             >
                                                 {lists.name}
                                             </Link>

@@ -63,7 +63,7 @@ const styles = () => ({
 // ----------------------------------------------------------------------------------------------------- //
 
 const SubmitTweetForm = props => {
-    const { classes, data, currentUser, profileLinkColor } = props;
+    const { classes, avatarImg, screenName, profileLinkColor } = props;
     return (
         <React.Fragment>
             <Mutation 
@@ -75,7 +75,7 @@ const SubmitTweetForm = props => {
                     {
                         query: GET_USERPROFILE_TWEETS,
                         variables: {
-                            screen_name: currentUser
+                            screen_name: screenName
                         }
                     }
                 ]}
@@ -98,7 +98,7 @@ const SubmitTweetForm = props => {
                         }}
                         render={props => (
                             <React.Fragment>
-                                <Avatar alt="twitter avatar" src={data.currentUser.verifyCredentials.profile_image_url_https} className={props.values.tweet ? classes.tweetAvatarActiveInput : classes.twitterAvatar} /> 
+                                <Avatar alt="twitter avatar" src={avatarImg} className={props.values.tweet ? classes.tweetAvatarActiveInput : classes.twitterAvatar} /> 
                                 <Form className={classes.formElement}>
                                     <TextField
                                         className={props.values.tweet ? classes.activeInputField : classes.formControl}

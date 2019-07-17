@@ -21,12 +21,12 @@ import { extractAndReplaceNormalJPG } from '../apolloclient/apolloclient';
 // ----------------------------------------------------------------------------------------------------- //
 
 const UsersFollowingList = props => {
-    const { currentUser } = props;
+    const { currentUser, screenName, profileLinkColor } = props;
     return (
         <Query
             query={USERS_FOLLOWING}
             variables={{
-                screen_name: currentUser
+                screen_name: screenName
             }}
         >
             {({ loading, data, error }) => {
@@ -36,6 +36,7 @@ const UsersFollowingList = props => {
                     return (
                         <StaticToolTip
                             key={i}
+                            currentUser={currentUser}
                             name={usersFollowersList.name}
                             screen_name={usersFollowersList.screen_name}
                             nickname={usersFollowersList.screen_name}
@@ -45,6 +46,7 @@ const UsersFollowingList = props => {
                             followers_count={usersFollowersList.followers_count}
                             friends_count={usersFollowersList.friends_count}
                             bannerImageURL={extractAndReplaceNormalJPG(usersFollowersList.profile_banner_url)}
+                            profileLinkColor={profileLinkColor}
                         />
                     );    
                 });

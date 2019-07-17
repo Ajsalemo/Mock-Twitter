@@ -9,7 +9,7 @@ import { Repeat } from '@material-ui/icons';
 import { withStyles, CircularProgress } from '@material-ui/core';
 
 // Apollo Queries and Mutations
-import { UNRETWEET_STATUS, GET_AUTHUSER_TWEETS, GET_USERPROFILE_TWEETS } from '../apolloclient/apolloqueries';
+import { UNRETWEET_STATUS, GET_AUTHUSER_TWEETS, GET_USERPROFILE_TWEETS, GET_USERS_LIKES, GET_LISTS_TIMELINE } from '../apolloclient/apolloqueries';
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
@@ -28,7 +28,7 @@ const styles = () => ({
 // ----------------------------------------------------------------------------------------------------- //
 
 const UnRetweetStatus = props => {
-    const { classes, id, retweet_count, URLparam } = props;
+    const { classes, id, retweet_count, screenName, retweetId } = props;
     return (
         <Mutation 
             mutation={UNRETWEET_STATUS} 
@@ -39,7 +39,19 @@ const UnRetweetStatus = props => {
                 {
                     query: GET_USERPROFILE_TWEETS,
                     variables: {
-                        screen_name: URLparam
+                        screen_name: screenName
+                    }
+                },
+                {
+                    query: GET_USERS_LIKES,
+                    variables: {
+                        screen_name: screenName
+                    }
+                },
+                {
+                    query: GET_LISTS_TIMELINE,
+                    variables: {
+                        list_id: retweetId
                     }
                 }
             ]}

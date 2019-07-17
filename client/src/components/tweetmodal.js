@@ -55,7 +55,7 @@ class TweetModal extends Component {
     // ----------------------------------------------------------------------------------------------------- //
   
     render() {
-        const { classes, userToReply, userScreenName, profileLinkColor } = this.props;
+        const { classes, userToReply, userScreenName, profileLinkColor, screenName, avatarImg } = this.props;
         return (
             <React.Fragment>
                 <Fab 
@@ -80,8 +80,10 @@ class TweetModal extends Component {
                 >
                     <TweetModalBody 
                         onClose={this.handleClose}
-                        // Passed from the 'PublicProfileHandle' component
+                        profileLinkColor={profileLinkColor}
                         userScreenName={userScreenName}
+                        screenName={screenName}
+                        avatarImg={avatarImg}
                     />
                 </Modal>
             </React.Fragment>

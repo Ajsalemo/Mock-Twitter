@@ -8,14 +8,13 @@ import { Mutation } from 'react-apollo';
 import { withStyles, CircularProgress, Fab } from '@material-ui/core';
 
 // Apollo Mutations and Queries
-import { FOLLOW_USER, COMPARE_FRIENDSHIPS, USERS_FOLLOWERS } from '../apolloclient/apolloqueries';
+import { FOLLOW_USER, COMPARE_FRIENDSHIPS, USERS_FOLLOWERS, USERS_FOLLOWING } from '../apolloclient/apolloqueries';
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
 const styles = () => ({
     followUserButton: {
-        backgroundColor: '#fff',
         color: '#00acee',
         height: '2em',
         width: '5em'
@@ -25,7 +24,7 @@ const styles = () => ({
 // ----------------------------------------------------------------------------------------------------- //
 
 const FollowUser = props => {
-    const { classes, id, screen_name, currentUser } = props;
+    const { classes, id, screen_name, currentUser, profileLinkColor } = props;
     return (
         <Mutation 
             mutation={FOLLOW_USER} 
@@ -42,7 +41,13 @@ const FollowUser = props => {
                     variables: {
                         screen_name: currentUser
                     }
-                }	                
+                },
+                {
+                    query: USERS_FOLLOWING,
+                    variables: {
+                        screen_name: currentUser
+                    }
+                }                
             ]}
         >
             {(followUserProp, { loading }) => (
@@ -61,6 +66,7 @@ const FollowUser = props => {
                     classes={{
                         root: classes.followUserButton
                     }}
+                    style={{ backgroundColor: `#${profileLinkColor}` }}
                 >
                     Follow
                 </Fab>

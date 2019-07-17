@@ -15,7 +15,6 @@ import { UNSUBSCRIBE_TO_LIST, GET_LISTS_SHOW, GET_USER_LISTS } from '../apollocl
 
 const styles = () => ({
     unsubscribeListButtonClass: {
-        backgroundColor: '#00acee',
         color: '#fff',
         height: '2em'
     }
@@ -24,7 +23,7 @@ const styles = () => ({
 // ----------------------------------------------------------------------------------------------------- //
 
 const UnsubscribeListButton = props => {
-    const { classes, list_id, currentUser } = props;
+    const { classes, list_id, currentUser, profileLinkColor } = props;
     return (
         <Mutation
             mutation={UNSUBSCRIBE_TO_LIST}
@@ -37,7 +36,6 @@ const UnsubscribeListButton = props => {
                 },
                 {
                     query: GET_USER_LISTS,
-                    // currentUser is passed in from 'listsprofilehandle.js'
                     variables: {
                         screen_name: currentUser
                     }
@@ -60,6 +58,7 @@ const UnsubscribeListButton = props => {
                     classes={{
                         root: classes.unsubscribeListButtonClass
                     }}
+                    style={{ backgroundColor: `#${profileLinkColor}` }}
                 >
                     Unsubscribe
                 </Fab>

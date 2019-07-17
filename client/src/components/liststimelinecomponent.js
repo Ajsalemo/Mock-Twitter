@@ -99,8 +99,7 @@ const ListsTimelineComponent = props => {
                                 <Paper className={classes.listsTimelinePaper} key={i}>
                                     <ToolTipModal
                                         name={getListsTimeline.user.name}
-                                        nickname={getListsTimeline.user.screen_name}
-                                        // This is passed in from 'submittweet.js'
+                                        screenName={getListsTimeline.user.screen_name}
                                         currentUser={currentUser}
                                         statuses_count={getListsTimeline.user.statuses_count}
                                         friends_count={getListsTimeline.user.friends_count}
@@ -108,7 +107,8 @@ const ListsTimelineComponent = props => {
                                         imgSrc={getListsTimeline.user.profile_image_url_https}
                                         id={getListsTimeline.id_str}  
                                         tweetUserId={getListsTimeline.user.id}
-                                        verified={getListsTimeline.user.verified}  
+                                        verified={getListsTimeline.user.verified} 
+                                        profileLinkColor={getListsTimeline.user.profile_link_color}  
                                     />
                                     <Grid item className={classes.listsTimelineGrid}>
                                         {/* Tweet text body */}
@@ -147,6 +147,8 @@ const ListsTimelineComponent = props => {
                                                     <UnRetweetStatus
                                                         id={getListsTimeline.id_str}
                                                         retweet_count={getListsTimeline.retweet_count}
+                                                        screenName={getListsTimeline.user.screen_name}
+                                                        retweetId={URLparam}
                                                     />
                                                         :
                                                     // Else, if it hasn't been retweeted - give the option to be able to retweet it
@@ -154,11 +156,14 @@ const ListsTimelineComponent = props => {
                                                         retweet_count={getListsTimeline.retweet_count}
                                                         name={getListsTimeline.user.name}
                                                         verified={getListsTimeline.user.verified}
-                                                        nickname={getListsTimeline.user.nickname}
+                                                        nickname={getListsTimeline.user.screen_name}
+                                                        screenName={getListsTimeline.user.screen_name}
                                                         created_at={getListsTimeline.created_at}
                                                         full_text={getListsTimeline.full_text}    
                                                         srcImage={getListsTimeline.user.profile_image_url_https}  
-                                                        id={getListsTimeline.id_str}      
+                                                        id={getListsTimeline.id_str}    
+                                                        profileLinkColor={getListsTimeline.user.profile_link_color}  
+                                                        retweetId={URLparam}
                                                     />}
                                                 </div>
                                                 <div className={classNames(classes.listsButtonOptionsGrid, classes.listsButtonOptionsHover)}>
@@ -169,13 +174,17 @@ const ListsTimelineComponent = props => {
                                                         ?
                                                     <UnLikeStatus
                                                         id={getListsTimeline.id_str}
-                                                        favorite_count={getListsTimeline.favorite_count}    
+                                                        favorite_count={getListsTimeline.favorite_count}
+                                                        screenName={getListsTimeline.user.screen_name} 
+                                                        retweetId={URLparam}   
                                                     />
                                                     // Else, if it hasn't been liked - give the option to like the status
                                                         :
                                                     <LikeStatus 
                                                         id={getListsTimeline.id_str}
                                                         favorite_count={getListsTimeline.favorite_count}
+                                                        screenName={getListsTimeline.user.screen_name}
+                                                        retweetId={URLparam}
                                                     />}
                                                 </div>
                                                 <BarChart className={classNames(classes.listsTimelineIcons, classes.listsButtonOptionsHover)} />

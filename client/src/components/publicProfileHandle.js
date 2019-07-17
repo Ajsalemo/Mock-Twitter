@@ -3,17 +3,12 @@
 
 import React from 'react';
 import Moment from 'react-moment';
-import { Query } from 'react-apollo';
 
 // Material-UI components
-import { withStyles, Card, CardContent, Typography, CircularProgress } from '@material-ui/core';
+import { withStyles, Card, CardContent, Typography } from '@material-ui/core';
 import { CalendarToday } from '@material-ui/icons';
 
-// Apollo Queries
-import { GET_USERPROFILE_TWEETS, VERIFY_USER } from '../apolloclient/apolloqueries';
-
 // Components
-import Error from './error';
 import TweetModal from './tweetmodal';
 
 // Images
@@ -72,59 +67,38 @@ const styles = () => ({
 // ----------------------------------------------------------------------------------------------------- //
 
 const PublicProfileHandle = props => {
-    const { classes, URLparam } = props;
+    const { classes, screenName, currentUser, URLparam, verified, description, createdAt, name, profileLinkColor, avatarImg} = props;
     return (
-        <Query query={VERIFY_USER}>
-            {({ loading, error, data }) => {
-                const publicProfileAuthUser = data.currentUser.verifyCredentials.screen_name;
-                return (
-                    <Query 
-                        query={GET_USERPROFILE_TWEETS}
-                        variables={{
-                            screen_name: URLparam
-                        }}
-                    >
-                        {({ loading, error, data }) => {
-                            if (loading) return <div><CircularProgress /></div>;
-                            if (error) return <div><Error /></div>;
-            
-                            return (
-                                <Card className={classes.publicProfileCard}>
-                                    <CardContent className={classes.publicProfileCardContent}>
-                                        <Typography variant="h6" gutterBottom className={classes.publicProfileUpperText}>
-                                            <span className={classes.publicProfileTextUpper}>{data.currentUser.userProfileTweets[0].user.name}</span>
-                                            {data.currentUser.userProfileTweets[0].user.verified === true 
-                                                ? 
-                                            <img src={verifiedIcon} className={classes.verifiedPublicHandleIcon} alt="verified account" />
-                                                : 
-                                            null}
-                                            <span className={classes.publicProfileTextLower}>@{data.currentUser.userProfileTweets[0].user.screen_name}</span>
-                                            <span className={classes.descriptionContent}>{data.currentUser.userProfileTweets[0].user.description}</span>
-                                            <CalendarToday className={classes.createdAtIcon} />
-                                            <span className={classes.publicProfileCreatedAt}>
-                                                Joined <Moment format={'MMMM YYYY'}>{data.currentUser.userProfileTweets[0].user.created_at}</Moment>
-                                            </span>
-                                            {/* If you're viewing your own profile, this component will be hidden */}
-                                            {/* Else if you're viewing someone elses profile, the 'tweet at' component will be displayed */}
-                                            {publicProfileAuthUser === URLparam
-                                                ?
-                                                null
-                                                :
-                                            <TweetModal 
-                                                userToReply={data.currentUser.userProfileTweets[0].user.name}
-                                                userScreenName={data.currentUser.userProfileTweets[0].user.screen_name}
-                                                profileLinkColor={data.currentUser.userProfileTweets[0].user.profile_link_color}
-                                            />}
-                                            
-                                        </Typography>
-                                    </CardContent>
-                                </Card>
-                            );
-                        }}
-                    </Query>        
-                );
-            }}
-        </Query>
+        <Card className={classes.publicProfileCard}>
+            <CardContent className={classes.publicProfileCardContent}>
+                <Typography variant="h6" gutterBottom className={classes.publicProfileUpperText}>
+                    <span className={classes.publicProfileTextUpper}>{name}</span>
+                    {verified === true 
+                        ? 
+                    <img src={verifiedIcon} className={classes.verifiedPublicHandleIcon} alt="verified account" />
+                        : 
+                    null}
+                    <span className={classes.publicProfileTextLower}>@{screenName}</span>
+                    <span className={classes.descriptionContent}>{description}</span>
+                    <CalendarToday className={classes.createdAtIcon} />
+                    <span className={classes.publicProfileCreatedAt}>
+                        Joined <Moment format={'MMMM YYYY'}>{createdAt}</Moment>
+                    </span>
+                    {/* If you're viewing your own profile, this component will be hidden */}
+                    {/* Else if you're viewing someone elses profile, the 'tweet at' component will be displayed */}
+                    {currentUser === URLparam
+                        ?
+                        null
+                        :
+                    <TweetModal 
+                        userToReply={name}
+                        userScreenName={screenName}
+                        profileLinkColor={profileLinkColor}
+                        avatarImg={avatarImg}
+                    />}
+                </Typography>
+            </CardContent>
+        </Card>
     );
 };
 

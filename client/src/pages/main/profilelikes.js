@@ -19,7 +19,7 @@ import LikesComponent from '../../components/likescomponent';
 import Error from '../../components/error';
 
 // Apollo Query
-import { VERIFY_USER } from '../../apolloclient/apolloqueries';
+import { VERIFY_USER, SHOW_USER } from '../../apolloclient/apolloqueries';
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
@@ -45,43 +45,75 @@ let PublicProfileLikes = props => {
     const param = props.match.params.params; 
     const { classes } = props;
     return (
-        <React.Fragment>
-            <Navbar /> 
-            <PublicProfileBanner
-                URLparam={param}
-            />
-            <Query query={VERIFY_USER}>
-                {({ loading, error, data }) => {
-                    if (loading) return <div><CircularProgress /></div>;
-                    if (error) return <div><Error /></div>; 
-                    
-                    return (
-                        <React.Fragment>
-                            <ProfileBannerBar 
-                                URLparam={param}
-                                currentUser={data.currentUser.verifyCredentials.screen_name}
-                            />
-                            <Grid container className={classes.publicProfileLikesContainerStyle}>
-                                <Grid item xs={8} sm={8} md={2} className={classes.publicProfileLikesHandlerGrid}>
-                                    <PublicProfileHandle 
-                                        URLparam={param}
-                                    />
+        <Query
+            query={SHOW_USER}
+            variables={{
+                screen_name: param
+            }}
+        >
+            {({ loading: loadingOne, error: errorOne, data: one }) => (
+                <Query query={VERIFY_USER}>
+                    {({ loading: loadingTwo, error: errorTwo, data: two }) => {
+                        if (loadingOne || loadingTwo) return <div><CircularProgress /></div>;
+                        if (errorOne || errorTwo) return <div><Error /></div>;
+                        return (
+                            <React.Fragment>
+                                <Navbar 
+                                    profileLinkColor={one.currentUser.showUser.profile_link_color}
+                                    avatarImg={two.currentUser.verifyCredentials.profile_image_url_https}
+                                    name={two.currentUser.verifyCredentials.name}
+                                    screenName={two.currentUser.verifyCredentials.screen_name}
+                                /> 
+                                <PublicProfileBanner
+                                    URLparam={param}
+                                    profileLinkColor={one.currentUser.showUser.profileLinkColor}
+                                    profileBannerURL={one.currentUser.showUser.profile_banner_url}
+                                />
+                                <ProfileBannerBar 
+                                    URLparam={param}
+                                    screenName={one.currentUser.showUser.screen_name}
+                                    statusCount={one.currentUser.showUser.statuses_count}
+                                    friendsCount={one.currentUser.showUser.friends_count}
+                                    followersCount={one.currentUser.showUser.followers_count}
+                                    favouritesCount={one.currentUser.showUser.favourites_count}
+                                    tweetUserId={one.currentUser.showUser.id}
+                                    profileLinkColor={one.currentUser.showUser.profile_link_color}
+                                    currentUser={two.currentUser.verifyCredentials.screen_name}
+                                    avatarImg={one.currentUser.showUser.profile_image_url_https}
+                                />
+                                <Grid container className={classes.publicProfileLikesContainerStyle}>
+                                    <Grid item xs={8} sm={8} md={2} className={classes.publicProfileLikesHandlerGrid}>
+                                        <PublicProfileHandle 
+                                            URLparam={param}
+                                            currentUser={two.currentUser.verifyCredentials.screen_name}
+                                            screenName={one.currentUser.showUser.screen_name}
+                                            verified={one.currentUser.showUser.verified}
+                                            description={one.currentUser.showUser.description}
+                                            createdAt={one.currentUser.showUser.created_at}
+                                            name={one.currentUser.showUser.name}
+                                            profileLinkColor={one.currentUser.showUser.profile_link_color}
+                                            avatarImg={two.currentUser.verifyCredentials.profile_image_url_https}
+                                        />
+                                    </Grid>
+                                    <Grid item md={4} className={classes.publicProfileLikesTimelineItem}>
+                                        <LikesComponent
+                                            screenName={one.currentUser.showUser.screen_name}
+                                            profileLinkColor={one.currentUser.showUser.profile_link_color}
+                                        />
+                                    </Grid>
+                                    <Grid item md={2}>
+                                        <Recommended />
+                                        <Trending 
+                                            profileLinkColor={one.currentUser.showUser.profile_link_color}
+                                        />
+                                    </Grid>
                                 </Grid>
-                                <Grid item md={4} className={classes.publicProfileLikesTimelineItem}>
-                                    <LikesComponent
-                                        URLparam={param}
-                                    />
-                                </Grid>
-                                <Grid item md={2}>
-                                    <Recommended />
-                                    <Trending />
-                                </Grid>
-                            </Grid>
-                        </React.Fragment>
-                    );
-                }}
-            </Query>
-        </React.Fragment>
+                            </React.Fragment>
+                        );
+                    }}
+                </Query>
+            )}
+        </Query>
     );
 };
 

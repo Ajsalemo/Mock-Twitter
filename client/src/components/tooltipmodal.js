@@ -22,8 +22,8 @@ const styles = () => ({
         margin: '-1.5em 0 0 0.5em'
     },
     ToolTipUpperCardContent: {
-        backgroundColor: '#007fec',
-        height: '6em'
+        padding: '0em',
+        height: '10em'
     },
     ToolTipUpperText: {
         textAlign: 'left'
@@ -86,13 +86,16 @@ const styles = () => ({
         '&:hover': {
             textDecoration: 'underline'
         }
+    },
+    timelineTooltopBannerImage: {
+        height: 'inherit'
     }
 });
 
 // ----------------------------------------------------------------------------------------------------- //
 
 const ToolTipModal = props => {
-    const { classes, name, nickname, statuses_count, friends_count, followers_count, imgSrc, currentUser, tweetUserId, profileLinkColor } = props;
+    const { classes, name, screenName, statuses_count, friends_count, followers_count, imgSrc, currentUser, tweetUserId, profileLinkColor, profileBannerURL } = props;
     return (
         <React.Fragment>
             <Tooltip 
@@ -102,21 +105,27 @@ const ToolTipModal = props => {
                 }}
                 title={ 
                     <Card className={classes.ToolTipModalPaper}>
-                        <CardContent className={classes.ToolTipUpperCardContent}></CardContent>          
+                        <CardContent className={classes.ToolTipUpperCardContent}>
+                            <img 
+                                // Alt text is left empty due to this being a decorative image
+                                alt={''}
+                                src={profileBannerURL}
+                                className={classes.timelineTooltopBannerImage}
+                            />    
+                        </CardContent>          
                         <Avatar alt="twitter avatar" src={imgSrc} className={classes.ToolTipAvatar} /> 
                         <CardContent className={classes.ToolTipContent}>
                             <Typography variant="h6" gutterBottom className={classes.ToolTipUpperText}>
                                 <div className={classes.ToolTipHandleTextUpperDiv}>
                                     {/* These are passed in from 'timeline.js' */}
-                                    <Link to={`userprofile/${nickname}`} className={classNames(classes.ToolTipHandleTextUpper, classes.toolTilProfileLink)}>{name}</Link>
-                                    <Link to={`userprofile/${nickname}`} className={classNames(classes.ToolTipHandleTextLower, classes.toolTilProfileLink)}>@{nickname}</Link>
+                                    <Link to={`userprofile/${screenName}`} className={classNames(classes.ToolTipHandleTextUpper, classes.toolTilProfileLink)}>{name}</Link>
+                                    <Link to={`userprofile/${screenName}`} className={classNames(classes.ToolTipHandleTextLower, classes.toolTilProfileLink)}>@{screenName}</Link>
                                 </div>
                             </Typography>
                             <Grid item className={classes.toolTipFollowGrid}>
                                 <TooltipFollowButton
-                                    // These are passed in from 'timeline.js'
                                     currentUser={currentUser}
-                                    screen_name={nickname}
+                                    screen_name={screenName}
                                     tweetUserId={tweetUserId}
                                     profileLinkColor={profileLinkColor}
                                 />
@@ -125,21 +134,18 @@ const ToolTipModal = props => {
                                 <div className={classes.ToolTipTweetSpan}>
                                     <span>Tweets</span>
                                     <span className={classes.ToolTipTweetCount} style={{ color: `#${profileLinkColor}` }}>
-                                        {/* This is passed in from 'timeline.js' */}
                                         {statuses_count}
                                     </span>
                                 </div> 
                                 <div className={classes.ToolTipTweetSpan}>
                                     <span>Following</span>
                                     <span className={classes.ToolTipTweetCount} style={{ color: `#${profileLinkColor}` }}>
-                                        {/* This is passed in from 'timeline.js' */}
                                         {friends_count}
                                     </span>
                                 </div>  
                                 <div className={classes.ToolTipTweetSpan}>
                                     <span>Followers</span>
                                     <span className={classes.ToolTipTweetCount} style={{ color: `#${profileLinkColor}` }}>
-                                        {/* This is passed in from 'timeline.js' */}
                                         {followers_count}
                                     </span>
                                 </div>  

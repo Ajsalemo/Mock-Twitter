@@ -79,12 +79,12 @@ const styles = () => ({
 // ----------------------------------------------------------------------------------------------------- //
 
 const LikesComponent = props => {
-    const { classes, URLparam } = props;
+    const { classes, screenName, profileLinkColor } = props;
     return (
         <Query 
             query={GET_USERS_LIKES} 
             variables={{
-                screen_name: URLparam
+                screen_name: screenName
             }}
             pollInterval={pollMinute(1000, 60)} 
             fetchPolicy='cache-and-network'
@@ -132,7 +132,7 @@ const LikesComponent = props => {
                                                 <UnRetweetStatus
                                                     id={usersLikes.id_str}
                                                     retweet_count={usersLikes.retweet_count}
-                                                    URLparam={URLparam}
+                                                    screenName={screenName}
                                                 />
                                                     :
                                                 // Else, if it hasn't been retweeted - give the option to be able to retweet it
@@ -145,7 +145,8 @@ const LikesComponent = props => {
                                                     full_text={usersLikes.full_text}    
                                                     srcImage={usersLikes.user.profile_image_url_https}  
                                                     id={usersLikes.id_str}      
-                                                    URLparam={URLparam}
+                                                    screenName={screenName}
+                                                    profileLinkColor={profileLinkColor}
                                                 />}
                                             </div>
                                             <div className={classNames(classes.profileButtonOptionsGrid, classes.profileButtonOptionsHover)}>
@@ -157,14 +158,14 @@ const LikesComponent = props => {
                                                 <UnLikeStatus
                                                     id={usersLikes.id_str}
                                                     favorite_count={usersLikes.favorite_count} 
-                                                    URLparam={URLparam}   
+                                                    screenName={screenName}   
                                                 />
                                                 // Else, if it hasn't been liked - give the option to like the status
                                                     :
                                                 <LikeStatus 
                                                     id={usersLikes.id_str}
                                                     favorite_count={usersLikes.favorite_count}
-                                                    URLparam={URLparam}
+                                                    screenName={screenName}
                                                 />}
                                             </div>
                                             <BarChart className={classNames(classes.profileTimelineIcons, classes.profileButtonOptionsHover)} />

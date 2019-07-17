@@ -94,7 +94,7 @@ const styles = () => ({
 // ----------------------------------------------------------------------------------------------------- //
 
 const Timeline = props => {
-    const { classes, currentUser, profileLinkColor } = props;
+    const { classes, screenName, profileLinkColor } = props;
     return (
         <React.Fragment>
             <Query 
@@ -119,9 +119,9 @@ const Timeline = props => {
                                         id={timelineTweetInfo.id_str}  
                                         tweetUserId={timelineTweetInfo.user.id}
                                         verified={timelineTweetInfo.user.verified}  
-                                        // These are passed in from 'submitweet.js'
+                                        profileBannerURL={timelineTweetInfo.user.profile_banner_url}
                                         profileLinkColor={profileLinkColor}
-                                        currentUser={currentUser}
+                                        screenName={screenName}
                                     />
                                     <Grid item className={classes.timelineGrid}>
                                         {/* Tweet text body */}
