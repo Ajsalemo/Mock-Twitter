@@ -13,7 +13,7 @@ import twitterlogo from '../../images/twitterlogo.jpg';
 import twitterminilogo from '../../images/twitterminilogo.png';
 
 // Firebase Auth Function
-import firebaseClass from '../../firebase';
+import firebaseClass from '../../helpers/firebase';
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //

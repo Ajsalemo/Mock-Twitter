@@ -9,7 +9,7 @@ import { Button, Avatar, Tooltip, ClickAwayListener, Grow, Paper, Popper, MenuIt
 import { PersonOutline } from '@material-ui/icons';
 
 // Firebase
-import firebaseClass from '../firebase';
+import firebaseClass from '../helpers/firebase';
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //

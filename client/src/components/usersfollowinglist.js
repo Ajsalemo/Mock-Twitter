@@ -15,7 +15,7 @@ import { CircularProgress } from '@material-ui/core';
 import { USERS_FOLLOWERS } from '../apolloclient/apolloqueries';
 
 // Helper function
-import { extractAndReplaceNormalJPG } from '../apolloclient/apolloclient';
+import { extractAndReplaceNormalJPG } from '../helpers/helperfunctions';
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //

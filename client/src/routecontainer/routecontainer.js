@@ -18,7 +18,7 @@ import ListsTimeline from '../pages/main/liststimeline';
 import Loading from '../components/loading';
 
 // Firebase
-import firebaseClass from '../firebase';
+import firebaseClass from '../helpers/firebase';
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //

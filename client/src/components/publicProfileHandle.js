@@ -2,7 +2,6 @@
 // ----------------------------------------------------------------------------------------------------- //
 
 import React from 'react';
-import Moment from 'react-moment';
 
 // Material-UI components
 import { withStyles, Card, CardContent, Typography } from '@material-ui/core';
@@ -13,6 +12,9 @@ import TweetModal from './tweetmodal';
 
 // Images
 import verifiedIcon from '../images/verifiedicon.png';
+
+// Helper function
+import { parseCreatedAtDate } from '../helpers/helperfunctions';
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
@@ -82,7 +84,7 @@ const PublicProfileHandle = props => {
                     <span className={classes.descriptionContent}>{description}</span>
                     <CalendarToday className={classes.createdAtIcon} />
                     <span className={classes.publicProfileCreatedAt}>
-                        Joined <Moment format={'MMMM YYYY'}>{createdAt}</Moment>
+                        Joined {parseCreatedAtDate(createdAt)}
                     </span>
                     {/* If you're viewing your own profile, this component will be hidden */}
                     {/* Else if you're viewing someone elses profile, the 'tweet at' component will be displayed */}

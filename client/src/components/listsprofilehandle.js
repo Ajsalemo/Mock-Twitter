@@ -17,7 +17,7 @@ import UnsubscribeListButton from '../components/unsubscribelistbutton';
 import { GET_LISTS_SHOW } from '../apolloclient/apolloqueries';
 
 // Imported functions
-import { pollMinute } from '../apolloclient/apolloclient';
+import { pollMinute } from '../helpers/helperfunctions';
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //

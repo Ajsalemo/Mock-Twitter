@@ -2,7 +2,6 @@
 // ----------------------------------------------------------------------------------------------------- //
 
 import React from 'react';
-import Moment from 'react-moment';
 import { Link } from 'react-router-dom';
 
 // Material-UI components
@@ -14,6 +13,9 @@ import EditPost from '../components/editposts';
 
 // Images
 import verifiedIcon from '../images/verifiedicon.png';
+
+// Helpers
+import { parseCreatedAtDate } from '../helpers/helperfunctions';
 
 // ----------------------------------------------------------------------------------------------------- //
 
@@ -65,7 +67,7 @@ const Tweettext = props => {
                     null}
                     <span className={classes.timelineHandleFont}>@{nickname}</span>
                     <span className={classes.timelineDotSpacing}>&#8226;</span>
-                    <span className={classes.timelineHandleFont}><Moment fromNow>{created_at}</Moment></span>
+                    <span className={classes.timelineHandleFont}>{parseCreatedAtDate(created_at)}</span>
                 </Typography>
                 <Grid item>
                     <EditPost

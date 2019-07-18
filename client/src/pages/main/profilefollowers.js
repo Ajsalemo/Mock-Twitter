@@ -71,7 +71,6 @@ let ProfileFollowers = props => {
                                 /> 
                                 <PublicProfileBanner
                                     URLparam={param}
-                                    profileLinkColor={one.currentUser.showUser.profileLinkColor}
                                     profileBannerURL={one.currentUser.showUser.profile_banner_url}
                                 />
                                 <ProfileBannerBar 

@@ -22,7 +22,7 @@ import UnRetweetStatus from '../components/unretweet';
 import ToolTipModal from '../components/tooltipmodal';
 
 // Imported functions
-import { pollMinute } from '../apolloclient/apolloclient';
+import { pollMinute } from '../helpers/helperfunctions';
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
@@ -80,7 +80,6 @@ const styles = () => ({
 
 const ListsTimelineComponent = props => {
     const { classes, currentUser, URLparam } = props;
-    console.log(URLparam)
     return (
         <React.Fragment>
             <Query 

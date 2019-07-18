@@ -7,7 +7,7 @@ import React, { Component } from 'react';
 import { withStyles, CircularProgress, Typography, Grid } from '@material-ui/core';
 
 // Firebase
-import firebaseClass from '../firebase';
+import firebaseClass from '../helpers/firebase';
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //

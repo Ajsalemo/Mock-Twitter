@@ -21,7 +21,7 @@ import Tweettext from '../components/tweettext';
 import UnRetweetStatus from '../components/unretweet';
 
 // Imported functions
-import { pollMinute } from '../apolloclient/apolloclient';
+import { pollMinute } from '../helpers/helperfunctions';
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //

@@ -10,11 +10,9 @@ import { withStyles, Grid } from '@material-ui/core';
 // ----------------------------------------------------------------------------------------------------- //
 
 const styles = () => ({
-    bannerHeight: {
-        backgroundColor: '#007fec'
-    },
     bannerPlaceholderImage: {
-        height: '15em'
+        height: '15em',
+        backgroundColor: '#007fec'
     },
     bannerImage: {
         width: '-webkit-fill-available'
@@ -30,11 +28,11 @@ const styles = () => ({
 // ----------------------------------------------------------------------------------------------------- //
 
 const PublicProfileBanner = props => {
-    const { classes, profileLinkColor, profileBannerURL } = props;
+    const { classes, profileBannerURL } = props;
     return (
         profileBannerURL
             ?
-        <Grid item className={classes.bannerHeight}>
+        <Grid item>
             <img 
                 src={profileBannerURL}
                 className={classes.bannerImage}
@@ -42,11 +40,7 @@ const PublicProfileBanner = props => {
             />  
         </Grid>   
             :
-        <Grid 
-            item 
-            className={classes.bannerPlaceholderImage}
-            style={{ backgroundColor: `#${profileLinkColor}` }}
-        >
+        <Grid item className={classes.bannerPlaceholderImage}>
             {/* This banner displays if the users profile_banner_url value is null */}
         </Grid>  
     );

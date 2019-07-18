@@ -16,7 +16,7 @@ import Error from '../components/error';
 import TooltipFollowButton from '../components/tooltipfollowbutton';
 
 // Helper function
-import { extractAndReplaceNormalJPG } from '../apolloclient/apolloclient';
+import { extractAndReplaceNormalJPG } from '../helpers/helperfunctions';
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
