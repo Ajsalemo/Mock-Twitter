@@ -121,7 +121,8 @@ const Timeline = props => {
                                         verified={timelineTweetInfo.user.verified}  
                                         profileBannerURL={timelineTweetInfo.user.profile_banner_url}
                                         profileLinkColor={profileLinkColor}
-                                        screenName={screenName}
+                                        screenName={timelineTweetInfo.user.screen_name}
+                                        currentUser={screenName}
                                     />
                                     <Grid item className={classes.timelineGrid}>
                                         {/* Tweet text body */}
@@ -160,6 +161,7 @@ const Timeline = props => {
                                                     <UnRetweetStatus
                                                         id={timelineTweetInfo.id_str}
                                                         retweet_count={timelineTweetInfo.retweet_count}
+                                                        screenName={screenName}
                                                     />
                                                         :
                                                     // Else, if it hasn't been retweeted - give the option to be able to retweet it
@@ -171,7 +173,9 @@ const Timeline = props => {
                                                         created_at={timelineTweetInfo.created_at}
                                                         full_text={timelineTweetInfo.full_text}    
                                                         srcImage={timelineTweetInfo.user.profile_image_url_https}  
-                                                        id={timelineTweetInfo.id_str}      
+                                                        id={timelineTweetInfo.id_str}
+                                                        profileLinkColor={profileLinkColor}   
+                                                        screenName={timelineTweetInfo.user.screen_name}   
                                                     />}
                                                 </div>
                                                 <div className={classNames(classes.buttonOptionsGrid, classes.buttonOptionsHover)}>
@@ -182,13 +186,15 @@ const Timeline = props => {
                                                         ?
                                                     <UnLikeStatus
                                                         id={timelineTweetInfo.id_str}
-                                                        favorite_count={timelineTweetInfo.favorite_count}    
+                                                        favorite_count={timelineTweetInfo.favorite_count} 
+                                                        screenName={timelineTweetInfo.user.screen_name}   
                                                     />
                                                     // Else, if it hasn't been liked - give the option to like the status
                                                         :
                                                     <LikeStatus 
                                                         id={timelineTweetInfo.id_str}
                                                         favorite_count={timelineTweetInfo.favorite_count}
+                                                        screenName={timelineTweetInfo.user.screen_name}
                                                     />}
                                                 </div>
                                                 <BarChart className={classNames(classes.timelineIcons, classes.buttonOptionsHover)} />

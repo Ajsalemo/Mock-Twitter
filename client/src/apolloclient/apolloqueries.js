@@ -20,24 +20,15 @@ export const GET_AUTHUSER_TWEETS =
     gql`
         query GetAuthUserTweets {
             currentUser {
-                user_id
-                name
                 userTimelineTweets {
                     created_at
                     id
                     id_str
                     full_text
-                    truncated
-                    geo
-                    coordinates
-                    place
-                    contributors
-                    is_quote_status
                     retweet_count
                     favorite_count
                     favorited
                     retweeted
-                    lang
                     user {
                         id
                         name
@@ -68,24 +59,15 @@ export const GET_USERPROFILE_TWEETS =
     gql`
         query GetUserProfileTweets($screen_name: String!) {
             currentUser {
-                user_id
-                name
                 userProfileTweets(screen_name: $screen_name) {
                     created_at
                     id
                     id_str
                     full_text
-                    truncated
-                    geo
-                    coordinates
-                    place
-                    contributors
-                    is_quote_status
                     retweet_count
                     favorited
                     favorite_count
                     retweeted
-                    lang
                     user {
                         id
                         name
@@ -100,6 +82,7 @@ export const GET_USERPROFILE_TWEETS =
                         created_at
                         description
                         profile_background_image_url_https
+                        profile_background_image_url
                         profile_link_color
                     }
                     entities {
@@ -120,13 +103,10 @@ export const GET_TRENDING_TOPICS =
     gql`
         query GetTrendingTopics {
             currentUser {
-                user_id
-                name
                 trendingTopics {   
                     trends {
                         name
                         url
-                        promoted_content
                         query
                         tweet_volume
                     } 
@@ -154,8 +134,6 @@ export const GET_SUGGESTED_CATEGORIES_MEMBERS_GROUP =
     gql`
         query GetSuggestedCategoriesMembersGroup($slug: String!) {
             currentUser {
-                user_id
-                name
                 suggestedCategorySlug(slug: $slug) {
                     users {
                         id
@@ -176,8 +154,6 @@ export const COMPARE_FRIENDSHIPS =
     gql`
         query CompareRelationship($target_screenName: String!, $source_screenName: String!) {
             currentUser {
-                user_id
-                name
                 compareRelationship(target_screenName: $target_screenName, source_screenName: $source_screenName) {
                     relationship {
                         target {
@@ -208,33 +184,18 @@ export const VERIFY_USER =
                     id_str
                     name
                     screen_name
-                    location
-                    url
                     description
-                    derived
                     verified
                     followers_count
                     friends_count
-                    listed_count
                     favourites_count
                     statuses_count
                     created_at
-                    geo_enabled
-                    lang
                     profile_background_color
-                    profile_background_image_url
                     profile_background_image_url_https
-                    profile_background_tile
                     profile_banner_url
-                    profile_image_url
-                    profile_image_url_https
                     profile_link_color
-                    profile_sidebar_border_color
-                    profile_sidebar_fill_color
-                    profile_text_color
-                    profile_use_background_image
-                    default_profile
-                    default_profile_image
+                    profile_image_url_https
                 }
             }
         }
@@ -244,8 +205,6 @@ export const USERS_FOLLOWERS =
     gql`
         query UsersFollowers($screen_name: String!) {
             currentUser {
-                user_id
-                name
                 usersFollowers(screen_name: $screen_name) {
                     previous_cursor_str
                     next_cursor_str
@@ -254,33 +213,18 @@ export const USERS_FOLLOWERS =
                         id_str
                         name
                         screen_name
-                        location
-                        url
                         description
-                        derived
                         verified
                         followers_count
                         friends_count
-                        listed_count
                         favourites_count
                         statuses_count
                         created_at
-                        geo_enabled
-                        lang
                         profile_background_color
-                        profile_background_image_url
                         profile_background_image_url_https
-                        profile_background_tile
                         profile_banner_url
-                        profile_image_url
                         profile_image_url_https
                         profile_link_color
-                        profile_sidebar_border_color
-                        profile_sidebar_fill_color
-                        profile_text_color
-                        profile_use_background_image
-                        default_profile
-                        default_profile_image
                     }
                 }
             }
@@ -291,8 +235,6 @@ export const USERS_FOLLOWING =
     gql`
         query UsersFollowing($screen_name: String!) {
             currentUser {
-                user_id
-                name
                 usersFollowing(screen_name: $screen_name) {
                     previous_cursor_str
                     next_cursor_str
@@ -301,33 +243,18 @@ export const USERS_FOLLOWING =
                         id_str
                         name
                         screen_name
-                        location
-                        url
                         description
-                        derived
                         verified
                         followers_count
                         friends_count
-                        listed_count
                         favourites_count
                         statuses_count
                         created_at
-                        geo_enabled
-                        lang
                         profile_background_color
-                        profile_background_image_url
                         profile_background_image_url_https
-                        profile_background_tile
                         profile_banner_url
-                        profile_image_url
-                        profile_image_url_https
                         profile_link_color
-                        profile_sidebar_border_color
-                        profile_sidebar_fill_color
-                        profile_text_color
-                        profile_use_background_image
-                        default_profile
-                        default_profile_image
+                        profile_image_url_https
                     }
                 }
             }
@@ -338,24 +265,15 @@ export const GET_USERS_LIKES =
     gql`
         query GetUsersFavorites($screen_name: String!) {
             currentUser {
-                user_id
-                name
                 getUsersFavorites(screen_name: $screen_name) {
                     created_at
                     id
                     id_str
                     full_text
-                    truncated
-                    geo
-                    coordinates
-                    place
-                    contributors
-                    is_quote_status
                     retweet_count
                     favorite_count
                     favorited
                     retweeted
-                    lang
                     user {
                         id
                         name
@@ -365,7 +283,6 @@ export const GET_USERS_LIKES =
                         friends_count
                         followers_count
                         profile_image_url_https
-                        in_reply_to_status_id_str
                     }
                     entities {
                         hashtags {
@@ -385,8 +302,6 @@ export const GET_USER_LISTS =
     gql`
         query GetUserLists($screen_name: String!) {
             currentUser {
-                user_id
-                name
                 getLists(screen_name: $screen_name) {
                     name
                     slug
@@ -411,26 +326,17 @@ export const GET_USER_LISTS =
 
 export const GET_LISTS_TIMELINE = 
     gql`
-        query GetListsTimeline($list_id: String) {
+        query GetListsTimeline($list_id: String!) {
             currentUser {
-                user_id
-                name
                 getListsTimeline(list_id: $list_id) {
                     created_at
                     id
                     id_str
                     full_text
-                    truncated
-                    geo
-                    coordinates
-                    place
-                    contributors
-                    is_quote_status
                     retweet_count
                     favorite_count
                     favorited
                     retweeted
-                    lang
                     user {
                         id
                         name
@@ -460,8 +366,6 @@ export const GET_LISTS_SHOW =
     gql`
         query GetListsShow($list_id: String!) {
             currentUser {
-                user_id
-                name
                 getListsShow(list_id: $list_id) {
                     name
                     slug
@@ -503,9 +407,8 @@ export const SHOW_USER =
                     profile_background_image_url
                     profile_background_image_url_https
                     profile_banner_url
-                    profile_image_url_https
                     profile_link_color
-                    profile_text_color
+                    profile_image_url_https
                 }
             }
         }
@@ -550,8 +453,6 @@ export const LIKE_STATUS =
         mutation likeStatus($id: String!) {
             likeStatus(id: $id) {
                 id
-                name
-                screen_name
             }
         }
     `;
@@ -561,8 +462,6 @@ export const UNLIKE_STATUS =
         mutation unlikeStatus($id: String!) {
             unlikeStatus(id: $id) {
                 id
-                name
-                screen_name
             }
         }
     `;
@@ -586,8 +485,6 @@ export const UNRETWEET_STATUS =
         mutation UnRetweetStatus($id: String!) {
             unRetweet(id: $id) {
                 id
-                name
-                screen_name
             }
         }
     `;
@@ -597,8 +494,6 @@ export const DELETE_STATUS =
         mutation DeleteStatus($id: String!) {
             deleteStatus(id: $id) {
                 id
-                name
-                screen_name
             }
         }
     `;

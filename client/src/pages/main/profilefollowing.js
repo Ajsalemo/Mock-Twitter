@@ -34,6 +34,12 @@ const styles = () => ({
         width: 'auto',
         paddingRight: '2em',
         marginLeft: '10em'
+    },
+    errorAndLoadingDiv: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: '100vh'
     }
 });
 
@@ -54,8 +60,8 @@ let ProfileFollowing = props => {
                     query={VERIFY_USER}
                 >
                     {({ loading: loadingTwo, error: errorTwo, data: two }) => {
-                        if (loadingOne || loadingTwo) return <div><CircularProgress /></div>;
-                        if (errorOne || errorTwo) return <div><Error /></div>;
+                        if (loadingOne || loadingTwo) return <div className={classes.errorAndLoadingDiv}><CircularProgress /></div>;
+                        if (errorOne || errorTwo) return <div className={classes.errorAndLoadingDiv}><Error /></div>;
                         return (
                             <React.Fragment>
                                 <Navbar 

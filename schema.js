@@ -42,7 +42,7 @@ const typeDefs =
             usersFollowing(screen_name: String!): UsersFollowers
             getUsersFavorites(screen_name: String!): [UserTimelineTweets]
             getLists(screen_name: String!): [UsersLists]
-            getListsTimeline(list_id: String): [UserTimelineTweets]
+            getListsTimeline(list_id: String!): [UserTimelineTweets]
             getListsShow(list_id: String!): UsersLists
             showUser(screen_name: String!): UserObject
         }
@@ -58,17 +58,10 @@ const typeDefs =
             id: String
             id_str: String
             full_text: String
-            truncated: String
-            geo: String
-            coordinates: String
-            place: String
-            contributors: String
-            is_quote_status: String
             retweet_count: String
             favorite_count: String
             favorited: Boolean
             retweeted: Boolean
-            lang: String
             user: UserTweetObject
             entities: Entities
         }
@@ -79,17 +72,10 @@ const typeDefs =
             id: String
             id_str: String
             full_text: String
-            geo: String
-            coordinates: String
-            truncated: Boolean
             retweet_count: String
             favorite_count: String
             favorited: Boolean
             retweeted: Boolean
-            is_quote_status: String
-            lang: String
-            contributors: String
-            place: String
             user: UserTweetObject
             entities: Entities
         }
@@ -113,7 +99,6 @@ const typeDefs =
         type TrendingTopics {
             name: String
             url: String
-            promoted_content: String
             query: String
             tweet_volume: String
         }
@@ -147,76 +132,41 @@ const typeDefs =
             id_str: String
             name: String
             screen_name: String
-            location: String
-            url: String
             description: String
-            derived: String
             verified: Boolean
             followers_count: String
             friends_count: Int
-            listed_count: Int
             favourites_count: Int
             statuses_count: Int
             created_at: String
-            geo_enabled: Boolean
-            lang: String
             profile_background_color: String
-            profile_background_image_url: String
             profile_background_image_url_https: String
-            profile_background_tile: String
+            profile_background_image_url: String
             profile_banner_url: String
-            profile_image_url: String
             profile_image_url_https: String
             profile_link_color: String
-            profile_sidebar_border_color: String
-            profile_sidebar_fill_color: String
-            profile_text_color: String
-            profile_use_background_image: String
-            default_profile: Boolean
-            default_profile_image: Boolean
         }
 
         # Object that is generated inside timeline tweet responses
         type UserTweetObject {
             name: String 
-            in_reply_to_status_id_str: String
-            profile_sidebar_fill_color: String
-            profile_background_tile: String
-            profile_sidebar_border_color: String 
             profile_image_url: String 
             created_at: String 
-            location: String 
-            follow_request_sent: String 
             id_str: String
-            is_translator: Boolean
             profile_link_color: String 
-            default_profile: Boolean
-            url: String
-            contributors_enabled: Boolean
             favourites_count: String
-            utc_offset: String
             profile_image_url_https: String
             id: String
-            listed_count: String
-            profile_use_background_image: String
-            profile_text_color: String
             followers_count: String
-            lang: String
-            protected: Boolean
-            geo_enabled: Boolean
-            notifications: Boolean
             description: String
             profile_background_color: String
             verified: Boolean
-            time_zone: String
             profile_background_image_url_https: String
             statuses_count: String
             profile_background_image_url: String
             profile_banner_url: String
-            default_profile_image: Boolean
             friends_count: String
             following: Boolean
-            show_all_inline_media: Boolean
             screen_name: String
         }
 
@@ -338,7 +288,7 @@ const resolvers = {
         showUser: async (parent, args, user) => {
             const showUserRequest = await twitterNetworkCall(user.access_token, user.access_secret).get('users/show', { screen_name: args.screen_name });
             const showUserResponse = await showUserRequest;
-            return showUserRequest;
+            return showUserResponse;
         }
     },
     Mutation: {

@@ -29,6 +29,12 @@ const styles = () => ({
     },
     profileHandlerGrid: {
         width: 'auto'
+    },
+    errorAndLoadingDiv: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: '100vh'
     }
 });
 
@@ -42,8 +48,8 @@ const Main = props => {
                 fetchPolicy='network-only'
             >
             {({ loading, error, data }) => {
-                if (loading) return <div><CircularProgress /></div>
-                if (error) return <div><Error /></div>
+                if (loading) return <div className={classes.errorAndLoadingDiv}><CircularProgress /></div>
+                if (error) return <div className={classes.errorAndLoadingDiv}><Error /></div>
                 return (
                     <React.Fragment>
                         <Navbar 

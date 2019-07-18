@@ -28,13 +28,23 @@ const styles = () => ({
 // ----------------------------------------------------------------------------------------------------- //
 
 const UnLikeStatus = props => {
-    const { id, favorite_count, classes, screenName, retweetId } = props;
+    const { id, favorite_count, classes, screenName, list_id } = props;
     return (
         <Mutation
             mutation={UNLIKE_STATUS}
             refetchQueries={[
+                // If list_id is being passed in the fire this query
+                // Else if it isn't refetch the rest - this is to prevent any errors from twitters API and Apollo
+                // Since list_id is a required string
+                list_id !== undefined ? 
                 {
-                    query: GET_AUTHUSER_TWEETS
+                    query: GET_LISTS_TIMELINE,
+                    variables: {
+                        list_id: list_id
+                    }
+                } :
+                { 
+                    query: GET_AUTHUSER_TWEETS 
                 },
                 {
                     query: GET_USERPROFILE_TWEETS,
@@ -46,13 +56,7 @@ const UnLikeStatus = props => {
                     query: GET_USERS_LIKES,
                     variables: {
                         screen_name: screenName
-                    }
-                },
-                {
-                    query: GET_LISTS_TIMELINE,
-                    variables: {
-                        list_id: retweetId
-                    }
+                    } 
                 }
             ]}
         >

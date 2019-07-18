@@ -33,8 +33,19 @@ const UnRetweetStatus = props => {
         <Mutation 
             mutation={UNRETWEET_STATUS} 
             refetchQueries={[
+                // If retweetId is being passed in the fire this query
+                // Else if it isn't refetch the rest - this is to prevent any errors from twitters API and Apollo
+                // Since retweetId is a required string
+                retweetId !== undefined ? 
                 {
-                    query: GET_AUTHUSER_TWEETS
+                    query: GET_LISTS_TIMELINE,
+                    variables: {
+                        list_id: retweetId
+                    }
+                }
+                    :
+                { 
+                    query: GET_AUTHUSER_TWEETS 
                 },
                 {
                     query: GET_USERPROFILE_TWEETS,
@@ -46,12 +57,6 @@ const UnRetweetStatus = props => {
                     query: GET_USERS_LIKES,
                     variables: {
                         screen_name: screenName
-                    }
-                },
-                {
-                    query: GET_LISTS_TIMELINE,
-                    variables: {
-                        list_id: retweetId
                     }
                 }
             ]}

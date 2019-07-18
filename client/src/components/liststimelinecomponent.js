@@ -80,6 +80,7 @@ const styles = () => ({
 
 const ListsTimelineComponent = props => {
     const { classes, currentUser, URLparam } = props;
+    console.log(URLparam)
     return (
         <React.Fragment>
             <Query 
@@ -176,7 +177,7 @@ const ListsTimelineComponent = props => {
                                                         id={getListsTimeline.id_str}
                                                         favorite_count={getListsTimeline.favorite_count}
                                                         screenName={getListsTimeline.user.screen_name} 
-                                                        retweetId={URLparam}   
+                                                        list_id={URLparam}   
                                                     />
                                                     // Else, if it hasn't been liked - give the option to like the status
                                                         :
@@ -184,7 +185,7 @@ const ListsTimelineComponent = props => {
                                                         id={getListsTimeline.id_str}
                                                         favorite_count={getListsTimeline.favorite_count}
                                                         screenName={getListsTimeline.user.screen_name}
-                                                        retweetId={URLparam}
+                                                        list_id={URLparam}
                                                     />}
                                                 </div>
                                                 <BarChart className={classNames(classes.listsTimelineIcons, classes.listsButtonOptionsHover)} />

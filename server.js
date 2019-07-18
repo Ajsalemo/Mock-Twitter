@@ -40,6 +40,7 @@ const getUid = async (req) => {
             }
             return decodedInformation;
         }).catch(err => {
+            console.log(err)
             return err;
         });
     return user;
