@@ -76,7 +76,7 @@ class FirebaseHelperClass {
                 // Handle error
                 console.log(err);
             });
-            return verifyToken;
+        return verifyToken;
     };
 
     // This function sets the persistence of the authenticated session

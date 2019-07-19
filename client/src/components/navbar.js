@@ -5,8 +5,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 // Material-UI components
-import { withStyles, Avatar, AppBar, Typography, Toolbar, TextField, InputAdornment } from '@material-ui/core';
-import { Home, OfflineBolt, NotificationsNone, Message, Search } from '@material-ui/icons';
+import { withStyles, Avatar, AppBar, Typography, Toolbar } from '@material-ui/core';
+import { Home, OfflineBolt, NotificationsNone, Message } from '@material-ui/icons';
 
 // Image
 import twitterminilogo from '../images/twitterminilogo.png';
@@ -14,6 +14,7 @@ import twitterminilogo from '../images/twitterminilogo.png';
 // Components
 import TweetModal from '../components/tweetmodal';
 import ProfileAvatarModal from '../components/profileavatarmodal';
+import SearchTweets from '../components/searchtweets';
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
@@ -82,21 +83,12 @@ const styles = theme => ({
             paddingBottom: '1em'
         }
     },
-    searchIconColor: {
-        color: 'gray',
-        '&:hover': {
-            cursor: 'pointer'
-        }
-    },
     tweetButton: {
         backgroundColor: '#00acee',
         color: '#fff'
     },
     toolBar: {
         justifyContent: 'center'
-    },
-    navTextField: {
-        height: '-webkit-fill-available'
     },
     navAnchor: {
         paddingTop: '0.3em'
@@ -131,26 +123,7 @@ const Navbar = props => {
                         <Avatar alt="twitter logo" src={twitterminilogo} className={classes.twitterAvatar} /> 
                     </div>
                     <div className={classes.searchDiv}>
-                        <TextField
-                            placeholder="Search Twitter"
-                            variant="outlined"
-                            InputProps={{
-                                endAdornment: (
-                                <InputAdornment variant="filled" position="end">
-                                    <Search
-                                    aria-label="Search form submit"
-                                    classes={{
-                                        root: classes.searchIconColor
-                                    }}
-                                    >
-                                    </Search>
-                                </InputAdornment>
-                                ),
-                                classes: {
-                                    root: classes.navTextField
-                                }
-                            }}
-                        />
+                        <SearchTweets />
                         <ProfileAvatarModal
                             avatarImg={avatarImg}
                             name={name}
