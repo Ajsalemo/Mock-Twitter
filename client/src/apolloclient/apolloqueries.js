@@ -414,6 +414,46 @@ export const SHOW_USER =
         }
     `;
 
+export const SEARCH_TWEETS =
+    gql`
+        query SearchTweets($query: String!) {
+            currentUser {
+                searchTweets(query: $query) {
+                    statuses {
+                        created_at
+                        id
+                        id_str
+                        full_text
+                        retweet_count
+                        favorite_count
+                        favorited
+                        retweeted
+                        user {
+                            id
+                            name
+                            screen_name
+                            verified
+                            statuses_count
+                            friends_count
+                            followers_count
+                            profile_image_url_https
+                            profile_link_color
+                        }
+                        entities {
+                            hashtags {
+                                text
+                            }
+                            media {
+                                display_url
+                                media_url_https
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    `;
+
 // ------------------------------------------------------------------------------------------------------ //
 // ---------------------------------------------- Mutations --------------------------------------------- //
 

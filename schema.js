@@ -36,7 +36,6 @@ const typeDefs =
             userProfileTweets(screen_name: String!): [UserProfileTimeline]
             trendingTopics: [trendsWrapper]
             compareRelationship(target_screenName: String!, source_screenName: String!): RelationshipWrapper 
-            userTweetStatusCount: [UserTimelineTweets]
             verifyCredentials: UserObject
             usersFollowers(screen_name: String!): UsersFollowers
             usersFollowing(screen_name: String!): UsersFollowers
@@ -45,6 +44,7 @@ const typeDefs =
             getListsTimeline(list_id: String!): [UserTimelineTweets]
             getListsShow(list_id: String!): UsersLists
             showUser(screen_name: String!): UserObject
+            searchTweets(query: String!): SearchTweets
         }
 
         # Object wrapper to iterate
@@ -93,6 +93,10 @@ const typeDefs =
         type Media {
             display_url: String
             media_url_https: String
+        }
+
+        type SearchTweets {
+            statuses: [UserTimelineTweets]
         }
 
         # Currently trending topics
@@ -289,6 +293,12 @@ const resolvers = {
             const showUserRequest = await twitterNetworkCall(user.access_token, user.access_secret).get('users/show', { screen_name: args.screen_name });
             const showUserResponse = await showUserRequest;
             return showUserResponse;
+        },
+        searchTweets: async (parent, args, user) => {
+            const searchTweetsRequest = await twitterNetworkCall(user.access_token, user.access_secret).get('search/tweets', { q: args.query, tweet_mode: 'extended' });
+            const searchTweetsResponse = await searchTweetsRequest;
+            console.log(searchTweetsResponse)
+            return searchTweetsResponse;
         }
     },
     Mutation: {

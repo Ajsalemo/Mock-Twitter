@@ -93,7 +93,7 @@ const SubmitTweetForm = props => {
                                 resetForm({ tweet: '' });
                             } catch(error) {
                                 setSubmitting(false);
-                                console.log(error)
+                                console.log(error);
                             }
                         }}
                         render={props => (
