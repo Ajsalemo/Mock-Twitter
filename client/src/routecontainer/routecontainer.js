@@ -19,6 +19,7 @@ import Loading from '../components/loading';
 
 // Firebase
 import firebaseClass from '../helpers/firebase';
+import SearchPage from '../pages/main/searchpage';
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
@@ -46,6 +47,7 @@ class RouteContainer extends Component {
         return (
             <React.Fragment>
                 <Switch>
+                    <Route path='/search/:params' component={SearchPage} />
                     <Route path='/lists-statuses/:screen_name/:params' component={ListsTimeline} />
                     <Route path='/lists/:params' component={PublicProfileLists} />
                     <Route path='/likes/:params' component={ProfileLikes} />
