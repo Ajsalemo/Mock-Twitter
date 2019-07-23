@@ -196,6 +196,7 @@ export const VERIFY_USER =
                     profile_banner_url
                     profile_link_color
                     profile_image_url_https
+                    profile_text_color
                 }
             }
         }

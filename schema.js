@@ -149,6 +149,7 @@ const typeDefs =
             profile_banner_url: String
             profile_image_url_https: String
             profile_link_color: String
+            profile_text_color: String
         }
 
         # Object that is generated inside timeline tweet responses

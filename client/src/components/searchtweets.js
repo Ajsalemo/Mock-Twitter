@@ -41,7 +41,7 @@ let SearchTweet = props => {
                     resetForm({ search: '' });
                     // After submitting the form, this pushes to the search results page
                     // When then will use a Query component to pull data using the parameter passed in through here
-                    // await props.history.push(`/search/${values.search}`);
+                    await props.history.push(`/search/${values.search}`);
                 } catch(error) {
                     setSubmitting(false);
                     console.log(error);

@@ -3,6 +3,7 @@
 
 import React, { Component } from 'react';
 import classNames from 'classnames';
+import { Link } from 'react-router-dom';
 
 // Material-UI components
 import { Button, Avatar, Tooltip, ClickAwayListener, Grow, Paper, Popper, MenuItem, MenuList, Typography, withStyles } from '@material-ui/core';
@@ -75,6 +76,13 @@ const styles = () => ({
     },
     popperRootClass: {
         marginTop: '0.5em'
+    },
+    profileLinkClass: {
+        textDecoration: 'none',
+        display: 'flex',
+        '&:hover': {
+            textDecoration: 'none'
+        }
     }
 });
 
@@ -100,7 +108,7 @@ class ProfileAvatarModal extends Component {
     // ----------------------------------------------------------------------------------------------------- //
 
     render() {
-        const { classes, avatarImg, name, screen_name } = this.props;
+        const { classes, avatarImg, name, screen_name, screenName } = this.props;
         const { open } = this.state;
         return (
             <React.Fragment>
@@ -155,10 +163,12 @@ class ProfileAvatarModal extends Component {
                                             </Typography>
                                         </MenuItem>
                                         <MenuItem onClick={this.handleClose} className={classNames(classes.menuDivider, classes.profileChildMenuGrid, classes.menuPersonOutline)}>
-                                            <PersonOutline className={classes.menuPersonOutline} />
-                                            <Typography variant="subtitle1" className={classes.profileChildMenuGridText}>
-                                                Profile
-                                            </Typography>
+                                            <Link to={`/userprofile/${screenName}`} className={classes.profileLinkClass}>
+                                                <PersonOutline className={classes.menuPersonOutline} />
+                                                <Typography variant="subtitle1" className={classes.profileChildMenuGridText}>
+                                                    Profile
+                                                </Typography>
+                                            </Link>
                                         </MenuItem>
                                         <MenuItem onClick={this.handleClose} className={classNames(classes.menuDivider, classes.profileChildMenuGrid)}>
                                             <Typography 
