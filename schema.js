@@ -298,7 +298,6 @@ const resolvers = {
         searchTweets: async (parent, args, user) => {
             const searchTweetsRequest = await twitterNetworkCall(user.access_token, user.access_secret).get('search/tweets', { q: args.query, tweet_mode: 'extended' });
             const searchTweetsResponse = await searchTweetsRequest;
-            console.log(searchTweetsResponse)
             return searchTweetsResponse;
         }
     },

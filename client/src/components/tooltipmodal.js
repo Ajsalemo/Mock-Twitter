@@ -118,8 +118,8 @@ const ToolTipModal = props => {
                             <Typography variant="h6" gutterBottom className={classes.ToolTipUpperText}>
                                 <div className={classes.ToolTipHandleTextUpperDiv}>
                                     {/* These are passed in from 'timeline.js' */}
-                                    <Link to={`userprofile/${screenName}`} className={classNames(classes.ToolTipHandleTextUpper, classes.toolTilProfileLink)}>{name}</Link>
-                                    <Link to={`userprofile/${screenName}`} className={classNames(classes.ToolTipHandleTextLower, classes.toolTilProfileLink)}>@{screenName}</Link>
+                                    <Link to={`/userprofile/${screenName}`} className={classNames(classes.ToolTipHandleTextUpper, classes.toolTilProfileLink)}>{name}</Link>
+                                    <Link to={`/userprofile/${screenName}`} className={classNames(classes.ToolTipHandleTextLower, classes.toolTilProfileLink)}>@{screenName}</Link>
                                 </div>
                             </Typography>
                             <Grid item className={classes.toolTipFollowGrid}>
