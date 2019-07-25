@@ -13,7 +13,7 @@ import Tweettext from '../components/tweettext';
 import Error from '../components/error';
 
 // Apollo Queries and Mutations 
-import { RETWEET_STATUS, GET_AUTHUSER_TWEETS, GET_USERPROFILE_TWEETS, GET_USERS_LIKES, GET_LISTS_TIMELINE } from '../apolloclient/apolloqueries';
+import { RETWEET_STATUS, GET_AUTHUSER_TWEETS, GET_USERPROFILE_TWEETS, GET_USERS_LIKES, GET_LISTS_TIMELINE, SEARCH_TWEETS } from '../apolloclient/apolloqueries';
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
@@ -100,7 +100,7 @@ class RetweetModal extends Component {
     // ----------------------------------------------------------------------------------------------------- //
   
     render() {
-        const { classes, retweet_count, name, verified, nickname, created_at, full_text, srcImage, id, screenName, profileLinkColor, retweetId } = this.props;
+        const { classes, retweet_count, name, verified, nickname, created_at, full_text, srcImage, id, screenName, profileLinkColor, retweetId, searchQueryParam } = this.props;
         return ( 
             <React.Fragment>
                 <Repeat 
@@ -152,6 +152,14 @@ class RetweetModal extends Component {
                                         query: GET_LISTS_TIMELINE,
                                         variables: {
                                             list_id: retweetId
+                                        }
+                                    }
+                                        :
+                                    searchQueryParam !== undefined ?
+                                    {
+                                        query: SEARCH_TWEETS,
+                                        variables: {
+                                            query: searchQueryParam
                                         }
                                     }
                                         :

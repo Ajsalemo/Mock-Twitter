@@ -147,6 +147,7 @@ const SearchQueryTimeline = props => {
                                                         id={searchQueryList.id_str}
                                                         retweet_count={searchQueryList.retweet_count}
                                                         screenName={screenName}
+                                                        searchQueryParam={searchQuery}
                                                     />
                                                         :
                                                     // Else, if it hasn't been retweeted - give the option to be able to retweet it
@@ -160,7 +161,8 @@ const SearchQueryTimeline = props => {
                                                         srcImage={searchQueryList.user.profile_image_url_https}  
                                                         id={searchQueryList.id_str}
                                                         profileLinkColor={profileLinkColor}   
-                                                        screenName={searchQueryList.user.screen_name}   
+                                                        screenName={searchQueryList.user.screen_name}  
+                                                        searchQueryParam={searchQuery} 
                                                     />}
                                                 </div>
                                                 <div className={classNames(classes.searchQueryOptionsGrid, classes.searchQueryOptionsHover)}>
@@ -172,7 +174,8 @@ const SearchQueryTimeline = props => {
                                                     <UnLikeStatus
                                                         id={searchQueryList.id_str}
                                                         favorite_count={searchQueryList.favorite_count} 
-                                                        screenName={searchQueryList.user.screen_name}   
+                                                        screenName={searchQueryList.user.screen_name}  
+                                                        searchQueryParam={searchQuery} 
                                                     />
                                                     // Else, if it hasn't been liked - give the option to like the status
                                                         :
@@ -180,6 +183,7 @@ const SearchQueryTimeline = props => {
                                                         id={searchQueryList.id_str}
                                                         favorite_count={searchQueryList.favorite_count}
                                                         screenName={searchQueryList.user.screen_name}
+                                                        searchQueryParam={searchQuery} 
                                                     />}
                                                 </div>
                                                 <BarChart className={classNames(classes.searchQueryTimelineIcons, classes.searchQueryOptionsHover)} />
