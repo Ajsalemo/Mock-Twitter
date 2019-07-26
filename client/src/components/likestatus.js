@@ -28,7 +28,6 @@ const styles = () => ({
 
 const LikeStatus = props => {
     const { id, favorite_count, classes, screenName, list_id, searchQueryParam } = props;
-    console.log(searchQueryParam)
     return (
         <Mutation
             mutation={LIKE_STATUS}

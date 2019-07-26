@@ -26,6 +26,10 @@ const styles = () => ({
         '&:hover': {
             backgroundColor: 'inherit'
         }
+    },
+    // Used to override the disabled state RBGA background color
+    fabDisabled: {
+        backgroundColor: 'inherit !important'
     }
 });
 
@@ -69,6 +73,9 @@ let SearchTweet = props => {
                                         className={classes.fabButton} 
                                         type="submit"
                                         disabled={props.isSubmitting || !props.values.search}
+                                        classes={{
+                                            disabled: classes.fabDisabled
+                                        }}
                                     >
                                         <Search
                                             aria-label="Search form submit"
