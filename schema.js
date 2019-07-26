@@ -236,9 +236,9 @@ const resolvers = {
     },
     User: {
         userTimelineTweets: async (parent, args, user) => {
-            const requestUserTimelineTweets = await twitterNetworkCall(user.access_token, user.access_secret).get('statuses/home_timeline', { tweet_mode: 'extended' });
-            const responseUserTimelineTweets = await requestUserTimelineTweets;
-            return responseUserTimelineTweets;
+            const userTimelineTweetsRequest = await twitterNetworkCall(user.access_token, user.access_secret).get('statuses/home_timeline', { tweet_mode: 'extended' });
+            const userTimelineTweetsResponse = await userTimelineTweetsRequest;
+            return userTimelineTweetsResponse;
         },
         userProfileTweets: async (parent, args, user) => {
             const userProfileTweetsRequest = await twitterNetworkCall(user.access_token, user.access_secret).get('statuses/user_timeline', { screen_name: args.screen_name, tweet_mode: 'extended' });

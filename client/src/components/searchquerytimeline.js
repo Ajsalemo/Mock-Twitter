@@ -92,7 +92,6 @@ const SearchQueryTimeline = props => {
                     if (error) return <div className={classes.errorAndLoadingDiv}><Error /></div>;
                     return (
                         data.currentUser.searchTweets.statuses.map((searchQueryList, i) => {
-                            console.log(searchQueryList)
                             return (
                                 <Paper className={classes.searchQueryTimelinePaper} key={i}>
                                     <ToolTipModal
