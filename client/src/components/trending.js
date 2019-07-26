@@ -3,6 +3,7 @@
 
 import React from 'react';
 import { Query } from 'react-apollo';
+import { Link } from 'react-router-dom';
 
 // Material-UI components
 import { withStyles, Paper, Card, CardContent, Typography, CircularProgress } from '@material-ui/core';
@@ -12,6 +13,9 @@ import { GET_TRENDING_TOPICS } from '../apolloclient/apolloqueries';
 
 // Components 
 import Error from '../components/error';
+
+// Helper functions
+import { removeLeadingHashtag } from '../helpers/helperfunctions';
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
@@ -43,6 +47,13 @@ const styles = () => ({
     trendingTweetsFont: {
         fontWeight: '100',
         fontSize: '0.8em'
+    },
+    trendingLinks: {
+        color: 'inherit',
+        textDecoration: 'none',
+        '&:hover': {
+            textDecoration: 'underline'
+        }
     }
 });
 
@@ -65,6 +76,7 @@ const Trending = props => {
                             </CardContent>
                             {data.currentUser.trendingTopics.map((trendingArray, i) => {
                                 return trendingArray.trends.map((trendingArrayInner, j) => {
+                                    const removeHashtag = removeLeadingHashtag(trendingArrayInner.name);
                                     return (
                                         <CardContent className={classes.cardContentBottom} key={j}>
                                             <Typography variant="subtitle2">
@@ -72,7 +84,9 @@ const Trending = props => {
                                                     className={classes.trendingNamesColor}
                                                     style={{ color: `#${profileLinkColor}` }}
                                                 >
-                                                    {trendingArrayInner.name}
+                                                    <Link to={`/search/${removeHashtag}`} className={classes.trendingLinks}>
+                                                        {trendingArrayInner.name}
+                                                    </Link>
                                                 </span>
                                             </Typography>
                                             <Typography variant="subtitle1" gutterBottom className={classes.trendingTweetNumber}>
