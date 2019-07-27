@@ -19,6 +19,7 @@ import UnLikeStatus from '../components/unlikestatus';
 import RetweetModal from '../components/retweetmodal';
 import Tweettext from '../components/tweettext';
 import UnRetweetStatus from '../components/unretweet';
+import EmptyTweetMessage from '../components/emptytweetsmessage';
 
 // Imported functions
 import { pollMinute } from '../helpers/helperfunctions';
@@ -93,88 +94,99 @@ const PublicProfileTimeline = props => {
                 if (loading) return <div className={classes.publicTimelineLoadingDiv}><CircularProgress /></div>;
                 if (error) return <div className={classes.publicTimelineLoadingDiv}><Error /></div>;
                 return (
-                    data.currentUser.userProfileTweets.map((userTweetInfo, i) => {
-                        return (
-                            <Paper className={classes.publicTimelinePaper} key={i}>
-                                <Avatar src={userTweetInfo.user.profile_image_url_https} alt='User profile avatar' />
-                                <Grid item className={classes.profileTimelineGrid}>
-                                    {/* Tweet text body */}
-                                    <Tweettext
-                                        name={userTweetInfo.user.name}
-                                        verified={userTweetInfo.user.verified}
-                                        nickname={userTweetInfo.user.screen_name}
-                                        created_at={userTweetInfo.created_at}
-                                        full_text={userTweetInfo.full_text}                                    
-                                    />
-                                    {/* Tweet Media */}
-                                    {userTweetInfo.entities.media ?
-                                        <CardMedia
-                                            component="img"
-                                            alt="Twitter User post's related media"
-                                            className={classes.profileMediaCard}
-                                            image={userTweetInfo.entities.media[0].media_url_https}
-                                            title="Twitter User post's related media"
+                    /** 
+                    *   * This ternary checks to see if a user has posted tweets
+                    *   * If they haven't, this will display a message - else it'll display what the user has posted
+                    */
+                    data.currentUser.userProfileTweets.length ? 
+                        data.currentUser.userProfileTweets.map((userTweetInfo, i) => {
+                            return (
+                                <Paper className={classes.publicTimelinePaper} key={i}>
+                                    <Avatar src={userTweetInfo.user.profile_image_url_https} alt='User profile avatar' />
+                                    <Grid item className={classes.profileTimelineGrid}>
+                                        {/* Tweet text body */}
+                                        <Tweettext
+                                            name={userTweetInfo.user.name}
+                                            verified={userTweetInfo.user.verified}
+                                            nickname={userTweetInfo.user.screen_name}
+                                            created_at={userTweetInfo.created_at}
+                                            full_text={userTweetInfo.full_text}                                    
                                         />
-                                            :
-                                        null
-                                    }
-                                    <Grid item>
-                                        <Typography variant="subtitle2" className={classes.profileButtonOptionsGrid}>
-                                            <div className={classNames(classes.profileButtonOptionsSpacing, classes.profileButtonOptionsHover)}>
-                                                <ChatBubbleOutline className={classes.profileTimelineIcons} />
-                                            </div>
-                                            <div className={classNames(classes.profileButtonOptionsGrid, classes.profileButtonOptionsHover)}>
-                                                {/* This ternary block displays the option to whether or not to retweet a status */} 
-                                                {/* Depending on the returned boolean from the API call */}
-                                                {userTweetInfo.retweeted === true
-                                                // If this status has been retweeted, give the choice to unlike it 
-                                                    ?
-                                                <UnRetweetStatus
-                                                    id={userTweetInfo.id_str}
-                                                    retweet_count={userTweetInfo.retweet_count}
-                                                    screenName={screenName}
-                                                />
-                                                    :
-                                                // Else, if it hasn't been retweeted - give the option to be able to retweet it
-                                                <RetweetModal
-                                                    retweet_count={userTweetInfo.retweet_count}
-                                                    name={userTweetInfo.user.name}
-                                                    verified={userTweetInfo.user.verified}
-                                                    nickname={userTweetInfo.user.nickname}
-                                                    created_at={userTweetInfo.created_at}
-                                                    full_text={userTweetInfo.full_text}    
-                                                    srcImage={userTweetInfo.user.profile_image_url_https}  
-                                                    id={userTweetInfo.id_str}      
-                                                    screenName={screenName}
-                                                    profileLinkColor={profileLinkColor}
-                                                />}
-                                            </div>
-                                            <div className={classNames(classes.profileButtonOptionsGrid, classes.profileButtonOptionsHover)}>
-                                                {/* This ternary block displays the option to whether or not to like a status */} 
-                                                {/* Depending on the returned boolean from the API call */}
-                                                {userTweetInfo.favorited === true
-                                                // If this status has been liked alread - give the option to unline it
-                                                    ?
-                                                <UnLikeStatus
-                                                    id={userTweetInfo.id_str}
-                                                    favorite_count={userTweetInfo.favorite_count} 
-                                                    screenName={screenName}   
-                                                />
-                                                // Else, if it hasn't been liked - give the option to like the status
-                                                    :
-                                                <LikeStatus 
-                                                    id={userTweetInfo.id_str}
-                                                    favorite_count={userTweetInfo.favorite_count}
-                                                    screenName={screenName}
-                                                />}
-                                            </div>
-                                            <BarChart className={classNames(classes.profileTimelineIcons, classes.profileButtonOptionsHover)} />
-                                        </Typography>
+                                        {/* Tweet Media */}
+                                        {userTweetInfo.entities.media ?
+                                            <CardMedia
+                                                component="img"
+                                                alt="Twitter User post's related media"
+                                                className={classes.profileMediaCard}
+                                                image={userTweetInfo.entities.media[0].media_url_https}
+                                                title="Twitter User post's related media"
+                                            />
+                                                :
+                                            null
+                                        }
+                                        <Grid item>
+                                            <Typography variant="subtitle2" className={classes.profileButtonOptionsGrid}>
+                                                <div className={classNames(classes.profileButtonOptionsSpacing, classes.profileButtonOptionsHover)}>
+                                                    <ChatBubbleOutline className={classes.profileTimelineIcons} />
+                                                </div>
+                                                <div className={classNames(classes.profileButtonOptionsGrid, classes.profileButtonOptionsHover)}>
+                                                    {/* This ternary block displays the option to whether or not to retweet a status */} 
+                                                    {/* Depending on the returned boolean from the API call */}
+                                                    {userTweetInfo.retweeted === true
+                                                    // If this status has been retweeted, give the choice to unlike it 
+                                                        ?
+                                                    <UnRetweetStatus
+                                                        id={userTweetInfo.id_str}
+                                                        retweet_count={userTweetInfo.retweet_count}
+                                                        screenName={screenName}
+                                                    />
+                                                        :
+                                                    // Else, if it hasn't been retweeted - give the option to be able to retweet it
+                                                    <RetweetModal
+                                                        retweet_count={userTweetInfo.retweet_count}
+                                                        name={userTweetInfo.user.name}
+                                                        verified={userTweetInfo.user.verified}
+                                                        nickname={userTweetInfo.user.nickname}
+                                                        created_at={userTweetInfo.created_at}
+                                                        full_text={userTweetInfo.full_text}    
+                                                        srcImage={userTweetInfo.user.profile_image_url_https}  
+                                                        id={userTweetInfo.id_str}      
+                                                        screenName={screenName}
+                                                        profileLinkColor={profileLinkColor}
+                                                    />}
+                                                </div>
+                                                <div className={classNames(classes.profileButtonOptionsGrid, classes.profileButtonOptionsHover)}>
+                                                    {/* This ternary block displays the option to whether or not to like a status */} 
+                                                    {/* Depending on the returned boolean from the API call */}
+                                                    {userTweetInfo.favorited === true
+                                                    // If this status has been liked alread - give the option to unline it
+                                                        ?
+                                                    <UnLikeStatus
+                                                        id={userTweetInfo.id_str}
+                                                        favorite_count={userTweetInfo.favorite_count} 
+                                                        screenName={screenName}   
+                                                    />
+                                                    // Else, if it hasn't been liked - give the option to like the status
+                                                        :
+                                                    <LikeStatus 
+                                                        id={userTweetInfo.id_str}
+                                                        favorite_count={userTweetInfo.favorite_count}
+                                                        screenName={screenName}
+                                                    />}
+                                                </div>
+                                                <BarChart className={classNames(classes.profileTimelineIcons, classes.profileButtonOptionsHover)} />
+                                            </Typography>
+                                        </Grid>
                                     </Grid>
-                                </Grid>
-                            </Paper>
-                        );
-                    })
+                                </Paper>
+                            );
+                        })
+                        :
+                    <EmptyTweetMessage
+                        screenName={screenName}
+                        text={"hasn't posted any tweets yet"}
+                        profileLinkColor={profileLinkColor}
+                    />
                 );  
             }}
         </Query>
