@@ -119,7 +119,8 @@ const Navbar = props => {
                             <Message /><span className={classes.innerText}>Messages</span>
                         </Typography>
                     </div>
-                    <div className={classes.avatarDiv}>
+                    {/* // *! This anonymous function provides a full page reload of the homepage */}
+                    <div className={classes.avatarDiv} onClick={() => window.location.reload()}>
                         <Avatar alt="twitter logo" src={twitterminilogo} className={classes.twitterAvatar} /> 
                     </div>
                     <div className={classes.searchDiv}>

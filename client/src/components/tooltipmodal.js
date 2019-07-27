@@ -80,9 +80,8 @@ const styles = () => ({
     popperClass: {
         opacity: '1'
     },
-    toolTilProfileLink: {
+    toolTipProfileLink: {
         textDecoration: 'none',
-        color: '#000',
         '&:hover': {
             textDecoration: 'underline'
         }
@@ -118,8 +117,20 @@ const ToolTipModal = props => {
                             <Typography variant="h6" gutterBottom className={classes.ToolTipUpperText}>
                                 <div className={classes.ToolTipHandleTextUpperDiv}>
                                     {/* These are passed in from 'timeline.js' */}
-                                    <Link to={`/userprofile/${screenName}`} className={classNames(classes.ToolTipHandleTextUpper, classes.toolTilProfileLink)}>{name}</Link>
-                                    <Link to={`/userprofile/${screenName}`} className={classNames(classes.ToolTipHandleTextLower, classes.toolTilProfileLink)}>@{screenName}</Link>
+                                    <Link 
+                                        to={`/userprofile/${screenName}`} 
+                                        className={classNames(classes.ToolTipHandleTextUpper, classes.toolTipProfileLink)}
+                                        style={{ color: `#${profileLinkColor}` }}
+                                    >
+                                        {name}                   
+                                    </Link>
+                                    <Link 
+                                        to={`/userprofile/${screenName}`} 
+                                        className={classNames(classes.ToolTipHandleTextLower, classes.toolTipProfileLink)}
+                                        style={{ color: `#${profileLinkColor}` }}
+                                    >
+                                        @{screenName}
+                                    </Link>
                                 </div>
                             </Typography>
                             <Grid item className={classes.toolTipFollowGrid}>
@@ -133,20 +144,38 @@ const ToolTipModal = props => {
                             <Typography variant="subtitle2" className={classes.ToolTipHandleTypography} gutterBottom>               
                                 <div className={classes.ToolTipTweetSpan}>
                                     <span>Tweets</span>
-                                    <span className={classes.ToolTipTweetCount} style={{ color: `#${profileLinkColor}` }}>
-                                        {statuses_count}
+                                    <span className={classes.ToolTipTweetCount}>
+                                        <Link 
+                                            to={`/userprofile/${screenName}`} 
+                                            style={{ color: `#${profileLinkColor}` }}
+                                            className={classes.toolTipProfileLink}
+                                        >
+                                            {statuses_count}
+                                        </Link>
                                     </span>
                                 </div> 
                                 <div className={classes.ToolTipTweetSpan}>
                                     <span>Following</span>
-                                    <span className={classes.ToolTipTweetCount} style={{ color: `#${profileLinkColor}` }}>
-                                        {friends_count}
+                                    <span className={classes.ToolTipTweetCount}>
+                                        <Link 
+                                            to={`/following/${screenName}`} 
+                                            style={{ color: `#${profileLinkColor}` }}
+                                            className={classes.toolTipProfileLink}
+                                        >
+                                            {friends_count}
+                                        </Link>
                                     </span>
                                 </div>  
                                 <div className={classes.ToolTipTweetSpan}>
                                     <span>Followers</span>
-                                    <span className={classes.ToolTipTweetCount} style={{ color: `#${profileLinkColor}` }}>
-                                        {followers_count}
+                                    <span className={classes.ToolTipTweetCount}>
+                                        <Link 
+                                            to={`/followers/${screenName}`} 
+                                            style={{ color: `#${profileLinkColor}` }}
+                                            className={classes.toolTipProfileLink}
+                                        >
+                                            {followers_count}
+                                        </Link>
                                     </span>
                                 </div>  
                             </Typography>
