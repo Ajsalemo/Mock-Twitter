@@ -74,6 +74,9 @@ const styles = () => ({
         height: 70,
         border: '4px solid #fff',
         margin: '-1.5em 0 0 0.5em'
+    },
+    textPlacement: {
+        textAlign: 'center'
     }
 });
 
@@ -95,9 +98,9 @@ const PublicProfileTimeline = props => {
                 if (error) return <div className={classes.publicTimelineLoadingDiv}><Error /></div>;
                 return (
                     /** 
-                    *   * This ternary checks to see if a user has posted tweets
-                    *   * If they haven't, this will display a message - else it'll display what the user has posted
-                    */
+                     *   * This ternary checks to see if a user has posted tweets
+                     *   * If they haven't, this will display a message - else it'll display what the user has posted
+                     */
                     data.currentUser.userProfileTweets.length ? 
                         data.currentUser.userProfileTweets.map((userTweetInfo, i) => {
                             return (
@@ -186,6 +189,7 @@ const PublicProfileTimeline = props => {
                         screenName={screenName}
                         text={"hasn't posted any tweets yet"}
                         profileLinkColor={profileLinkColor}
+                        textPlacement={classes.textPlacement}
                     />
                 );  
             }}

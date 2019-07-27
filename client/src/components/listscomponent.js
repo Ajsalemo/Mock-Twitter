@@ -10,6 +10,7 @@ import { withStyles, Grid, Paper, Typography, CircularProgress } from '@material
 
 // Components
 import Error from '../components/error';
+import EmptyTweetMessage from '../components/emptytweetsmessage';
 
 // Apollo Query
 import { GET_USER_LISTS } from '../apolloclient/apolloqueries';
@@ -68,6 +69,9 @@ const styles = () => ({
         '&:hover': {
             textDecoration: 'underline'
         }
+    },
+    textPlacement: {
+        textAlign: 'center'
     }
 });
 
@@ -86,39 +90,51 @@ const ListsComponent = props => {
                 if (loading) return <div><CircularProgress /></div>;
                 if (error) return <div><Error /></div>;    
                 return (
-                    <Paper className={classes.listsComponentPaper}>
-                        <Grid className={classes.listsComponentFontGrid}>
-                            <Typography variant="h6">
-                                <span  style={{ color: `#${profileLinkColor}` }}>Subscribed to</span>
-                            </Typography>
-                        </Grid>
-                        {
-                            data.currentUser.getLists.map((lists, i) => {
-                                return (
-                                    <Grid className={classes.listsComponentDataGrid} key={i}>
-                                        <Typography variant="subtitle2" gutterBottom className={classes.listComponentDataTypography}>
-                                            <Link 
-                                                to={`/lists-statuses/${lists.user.screen_name}/${lists.id}`} 
-                                                className={classes.listsComponentName}
-                                                style={{ color: `#${profileLinkColor}` }}
-                                            >
-                                                {lists.name}
-                                            </Link>
-                                            <span className={classes.listsComponentSpan}>
-                                                by 
-                                                <Link to={`/userprofile/${lists.user.screen_name}`} className={classes.listsComponentLink}>
-                                                    {lists.user.screen_name}
+                    /** 
+                     *   * This ternary checks to see if a user has subscribed to any Lists
+                     *   * If they haven't, this will display a message - else it'll display what the user has subscribed to
+                     */
+                    data.currentUser.getLists.length ? 
+                        <Paper className={classes.listsComponentPaper}>
+                            <Grid className={classes.listsComponentFontGrid}>
+                                <Typography variant="h6">
+                                    <span  style={{ color: `#${profileLinkColor}` }}>Subscribed to</span>
+                                </Typography>
+                            </Grid>
+                            {
+                                data.currentUser.getLists.map((lists, i) => {
+                                    return (
+                                        <Grid className={classes.listsComponentDataGrid} key={i}>
+                                            <Typography variant="subtitle2" gutterBottom className={classes.listComponentDataTypography}>
+                                                <Link 
+                                                    to={`/lists-statuses/${lists.user.screen_name}/${lists.id}`} 
+                                                    className={classes.listsComponentName}
+                                                    style={{ color: `#${profileLinkColor}` }}
+                                                >
+                                                    {lists.name}
                                                 </Link>
-                                            </span>
-                                        </Typography>
-                                        <Typography variant="subtitle2" gutterBottom className={classes.listsComponentSpanMembers}>
-                                            <span>{lists.member_count}</span> members
-                                        </Typography>
-                                    </Grid>
-                                );
-                            })
-                        }
-                    </Paper>
+                                                <span className={classes.listsComponentSpan}>
+                                                    by 
+                                                    <Link to={`/userprofile/${lists.user.screen_name}`} className={classes.listsComponentLink}>
+                                                        {lists.user.screen_name}
+                                                    </Link>
+                                                </span>
+                                            </Typography>
+                                            <Typography variant="subtitle2" gutterBottom className={classes.listsComponentSpanMembers}>
+                                                <span>{lists.member_count}</span> members
+                                            </Typography>
+                                        </Grid>
+                                    );
+                                })
+                            }
+                        </Paper>
+                        :
+                    <EmptyTweetMessage 
+                        screenName={screenName}
+                        text={"hasn't subscribed to any lists"}
+                        profileLinkColor={profileLinkColor}
+                        textPlacement={classes.textPlacement}
+                    />
                 );
             }}
         </Query>

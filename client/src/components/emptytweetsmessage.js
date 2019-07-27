@@ -10,9 +10,6 @@ import { Typography, withStyles, Grid } from '@material-ui/core';
 // ----------------------------------------------------------------------------------------------------- //
 
 const styles = () => ({
-    messageTypography: {
-        textAlign: 'center'
-    },
     messageGrid: {
         paddingTop: '4em'
     }
@@ -21,14 +18,14 @@ const styles = () => ({
 // ----------------------------------------------------------------------------------------------------- //
 
 const EmptyTweetMessage = props => {
-    const { classes, screenName, profileLinkColor, text } = props;
+    const { classes, screenName, profileLinkColor, text, textPlacement } = props;
     return (
         <Grid className={classes.messageGrid}>
             <Typography 
                 variant='h6' 
                 gutterBottom 
                 style={{ color: `#${profileLinkColor}` }}
-                className={classes.messageTypography}
+                className={textPlacement}
             >
                 {/* 
                     //* The text prop is based on which public profile/authorized user page you're viewing
