@@ -10,7 +10,7 @@ const Twitter = require('twitter-lite');
 const twitterNetworkCall = (token, secret) => {
     return new Twitter({
         consumer_key: process.env.REACT_APP_TWITTER_CONSUMER_KEY,
-        consumer_secret: process.env.REACT_APP_TWITTER_CONSUMER_SECRET,
+        consumer_secret: process.envREACT_APP_TWITTER_CONSUMER_SECRET,
         access_token_key: token,
         access_token_secret: secret
     });

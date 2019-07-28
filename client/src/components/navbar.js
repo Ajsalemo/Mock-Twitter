@@ -7,7 +7,7 @@ import { Query } from 'react-apollo';
 
 // Material-UI components
 import { withStyles, Avatar, AppBar, Typography, Toolbar, CircularProgress } from '@material-ui/core';
-import { Home, OfflineBolt, NotificationsNone, Message } from '@material-ui/icons';
+import { Home } from '@material-ui/icons';
 
 // Image
 import twitterminilogo from '../images/twitterminilogo.png';
@@ -120,17 +120,13 @@ const Navbar = props => {
                                 <Home /><span className={classes.innerText}>Home</span>
                             </Link>
                         </Typography>
-                        <Typography variant="subtitle2" className={classes.colorDefault}>
-                            <OfflineBolt /><span className={classes.innerText}>Moments</span>
-                        </Typography>
-                        <Typography variant="subtitle2" className={classes.colorDefault}>
-                            <NotificationsNone /><span className={classes.innerText}>Notifications</span>
-                        </Typography>
-                        <Typography variant="subtitle2" className={classes.colorDefault}>
-                            <Message /><span className={classes.innerText}>Messages</span>
-                        </Typography>
+                        {/* 
+                            // *! The Moments API has been deprecated in the recent twitter release  
+                            // *! The Notifications API is a paid product, the Messages panel has also been changed in the new release
+                            // *! Due to this - the Moments, Notifications and Messages tabs were removed to keep the previous releases functionality true
+                        */}
                     </div>
-                    {/* // *! This refetchs the authenticating users timeline */}
+                    {/* // * * This refetchs the authenticating users timeline */}
                     <Query
                         query={GET_AUTHUSER_TWEETS}
                         fetchPolicy='network-only'

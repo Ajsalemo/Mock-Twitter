@@ -20,6 +20,7 @@ import RetweetModal from '../components/retweetmodal';
 import Tweettext from '../components/tweettext';
 import UnRetweetStatus from '../components/unretweet';
 import ToolTipModal from '../components/tooltipmodal';
+import NoResults from '../components/noresults';
 
 // Helper functions
 import { pollMinute } from '../helpers/helperfunctions';
@@ -91,108 +92,113 @@ const SearchQueryTimeline = props => {
                     if (loading) return <div className={classes.errorAndLoadingDiv}><CircularProgress /></div>;
                     if (error) return <div className={classes.errorAndLoadingDiv}><Error /></div>;
                     return (
-                        data.currentUser.searchTweets.statuses.map((searchQueryList, i) => {
-                            return (
-                                <Paper className={classes.searchQueryTimelinePaper} key={i}>
-                                    <ToolTipModal
-                                        name={searchQueryList.user.name}
-                                        nickname={searchQueryList.user.screen_name}
-                                        statuses_count={searchQueryList.user.statuses_count}
-                                        friends_count={searchQueryList.user.friends_count}
-                                        followers_count={searchQueryList.user.followers_count}
-                                        imgSrc={searchQueryList.user.profile_image_url_https}
-                                        id={searchQueryList.id_str}  
-                                        tweetUserId={searchQueryList.user.id}
-                                        verified={searchQueryList.user.verified}  
-                                        profileBannerURL={searchQueryList.user.profile_banner_url}
-                                        profileLinkColor={profileLinkColor}
-                                        screenName={searchQueryList.user.screen_name}
-                                        currentUser={screenName}
-                                    />
-                                    <Grid item className={classes.searchQueryTimelineGrid}>
-                                        {/* Tweet text body */}
-                                        <Tweettext
+                        data.currentUser.searchTweets.statuses.length ?
+                            data.currentUser.searchTweets.statuses.map((searchQueryList, i) => {
+                                return (
+                                    <Paper className={classes.searchQueryTimelinePaper} key={i}>
+                                        <ToolTipModal
                                             name={searchQueryList.user.name}
-                                            verified={searchQueryList.user.verified}
                                             nickname={searchQueryList.user.screen_name}
-                                            created_at={searchQueryList.created_at}
-                                            full_text={searchQueryList.full_text}
-                                            id={searchQueryList.id_str}
+                                            statuses_count={searchQueryList.user.statuses_count}
+                                            friends_count={searchQueryList.user.friends_count}
+                                            followers_count={searchQueryList.user.followers_count}
+                                            imgSrc={searchQueryList.user.profile_image_url_https}
+                                            id={searchQueryList.id_str}  
                                             tweetUserId={searchQueryList.user.id}
+                                            verified={searchQueryList.user.verified}  
+                                            profileBannerURL={searchQueryList.user.profile_banner_url}
+                                            profileLinkColor={profileLinkColor}
+                                            screenName={searchQueryList.user.screen_name}
+                                            currentUser={screenName}
                                         />
-                                        {/* Tweet Media */}
-                                        {searchQueryList.entities.media ?
-                                            <CardMedia
-                                                component="img"
-                                                alt="Twitter post's related media"
-                                                className={classes.searchQueryMediaCard}
-                                                image={searchQueryList.entities.media[0].media_url_https}
-                                                title="Twitter post's related media"
+                                        <Grid item className={classes.searchQueryTimelineGrid}>
+                                            {/* Tweet text body */}
+                                            <Tweettext
+                                                name={searchQueryList.user.name}
+                                                verified={searchQueryList.user.verified}
+                                                nickname={searchQueryList.user.screen_name}
+                                                created_at={searchQueryList.created_at}
+                                                full_text={searchQueryList.full_text}
+                                                id={searchQueryList.id_str}
+                                                tweetUserId={searchQueryList.user.id}
                                             />
-                                                :
-                                            null
-                                        }
-                                        <Grid item>
-                                            <Typography variant="subtitle2" className={classes.searchQueryOptionsGrid}>
-                                                <div className={classNames(classes.searchQueryOptionsSpacing, classes.searchQueryOptionsHover)}>
-                                                    <ChatBubbleOutline className={classes.searchQueryTimelineIcons} />
-                                                </div>
-                                                <div className={classNames(classes.searchQueryOptionsGrid, classes.searchQueryOptionsHover)}>
-                                                    {/* This ternary block displays the option to whether or not to retweet a status */} 
-                                                    {/* Depending on the returned boolean from the API call */}
-                                                    {searchQueryList.retweeted === true
-                                                    // If this status has been retweeted, give the choice to unlike it 
-                                                        ?
-                                                    <UnRetweetStatus
-                                                        id={searchQueryList.id_str}
-                                                        retweet_count={searchQueryList.retweet_count}
-                                                        screenName={screenName}
-                                                        searchQueryParam={searchQuery}
-                                                    />
-                                                        :
-                                                    // Else, if it hasn't been retweeted - give the option to be able to retweet it
-                                                    <RetweetModal
-                                                        retweet_count={searchQueryList.retweet_count}
-                                                        name={searchQueryList.user.name}
-                                                        verified={searchQueryList.user.verified}
-                                                        nickname={searchQueryList.user.nickname}
-                                                        created_at={searchQueryList.created_at}
-                                                        full_text={searchQueryList.full_text}    
-                                                        srcImage={searchQueryList.user.profile_image_url_https}  
-                                                        id={searchQueryList.id_str}
-                                                        profileLinkColor={profileLinkColor}   
-                                                        screenName={searchQueryList.user.screen_name}  
-                                                        searchQueryParam={searchQuery} 
-                                                    />}
-                                                </div>
-                                                <div className={classNames(classes.searchQueryOptionsGrid, classes.searchQueryOptionsHover)}>
-                                                    {/* This ternary block displays the option to whether or not to like a status */} 
-                                                    {/* Depending on the returned boolean from the API call */}
-                                                    {searchQueryList.favorited === true
-                                                    // If this status has been liked alread - give the option to unline it
-                                                        ?
-                                                    <UnLikeStatus
-                                                        id={searchQueryList.id_str}
-                                                        favorite_count={searchQueryList.favorite_count} 
-                                                        screenName={searchQueryList.user.screen_name}  
-                                                        searchQueryParam={searchQuery} 
-                                                    />
-                                                    // Else, if it hasn't been liked - give the option to like the status
-                                                        :
-                                                    <LikeStatus 
-                                                        id={searchQueryList.id_str}
-                                                        favorite_count={searchQueryList.favorite_count}
-                                                        screenName={searchQueryList.user.screen_name}
-                                                        searchQueryParam={searchQuery} 
-                                                    />}
-                                                </div>
-                                                <BarChart className={classNames(classes.searchQueryTimelineIcons, classes.searchQueryOptionsHover)} />
-                                            </Typography>
+                                            {/* Tweet Media */}
+                                            {searchQueryList.entities.media ?
+                                                <CardMedia
+                                                    component="img"
+                                                    alt="Twitter post's related media"
+                                                    className={classes.searchQueryMediaCard}
+                                                    image={searchQueryList.entities.media[0].media_url_https}
+                                                    title="Twitter post's related media"
+                                                />
+                                                    :
+                                                null
+                                            }
+                                            <Grid item>
+                                                <Typography variant="subtitle2" className={classes.searchQueryOptionsGrid}>
+                                                    <div className={classNames(classes.searchQueryOptionsSpacing, classes.searchQueryOptionsHover)}>
+                                                        <ChatBubbleOutline className={classes.searchQueryTimelineIcons} />
+                                                    </div>
+                                                    <div className={classNames(classes.searchQueryOptionsGrid, classes.searchQueryOptionsHover)}>
+                                                        {/* This ternary block displays the option to whether or not to retweet a status */} 
+                                                        {/* Depending on the returned boolean from the API call */}
+                                                        {searchQueryList.retweeted === true
+                                                        // If this status has been retweeted, give the choice to unlike it 
+                                                            ?
+                                                        <UnRetweetStatus
+                                                            id={searchQueryList.id_str}
+                                                            retweet_count={searchQueryList.retweet_count}
+                                                            screenName={screenName}
+                                                            searchQueryParam={searchQuery}
+                                                        />
+                                                            :
+                                                        // Else, if it hasn't been retweeted - give the option to be able to retweet it
+                                                        <RetweetModal
+                                                            retweet_count={searchQueryList.retweet_count}
+                                                            name={searchQueryList.user.name}
+                                                            verified={searchQueryList.user.verified}
+                                                            nickname={searchQueryList.user.nickname}
+                                                            created_at={searchQueryList.created_at}
+                                                            full_text={searchQueryList.full_text}    
+                                                            srcImage={searchQueryList.user.profile_image_url_https}  
+                                                            id={searchQueryList.id_str}
+                                                            profileLinkColor={profileLinkColor}   
+                                                            screenName={searchQueryList.user.screen_name}  
+                                                            searchQueryParam={searchQuery} 
+                                                        />}
+                                                    </div>
+                                                    <div className={classNames(classes.searchQueryOptionsGrid, classes.searchQueryOptionsHover)}>
+                                                        {/* This ternary block displays the option to whether or not to like a status */} 
+                                                        {/* Depending on the returned boolean from the API call */}
+                                                        {searchQueryList.favorited === true
+                                                        // If this status has been liked alread - give the option to unline it
+                                                            ?
+                                                        <UnLikeStatus
+                                                            id={searchQueryList.id_str}
+                                                            favorite_count={searchQueryList.favorite_count} 
+                                                            screenName={searchQueryList.user.screen_name}  
+                                                            searchQueryParam={searchQuery} 
+                                                        />
+                                                        // Else, if it hasn't been liked - give the option to like the status
+                                                            :
+                                                        <LikeStatus 
+                                                            id={searchQueryList.id_str}
+                                                            favorite_count={searchQueryList.favorite_count}
+                                                            screenName={searchQueryList.user.screen_name}
+                                                            searchQueryParam={searchQuery} 
+                                                        />}
+                                                    </div>
+                                                    <BarChart className={classNames(classes.searchQueryTimelineIcons, classes.searchQueryOptionsHover)} />
+                                                </Typography>
+                                            </Grid>
                                         </Grid>
-                                    </Grid>
-                                </Paper>
-                            );
-                        })
+                                    </Paper>
+                                );
+                            })
+                            :
+                        <NoResults 
+                            profileLinkColor={profileLinkColor}
+                        />
                     );
                 }}
             </Query>
