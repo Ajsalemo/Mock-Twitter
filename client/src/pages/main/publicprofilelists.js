@@ -16,7 +16,9 @@ import PublicProfileHandle from '../../components/publicprofilehandle';
 import Recommended from '../../components/recommended';
 import ListsComponent from '../../components/listscomponent';
 import Trending from '../../components/trending';
-import Error from '../../components/error';
+
+// Pages
+import NotFound from './notfound';
 
 // Apollo Query
 import { VERIFY_USER, SHOW_USER } from '../../apolloclient/apolloqueries';
@@ -62,7 +64,7 @@ let PublicProfileLists = props => {
                     <Query query={VERIFY_USER}>
                         {({ loading: loadingTwo, error: errorTwo, data: two }) => {
                             if (loadingOne || loadingTwo) return <div className={classes.errorAndLoadingDiv}><CircularProgress /></div>;
-                            if (errorOne || errorTwo) return <div className={classes.errorAndLoadingDiv}><Error /></div>;                 
+                            if (errorOne || errorTwo) return <div><NotFound /></div>;                 
                             return (
                                 <React.Fragment>
                                     <Navbar 

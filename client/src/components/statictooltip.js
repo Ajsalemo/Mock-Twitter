@@ -79,7 +79,7 @@ const styles = () => ({
         padding: '0em',
         boxShadow: '1px 1px 1px #00000073'
     },
-    toolTilProfileLink: {
+    toolTipProfileLink: {
         textDecoration: 'none',
         color: '#000',
         '&:hover': {
@@ -109,8 +109,8 @@ const StaticToolTip = props => {
             <CardContent className={classes.staticToolTipContent}>
                 <Typography variant="h6" gutterBottom className={classes.staticToolTipUpperText}>
                     <div className={classes.staticToolTipHandleTextUpperDiv}>
-                        <Link to={`/userprofile/${screen_name}`} className={classNames(classes.staticToolTipHandleTextUpper, classes.toolTilProfileLink)}>{name}</Link>
-                        <Link to={`/userprofile/${screen_name}`} className={classNames(classes.staticToolTipHandleTextLower, classes.toolTilProfileLink)}>@{screen_name}</Link>
+                        <Link to={`/userprofile/${screen_name}`} className={classNames(classes.staticToolTipHandleTextUpper, classes.toolTipProfileLink)}>{name}</Link>
+                        <Link to={`/userprofile/${screen_name}`} className={classNames(classes.staticToolTipHandleTextLower, classes.toolTipProfileLink)}>@{screen_name}</Link>
                     </div>
                 </Typography>
                 <Grid item className={classes.staticToolTipFollowGrid}>
@@ -126,27 +126,42 @@ const StaticToolTip = props => {
                         <span>Tweets</span>
                         <span 
                             className={classes.staticToolTipTweetCount}
-                            style={{ color: `#${profileLinkColor}` }}
                         >
-                            {statuses_count}
+                            <Link 
+                                to={`/userprofile/${screen_name}`}
+                                style={{ color: `#${profileLinkColor}` }}
+                                className={classes.toolTipProfileLink}
+                            >
+                                {statuses_count}
+                            </Link>
                         </span>
                     </div> 
                     <div className={classes.staticToolTipTweetSpan}>
                         <span>Following</span>
                         <span 
                             className={classes.staticToolTipTweetCount}
-                            style={{ color: `#${profileLinkColor}` }}
                         >
-                            {friends_count}
+                            <Link 
+                                to={`/following/${screen_name}`}
+                                style={{ color: `#${profileLinkColor}` }}
+                                className={classes.toolTipProfileLink}
+                            >
+                                {friends_count}
+                            </Link>
                         </span>
                     </div>  
                     <div className={classes.staticToolTipTweetSpan}>
                         <span>Followers</span>
                         <span 
                             className={classes.staticToolTipTweetCount}
-                            style={{ color: `#${profileLinkColor}` }}
                         >
-                            {followers_count}
+                            <Link 
+                                to={`/followers/${screen_name}`}
+                                style={{ color: `#${profileLinkColor}` }}
+                                className={classes.toolTipProfileLink}
+                            >
+                                {followers_count}
+                            </Link>
                         </span>
                     </div>  
                 </Typography>

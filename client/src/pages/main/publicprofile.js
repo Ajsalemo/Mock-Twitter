@@ -15,8 +15,10 @@ import ProfileBannerBar from '../../components/profilebannerbar';
 import PublicProfileHandle from '../../components/publicprofilehandle';
 import Recommended from '../../components/recommended';
 import Trending from '../../components/trending';
-import Error from '../../components/error';
 import PublicProfileTimeline from '../../components/publicprofiletimeline';
+
+// Pages
+import NotFound from './notfound';
 
 // Apollo Query
 import { SHOW_USER, VERIFY_USER } from '../../apolloclient/apolloqueries';
@@ -63,7 +65,7 @@ let PublicProfile = props => {
                 >
                     {({ loading: loadingTwo, error: errorTwo, data: two }) => {
                         if (loadingOne || loadingTwo) return <div className={classes.errorAndLoadingDiv}><CircularProgress /></div>;
-                        if (errorOne || errorTwo) return <div className={classes.errorAndLoadingDiv}><Error /></div>;
+                        if (errorOne || errorTwo) return <NotFound />;
                         return (
                             <React.Fragment>
                                 <Navbar 

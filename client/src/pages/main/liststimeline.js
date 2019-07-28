@@ -11,8 +11,10 @@ import { withStyles, Grid, CircularProgress } from '@material-ui/core';
 import Navbar from '../../components/navbar';
 import Trending from '../../components/trending';
 import ListsTimelineComponent from '../../components/liststimelinecomponent';
-import Error from '../../components/error';
 import ListsProfileHandle from '../../components/listsprofilehandle';
+
+// Pages
+import NotFound from './notfound';
 
 // Apollo Query
 import { VERIFY_USER, SHOW_USER } from '../../apolloclient/apolloqueries';
@@ -59,7 +61,7 @@ const ListsTimeline = props => {
                     <Query query={VERIFY_USER}>
                         {({ loading: loadingTwo, error: errorTwo, data: two }) => {
                             if (loadingOne || loadingTwo) return <div className={classes.errorAndLoadingDiv}><CircularProgress /></div>;
-                            if (errorOne || errorTwo) return <div className={classes.errorAndLoadingDiv}><Error /></div>;
+                            if (errorOne || errorTwo) return <div><NotFound /></div>;
                             return (
                                 <React.Fragment>
                                     <Navbar 

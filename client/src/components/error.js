@@ -18,6 +18,9 @@ const styles = () => ({
     },
     errorImage: {
         height: '2em'
+    },
+    errorCenter: {
+        padding: '0em 10em 3em'
     }
 });
 
@@ -26,7 +29,7 @@ const styles = () => ({
 const Error = props => {
     const { classes } = props;
     return (
-        <div>
+        <div className={classes.errorCenter}>
             An error has occured: <img src={errorImage} className={classes.errorImage} alt="an error has occured" />
         </div>
     )

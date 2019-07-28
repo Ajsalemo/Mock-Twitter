@@ -13,6 +13,7 @@ import ProfileFollowers from '../pages/main/profilefollowers';
 import ProfileLikes from '../pages/main/profilelikes';
 import PublicProfileLists from '../pages/main/publicprofilelists';
 import ListsTimeline from '../pages/main/liststimeline';
+import NotFound from '../pages/main/notfound';
 
 // Components
 import Loading from '../components/loading';
@@ -54,9 +55,11 @@ class RouteContainer extends Component {
                     <Route path='/userprofile/:params' component={PublicProfile} />
                     <Route path='/following/:params' component={ProfileFollowing} />
                     <Route path='/followers/:params' component={ProfileFollowers} />
-                    <Route path='/main' component={Main} />
-                    <Route path='/loading' component={Loading} />
-                    <Route path='/' component={Home} />
+                    <Route exact path='/main' component={Main} />
+                    <Route exact path='/loading' component={Loading} />
+                    <Route exact path='/' component={Home} />
+                    {/** // ** This renders a 404 page if none of the above routes match */}
+                    <Route component={NotFound} />
                 </Switch>
             </React.Fragment>
         );

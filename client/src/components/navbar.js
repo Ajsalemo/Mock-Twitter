@@ -3,18 +3,23 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Query } from 'react-apollo';
 
 // Material-UI components
-import { withStyles, Avatar, AppBar, Typography, Toolbar } from '@material-ui/core';
+import { withStyles, Avatar, AppBar, Typography, Toolbar, CircularProgress } from '@material-ui/core';
 import { Home, OfflineBolt, NotificationsNone, Message } from '@material-ui/icons';
 
 // Image
 import twitterminilogo from '../images/twitterminilogo.png';
 
+// Apollo Queries
+import { GET_AUTHUSER_TWEETS } from '../apolloclient/apolloqueries';
+
 // Components
 import TweetModal from '../components/tweetmodal';
 import ProfileAvatarModal from '../components/profileavatarmodal';
 import SearchTweets from '../components/searchtweets';
+import Error from '../components/error';
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
@@ -92,6 +97,12 @@ const styles = theme => ({
     },
     navAnchor: {
         paddingTop: '0.3em'
+    },
+    errorAndLoadingDiv: {
+        width: '25%',
+        paddingBottom: '1em',
+        display: 'flex',
+        justifyContent: 'center'
     }
 });
 
@@ -119,10 +130,21 @@ const Navbar = props => {
                             <Message /><span className={classes.innerText}>Messages</span>
                         </Typography>
                     </div>
-                    {/* // *! This anonymous function provides a full page reload of the homepage */}
-                    <div className={classes.avatarDiv} onClick={() => window.location.reload()}>
-                        <Avatar alt="twitter logo" src={twitterminilogo} className={classes.twitterAvatar} /> 
-                    </div>
+                    {/* // *! This refetchs the authenticating users timeline */}
+                    <Query
+                        query={GET_AUTHUSER_TWEETS}
+                        fetchPolicy='network-only'
+                    >
+                        {({ loading, error, data, refetch }) => {
+                            if (loading) return <div className={classes.errorAndLoadingDiv}><CircularProgress /></div>
+                            if (error) return <div className={classes.errorAndLoadingDiv}><Error /></div>;
+                            return (
+                                <div className={classes.avatarDiv} onClick={() => refetch()}>
+                                    <Avatar alt="twitter logo" src={twitterminilogo} className={classes.twitterAvatar} /> 
+                                </div>        
+                            );
+                        }}
+                    </Query>
                     <div className={classes.searchDiv}>
                         <SearchTweets />
                         <ProfileAvatarModal

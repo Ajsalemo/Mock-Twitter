@@ -46,7 +46,7 @@ const UsersFollowingList = props => {
                      *   * This ternary checks to see if a user has any followers
                      *   * If they haven't, this will display a message - else it'll display their followers
                     */
-                    data.currentUser.usersFollowers.users ?
+                    data.currentUser.usersFollowers.users.length ?
                         data.currentUser.usersFollowers.users.map((userFollowersList, i) => {
                             return (
                                 <StaticToolTip

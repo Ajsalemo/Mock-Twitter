@@ -16,7 +16,9 @@ import PublicProfileHandle from '../../components/publicprofilehandle';
 import Trending from '../../components/trending';
 import UsersFollowingList from '../../components/usersfollowinglist';
 import Recommended from '../../components/recommended';
-import Error from '../../components/error';
+
+// Pages
+import NotFound from './notfound';
 
 // Apollo Query
 import { SHOW_USER, VERIFY_USER } from '../../apolloclient/apolloqueries';
@@ -61,7 +63,7 @@ let ProfileFollowing = props => {
                 >
                     {({ loading: loadingTwo, error: errorTwo, data: two }) => {
                         if (loadingOne || loadingTwo) return <div className={classes.errorAndLoadingDiv}><CircularProgress /></div>;
-                        if (errorOne || errorTwo) return <div className={classes.errorAndLoadingDiv}><Error /></div>;
+                        if (errorOne || errorTwo) return <div><NotFound /></div>;
                         return (
                             <React.Fragment>
                                 <Navbar 

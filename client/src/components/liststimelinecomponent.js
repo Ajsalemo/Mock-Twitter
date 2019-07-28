@@ -13,13 +13,15 @@ import { withStyles, Paper, Typography, CircularProgress, Grid, CardMedia } from
 import { GET_LISTS_TIMELINE } from '../apolloclient/apolloqueries';
 
 // Components
-import Error from '../components/error';
 import LikeStatus from '../components/likestatus';
 import UnLikeStatus from '../components/unlikestatus';
 import RetweetModal from '../components/retweetmodal';
 import Tweettext from '../components/tweettext';
 import UnRetweetStatus from '../components/unretweet';
 import ToolTipModal from '../components/tooltipmodal';
+
+// Pages
+import NotFound from '../pages/main/notfound';
 
 // Imported functions
 import { pollMinute } from '../helpers/helperfunctions';
@@ -92,7 +94,7 @@ const ListsTimelineComponent = props => {
             >
                 {({ loading, error, data }) => {
                     if (loading) return <div className={classes.errorAndLoadingDiv}><CircularProgress /></div>;
-                    if (error) return <div className={classes.errorAndLoadingDiv}><Error /></div>;
+                    if (error) return <div><NotFound /></div>;
                     return (
                         data.currentUser.getListsTimeline.map((getListsTimeline, i) => {
                             return (
