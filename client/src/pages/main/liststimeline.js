@@ -33,6 +33,9 @@ const styles = () => ({
         justifyContent: 'center',
         margin: '1em 2em 0em 2em'
     },
+    listsTimelineTrend: {
+        margin: '-0.1em 2em 0em 2em'
+    },
     listsTimelineGridMain: {
         marginTop: '1em'
     },
@@ -84,7 +87,7 @@ const ListsTimeline = props => {
                                                 currentUser={two.currentUser.verifyCredentials.screen_name}
                                             />
                                         </Grid>
-                                        <Grid item xs={8} sm={8} md={2} className={classes.listsTimelineGrid}>
+                                        <Grid item xs={8} sm={8} md={2} className={classes.listsTimelineTrend}>
                                             <Trending 
                                                 profileLinkColor={one.currentUser.showUser.profile_link_color}
                                             />

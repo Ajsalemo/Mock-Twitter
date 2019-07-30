@@ -13,7 +13,6 @@ import Navbar from '../../components/navbar';
 import PublicProfileBanner from '../../components/publicprofilebanner';
 import ProfileBannerBar from '../../components/profilebannerbar';
 import PublicProfileHandle from '../../components/publicprofilehandle';
-import Recommended from '../../components/recommended';
 import Trending from '../../components/trending';
 import PublicProfileTimeline from '../../components/publicprofiletimeline';
 
@@ -44,6 +43,9 @@ const styles = () => ({
         justifyContent: 'center',
         alignItems: 'center',
         height: '100vh'
+    },
+    trendingGrid: {
+        marginTop: '-1em'
     }
 });
 
@@ -110,8 +112,7 @@ let PublicProfile = props => {
                                             profileLinkColor={one.currentUser.showUser.profile_link_color}
                                         />
                                     </Grid>
-                                    <Grid item md={2}>
-                                        <Recommended />
+                                    <Grid item md={2} className={classes.trendingGrid}>
                                         <Trending 
                                             profileLinkColor={one.currentUser.showUser.profile_link_color}
                                         />

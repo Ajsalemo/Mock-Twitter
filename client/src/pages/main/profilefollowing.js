@@ -15,7 +15,6 @@ import ProfileBannerBar from '../../components/profilebannerbar';
 import PublicProfileHandle from '../../components/publicprofilehandle';
 import Trending from '../../components/trending';
 import UsersFollowingList from '../../components/usersfollowinglist';
-import Recommended from '../../components/recommended';
 
 // Pages
 import NotFound from './notfound';
@@ -111,9 +110,6 @@ let ProfileFollowing = props => {
                                             screenName={one.currentUser.showUser.screen_name}
                                             profileLinkColor={one.currentUser.showUser.profile_link_color}
                                         />
-                                    </Grid>
-                                    <Grid item md={2}>
-                                        <Recommended />
                                     </Grid>
                                 </Grid>
                             </React.Fragment>

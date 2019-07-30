@@ -13,13 +13,11 @@ import Navbar from '../../components/navbar';
 import PublicProfileBanner from '../../components/publicprofilebanner';
 import ProfileBannerBar from '../../components/profilebannerbar';
 import PublicProfileHandle from '../../components/publicprofilehandle';
-import Recommended from '../../components/recommended';
 import Trending from '../../components/trending';
 import LikesComponent from '../../components/likescomponent';
 
 // Pages
 import NotFound from './notfound';
-
 
 // Apollo Query
 import { VERIFY_USER, SHOW_USER } from '../../apolloclient/apolloqueries';
@@ -45,6 +43,9 @@ const styles = () => ({
         justifyContent: 'center',
         alignItems: 'center',
         height: '100vh'
+    },
+    trendingGrid: {
+        marginTop: '-1em'
     }
 });
 
@@ -109,8 +110,7 @@ let PublicProfileLikes = props => {
                                             profileLinkColor={one.currentUser.showUser.profile_link_color}
                                         />
                                     </Grid>
-                                    <Grid item md={2}>
-                                        <Recommended />
+                                    <Grid item md={2} className={classes.trendingGrid}>
                                         <Trending 
                                             profileLinkColor={one.currentUser.showUser.profile_link_color}
                                         />

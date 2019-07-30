@@ -12,7 +12,6 @@ import { withStyles, Grid, CircularProgress } from '@material-ui/core';
 import Navbar from '../../components/navbar';
 import ProfileHandle from '../../components/profilehandle';
 import SubmitTweet from '../../components/submittweet';
-import Recommended from '../../components/recommended';
 import Trending from '../../components/trending';
 import Error from '../../components/error';
 
@@ -29,6 +28,10 @@ const styles = () => ({
     },
     profileHandlerGrid: {
         width: 'auto'
+    },
+    recommendedGrid: {
+        width: 'auto',
+        marginTop: '-1em'
     },
     errorAndLoadingDiv: {
         display: 'flex',
@@ -70,17 +73,16 @@ const Main = props => {
                                     friendsCount={data.currentUser.verifyCredentials.friends_count}
                                     statusCount={data.currentUser.verifyCredentials.statuses_count}
                                 />
-                                <Trending 
-                                    profileLinkColor={data.currentUser.verifyCredentials.profile_link_color}
-                                />
                             </Grid>
                             <SubmitTweet 
                                 avatarImg={data.currentUser.verifyCredentials.profile_image_url_https}
                                 profileLinkColor={data.currentUser.verifyCredentials.profile_link_color}
                                 screenName={data.currentUser.verifyCredentials.screen_name}
                             />
-                            <Grid item xs={8} sm={8} md={2} className={classes.profileHandlerGrid}>
-                                <Recommended />
+                            <Grid item xs={8} sm={8} md={2} className={classes.recommendedGrid}>
+                                <Trending 
+                                    profileLinkColor={data.currentUser.verifyCredentials.profile_link_color}
+                                />
                             </Grid>
                         </Grid>
                     </React.Fragment>

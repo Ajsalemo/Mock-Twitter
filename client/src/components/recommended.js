@@ -60,14 +60,6 @@ const Recommended = props => {
                         <CardContent classes={{ root: classes.cardPadding }}>
                             <Typography variant="h6" gutterBottom>
                                 <span className={classes.spacing}>Who to follow</span>
-                                &#8226;
-                                <span className={classes.spanLink}>
-                                    <Link to='#/' className={classes.links}>Refresh</Link>
-                                </span>
-                                &#8226;
-                                <span className={classes.spanLink}>
-                                    <Link to='#/' className={classes.links}>View all</Link>
-                                </span>
                             </Typography>
                             {/* Suggested Users API has been depricated as of the latest Twitter API release */}
                             <div>Placeholder</div>
