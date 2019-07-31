@@ -1,35 +1,40 @@
 // --------------------------------------------- Imports ----------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
-import React, { Component } from 'react';
-import { Provider } from 'react-redux'
-import { PersistGate } from 'redux-persist/integration/react'
+import { combineReducers } from 'redux';
 
-// Redux
-import { store, persistor } from './redux/store';
-
-// Imports
-import RouteContainer from './routecontainer/routecontainer';
+// Types
+import { TOGGLE_DARK_MODE_ON, TOGGLE_DARK_MODE_OFF } from './types';
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-          <Provider store={store}>
-            <RouteContainer />
-          </Provider>
-      </div>
-    );
-  };
+const toggleDarkMode = (state = { dark_mode: false }, action) => {
+    switch (action.type) {
+        case TOGGLE_DARK_MODE_ON:
+            return {
+                dark_mode: true
+            }
+        case TOGGLE_DARK_MODE_OFF:
+            return {
+                dark_mode: false
+            }
+        default:
+            return state;
+    }
 };
 
 // ----------------------------------------------------------------------------------------------------- //
+
+const rootReducer = combineReducers({
+    toggleDarkMode
+});
+
+// ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
-export default App;
+export default rootReducer;
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
+
