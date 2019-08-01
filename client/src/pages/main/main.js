@@ -64,6 +64,10 @@ let Main = props => {
                             name={data.currentUser.verifyCredentials.name}
                             screenName={data.currentUser.verifyCredentials.screen_name}
                             profileLinkColor={data.currentUser.verifyCredentials.profile_link_color}
+                            darkModeStatus={dark_mode}
+                            darkModeBorder={changeBorder(dark_mode)}
+                            darkModeFont={fontColorChange(dark_mode)}
+                            darkModeComponentBackground={changeComponentBackground(dark_mode)}
                         />
                         <Grid 
                             container 

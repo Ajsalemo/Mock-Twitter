@@ -32,7 +32,7 @@ const styles = theme => ({
 // ----------------------------------------------------------------------------------------------------- //
 
 const SubmitTweet = props => {
-    const { classes, screenName, profileLinkColor, avatarImg, darkModeStatus, darkModeBorder, darkModeFont, darkModeComponentBackground } = props;
+    const { classes, screenName, profileLinkColor, avatarImg, darkModeStatus, darkModeBorder, darkModeComponentBackground } = props;
     return (
         <React.Fragment>
             <Grid item xs={10} sm={8} md={5} className={classes.gridItem} >

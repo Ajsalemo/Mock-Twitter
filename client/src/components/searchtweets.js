@@ -4,6 +4,7 @@
 import React from 'react';
 import { Formik, Form } from 'formik';
 import { withRouter } from 'react-router-dom';
+import classNames from 'classnames';
 
 // Material-UI components
 import { Search } from '@material-ui/icons';
@@ -30,13 +31,19 @@ const styles = () => ({
     // Used to override the disabled state RBGA background color
     fabDisabled: {
         backgroundColor: 'inherit !important'
+    },
+    darkModeTextFieldBackground: {
+        backgroundColor: '#80808040'
+    },
+    darkModeFontClass: {
+        color: '#fff'
     }
 });
 
 // ----------------------------------------------------------------------------------------------------- //
 
 let SearchTweet = props => {
-    const { classes } = props;
+    const { classes, darkModeBorder, darkModeStatus } = props;
     return (
         <Formik 
             initialValues={{ search: '' }}
@@ -59,6 +66,7 @@ let SearchTweet = props => {
                         value={props.values.search}
                         name="search"
                         onChange={props.handleChange}
+                        style={{ border: darkModeBorder }}
                         InputProps={{
                             endAdornment: (
                                 props.isSubmitting 
@@ -88,7 +96,8 @@ let SearchTweet = props => {
                                 </InputAdornment>
                             ),
                             classes: {
-                                root: classes.navTextField
+                                root: darkModeStatus ? classNames(classes.darkModeTextFieldBackground, classes.navTextField) : classes.navTextField,
+                                input: darkModeStatus ? classes.darkModeFontClass : null
                             }
                         }}
                     />

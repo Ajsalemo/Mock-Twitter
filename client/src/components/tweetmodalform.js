@@ -53,13 +53,23 @@ const styles = () => ({
     },
     tweetModalSubmittingText: {
         paddingLeft: '1em'
+    },
+    darkModeTweetModalFont: {
+        color: '#000'
+    },
+    darkModeTweetModalTextBackground: {
+        backgroundColor: '#000000a6',
+        borderRadius: '0em'
+    },
+    noTweetModalRadius: {
+        borderRadius: '0em'
     }
 });
 
 // ----------------------------------------------------------------------------------------------------- //
 
 const TweetModalForm = props => {
-    const { classes, avatarImg, onClose, userScreenName, screenName, profileLinkColor } = props;
+    const { classes, avatarImg, onClose, userScreenName, screenName, profileLinkColor, dark_mode } = props;
     return (
         <React.Fragment>
             <Mutation 
@@ -111,8 +121,9 @@ const TweetModalForm = props => {
                                         onChange={props.handleChange}
                                         InputProps={{ 
                                             classes: {
-                                                input: classNames(classes.tweetModalFormPlaceholder, classes.tweetModalActiveTextfield),
-                                                root: classes.tweetModalActiveTextfield
+                                                input: dark_mode ? classNames(classes.darkModeTweetModalFont, classes.tweetModalActiveTextfield) : classNames(classes.tweetModalFormPlaceholder, classes.tweetModalActiveTextfield),
+                                                root: classes.tweetModalActiveTextfield,
+                                                notchedOutline: dark_mode ? classNames(classes.darkModeTweetModalTextBackground, classes.noTweetModalRadius) : classes.noTweetModalRadius
                                             }
                                         }}
                                     />

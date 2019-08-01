@@ -109,14 +109,14 @@ const styles = theme => ({
 // ----------------------------------------------------------------------------------------------------- //
 
 const Navbar = props => {
-    const { classes, avatarImg, name, screenName, profileLinkColor } = props;
+    const { classes, avatarImg, name, screenName, profileLinkColor, darkModeBorder, darkModeFont, darkModeComponentBackground, darkModeStatus } = props;
     return (
         <React.Fragment>
-            <AppBar className={classes.appBar}>
+            <AppBar className={classes.appBar} style={{ backgroundColor: darkModeComponentBackground, borderBottom: darkModeBorder }}>
                 <Toolbar className={classes.toolBar}>
                     <div className={classes.notificationDiv}>
                         <Typography variant="subtitle2" className={classes.navAnchor}>
-                            <Link to='/main' className={classes.colorDefault}>
+                            <Link to='/main' className={classes.colorDefault} style={{ color: darkModeFont }}>
                                 <Home /><span className={classes.innerText}>Home</span>
                             </Link>
                         </Typography>
@@ -142,18 +142,23 @@ const Navbar = props => {
                         }}
                     </Query>
                     <div className={classes.searchDiv}>
-                        <SearchTweets />
+                        <SearchTweets 
+                            darkModeBorder={darkModeBorder} 
+                            darkModeFont={darkModeFont} 
+                            darkModeComponentBackground={darkModeComponentBackground} 
+                            darkModeStatus={darkModeStatus}
+                        />
                         <ProfileAvatarModal
                             avatarImg={avatarImg}
                             name={name}
                             screenName={screenName}
                         />
                         {/* Classes component for the modal to submit tweets */}
-                            <TweetModal 
-                                profileLinkColor={profileLinkColor}  
-                                avatarImg={avatarImg}
-                                screenName={screenName}                                              
-                            />
+                        <TweetModal 
+                            profileLinkColor={profileLinkColor}  
+                            avatarImg={avatarImg}
+                            screenName={screenName}      
+                        />
                     </div>
                 </Toolbar>
             </AppBar>

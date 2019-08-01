@@ -65,7 +65,7 @@ const styles = () => ({
         backgroundColor: '#000000d6'
     },
     darkModePlaceholder: {
-        color: '#fff'
+        color: '#000'
     }
 });
 
