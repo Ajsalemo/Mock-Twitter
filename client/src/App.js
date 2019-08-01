@@ -12,7 +12,7 @@ import RouteContainer from './routecontainer/routecontainer';
 class App extends Component {
   render() {
     return (
-      <div className="App">
+      <div className="App" style={{ backgroundColor: '#8080802b' }}>
         <RouteContainer />
       </div>
     );

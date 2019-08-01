@@ -32,15 +32,16 @@ const styles = theme => ({
 // ----------------------------------------------------------------------------------------------------- //
 
 const SubmitTweet = props => {
-    const { classes, screenName, profileLinkColor, avatarImg } = props;
+    const { classes, screenName, profileLinkColor, avatarImg, darkModeStatus, darkModeBorder, darkModeFont, darkModeComponentBackground } = props;
     return (
         <React.Fragment>
-            <Grid item xs={10} sm={8} md={5} className={classes.gridItem}>
-                <Paper className={classes.paperOutline}>
+            <Grid item xs={10} sm={8} md={5} className={classes.gridItem} >
+                <Paper className={classes.paperOutline} style={{ backgroundColor: darkModeComponentBackground, border: darkModeBorder }}>
                     <SubmitTweetForm 
                         avatarImg={avatarImg}
                         screenName={screenName}
                         profileLinkColor={profileLinkColor}
+                        darkModeStatus={darkModeStatus}
                     />
                 </Paper>
                 <Timeline 

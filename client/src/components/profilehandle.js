@@ -73,10 +73,10 @@ const styles = () => ({
 // ----------------------------------------------------------------------------------------------------- //
 
 const ProfileHandle = props => {
-    const { classes, profileLinkColor, profileBannerURL, profileImage, name, screenName, statusCount, friendsCount, followersCount } = props;
+    const { classes, profileLinkColor, profileBannerURL, profileImage, name, screenName, statusCount, friendsCount, followersCount, darkModeFont, darkModeComponentBackground, darkModeBorder } = props;
     return (
         <Paper>
-            <Card className={classes.profileHandlePaper}>
+            <Card className={classes.profileHandlePaper} style={{ backgroundColor: darkModeComponentBackground, border: darkModeBorder }}>
                 <CardContent 
                     className={classes.upperCardContent}
                     style={{ backgroundColor: `#${profileLinkColor}` }}
@@ -92,42 +92,47 @@ const ProfileHandle = props => {
                     <Avatar alt="twitter avatar" src={profileImage} className={classes.twitterAvatar} /> 
                 </Link>
                 <CardContent className={classes.rootClass}>
-                    <Typography variant="h6" gutterBottom className={classes.upperText}>
+                    <Typography 
+                        variant="h6" 
+                        gutterBottom 
+                        className={classes.upperText} 
+                        style={{ color: darkModeFont }}
+                    >
                         <div className={classes.handleTextUpperDiv}>
                             <span className={classes.handleTextUpper}>{name}</span>
                             <span className={classes.handleTextLower}>@{screenName}</span>
                         </div>
                     </Typography>
-                    <Typography variant="subtitle2" className={classes.profileHandleTypography} gutterBottom>
+                    <Typography  variant="subtitle2" className={classes.profileHandleTypography} gutterBottom>
                         <React.Fragment>
-                            <div className={classes.profileTweetSpan}>
+                            <div className={classes.profileTweetSpan} style={{ color: darkModeFont }}>
                                 <Link to={`userprofile/${screenName}`} className={classes.linkToProfileStats}>
                                     <span>Tweets</span>
                                     <span 
                                         className={classes.profileTweetCount}
-                                        style={{ color: `#${profileLinkColor}` }}
+                                        style={{ color: darkModeFont ? darkModeFont : `#${profileLinkColor}` }}
                                     >
                                         {statusCount}
                                     </span>
                                 </Link>
                             </div> 
-                            <div className={classes.profileTweetSpan}>
+                            <div className={classes.profileTweetSpan} style={{ color: darkModeFont }}>
                                 <Link to={`following/${screenName}`} className={classes.linkToProfileStats}>
                                     <span>Following</span>
                                     <span 
                                         className={classes.profileTweetCount}
-                                        style={{ color: `#${profileLinkColor}` }}
+                                        style={{ color: darkModeFont ? darkModeFont : `#${profileLinkColor}` }}
                                     >
                                         {friendsCount}
                                     </span>
                                 </Link>
                             </div>  
-                            <div className={classes.profileTweetSpan}>
+                            <div className={classes.profileTweetSpan} style={{ color: darkModeFont }}>
                                 <Link to={`followers/${screenName}`} className={classes.linkToProfileStats}>
                                     <span>Followers</span>
                                     <span 
                                         className={classes.profileTweetCount}
-                                        style={{ color: `#${profileLinkColor}` }}
+                                        style={{ color: darkModeFont ? darkModeFont : `#${profileLinkColor}` }}
                                     >
                                         {followersCount}
                                     </span>

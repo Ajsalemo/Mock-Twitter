@@ -60,7 +60,7 @@ const styles = () => ({
 // ----------------------------------------------------------------------------------------------------- //
 
 const Trending = props => {
-    const { classes, profileLinkColor } = props;
+    const { classes, profileLinkColor, darkModeBorder, darkModeFont, darkModeComponentBackground } = props;
     return (
         <Query query={GET_TRENDING_TOPICS} fetchPolicy='cache-and-network'>
             {({ loading, error, data }) => {
@@ -68,9 +68,9 @@ const Trending = props => {
                 if (error) return <div><Error /></div>;
                 return (
                     <Paper className={classes.trendingPaper}>
-                        <Card className={classes.trendingCard}> 
+                        <Card className={classes.trendingCard} style={{ backgroundColor: darkModeComponentBackground, border: darkModeBorder }}> 
                             <CardContent className={classes.cardContentUpper}>
-                                <Typography variant="h6" gutterBottom>
+                                <Typography variant="h6" gutterBottom style={{ color: darkModeFont }}>
                                     Trends for you
                                 </Typography>
                             </CardContent>
@@ -82,14 +82,19 @@ const Trending = props => {
                                             <Typography variant="subtitle2">
                                                 <span 
                                                     className={classes.trendingNamesColor}
-                                                    style={{ color: `#${profileLinkColor}` }}
+                                                    style={{ color: darkModeFont ? darkModeFont : `#${profileLinkColor}` }}
                                                 >
                                                     <Link to={`/search/${removeHashtag}`} className={classes.trendingLinks}>
                                                         {trendingArrayInner.name}
                                                     </Link>
                                                 </span>
                                             </Typography>
-                                            <Typography variant="subtitle1" gutterBottom className={classes.trendingTweetNumber}>
+                                            <Typography 
+                                                variant="subtitle1" 
+                                                gutterBottom 
+                                                className={classes.trendingTweetNumber}
+                                                style={{ color: darkModeFont }}
+                                            >
                                                 {trendingArrayInner.tweet_volume
                                                     ?
                                                 <span className={classes.trendingTweetsFont}>

@@ -57,13 +57,22 @@ const styles = () => ({
         height: 30,
         display: 'flex',
         flexDirection: 'start'
+    },
+    notchedOutline: {
+        borderRadius: '0em'
+    },
+    darkModeFormBackground: {
+        backgroundColor: '#000000d6'
+    },
+    darkModePlaceholder: {
+        color: '#fff'
     }
 });
 
 // ----------------------------------------------------------------------------------------------------- //
 
 const SubmitTweetForm = props => {
-    const { classes, avatarImg, screenName, profileLinkColor } = props;
+    const { classes, avatarImg, screenName, profileLinkColor, darkModeStatus } = props;
     return (
         <React.Fragment>
             <Mutation 
@@ -109,8 +118,11 @@ const SubmitTweetForm = props => {
                                         onChange={props.handleChange}
                                         InputProps={{ 
                                             classes: {
-                                                input: props.values.tweet ? classNames(classes.activeTextField, classes.placeholder) : classes.placeholder,
-                                                root: classes.activeTextField
+                                                // **If dark mode is enabled - the font color will change to a lighter color, if it isn't - it defaults to blue
+                                                input: darkModeStatus ? classNames(classes.activeTextField, classes.darkModePlaceholder) : classNames(classes.activeTextField, classes.placeholder),
+                                                root: classes.activeTextField,
+                                                // **If dark mode is enabled - the background color will change to a darker color, if it isn't - it defaults to white
+                                                notchedOutline: darkModeStatus ? classNames(classes.notchedOutline, classes.darkModeFormBackground) : classes.notchedOutline
                                             },
                                         }}
                                     />

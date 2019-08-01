@@ -4,6 +4,7 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { Query } from 'react-apollo';
+import { connect } from 'react-redux';
 
 // Material-UI components
 import { withStyles, Grid, CircularProgress } from '@material-ui/core';
@@ -18,12 +19,15 @@ import Error from '../../components/error';
 // Apollo Queries
 import { VERIFY_USER } from '../../apolloclient/apolloqueries';
 
+// Helper function
+import { changeGridBackground, fontColorChange, changeComponentBackground, changeBorder } from '../../helpers/helperfunctions';
+
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
 const styles = () => ({
     containerStyle: {
-        marginTop: '3.5em',
+        paddingTop: '3.5em',
         justifyContent: 'center'
     },
     profileHandlerGrid: {
@@ -43,8 +47,8 @@ const styles = () => ({
 
 // ----------------------------------------------------------------------------------------------------- //
 
-const Main = props => {
-    const { classes } = props;
+let Main = props => {
+    const { classes, dark_mode } = props;
     return (
             <Query
                 query={VERIFY_USER}
@@ -61,9 +65,16 @@ const Main = props => {
                             screenName={data.currentUser.verifyCredentials.screen_name}
                             profileLinkColor={data.currentUser.verifyCredentials.profile_link_color}
                         />
-                        <Grid container className={classes.containerStyle}>
+                        <Grid 
+                            container 
+                            className={classes.containerStyle}
+                            style={{ backgroundColor: changeGridBackground(dark_mode) }}
+                        >
                             <Grid item xs={8} sm={8} md={2} className={classes.profileHandlerGrid}>
                                 <ProfileHandle 
+                                    darkModeBorder={changeBorder(dark_mode)}
+                                    darkModeFont={fontColorChange(dark_mode)}
+                                    darkModeComponentBackground={changeComponentBackground(dark_mode)}
                                     profileLinkColor={data.currentUser.verifyCredentials.profile_link_color}
                                     profileBannerURL={data.currentUser.verifyCredentials.profile_banner_url}
                                     profileImage={data.currentUser.verifyCredentials.profile_image_url_https}
@@ -78,10 +89,17 @@ const Main = props => {
                                 avatarImg={data.currentUser.verifyCredentials.profile_image_url_https}
                                 profileLinkColor={data.currentUser.verifyCredentials.profile_link_color}
                                 screenName={data.currentUser.verifyCredentials.screen_name}
+                                darkModeStatus={dark_mode}
+                                darkModeBorder={changeBorder(dark_mode)}
+                                darkModeFont={fontColorChange(dark_mode)}
+                                darkModeComponentBackground={changeComponentBackground(dark_mode)}
                             />
                             <Grid item xs={8} sm={8} md={2} className={classes.recommendedGrid}>
                                 <Trending 
                                     profileLinkColor={data.currentUser.verifyCredentials.profile_link_color}
+                                    darkModeBorder={changeBorder(dark_mode)}
+                                    darkModeFont={fontColorChange(dark_mode)}
+                                    darkModeComponentBackground={changeComponentBackground(dark_mode)}
                                 />
                             </Grid>
                         </Grid>
@@ -93,6 +111,20 @@ const Main = props => {
 };
 
 // ----------------------------------------------------------------------------------------------------- //
+// ----------------------------------------------------------------------------------------------------- //
+
+const mapStateToProps = state => {
+    return {
+        dark_mode: state.toggleDarkMode.dark_mode
+    }
+};
+
+// ----------------------------------------------------------------------------------------------------- //
+
+Main = connect(
+    mapStateToProps
+)(Main);
+
 // ----------------------------------------------------------------------------------------------------- //
 
 export default withRouter(withStyles(styles)(Main));
