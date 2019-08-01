@@ -9,6 +9,9 @@ import { Link } from 'react-router-dom';
 import { Button, Avatar, Tooltip, ClickAwayListener, Grow, Paper, Popper, MenuItem, MenuList, Typography, withStyles } from '@material-ui/core';
 import { PersonOutline } from '@material-ui/icons';
 
+// Components
+import DarkModeToggle from './darkmodetoggle';
+
 // Firebase
 import firebaseClass from '../helpers/firebase';
 
@@ -169,6 +172,9 @@ class ProfileAvatarModal extends Component {
                                                     Profile
                                                 </Typography>
                                             </Link>
+                                        </MenuItem>
+                                        <MenuItem className={classNames(classes.menuDivider, classes.profileChildMenuGrid)}>
+                                            <DarkModeToggle />
                                         </MenuItem>
                                         <MenuItem onClick={this.handleClose} className={classNames(classes.menuDivider, classes.profileChildMenuGrid)}>
                                             <Typography 
