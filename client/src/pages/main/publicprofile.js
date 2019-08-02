@@ -4,6 +4,7 @@
 import React from 'react';
 import { withRouter } from 'react-router';
 import { Query } from 'react-apollo';
+import { connect } from 'react-redux';
 
 // * Material-UI components
 import { withStyles, Grid, CircularProgress } from '@material-ui/core';

@@ -108,6 +108,9 @@ const Timeline = props => {
                                         profileLinkColor={profileLinkColor}
                                         screenName={timelineTweetInfo.user.screen_name}
                                         currentUser={screenName}
+                                        darkModeBorder={darkModeBorder}
+                                        darkModeFont={darkModeFont}
+                                        darkModeComponentBackground={darkModeComponentBackground}
                                     />
                                     <Grid item className={classes.timelineGrid}>
                                         {/* Tweet text body */}

@@ -94,7 +94,7 @@ const styles = () => ({
 // ----------------------------------------------------------------------------------------------------- //
 
 const ToolTipModal = props => {
-    const { classes, name, screenName, statuses_count, friends_count, followers_count, imgSrc, currentUser, tweetUserId, profileLinkColor, profileBannerURL } = props;
+    const { classes, name, screenName, statuses_count, friends_count, followers_count, imgSrc, currentUser, tweetUserId, profileLinkColor, profileBannerURL, darkModeBorder, darkModeFont, darkModeComponentBackground } = props;
     return (
         <React.Fragment>
             <Tooltip 
@@ -102,8 +102,10 @@ const ToolTipModal = props => {
                     popper: classes.popperClass,
                     tooltip: classes.toolTipBackground
                 }}
+                style={{ border: darkModeBorder }}
                 title={ 
-                    <Card className={classes.ToolTipModalPaper}>
+                    // ! Inline styles are used for dark mode
+                    <Card className={classes.ToolTipModalPaper} style={{ backgroundColor: darkModeComponentBackground }}>
                         <CardContent className={classes.ToolTipUpperCardContent}>
                             <img 
                                 // * Alt text is left empty due to this being a decorative image
@@ -121,7 +123,7 @@ const ToolTipModal = props => {
                                         to={`/userprofile/${screenName}`} 
                                         className={classNames(classes.ToolTipHandleTextUpper, classes.toolTipProfileLink)}
                                         // ! This inline style dictates what the user's color theme is set to
-                                        style={{ color: `#${profileLinkColor}` }}
+                                        style={{ color: darkModeFont ? darkModeFont : `#${profileLinkColor}` }}
                                     >
                                         {name}                   
                                     </Link>
@@ -129,7 +131,7 @@ const ToolTipModal = props => {
                                         to={`/userprofile/${screenName}`} 
                                         className={classNames(classes.ToolTipHandleTextLower, classes.toolTipProfileLink)}
                                         // ! This inline style dictates what the user's color theme is set to
-                                        style={{ color: `#${profileLinkColor}` }}
+                                        style={{ color: darkModeFont ? darkModeFont : `#${profileLinkColor}` }}
                                     >
                                         @{screenName}
                                     </Link>
@@ -150,7 +152,7 @@ const ToolTipModal = props => {
                                         <Link 
                                             to={`/userprofile/${screenName}`} 
                                             // ! This inline style dictates what the user's color theme is set to
-                                            style={{ color: `#${profileLinkColor}` }}
+                                            style={{ color: darkModeFont ? darkModeFont : `#${profileLinkColor}` }}
                                             className={classes.toolTipProfileLink}
                                         >
                                             {statuses_count}
@@ -163,7 +165,7 @@ const ToolTipModal = props => {
                                         <Link 
                                             to={`/following/${screenName}`} 
                                             // ! This inline style dictates what the user's color theme is set to
-                                            style={{ color: `#${profileLinkColor}` }}
+                                            style={{ color: darkModeFont ? darkModeFont : `#${profileLinkColor}` }}
                                             className={classes.toolTipProfileLink}
                                         >
                                             {friends_count}
@@ -176,7 +178,7 @@ const ToolTipModal = props => {
                                         <Link 
                                             to={`/followers/${screenName}`} 
                                             // ! This inline style dictates what the user's color theme is set to
-                                            style={{ color: `#${profileLinkColor}` }}
+                                            style={{ color: darkModeFont ? darkModeFont : `#${profileLinkColor}` }}
                                             className={classes.toolTipProfileLink}
                                         >
                                             {followers_count}
