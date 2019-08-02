@@ -1,4 +1,4 @@
-// --------------------------------------------- Imports ----------------------------------------------- //
+// * --------------------------------------------- Imports ----------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
 import React from 'react';
@@ -6,10 +6,10 @@ import { Mutation } from 'react-apollo';
 import { Formik, Form } from 'formik';
 import classNames from 'classnames';
 
-// Material-UI components
+// * Material-UI components
 import { withStyles, Typography, CircularProgress, Avatar, Grid, Fab, TextField } from '@material-ui/core';
 
-// Apollo Queries and Mutations
+// * Apollo Queries and Mutations
 import { CREATE_USER_TWEET, GET_AUTHUSER_TWEETS, GET_USERPROFILE_TWEETS } from '../apolloclient/apolloqueries';
 
 // ----------------------------------------------------------------------------------------------------- //
@@ -88,8 +88,8 @@ const TweetModalForm = props => {
             >
                 {(createModalTweetProp, { loading }) => (
                     <Formik
-                        // the userScreenName prop is passed in from the publicProfileHandle component
-                        // This is so the component can be re-used, incase the authenticated user wants tweet directly at the profile in question
+                        // * the userScreenName prop is passed in from the publicProfileHandle component
+                        // * This is so the component can be re-used, incase the authenticated user wants tweet directly at the profile in question
                         initialValues={{ 
                             tweetModalForm: userScreenName ? `@${userScreenName} ` : '' 
                         }}
@@ -100,8 +100,8 @@ const TweetModalForm = props => {
                                         full_text: values.tweetModalForm                                    }
                                 });
                                 resetForm({ tweetModalForm: '' });
-                                // After submitting the form - call this function to close the form
-                                // This sets the modal 'state' to the opposite of the 'handleOpen' function - which opens the modal 
+                                // * After submitting the form - call this function to close the form
+                                // * This sets the modal 'state' to the opposite of the 'handleOpen' function - which opens the modal 
                                 onClose()
                             } catch(error) {
                                 setSubmitting(false);
@@ -120,6 +120,7 @@ const TweetModalForm = props => {
                                         value={props.values.tweetModalForm}
                                         onChange={props.handleChange}
                                         InputProps={{ 
+                                            // * These ternaries run if the user has dark mode toggled or not
                                             classes: {
                                                 input: dark_mode ? classNames(classes.darkModeTweetModalFont, classes.tweetModalActiveTextfield) : classNames(classes.tweetModalFormPlaceholder, classes.tweetModalActiveTextfield),
                                                 root: classes.tweetModalActiveTextfield,
@@ -141,6 +142,7 @@ const TweetModalForm = props => {
                                                 variant="extended" 
                                                 aria-label="Add Tweet" 
                                                 className={classes.tweetModalFormButtonMain} 
+                                                // ! This inline style dictates what the user's color theme is set to
                                                 style={{ backgroundColor: `#${profileLinkColor}`}}
                                                 disabled={loading || !props.values.tweetModalForm}
                                                 type="submit"

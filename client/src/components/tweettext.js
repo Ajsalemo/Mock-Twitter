@@ -52,13 +52,19 @@ const styles = () => ({
 // ----------------------------------------------------------------------------------------------------- //
 
 const Tweettext = props => {
-    const { classes, name, verified, nickname, created_at, full_text, id, tweetUserId } = props;
+    const { classes, name, verified, nickname, created_at, full_text, id, tweetUserId, darkModeFont } = props;
     return (
         <React.Fragment>
             {/* Name and handle */}
             <Grid item className={classes.nameAndHandleGrid}>
-                <Typography variant="subtitle2">
-                    <Link to={`/userprofile/${nickname}`} className={classes.profileLink}>{name}</Link>
+                <Typography variant="subtitle2" style={{ color: darkModeFont }}>
+                    <Link 
+                        to={`/userprofile/${nickname}`} 
+                        className={classes.profileLink} 
+                        style={{ color: darkModeFont }}
+                    >
+                        {name}
+                    </Link>
                     {/* If the Twitter account is verified - display the blue 'check' icon */}
                     {verified === true 
                         ? 
@@ -75,11 +81,12 @@ const Tweettext = props => {
                         id={id}
                         // This is the tweet author's Id passed in from 'timeline.js'
                         tweetUserId={tweetUserId}
+                        darkModeFont={darkModeFont}
                     />
                 </Grid>
             </Grid>
             {/* Tweet body */}
-            <Typography variant="body2" gutterBottom>
+            <Typography variant="body2" gutterBottom style={{ color: darkModeFont }}>
                 <span className={classes.timelimeTweets}>{full_text}</span>
             </Typography>
         </React.Fragment>

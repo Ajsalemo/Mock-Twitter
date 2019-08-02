@@ -1,21 +1,21 @@
-// --------------------------------------------- Imports ----------------------------------------------- //
+// * --------------------------------------------- Imports ----------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
 import React from 'react';
 import { Query } from 'react-apollo';
 
-// Components
+// * Components
 import StaticToolTip from './statictooltip';
 import Error from './error';
 import EmptyTweetMessage from '../components/emptytweetsmessage';
 
-// Material-UI components
+// * Material-UI components
 import { CircularProgress, withStyles } from '@material-ui/core';
 
-// Apollo Query
+// * Apollo Query
 import { USERS_FOLLOWING } from '../apolloclient/apolloqueries';
 
-// Helper function
+// * Helper function
 import { extractAndReplaceNormalJPG } from '../helpers/helperfunctions';
 
 // ----------------------------------------------------------------------------------------------------- //
@@ -46,6 +46,7 @@ const UsersFollowingList = props => {
                      *   * This ternary checks to see if a user has followed any accounts
                      *   * If they haven't, this will display a message - else it'll display who the user has followed
                      */
+                    // ! query.length checks to see if there is values being returned, if the values are empty a placeholder will be display
                     data.currentUser.usersFollowing.users.length ? 
                         data.currentUser.usersFollowing.users.map((usersFollowersList, i) => {
                             return (
@@ -66,6 +67,7 @@ const UsersFollowingList = props => {
                             );    
                         })
                         :
+                    // ! If the associated profile doesn't have any followers, this placeholder will be displayed
                     <EmptyTweetMessage 
                         screenName={screenName}
                         text={"doesn't have any followers yet"}

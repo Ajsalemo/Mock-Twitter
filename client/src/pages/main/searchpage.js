@@ -1,22 +1,22 @@
-// --------------------------------------------- Imports ----------------------------------------------- //
+// * --------------------------------------------- Imports ----------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
 import React from 'react';
 import { Query } from 'react-apollo';
 
-// Material-UI components
+// * Material-UI components
 import { CircularProgress, withStyles, Grid } from '@material-ui/core';
 
-// Components
+// * Components
 import Navbar from '../../components/navbar';
 import SearchAppBar from '../../components/searchappbar';
 import Trending from '../../components/trending';
 import SearchQueryTimeline from '../../components/searchquerytimeline';
 
-// Pages
+// * Pages
 import NotFound from './notfound';
 
-// Apollo Query
+// * Apollo Query
 import { VERIFY_USER } from '../../apolloclient/apolloqueries';
 
 // ----------------------------------------------------------------------------------------------------- //

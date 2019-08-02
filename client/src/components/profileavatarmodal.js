@@ -1,18 +1,18 @@
-// --------------------------------------------- Imports ----------------------------------------------- //
+// * --------------------------------------------- Imports ----------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
 import React, { Component } from 'react';
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 
-// Material-UI components
+// * Material-UI components
 import { Button, Avatar, Tooltip, ClickAwayListener, Grow, Paper, Popper, MenuItem, MenuList, Typography, withStyles } from '@material-ui/core';
 import { PersonOutline } from '@material-ui/icons';
 
-// Components
+// * Components
 import DarkModeToggle from './darkmodetoggle';
 
-// Firebase
+// * Firebase
 import firebaseClass from '../helpers/firebase';
 
 // ----------------------------------------------------------------------------------------------------- //

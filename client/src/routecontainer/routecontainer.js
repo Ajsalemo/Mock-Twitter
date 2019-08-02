@@ -1,10 +1,10 @@
-// --------------------------------------------- Imports ----------------------------------------------- //
+// * --------------------------------------------- Imports ----------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
 import React, { Component } from 'react';
 import { withRouter, Switch, Route } from 'react-router-dom';
 
-// Pages
+// * Pages
 import Home from '../pages/home/home';
 import Main from '../pages/main/main';
 import PublicProfile from '../pages/main/publicprofile';
@@ -15,10 +15,10 @@ import PublicProfileLists from '../pages/main/publicprofilelists';
 import ListsTimeline from '../pages/main/liststimeline';
 import NotFound from '../pages/main/notfound';
 
-// Components
+// * Components
 import Loading from '../components/loading';
 
-// Firebase
+// * Firebase
 import firebaseClass from '../helpers/firebase';
 import SearchPage from '../pages/main/searchpage';
 
@@ -27,8 +27,8 @@ import SearchPage from '../pages/main/searchpage';
 
 class RouteContainer extends Component {
     async componentDidMount() {
-        // When the routes mount - push the authenicated user to the home page
-        // Else if the user is unAuthenticated(i.e, logs out) - push them to the log in page
+        // * When the routes mount - push the authenicated user to the home page
+        // * Else if the user is unAuthenticated(i.e, logs out) - push them to the log in page
         await firebaseClass.firebaseAuth().onAuthStateChanged(user => {
             if(user && this.props.location.pathname === '/') {
                 this.props.history.push('/main');
@@ -36,9 +36,11 @@ class RouteContainer extends Component {
                 this.props.history.push('/');
             }
         });
-        // Work around to prevent the getTokenId method on the firebase constructor from becoming null
-        // If the page hard refreshes, it pushes it to a loading indicator page
-        // Which then pushes back to the previous page, unless the route is the log in route
+        // TODO - Need to implement a better working version of this, idToken still sometimes returns null(doesn't effect site usability)
+        // TODO - Need to implement a better way to push between routes 
+        // ?  - Work around to prevent the getTokenId method on the firebase constructor from becoming null
+        // * If the page hard refreshes, it pushes it to a loading indicator page
+        // * Which then pushes back to the previous page, unless the route is the log in route
         if(window.location.reload && this.props.location.pathname !== '/') {
             this.props.history.push('/loading');
         }
@@ -58,7 +60,7 @@ class RouteContainer extends Component {
                     <Route exact path='/main' component={Main} />
                     <Route exact path='/loading' component={Loading} />
                     <Route exact path='/' component={Home} />
-                    {/** // ** This renders a 404 page if none of the above routes match */}
+                    {/* // * This renders a 404 page if none of the above routes match */}
                     <Route component={NotFound} />
                 </Switch>
             </React.Fragment>

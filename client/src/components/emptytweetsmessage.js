@@ -1,9 +1,9 @@
-// --------------------------------------------- Imports ----------------------------------------------- //
+// * --------------------------------------------- Imports ----------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
 import React from 'react';
 
-// Material-UI components
+// * Material-UI components
 import { Typography, withStyles, Grid } from '@material-ui/core';
 
 // ----------------------------------------------------------------------------------------------------- //
@@ -24,13 +24,14 @@ const EmptyTweetMessage = props => {
             <Typography 
                 variant='h6' 
                 gutterBottom 
+                // ! This inline style dictates what the user's color theme is set to
                 style={{ color: `#${profileLinkColor}` }}
                 className={textPlacement}
             >
                 {/* 
-                    //* The text prop is based on which public profile/authorized user page you're viewing
-                    //* Ex. - if you're viewing a users 'likes' page - this'll display '@screename hasn't liked any posts'
-                    //* Ex. - if you're viewing a users 'following' page - this'll display '@screen hasn't followed anyone yet', etc.
+                    // * The text prop is based on which public profile/authorized user page you're viewing
+                    // * Ex. - if you're viewing a users 'likes' page - this'll display '@screename hasn't liked any posts'
+                    // * Ex. - if you're viewing a users 'following' page - this'll display '@screen hasn't followed anyone yet', etc.
                 */}
                 @{screenName} {text}
             </Typography>

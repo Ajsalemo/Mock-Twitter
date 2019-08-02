@@ -1,14 +1,14 @@
-// --------------------------------------------- Imports ----------------------------------------------- //
+// * --------------------------------------------- Imports ----------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
 import React from 'react';
 import { withRouter } from 'react-router';
 import { Query } from 'react-apollo';
 
-// Material-UI components
+// * Material-UI components
 import { withStyles, Grid, CircularProgress } from '@material-ui/core';
 
-// Components
+// * Components
 import Navbar from '../../components/navbar';
 import PublicProfileBanner from '../../components/publicprofilebanner';
 import ProfileBannerBar from '../../components/profilebannerbar';
@@ -16,10 +16,10 @@ import PublicProfileHandle from '../../components/publicprofilehandle';
 import Trending from '../../components/trending';
 import LikesComponent from '../../components/likescomponent';
 
-// Pages
+// * Pages
 import NotFound from './notfound';
 
-// Apollo Query
+// * Apollo Query
 import { VERIFY_USER, SHOW_USER } from '../../apolloclient/apolloqueries';
 
 // ----------------------------------------------------------------------------------------------------- //

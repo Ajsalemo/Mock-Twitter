@@ -1,4 +1,4 @@
-// --------------------------------------------- Imports ----------------------------------------------- //
+// * --------------------------------------------- Imports ----------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
 import React from 'react';
@@ -41,7 +41,7 @@ const PublicProfileBanner = props => {
         </Grid>   
             :
         <Grid item className={classes.bannerPlaceholderImage}>
-            {/* This banner displays if the users profile_banner_url value is null */}
+            {/* // * This banner displays if the users profile_banner_url value is null */}
         </Grid>  
     );
 };

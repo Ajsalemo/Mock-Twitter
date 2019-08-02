@@ -1,12 +1,12 @@
-// --------------------------------------------- Imports ----------------------------------------------- //
+// * --------------------------------------------- Imports ----------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
 import React, { Component } from 'react';
 
-// Material-UI components
+// * Material-UI components
 import { withStyles, Fab, Modal } from '@material-ui/core';
 
-// Components
+// * Components
 import TweetModalBody from './tweetmodalbody';
 
 // ----------------------------------------------------------------------------------------------------- //
@@ -63,9 +63,8 @@ class TweetModal extends Component {
                     aria-label="Add Tweet" 
                     className={classes.tweetButton}
                     onClick={this.handleOpen}
-                    style={{ 
-                        backgroundColor: `#${profileLinkColor}`
-                    }}
+                    // ! This inline style dictates what the user's color theme is set to
+                    style={{ backgroundColor: `#${profileLinkColor}` }}
                 >
                     {userToReply ? `Tweet to ${userToReply}` : 'Tweet'}
                 </Fab>

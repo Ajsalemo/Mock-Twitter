@@ -1,14 +1,14 @@
-// --------------------------------------------- Imports ----------------------------------------------- //
+// * --------------------------------------------- Imports ----------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
 import React from 'react';
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 
-// Material-UI components
+// * Material-UI components
 import { withStyles, Grid, Card, CardContent, Avatar, Typography, Tooltip } from '@material-ui/core';
 
-// Components
+// * Components
 import TooltipFollowButton from './tooltipfollowbutton';
 
 // ----------------------------------------------------------------------------------------------------- //
@@ -106,7 +106,7 @@ const ToolTipModal = props => {
                     <Card className={classes.ToolTipModalPaper}>
                         <CardContent className={classes.ToolTipUpperCardContent}>
                             <img 
-                                // Alt text is left empty due to this being a decorative image
+                                // * Alt text is left empty due to this being a decorative image
                                 alt={''}
                                 src={profileBannerURL}
                                 className={classes.timelineTooltopBannerImage}
@@ -116,10 +116,11 @@ const ToolTipModal = props => {
                         <CardContent className={classes.ToolTipContent}>
                             <Typography variant="h6" gutterBottom className={classes.ToolTipUpperText}>
                                 <div className={classes.ToolTipHandleTextUpperDiv}>
-                                    {/* These are passed in from 'timeline.js' */}
+                                    {/*// * These are passed in from 'timeline.js' */}
                                     <Link 
                                         to={`/userprofile/${screenName}`} 
                                         className={classNames(classes.ToolTipHandleTextUpper, classes.toolTipProfileLink)}
+                                        // ! This inline style dictates what the user's color theme is set to
                                         style={{ color: `#${profileLinkColor}` }}
                                     >
                                         {name}                   
@@ -127,6 +128,7 @@ const ToolTipModal = props => {
                                     <Link 
                                         to={`/userprofile/${screenName}`} 
                                         className={classNames(classes.ToolTipHandleTextLower, classes.toolTipProfileLink)}
+                                        // ! This inline style dictates what the user's color theme is set to
                                         style={{ color: `#${profileLinkColor}` }}
                                     >
                                         @{screenName}
@@ -147,6 +149,7 @@ const ToolTipModal = props => {
                                     <span className={classes.ToolTipTweetCount}>
                                         <Link 
                                             to={`/userprofile/${screenName}`} 
+                                            // ! This inline style dictates what the user's color theme is set to
                                             style={{ color: `#${profileLinkColor}` }}
                                             className={classes.toolTipProfileLink}
                                         >
@@ -159,6 +162,7 @@ const ToolTipModal = props => {
                                     <span className={classes.ToolTipTweetCount}>
                                         <Link 
                                             to={`/following/${screenName}`} 
+                                            // ! This inline style dictates what the user's color theme is set to
                                             style={{ color: `#${profileLinkColor}` }}
                                             className={classes.toolTipProfileLink}
                                         >
@@ -171,6 +175,7 @@ const ToolTipModal = props => {
                                     <span className={classes.ToolTipTweetCount}>
                                         <Link 
                                             to={`/followers/${screenName}`} 
+                                            // ! This inline style dictates what the user's color theme is set to
                                             style={{ color: `#${profileLinkColor}` }}
                                             className={classes.toolTipProfileLink}
                                         >
@@ -186,7 +191,7 @@ const ToolTipModal = props => {
             >
                 <Avatar 
                     alt="twitter avatar" 
-                    // This is passed in from 'timeline.js' 
+                    // * This is passed in from 'timeline.js' 
                     src={imgSrc} 
                     className={classes.ToolTipAvatarParent}
                 />

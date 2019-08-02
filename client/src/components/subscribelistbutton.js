@@ -1,13 +1,13 @@
-// --------------------------------------------- Imports ----------------------------------------------- //
+// * --------------------------------------------- Imports ----------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
 import React from 'react';
 import { Mutation } from 'react-apollo';
 
-// Material-UI components
+// * Material-UI components
 import { withStyles, Fab, CircularProgress } from '@material-ui/core';
 
-// Apollo Mutation
+// * Apollo Mutation
 import { SUBSCRIBE_TO_LIST, GET_LISTS_SHOW, GET_USER_LISTS } from '../apolloclient/apolloqueries';
 
 // ----------------------------------------------------------------------------------------------------- //
@@ -37,7 +37,7 @@ const SubscribeListButton = props => {
                 },
                 {
                     query: GET_USER_LISTS,
-                    // currentUser is passed in from 'listsprofilehandle.js'
+                    // * currentUser is passed in from 'listsprofilehandle.js'
                     variables: {
                         screen_name: currentUser
                     }

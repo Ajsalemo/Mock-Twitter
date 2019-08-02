@@ -1,4 +1,4 @@
-// --------------------------------------------- Imports ----------------------------------------------- //
+// * --------------------------------------------- Imports ----------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
 import React from 'react';
@@ -10,13 +10,13 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
 
-// Redux
+// * Redux
 import { store, persistor } from './redux/store';
 
-// Apollo Client
+// * Apollo Client
 import { client } from './apolloclient/apolloclient';
 
-// Material-UI components
+// * Material-UI components
 import CssBaseline from '@material-ui/core/CssBaseline';
 
 // ----------------------------------------------------------------------------------------------------- //

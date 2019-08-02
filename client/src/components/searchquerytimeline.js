@@ -1,18 +1,18 @@
-// --------------------------------------------- Imports ----------------------------------------------- //
+// * --------------------------------------------- Imports ----------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
 import React from 'react';
 import { Query } from 'react-apollo';
 import classNames from 'classnames';
 
-// Material-UI components
+// * Material-UI components
 import { ChatBubbleOutline, BarChart } from '@material-ui/icons';
 import { withStyles, Paper, Typography, CircularProgress, Grid, CardMedia } from '@material-ui/core';
 
-// Apollo Queries
+// * Apollo Queries
 import { SEARCH_TWEETS } from '../apolloclient/apolloqueries';
 
-// Components
+// * Components
 import Error from '../components/error';
 import LikeStatus from '../components/likestatus';
 import UnLikeStatus from '../components/unlikestatus';
@@ -22,7 +22,7 @@ import UnRetweetStatus from '../components/unretweet';
 import ToolTipModal from '../components/tooltipmodal';
 import NoResults from '../components/noresults';
 
-// Helper functions
+// * Helper functions
 import { pollMinute } from '../helpers/helperfunctions';
 
 // ----------------------------------------------------------------------------------------------------- //
@@ -92,6 +92,7 @@ const SearchQueryTimeline = props => {
                     if (loading) return <div className={classes.errorAndLoadingDiv}><CircularProgress /></div>;
                     if (error) return <div className={classes.errorAndLoadingDiv}><Error /></div>;
                     return (
+                        // ! query.length checks to see if there is values being returned, if the values are empty a placeholder will be displayed
                         data.currentUser.searchTweets.statuses.length ?
                             data.currentUser.searchTweets.statuses.map((searchQueryList, i) => {
                                 return (
@@ -140,10 +141,10 @@ const SearchQueryTimeline = props => {
                                                         <ChatBubbleOutline className={classes.searchQueryTimelineIcons} />
                                                     </div>
                                                     <div className={classNames(classes.searchQueryOptionsGrid, classes.searchQueryOptionsHover)}>
-                                                        {/* This ternary block displays the option to whether or not to retweet a status */} 
-                                                        {/* Depending on the returned boolean from the API call */}
+                                                        {/* // * This ternary block displays the option to whether or not to retweet a status */} 
+                                                        {/* // * Depending on the returned boolean from the API call */}
                                                         {searchQueryList.retweeted === true
-                                                        // If this status has been retweeted, give the choice to unlike it 
+                                                        // * If this status has been retweeted, give the choice to unlike it 
                                                             ?
                                                         <UnRetweetStatus
                                                             id={searchQueryList.id_str}
@@ -152,7 +153,7 @@ const SearchQueryTimeline = props => {
                                                             searchQueryParam={searchQuery}
                                                         />
                                                             :
-                                                        // Else, if it hasn't been retweeted - give the option to be able to retweet it
+                                                        // * Else, if it hasn't been retweeted - give the option to be able to retweet it
                                                         <RetweetModal
                                                             retweet_count={searchQueryList.retweet_count}
                                                             name={searchQueryList.user.name}
@@ -168,8 +169,8 @@ const SearchQueryTimeline = props => {
                                                         />}
                                                     </div>
                                                     <div className={classNames(classes.searchQueryOptionsGrid, classes.searchQueryOptionsHover)}>
-                                                        {/* This ternary block displays the option to whether or not to like a status */} 
-                                                        {/* Depending on the returned boolean from the API call */}
+                                                        {/* // * This ternary block displays the option to whether or not to like a status */} 
+                                                        {/* // * Depending on the returned boolean from the API call */}
                                                         {searchQueryList.favorited === true
                                                         // If this status has been liked alread - give the option to unline it
                                                             ?
@@ -179,7 +180,7 @@ const SearchQueryTimeline = props => {
                                                             screenName={searchQueryList.user.screen_name}  
                                                             searchQueryParam={searchQuery} 
                                                         />
-                                                        // Else, if it hasn't been liked - give the option to like the status
+                                                        // * Else, if it hasn't been liked - give the option to like the status
                                                             :
                                                         <LikeStatus 
                                                             id={searchQueryList.id_str}
@@ -196,6 +197,7 @@ const SearchQueryTimeline = props => {
                                 );
                             })
                             :
+                        // ! If there are no search results, this message will be displayed
                         <NoResults 
                             profileLinkColor={profileLinkColor}
                         />

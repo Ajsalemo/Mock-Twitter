@@ -1,18 +1,18 @@
-// --------------------------------------------- Imports ----------------------------------------------- //
+// * --------------------------------------------- Imports ----------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
 import React from 'react';
 import { Query } from 'react-apollo';
 import classNames from 'classnames';
 
-// Material-UI components
+// * Material-UI components
 import { ChatBubbleOutline, BarChart } from '@material-ui/icons';
 import { withStyles, Paper, Typography, CircularProgress, Grid, CardMedia } from '@material-ui/core';
 
-// Apollo Queries
+// * Apollo Queries
 import { GET_LISTS_TIMELINE } from '../apolloclient/apolloqueries';
 
-// Components
+// * Components
 import LikeStatus from '../components/likestatus';
 import UnLikeStatus from '../components/unlikestatus';
 import RetweetModal from '../components/retweetmodal';
@@ -20,10 +20,10 @@ import Tweettext from '../components/tweettext';
 import UnRetweetStatus from '../components/unretweet';
 import ToolTipModal from '../components/tooltipmodal';
 
-// Pages
+// * Pages
 import NotFound from '../pages/main/notfound';
 
-// Imported functions
+// * Helper function
 import { pollMinute } from '../helpers/helperfunctions';
 
 // ----------------------------------------------------------------------------------------------------- //
@@ -141,10 +141,10 @@ const ListsTimelineComponent = props => {
                                                     <ChatBubbleOutline className={classes.listsTimelineIcons} />
                                                 </div>
                                                 <div className={classNames(classes.listsButtonOptionsGrid, classes.listsButtonOptionsHover)}>
-                                                    {/* This ternary block displays the option to whether or not to retweet a status */} 
-                                                    {/* Depending on the returned boolean from the API call */}
+                                                    {/* // * This ternary block displays the option to whether or not to retweet a status */} 
+                                                    {/* // * Depending on the returned boolean from the API call */}
                                                     {getListsTimeline.retweeted === true
-                                                    // If this status has been retweeted, give the choice to unlike it 
+                                                    // * If this status has been retweeted, give the choice to unlike it 
                                                         ?
                                                     <UnRetweetStatus
                                                         id={getListsTimeline.id_str}
@@ -153,7 +153,7 @@ const ListsTimelineComponent = props => {
                                                         retweetId={URLparam}
                                                     />
                                                         :
-                                                    // Else, if it hasn't been retweeted - give the option to be able to retweet it
+                                                    // * Else, if it hasn't been retweeted - give the option to be able to retweet it
                                                     <RetweetModal
                                                         retweet_count={getListsTimeline.retweet_count}
                                                         name={getListsTimeline.user.name}
@@ -169,10 +169,10 @@ const ListsTimelineComponent = props => {
                                                     />}
                                                 </div>
                                                 <div className={classNames(classes.listsButtonOptionsGrid, classes.listsButtonOptionsHover)}>
-                                                    {/* This ternary block displays the option to whether or not to like a status */} 
-                                                    {/* Depending on the returned boolean from the API call */}
+                                                    {/* // * This ternary block displays the option to whether or not to like a status */} 
+                                                    {/* // * Depending on the returned boolean from the API call */}
                                                     {getListsTimeline.favorited === true
-                                                    // If this status has been liked alread - give the option to unline it
+                                                    // * If this status has been liked alread - give the option to unline it
                                                         ?
                                                     <UnLikeStatus
                                                         id={getListsTimeline.id_str}
@@ -180,7 +180,7 @@ const ListsTimelineComponent = props => {
                                                         screenName={getListsTimeline.user.screen_name} 
                                                         list_id={URLparam}   
                                                     />
-                                                    // Else, if it hasn't been liked - give the option to like the status
+                                                    // * Else, if it hasn't been liked - give the option to like the status
                                                         :
                                                     <LikeStatus 
                                                         id={getListsTimeline.id_str}

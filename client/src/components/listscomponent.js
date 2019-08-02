@@ -1,18 +1,18 @@
-// --------------------------------------------- Imports ----------------------------------------------- //
+// * --------------------------------------------- Imports ----------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
 import React from 'react';
 import { Query } from 'react-apollo';
 import { Link } from 'react-router-dom';
 
-// Material-UI components
+// * Material-UI components
 import { withStyles, Grid, Paper, Typography, CircularProgress } from '@material-ui/core';
 
-// Components
+// * Components
 import Error from '../components/error';
 import EmptyTweetMessage from '../components/emptytweetsmessage';
 
-// Apollo Query
+// * Apollo Query
 import { GET_USER_LISTS } from '../apolloclient/apolloqueries';
 
 // ----------------------------------------------------------------------------------------------------- //
@@ -94,10 +94,12 @@ const ListsComponent = props => {
                      *   * This ternary checks to see if a user has subscribed to any Lists
                      *   * If they haven't, this will display a message - else it'll display what the user has subscribed to
                      */
+                    // ! query.length checks to see if there is values being returned, if the values are empty a placeholder will be displayed
                     data.currentUser.getLists.length ? 
                         <Paper className={classes.listsComponentPaper}>
                             <Grid className={classes.listsComponentFontGrid}>
                                 <Typography variant="h6">
+                                    {/* // ! This inline style dictates what the user's color theme is set to */}
                                     <span  style={{ color: `#${profileLinkColor}` }}>Subscribed to</span>
                                 </Typography>
                             </Grid>
@@ -109,6 +111,7 @@ const ListsComponent = props => {
                                                 <Link 
                                                     to={`/lists-statuses/${lists.user.screen_name}/${lists.id}`} 
                                                     className={classes.listsComponentName}
+                                                    // ! This inline style dictates what the user's color theme is set to
                                                     style={{ color: `#${profileLinkColor}` }}
                                                 >
                                                     {lists.name}
@@ -129,6 +132,7 @@ const ListsComponent = props => {
                             }
                         </Paper>
                         :
+                    // ! If the associated profile hasn't subscribed to any lists, this placeholder will be displayed
                     <EmptyTweetMessage 
                         screenName={screenName}
                         text={"hasn't subscribed to any lists"}

@@ -1,13 +1,13 @@
-// --------------------------------------------- Imports ----------------------------------------------- //
+// * --------------------------------------------- Imports ----------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
 import React from 'react';
 import { Mutation } from 'react-apollo';
 
-// Material-UI components
+// * Material-UI components
 import { withStyles, Fab, CircularProgress } from '@material-ui/core';
 
-// Apollo Mutations
+// * Apollo Mutations
 import { UNFOLLOW_USER, COMPARE_FRIENDSHIPS, USERS_FOLLOWERS, USERS_FOLLOWING } from '../apolloclient/apolloqueries';
 
 // ----------------------------------------------------------------------------------------------------- //
@@ -69,6 +69,7 @@ const UnfollowUser = props => {
                     classes={{
                         root: classes.followUserButton
                     }}
+                    // ! This inline style dictates what the user's color theme is set to
                     style={{ backgroundColor: `#${profileLinkColor}`}}
                 >
                     Following

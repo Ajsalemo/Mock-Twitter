@@ -1,7 +1,6 @@
-// --------------------------------------------- Imports ----------------------------------------------- //
+// * --------------------------------------------- Imports ----------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
-// const firebase = require('firebase');
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
 
@@ -20,7 +19,7 @@ const firebaseConfig = {
 
 // ----------------------------------------------------------------------------------------------------- //
 
-// Initialize Firebase
+// * Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
 // ----------------------------------------------------------------------------------------------------- //
@@ -44,8 +43,8 @@ class FirebaseHelperClass {
     twitterSignIn = () => {
         this.firebaseAuth().signInWithPopup(provider)
             .then(result => {
-                // This gives you a the Twitter OAuth 1.0 Access Token and Secret.
-                // You can use these server side with your app's credentials to access the Twitter API.
+                // * This gives you a the Twitter OAuth 1.0 Access Token and Secret.
+                // * You can use these server side with your app's credentials to access the Twitter API.
                 const token = result.credential.accessToken;
                 localStorage.setItem('access_token', token)
                 const secret = result.credential.secret;
@@ -57,35 +56,35 @@ class FirebaseHelperClass {
             });
     };
 
-    // Returns Twitters Access Token Key
+    // * Returns Twitters Access Token Key
     getAccessToken = token => {
         return token;
     }
 
-    // Returns Twitters Access Token Secret
+    // * Returns Twitters Access Token Secret
     getAccessSecret = secret => {
         return secret;
     }
 
-    // Retrieves a JWT token to be associated with the user
+    // * Retrieves a JWT token to be associated with the user
     getTokenForValidation = () => {
         const verifyToken = this.firebaseAuth().currentUser.getIdToken()
             .then(idToken => {
                 return idToken;
             }).catch(err => {
-                // Handle error
+                // * Handle error
                 console.log(err);
             });
         return verifyToken;
     };
 
-    // This function sets the persistence of the authenticated session
-    // SESSION - lets the user stay authenticated through a page refresh
-    // But will clear the users session if the tab or browser is closed
+    // * This function sets the persistence of the authenticated session
+    // * SESSION - lets the user stay authenticated through a page refresh
+    // * But will clear the users session if the tab or browser is closed
     persistAuthentication = () => {
         this.firebaseAuth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
             .then(() => {
-                // After setting persistance, call the log in popup
+                // * After setting persistance, call the log in popup
                 return this.twitterSignIn();
             }).catch(err => {
                 console.log(err);
@@ -93,7 +92,7 @@ class FirebaseHelperClass {
     }
 
     signOut = () => {
-        // Clear out any history in local storage
+        // * Clear out any history in local storage
         localStorage.clear();
         this.firebaseAuth().signOut();
     }

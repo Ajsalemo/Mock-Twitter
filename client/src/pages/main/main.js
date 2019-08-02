@@ -1,4 +1,4 @@
-// --------------------------------------------- Imports ----------------------------------------------- //
+// * --------------------------------------------- Imports ----------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
 import React from 'react';
@@ -6,20 +6,20 @@ import { withRouter } from 'react-router-dom';
 import { Query } from 'react-apollo';
 import { connect } from 'react-redux';
 
-// Material-UI components
+// * Material-UI components
 import { withStyles, Grid, CircularProgress } from '@material-ui/core';
 
-// Components
+// * Components
 import Navbar from '../../components/navbar';
 import ProfileHandle from '../../components/profilehandle';
 import SubmitTweet from '../../components/submittweet';
 import Trending from '../../components/trending';
 import Error from '../../components/error';
 
-// Apollo Queries
+// * Apollo Queries
 import { VERIFY_USER } from '../../apolloclient/apolloqueries';
 
-// Helper function
+// * Helper function
 import { changeGridBackground, fontColorChange, changeComponentBackground, changeBorder } from '../../helpers/helperfunctions';
 
 // ----------------------------------------------------------------------------------------------------- //

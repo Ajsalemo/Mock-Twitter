@@ -1,13 +1,13 @@
-// --------------------------------------------- Imports ----------------------------------------------- //
+// * --------------------------------------------- Imports ----------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
 import React from 'react';
 import { Mutation } from 'react-apollo';
 
-// Material-UI components
+// * Material-UI components
 import { withStyles, Fab, CircularProgress } from '@material-ui/core';
 
-// Apollo Mutation
+// * Apollo Mutation
 import { UNSUBSCRIBE_TO_LIST, GET_LISTS_SHOW, GET_USER_LISTS } from '../apolloclient/apolloqueries';
 
 // ----------------------------------------------------------------------------------------------------- //
@@ -58,6 +58,7 @@ const UnsubscribeListButton = props => {
                     classes={{
                         root: classes.unsubscribeListButtonClass
                     }}
+                    // ! This inline style dictates what the user's color theme is set to
                     style={{ backgroundColor: `#${profileLinkColor}` }}
                 >
                     Unsubscribe

@@ -1,20 +1,20 @@
-// --------------------------------------------- Imports ----------------------------------------------- //
+// * --------------------------------------------- Imports ----------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
 import React from 'react';
 import { Query } from 'react-apollo';
 import { Link } from 'react-router-dom';
 
-// Material-UI components
+// * Material-UI components
 import { withStyles, Paper, Card, CardContent, Typography, CircularProgress } from '@material-ui/core';
 
-// Apollo Queries
+// * Apollo Queries
 import { GET_TRENDING_TOPICS } from '../apolloclient/apolloqueries';
 
-// Components 
+// * Components 
 import Error from '../components/error';
 
-// Helper functions
+// * Helper functions
 import { removeLeadingHashtag } from '../helpers/helperfunctions';
 
 // ----------------------------------------------------------------------------------------------------- //
@@ -70,10 +70,12 @@ const Trending = props => {
                     <Paper className={classes.trendingPaper}>
                         <Card className={classes.trendingCard} style={{ backgroundColor: darkModeComponentBackground, border: darkModeBorder }}> 
                             <CardContent className={classes.cardContentUpper}>
+                                {/* // ! Inline styles are used for dark mode */}
                                 <Typography variant="h6" gutterBottom style={{ color: darkModeFont }}>
                                     Trends for you
                                 </Typography>
                             </CardContent>
+                            {/* // * 2D loop to retrieve values */}
                             {data.currentUser.trendingTopics.map((trendingArray, i) => {
                                 return trendingArray.trends.map((trendingArrayInner, j) => {
                                     const removeHashtag = removeLeadingHashtag(trendingArrayInner.name);
@@ -82,6 +84,7 @@ const Trending = props => {
                                             <Typography variant="subtitle2">
                                                 <span 
                                                     className={classes.trendingNamesColor}
+                                                    // ! Inline styles are used for dark mode
                                                     style={{ color: darkModeFont ? darkModeFont : `#${profileLinkColor}` }}
                                                 >
                                                     <Link to={`/search/${removeHashtag}`} className={classes.trendingLinks}>
@@ -93,6 +96,7 @@ const Trending = props => {
                                                 variant="subtitle1" 
                                                 gutterBottom 
                                                 className={classes.trendingTweetNumber}
+                                                // ! Inline styles are used for dark mode
                                                 style={{ color: darkModeFont }}
                                             >
                                                 {trendingArrayInner.tweet_volume

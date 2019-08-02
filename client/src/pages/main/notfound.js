@@ -1,18 +1,18 @@
-// --------------------------------------------- Imports ----------------------------------------------- //
+// * --------------------------------------------- Imports ----------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Query } from 'react-apollo';
 
-// Material-UI components
+// * Material-UI components
 import { withStyles, Grid, CircularProgress, Typography } from '@material-ui/core';
 
-// Components
+// * Components
 import Navbar from '../../components/navbar';
 import Error from '../../components/error';
 
-// Apollo Query
+// * Apollo Query
 import { VERIFY_USER } from '../../apolloclient/apolloqueries';
 
 // ----------------------------------------------------------------------------------------------------- //

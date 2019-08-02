@@ -1,10 +1,10 @@
-// --------------------------------------------- Imports ----------------------------------------------- //
+// * --------------------------------------------- Imports ----------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-// Material-UI components
+// * Material-UI components
 import { withStyles, Paper, Card, CardContent, Avatar, Typography } from '@material-ui/core';
 
 // ----------------------------------------------------------------------------------------------------- //
@@ -76,13 +76,15 @@ const ProfileHandle = props => {
     const { classes, profileLinkColor, profileBannerURL, profileImage, name, screenName, statusCount, friendsCount, followersCount, darkModeFont, darkModeComponentBackground, darkModeBorder } = props;
     return (
         <Paper>
+            {/* // ! Inline styles are used for dark mode */}
             <Card className={classes.profileHandlePaper} style={{ backgroundColor: darkModeComponentBackground, border: darkModeBorder }}>
                 <CardContent 
                     className={classes.upperCardContent}
+                    // ! This inline style dictates what the user's color theme is set to
                     style={{ backgroundColor: `#${profileLinkColor}` }}
                 >
                     <img 
-                        // Alt is shown as an empty string due to these banners being a decorative image
+                        // * Alt is shown as an empty string due to these banners being a decorative image
                         alt={''}
                         src={profileBannerURL}
                         className={classes.profileHandleImage}
@@ -96,6 +98,7 @@ const ProfileHandle = props => {
                         variant="h6" 
                         gutterBottom 
                         className={classes.upperText} 
+                        // ! Inline styles are used for dark mode 
                         style={{ color: darkModeFont }}
                     >
                         <div className={classes.handleTextUpperDiv}>
@@ -105,33 +108,39 @@ const ProfileHandle = props => {
                     </Typography>
                     <Typography  variant="subtitle2" className={classes.profileHandleTypography} gutterBottom>
                         <React.Fragment>
+                            {/* // ! Inline styles are used for dark mode */}
                             <div className={classes.profileTweetSpan} style={{ color: darkModeFont }}>
                                 <Link to={`userprofile/${screenName}`} className={classes.linkToProfileStats}>
                                     <span>Tweets</span>
                                     <span 
                                         className={classes.profileTweetCount}
+                                        // ! Inline styles are used for dark mode 
                                         style={{ color: darkModeFont ? darkModeFont : `#${profileLinkColor}` }}
                                     >
                                         {statusCount}
                                     </span>
                                 </Link>
                             </div> 
+                            {/* // ! Inline styles are used for dark mode */}
                             <div className={classes.profileTweetSpan} style={{ color: darkModeFont }}>
                                 <Link to={`following/${screenName}`} className={classes.linkToProfileStats}>
                                     <span>Following</span>
                                     <span 
                                         className={classes.profileTweetCount}
+                                        // ! Inline styles are used for dark mode
                                         style={{ color: darkModeFont ? darkModeFont : `#${profileLinkColor}` }}
                                     >
                                         {friendsCount}
                                     </span>
                                 </Link>
                             </div>  
+                            {/* // ! Inline styles are used for dark mode */}
                             <div className={classes.profileTweetSpan} style={{ color: darkModeFont }}>
                                 <Link to={`followers/${screenName}`} className={classes.linkToProfileStats}>
                                     <span>Followers</span>
                                     <span 
                                         className={classes.profileTweetCount}
+                                        // ! Inline styles are used for dark mode
                                         style={{ color: darkModeFont ? darkModeFont : `#${profileLinkColor}` }}
                                     >
                                         {followersCount}

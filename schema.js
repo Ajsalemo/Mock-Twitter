@@ -1,4 +1,4 @@
-// --------------------------------------------- Imports ----------------------------------------------- //
+// * --------------------------------------------- Imports ----------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
 const { gql } = require('apollo-server');
@@ -229,7 +229,8 @@ const typeDefs =
 
 const resolvers = {
     Query: {
-        // The 3rd argument(user) is being pulled off of the context in server.js
+        // * The 3rd argument(user) is being pulled off of the context in server.js - this is the deconstructed user
+        // * This includes the authenticated users access token and secret
         currentUser: async (parent, args, user) => {
             return user.decodedToken;
         }

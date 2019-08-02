@@ -1,9 +1,9 @@
-// --------------------------------------------- Imports ----------------------------------------------- //
+// * --------------------------------------------- Imports ----------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
 import React from 'react';
 
-// Material-UI components
+// * Material-UI components
 import { Typography, withStyles, Grid } from '@material-ui/core';
 
 // ----------------------------------------------------------------------------------------------------- //
@@ -28,13 +28,12 @@ const NoResults = props => {
     return (
         <Grid className={classes.noResultsGrid}>
             <Typography 
-                variant='h6' 
+                variant='h6'
+                // ! This inline style dictates what the user's color theme is set to 
                 style={{ color: `#${profileLinkColor}` }}
                 className={classes.noResultsTypography}
             >
-                {/* 
-                    //* If the Search API returns no results, then display this message
-                */}
+                {/* //* If the Search API returns no results, then display this message */}
                 No results
             </Typography>
             <Typography variant='subtitle2' gutterBottom>

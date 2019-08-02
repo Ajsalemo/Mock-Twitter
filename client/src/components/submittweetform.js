@@ -1,4 +1,4 @@
-// --------------------------------------------- Imports ----------------------------------------------- //
+// * --------------------------------------------- Imports ----------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
 import React from 'react';
@@ -6,10 +6,10 @@ import { Mutation } from 'react-apollo';
 import { Formik, Form } from 'formik';
 import classNames from 'classnames';
 
-// Material-UI components
+// * Material-UI components
 import { withStyles, TextField, Fab, Grid, Avatar, CircularProgress } from '@material-ui/core';
 
-// Apollo Queries and Mutations
+// * Apollo Queries and Mutations
 import { CREATE_USER_TWEET, GET_AUTHUSER_TWEETS, GET_USERPROFILE_TWEETS } from '../apolloclient/apolloqueries';
 
 // ----------------------------------------------------------------------------------------------------- //
@@ -118,10 +118,10 @@ const SubmitTweetForm = props => {
                                         onChange={props.handleChange}
                                         InputProps={{ 
                                             classes: {
-                                                // **If dark mode is enabled - the font color will change to a lighter color, if it isn't - it defaults to blue
+                                                // * If dark mode is enabled - the font color will change to a lighter color, if it isn't - it defaults to blue
                                                 input: darkModeStatus ? classNames(classes.activeTextField, classes.darkModePlaceholder) : classNames(classes.activeTextField, classes.placeholder),
                                                 root: classes.activeTextField,
-                                                // **If dark mode is enabled - the background color will change to a darker color, if it isn't - it defaults to white
+                                                // * If dark mode is enabled - the background color will change to a darker color, if it isn't - it defaults to white
                                                 notchedOutline: darkModeStatus ? classNames(classes.notchedOutline, classes.darkModeFormBackground) : classes.notchedOutline
                                             },
                                         }}
@@ -136,6 +136,7 @@ const SubmitTweetForm = props => {
                                                 aria-label="Add Tweet" 
                                                 className={classes.tweetButtonMain} 
                                                 disabled={loading || !props.values.tweet}
+                                                // ! This inline style dictates what the user's color theme is set to
                                                 style={{ backgroundColor: `#${profileLinkColor}`}}
                                                 type="submit"
                                             >

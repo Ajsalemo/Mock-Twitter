@@ -1,14 +1,14 @@
-// --------------------------------------------- Imports ----------------------------------------------- //
+// * --------------------------------------------- Imports ----------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
 import React from 'react';
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 
-// Components
+// * Components
 import ToolTipFollowButton from './tooltipfollowbutton';
 
-// Material-UI components
+// * Material-UI components
 import { withStyles, Grid, Card, CardContent, Avatar, Typography } from '@material-ui/core';
 
 // ----------------------------------------------------------------------------------------------------- //
@@ -99,7 +99,7 @@ const StaticToolTip = props => {
         <Card className={classes.staticToolTipModalPaper} >
             <CardContent className={classes.staticToolTipUpperCardContent}>
                 <img
-                    // Alt is shown as an empty string due to these banners being a decorative image
+                    // * Alt is shown as an empty string due to these banners being a decorative image
                     alt={''}
                     src={bannerImageURL}
                     className={classes.followingBannerImage}
@@ -129,6 +129,7 @@ const StaticToolTip = props => {
                         >
                             <Link 
                                 to={`/userprofile/${screen_name}`}
+                                // ! This inline style dictates what the user's color theme is set to
                                 style={{ color: `#${profileLinkColor}` }}
                                 className={classes.toolTipProfileLink}
                             >
@@ -143,6 +144,7 @@ const StaticToolTip = props => {
                         >
                             <Link 
                                 to={`/following/${screen_name}`}
+                                // ! This inline style dictates what the user's color theme is set to
                                 style={{ color: `#${profileLinkColor}` }}
                                 className={classes.toolTipProfileLink}
                             >
@@ -157,6 +159,7 @@ const StaticToolTip = props => {
                         >
                             <Link 
                                 to={`/followers/${screen_name}`}
+                                // ! This inline style dictates what the user's color theme is set to
                                 style={{ color: `#${profileLinkColor}` }}
                                 className={classes.toolTipProfileLink}
                             >

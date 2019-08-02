@@ -1,4 +1,4 @@
-// --------------------------------------------- Imports ----------------------------------------------- //
+// * --------------------------------------------- Imports ----------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
 import React from 'react';
@@ -6,7 +6,7 @@ import { Formik, Form } from 'formik';
 import { withRouter } from 'react-router-dom';
 import classNames from 'classnames';
 
-// Material-UI components
+// * Material-UI components
 import { Search } from '@material-ui/icons';
 import { withStyles, TextField, InputAdornment, Fab, CircularProgress } from '@material-ui/core';
 
@@ -50,8 +50,8 @@ let SearchTweet = props => {
             onSubmit={ async(values, { resetForm, setSubmitting }) => {
                 try {
                     resetForm({ search: '' });
-                    // After submitting the form, this pushes to the search results page
-                    // When then will use a Query component to pull data using the parameter passed in through here
+                    // * After submitting the form, this pushes to the search results page
+                    // * When then will use a Query component to pull data using the parameter passed in through here
                     await props.history.push(`/search/${values.search}`);
                 } catch(error) {
                     setSubmitting(false);
@@ -66,6 +66,7 @@ let SearchTweet = props => {
                         value={props.values.search}
                         name="search"
                         onChange={props.handleChange}
+                        // ! Inline styles are used for dark mode
                         style={{ border: darkModeBorder }}
                         InputProps={{
                             endAdornment: (
@@ -96,6 +97,7 @@ let SearchTweet = props => {
                                 </InputAdornment>
                             ),
                             classes: {
+                                // * These ternaries run if the user has dark mode toggled or not
                                 root: darkModeStatus ? classNames(classes.darkModeTextFieldBackground, classes.navTextField) : classes.navTextField,
                                 input: darkModeStatus ? classes.darkModeFontClass : null
                             }

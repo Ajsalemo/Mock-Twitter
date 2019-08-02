@@ -1,12 +1,12 @@
-// --------------------------------------------- Imports ----------------------------------------------- //
+// * --------------------------------------------- Imports ----------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
 import React, { Component } from 'react';
 
-// Material-UI component
+// * Material-UI component
 import { withStyles, CircularProgress, Typography, Grid } from '@material-ui/core';
 
-// Firebase
+// * Firebase
 import firebaseClass from '../helpers/firebase';
 
 // ----------------------------------------------------------------------------------------------------- //
@@ -30,9 +30,9 @@ const styles = () => ({
 
 class Loading extends Component {
     async componentDidMount() {
-        // If the user hard refreshes the page - it pushes them back to the previous page
-        // Unless the page is the log in route
-        // Else push the unAuthenticated user back to log in
+        // * If the user hard refreshes the page - it pushes them back to the previous page
+        // * Unless the page is the log in route
+        // * Else push the unAuthenticated user back to log in
         await firebaseClass.firebaseAuth().onAuthStateChanged(user => {
             if(user && this.props.location.pathname !== '/') {
                 this.props.history.goBack();

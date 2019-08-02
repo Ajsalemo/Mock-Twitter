@@ -1,14 +1,14 @@
-// --------------------------------------------- Imports ----------------------------------------------- //
+// * --------------------------------------------- Imports ----------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
 import React from 'react';
 import { Mutation } from 'react-apollo';
 
-// Material-UI components
+// * Material-UI components
 import { Repeat } from '@material-ui/icons';
 import { withStyles, CircularProgress } from '@material-ui/core';
 
-// Apollo Queries and Mutations
+// * Apollo Queries and Mutations
 import { UNRETWEET_STATUS, GET_AUTHUSER_TWEETS, GET_USERPROFILE_TWEETS, GET_USERS_LIKES, GET_LISTS_TIMELINE, SEARCH_TWEETS } from '../apolloclient/apolloqueries';
 
 // ----------------------------------------------------------------------------------------------------- //
@@ -33,9 +33,9 @@ const UnRetweetStatus = props => {
         <Mutation 
             mutation={UNRETWEET_STATUS} 
             refetchQueries={[
-                // If retweetId is being passed in the fire this query
-                // Else if it isn't refetch the rest - this is to prevent any errors from twitters API and Apollo
-                // Since retweetId is a required string
+                // * If retweetId is being passed in the fire this query
+                // * Else if it isn't refetch the rest - this is to prevent any errors from twitters API and Apollo
+                // * Since retweetId is a required string
                 retweetId !== undefined ? 
                 {
                     query: GET_LISTS_TIMELINE,

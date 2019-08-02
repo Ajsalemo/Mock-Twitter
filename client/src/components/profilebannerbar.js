@@ -1,21 +1,21 @@
-// --------------------------------------------- Imports ----------------------------------------------- //
+// * --------------------------------------------- Imports ----------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
 import React from 'react';
 import { Query } from 'react-apollo';
 import { Link } from 'react-router-dom';
 
-// Material-UI components
+// * Material-UI components
 import { Avatar, Grid, AppBar, Toolbar, Typography, CircularProgress, withStyles } from '@material-ui/core';
 
-// Apollo Queries
+// * Apollo Queries
 import { GET_USER_LISTS } from '../apolloclient/apolloqueries';
 
-// Components
+// * Components
 import Error from '../components/error';
 import TooltipFollowButton from '../components/tooltipfollowbutton';
 
-// Helper function
+// * Helper function
 import { extractAndReplaceNormalJPG } from '../helpers/helperfunctions';
 
 // ----------------------------------------------------------------------------------------------------- //
@@ -132,7 +132,7 @@ const ProfileBannerBar = props => {
                                         </Link>
                                     </Typography>
                                     <div className={classes.profileBannerFollowButton}>
-                                        {/* If viewing the logged in users profile, hide this button */}
+                                        {/* // * If viewing the logged in users profile, hide this button */}
                                         {currentUser === screenName
                                             ?
                                             null

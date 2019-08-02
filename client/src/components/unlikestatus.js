@@ -1,14 +1,14 @@
-// --------------------------------------------- Imports ----------------------------------------------- //
+// * --------------------------------------------- Imports ----------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
  
 import React from 'react';
 import { Mutation } from 'react-apollo';
 
-// Material-UI components
+// * Material-UI components
 import { Favorite } from '@material-ui/icons';
 import { withStyles, CircularProgress } from '@material-ui/core';
 
-// Apollo Queries
+// * Apollo Queries
 import { UNLIKE_STATUS, GET_AUTHUSER_TWEETS, GET_USERPROFILE_TWEETS, GET_LISTS_TIMELINE, GET_USERS_LIKES, SEARCH_TWEETS } from '../apolloclient/apolloqueries';
 
 // ----------------------------------------------------------------------------------------------------- //
@@ -33,9 +33,9 @@ const UnLikeStatus = props => {
         <Mutation
             mutation={UNLIKE_STATUS}
             refetchQueries={[
-                // If list_id is being passed in the fire this query
-                // Else if it isn't refetch the rest - this is to prevent any errors from twitters API and Apollo
-                // Since list_id is a required string
+                // * If list_id is being passed in the fire this query
+                // * Else if it isn't refetch the rest - this is to prevent any errors from twitters API and Apollo
+                // * Since list_id is a required string
                 list_id !== undefined ? 
                 {
                     query: GET_LISTS_TIMELINE,

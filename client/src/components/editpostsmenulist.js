@@ -1,13 +1,13 @@
-// --------------------------------------------- Imports ----------------------------------------------- //
+//* --------------------------------------------- Imports ----------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
 import React from 'react';
 import { Mutation } from 'react-apollo';
 
-// Material-UI components
+//* Material-UI components
 import { MenuItem, MenuList, CircularProgress, withStyles } from '@material-ui/core';
 
-// Apollo Mutation and Queries
+//* Apollo Mutation and Queries
 import { DELETE_STATUS, GET_AUTHUSER_TWEETS } from '../apolloclient/apolloqueries';
 
 // ----------------------------------------------------------------------------------------------------- //
@@ -25,7 +25,7 @@ const styles = () => ({
 // ----------------------------------------------------------------------------------------------------- //
 
 const EditPostsMenuList = props => {
-    const { id, handleClose, classes } = props;
+    const { id, handleClose, classes, dark_mode } = props;
     return (
         <Mutation
             mutation={DELETE_STATUS}
@@ -44,6 +44,8 @@ const EditPostsMenuList = props => {
                             }
                         })}
                         className={classes.menuListItem}
+                        // ! Inline styles are used for dark mode
+                        style={{ color: dark_mode ? '#fff' : null }}
                     >
                         Delete Tweet
                     </MenuItem>}

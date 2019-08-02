@@ -1,9 +1,9 @@
-// --------------------------------------------- Imports ----------------------------------------------- //
+// * --------------------------------------------- Imports ----------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
 import React from 'react';
 
-// Material-UI components
+// * Material-UI components
 import { withStyles, AppBar, Typography, Toolbar } from '@material-ui/core';
 
 // ----------------------------------------------------------------------------------------------------- //
@@ -36,6 +36,7 @@ const SearchAppBar = props => {
             <AppBar 
                 position='static' 
                 className={classes.searchAppBar}
+                // ! This inline style dictates what the user's color theme is set to
                 style={{ backgroundColor: `#${profileLinkColor}` }}
             >
                 <Toolbar className={classes.searchToolBar}>

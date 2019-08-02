@@ -1,4 +1,4 @@
-// --------------------------------------------- Imports ----------------------------------------------- //
+// * --------------------------------------------- Imports ----------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
 const Twitter = require('twitter-lite');
@@ -6,7 +6,7 @@ const Twitter = require('twitter-lite');
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
-// Exported function which takes two arguments, these are added in server.js by pulling them off of the headers
+// ! Exported function which takes two arguments, these are added in server.js by pulling them off of the headers
 const twitterNetworkCall = (token, secret) => {
     return new Twitter({
         consumer_key: process.env.REACT_APP_TWITTER_CONSUMER_KEY,

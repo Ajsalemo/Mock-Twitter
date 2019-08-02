@@ -1,18 +1,18 @@
-// --------------------------------------------- Imports ----------------------------------------------- //
+//* --------------------------------------------- Imports ----------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
 import React from 'react';
 import classNames from 'classnames';
 import { Query } from 'react-apollo';
 
-// Material-UI components
+// * Material-UI components
 import { ChatBubbleOutline, BarChart } from '@material-ui/icons';
 import { withStyles, CircularProgress, Grid, Paper, CardMedia, Typography, Avatar } from '@material-ui/core';
 
-// Apollo Queries
+// * Apollo Queries
 import { GET_USERS_LIKES } from '../apolloclient/apolloqueries';
 
-// Components
+// * Components
 import Error from '../components/error';
 import LikeStatus from '../components/likestatus';
 import UnLikeStatus from '../components/unlikestatus';
@@ -21,7 +21,7 @@ import Tweettext from '../components/tweettext';
 import UnRetweetStatus from '../components/unretweet';
 import EmptyTweetMessage from '../components/emptytweetsmessage';
 
-// Imported functions
+// * Imported functions
 import { pollMinute } from '../helpers/helperfunctions';
 
 // ----------------------------------------------------------------------------------------------------- //
@@ -101,6 +101,7 @@ const LikesComponent = props => {
                      *   * This ternary checks to see if a user has liked any tweets
                      *   * If they haven't, this will display a message - else it'll display what the user has liked
                      */
+                    // ! query.length checks to see if there is values being returned, if the values are empty a placeholder will be displayed
                     data.currentUser.getUsersFavorites.length ?
                         data.currentUser.getUsersFavorites.map((usersLikes, i) => {
                             return (
@@ -133,10 +134,10 @@ const LikesComponent = props => {
                                                     <ChatBubbleOutline className={classes.profileTimelineIcons} />
                                                 </div>
                                                 <div className={classNames(classes.profileButtonOptionsGrid, classes.profileButtonOptionsHover)}>
-                                                    {/* This ternary block displays the option to whether or not to retweet a status */} 
-                                                    {/* Depending on the returned boolean from the API call */}
+                                                    {/* // * This ternary block displays the option to whether or not to retweet a status */} 
+                                                    {/* // * Depending on the returned boolean from the API call */}
                                                     {usersLikes.retweeted === true
-                                                    // If this status has been retweeted, give the choice to unlike it 
+                                                    // * If this status has been retweeted, give the choice to unlike it 
                                                         ?
                                                     <UnRetweetStatus
                                                         id={usersLikes.id_str}
@@ -144,7 +145,7 @@ const LikesComponent = props => {
                                                         screenName={screenName}
                                                     />
                                                         :
-                                                    // Else, if it hasn't been retweeted - give the option to be able to retweet it
+                                                    // * Else, if it hasn't been retweeted - give the option to be able to retweet it
                                                     <RetweetModal
                                                         retweet_count={usersLikes.retweet_count}
                                                         name={usersLikes.user.name}
@@ -159,17 +160,17 @@ const LikesComponent = props => {
                                                     />}
                                                 </div>
                                                 <div className={classNames(classes.profileButtonOptionsGrid, classes.profileButtonOptionsHover)}>
-                                                    {/* This ternary block displays the option to whether or not to like a status */} 
-                                                    {/* Depending on the returned boolean from the API call */}
+                                                    {/* // * This ternary block displays the option to whether or not to like a status */} 
+                                                    {/* // * Depending on the returned boolean from the API call */}
                                                     {usersLikes.favorited === true
-                                                    // If this status has been liked alread - give the option to unline it
+                                                    // * If this status has been liked already - give the option to unlike it
                                                         ?
                                                     <UnLikeStatus
                                                         id={usersLikes.id_str}
                                                         favorite_count={usersLikes.favorite_count} 
                                                         screenName={screenName}   
                                                     />
-                                                    // Else, if it hasn't been liked - give the option to like the status
+                                                    // * Else, if it hasn't been liked - give the option to like the status
                                                         :
                                                     <LikeStatus 
                                                         id={usersLikes.id_str}
@@ -185,6 +186,7 @@ const LikesComponent = props => {
                             );
                         })
                         :
+                    // ! If the associated profile hasn't liked any tweets, this placeholder will be displayed
                     <EmptyTweetMessage 
                         screenName={screenName}
                         text={"hasn't liked any posts yet"}

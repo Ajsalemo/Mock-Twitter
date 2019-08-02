@@ -1,19 +1,19 @@
-// --------------------------------------------- Imports ----------------------------------------------- //
+// * --------------------------------------------- Imports ----------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
 import React from 'react';
 
-// Material-UI components
+// * Material-UI components
 import { withStyles, Card, CardContent, Typography } from '@material-ui/core';
 import { CalendarToday } from '@material-ui/icons';
 
-// Components
+// * Components
 import TweetModal from './tweetmodal';
 
-// Images
+// * Images
 import verifiedIcon from '../images/verifiedicon.png';
 
-// Helper function
+// * Helper function
 import { parseCreatedAtDate } from '../helpers/helperfunctions';
 
 // ----------------------------------------------------------------------------------------------------- //
@@ -75,6 +75,7 @@ const PublicProfileHandle = props => {
             <CardContent className={classes.publicProfileCardContent}>
                 <Typography variant="h6" gutterBottom className={classes.publicProfileUpperText}>
                     <span className={classes.publicProfileTextUpper}>{name}</span>
+                    {/* // * If the account is verified display the 'blue check' icon */}
                     {verified === true 
                         ? 
                     <img src={verifiedIcon} className={classes.verifiedPublicHandleIcon} alt="verified account" />
@@ -86,8 +87,8 @@ const PublicProfileHandle = props => {
                     <span className={classes.publicProfileCreatedAt}>
                         Joined {parseCreatedAtDate(createdAt)}
                     </span>
-                    {/* If you're viewing your own profile, this component will be hidden */}
-                    {/* Else if you're viewing someone elses profile, the 'tweet at' component will be displayed */}
+                    {/* // * If you're viewing your own profile, this component will be hidden */}
+                    {/* // * Else if you're viewing someone elses profile, the 'tweet at' component will be displayed */}
                     {currentUser === URLparam
                         ?
                         null

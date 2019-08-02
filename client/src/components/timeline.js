@@ -79,7 +79,7 @@ const styles = () => ({
 // ----------------------------------------------------------------------------------------------------- //
 
 const Timeline = props => {
-    const { classes, screenName, profileLinkColor } = props;
+    const { classes, screenName, profileLinkColor, darkModeBorder, darkModeFont, darkModeComponentBackground } = props;
     return (
         <React.Fragment>
             <Query 
@@ -93,7 +93,7 @@ const Timeline = props => {
                     return (
                         data.currentUser.userTimelineTweets.map((timelineTweetInfo, i) => {
                             return (
-                                <Paper className={classes.timelinePaper} key={i}>
+                                <Paper className={classes.timelinePaper} key={i} style={{ backgroundColor: darkModeComponentBackground, border: darkModeBorder }}>
                                     <ToolTipModal
                                         name={timelineTweetInfo.user.name}
                                         nickname={timelineTweetInfo.user.screen_name}
@@ -119,6 +119,8 @@ const Timeline = props => {
                                             full_text={timelineTweetInfo.full_text}
                                             id={timelineTweetInfo.id_str}
                                             tweetUserId={timelineTweetInfo.user.id}
+                                            darkModeFont={darkModeFont}
+                                            darkModeComponentBackground={darkModeComponentBackground}
                                         />
                                         {/* Tweet Media */}
                                         {timelineTweetInfo.entities.media ?
@@ -133,7 +135,7 @@ const Timeline = props => {
                                             null
                                         }
                                         <Grid item>
-                                            <Typography variant="subtitle2" className={classes.buttonOptionsGrid}>
+                                            <Typography variant="subtitle2" className={classes.buttonOptionsGrid} style={{ color: darkModeFont }}>
                                                 <div className={classNames(classes.buttonOptionsSpacing, classes.buttonOptionsHover)}>
                                                     <ChatBubbleOutline className={classes.timelineIcons} />
                                                 </div>

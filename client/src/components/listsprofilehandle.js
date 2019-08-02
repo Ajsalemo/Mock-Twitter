@@ -1,22 +1,22 @@
-// --------------------------------------------- Imports ----------------------------------------------- //
+// * --------------------------------------------- Imports ----------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Query } from 'react-apollo';
 
-// Material-UI components
+// * Material-UI components
 import { withStyles, Paper, Typography, CircularProgress, Grid, Card, CardContent, Avatar } from '@material-ui/core';
 
-// Components
+// * Components
 import Error from '../components/error';
 import SubscribeListButton from '../components/subscribelistbutton';
 import UnsubscribeListButton from '../components/unsubscribelistbutton';
 
-// Apollo Queries
+// * Apollo Queries
 import { GET_LISTS_SHOW } from '../apolloclient/apolloqueries';
 
-// Imported functions
+// * Imported functions
 import { pollMinute } from '../helpers/helperfunctions';
 
 // ----------------------------------------------------------------------------------------------------- //
@@ -94,6 +94,7 @@ const ListsProfileHandle = props => {
                                     {data.currentUser.getListsShow.name}
                                 </Typography>
                                 <Typography variant="subtitle2" gutterBottom className={classes.listsProfileOwner}>
+                                    {/* // * If the list is public, display that it is - else if it doesn't show that it's private */}
                                     {data.currentUser.getListsShow.mode === "public"
                                         ?
                                     <span>
@@ -132,6 +133,7 @@ const ListsProfileHandle = props => {
                                     </Grid>
                                 </Grid>
                                 <Grid className={classes.listProfileButtonGrid}>
+                                    {/* // * If the authenticated user is already subscribed, show the Unsubscribe list button - else show the Subscribe button */}
                                     {data.currentUser.getListsShow.following === true
                                         ?
                                     <UnsubscribeListButton 

@@ -1,21 +1,21 @@
-// --------------------------------------------- Imports ----------------------------------------------- //
+// * --------------------------------------------- Imports ----------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Query } from 'react-apollo';
 
-// Material-UI components
+// * Material-UI components
 import { withStyles, Avatar, AppBar, Typography, Toolbar, CircularProgress } from '@material-ui/core';
 import { Home } from '@material-ui/icons';
 
-// Image
+// * Image
 import twitterminilogo from '../images/twitterminilogo.png';
 
-// Apollo Queries
+// * Apollo Queries
 import { GET_AUTHUSER_TWEETS } from '../apolloclient/apolloqueries';
 
-// Components
+// * Components
 import TweetModal from '../components/tweetmodal';
 import ProfileAvatarModal from '../components/profileavatarmodal';
 import SearchTweets from '../components/searchtweets';
@@ -112,10 +112,12 @@ const Navbar = props => {
     const { classes, avatarImg, name, screenName, profileLinkColor, darkModeBorder, darkModeFont, darkModeComponentBackground, darkModeStatus } = props;
     return (
         <React.Fragment>
+            {/* // ! Inline styles are used for dark mode */}
             <AppBar className={classes.appBar} style={{ backgroundColor: darkModeComponentBackground, borderBottom: darkModeBorder }}>
                 <Toolbar className={classes.toolBar}>
                     <div className={classes.notificationDiv}>
                         <Typography variant="subtitle2" className={classes.navAnchor}>
+                            {/* // ! Inline styles are used for dark mode */}
                             <Link to='/main' className={classes.colorDefault} style={{ color: darkModeFont }}>
                                 <Home /><span className={classes.innerText}>Home</span>
                             </Link>
@@ -126,7 +128,7 @@ const Navbar = props => {
                             // *! Due to this - the Moments, Notifications and Messages tabs were removed to keep the previous releases functionality true
                         */}
                     </div>
-                    {/* // * * This refetchs the authenticating users timeline */}
+                    {/* // * This refetchs the authenticating users timeline */}
                     <Query
                         query={GET_AUTHUSER_TWEETS}
                         fetchPolicy='network-only'
@@ -153,7 +155,7 @@ const Navbar = props => {
                             name={name}
                             screenName={screenName}
                         />
-                        {/* Classes component for the modal to submit tweets */}
+                        {/* // * Class component for the modal to submit tweets */}
                         <TweetModal 
                             profileLinkColor={profileLinkColor}  
                             avatarImg={avatarImg}

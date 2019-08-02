@@ -1,18 +1,18 @@
-// --------------------------------------------- Imports ----------------------------------------------- //
+// * --------------------------------------------- Imports ----------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
 import React from 'react';
 import { Query } from 'react-apollo';
 
-// Material-UI components
+// * Material-UI components
 import { CircularProgress } from '@material-ui/core';
 
-// Components
+// * Components
 import FollowUser from './followuser';
 import UnfollowUser from './unfollowuser';
 import Error from './error';
 
-// Apollo Queries
+// * Apollo Queries
 import { COMPARE_FRIENDSHIPS } from '../apolloclient/apolloqueries';
 
 // ----------------------------------------------------------------------------------------------------- //
@@ -31,6 +31,7 @@ const TooltipFollowButton = props => {
                 if (error) return <Error />;
                 
                 return (
+                    // * If the tool tip is showing the authenticated user, hide the follow/unfollow button - else if not, then display it
                     screen_name === currentUser
                         ?
                         null

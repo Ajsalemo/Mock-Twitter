@@ -1,18 +1,18 @@
-// --------------------------------------------- Imports ----------------------------------------------- //
+// * --------------------------------------------- Imports ----------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
 import React from 'react';
 import classNames from 'classnames';
 
-// Material-UI components
+// * Material-UI components
 import { withStyles, Grid, Typography, Avatar, Fab, AppBar, Toolbar } from '@material-ui/core';
 import { Search, PeopleOutline, ChatBubbleOutline } from '@material-ui/icons';
 
-// Image
+// ( Image
 import twitterlogo from '../../images/twitterlogo.jpg';
 import twitterminilogo from '../../images/twitterminilogo.png';
 
-// Firebase Auth Function
+// * Firebase Auth Function
 import firebaseClass from '../../helpers/firebase';
 
 // ----------------------------------------------------------------------------------------------------- //

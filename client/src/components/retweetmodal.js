@@ -1,18 +1,18 @@
-// --------------------------------------------- Imports ----------------------------------------------- //
+// * --------------------------------------------- Imports ----------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
 import React, { Component } from 'react';
 import { Mutation } from 'react-apollo';
 
-// Material-UI components
+// * Material-UI components
 import { Modal, Typography, Grid, Paper, Avatar, Fab, CircularProgress, withStyles } from '@material-ui/core';
 import { Repeat, Close } from '@material-ui/icons';
 
-// Components
+// * Components
 import Tweettext from '../components/tweettext';
 import Error from '../components/error';
 
-// Apollo Queries and Mutations 
+// * Apollo Queries and Mutations 
 import { RETWEET_STATUS, GET_AUTHUSER_TWEETS, GET_USERPROFILE_TWEETS, GET_USERS_LIKES, GET_LISTS_TIMELINE, SEARCH_TWEETS } from '../apolloclient/apolloqueries';
 
 // ----------------------------------------------------------------------------------------------------- //
@@ -144,9 +144,9 @@ class RetweetModal extends Component {
                             <Mutation 
                                 mutation={RETWEET_STATUS} 
                                 refetchQueries={[
-                                    // If retweetId is being passed in the fire this query
-                                    // Else if it isn't refetch the rest - this is to prevent any errors from twitters API and Apollo
-                                    // Since retweetId is a required string
+                                    // * If retweetId is being passed in the fire this query
+                                    // * Else if it isn't refetch the rest - this is to prevent any errors from twitters API and Apollo
+                                    // * Since retweetId is a required string
                                     retweetId !== undefined ? 
                                     {
                                         query: GET_LISTS_TIMELINE,
@@ -190,6 +190,7 @@ class RetweetModal extends Component {
                                         variant="extended" 
                                         aria-label="Add Tweet" 
                                         className={classes.retweetButton}
+                                        // ! This inline style dictates what the user's color theme is set to
                                         style={{ backgroundColor: `#${profileLinkColor}`}}
                                         onClick={ async () => {
                                             try {
