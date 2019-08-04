@@ -72,6 +72,7 @@ let Main = props => {
                         <Grid 
                             container 
                             className={classes.containerStyle}
+                            // ! Inline styles are used for dark mode
                             style={{ backgroundColor: changeGridBackground(dark_mode) }}
                         >
                             <Grid item xs={8} sm={8} md={2} className={classes.profileHandlerGrid}>

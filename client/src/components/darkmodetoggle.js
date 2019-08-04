@@ -14,13 +14,15 @@ import { darkModeOn, darkModeOff } from '../redux/actions';
 // ----------------------------------------------------------------------------------------------------- //
 
 let DarkModeToggle = props => {
-    const { dark_mode } = props;
+    const { dark_mode, darkModeFont } = props;
     return (
         // * If dark mode is toggled on, display an icon to show that it is - else if it isn't, remove the icon
         dark_mode ?
-        <span onClick={() => props.darkModeOff()}>Dark mode <Done/></span>
+        // ! Inline styles are used for dark mode
+        <span onClick={() => props.darkModeOff()} style={{ color: darkModeFont }}>Dark mode <Done/></span>
             :
-        <span onClick={() => props.darkModeOn()}>Dark mode</span>
+        // ! Inline styles are used for dark mode
+        <span onClick={() => props.darkModeOn()} style={{ color: darkModeFont }}>Dark mode</span>
     );
 };
 

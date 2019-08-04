@@ -93,6 +93,7 @@ const Timeline = props => {
                     return (
                         data.currentUser.userTimelineTweets.map((timelineTweetInfo, i) => {
                             return (
+                                // ! Inline styles are used for dark mode 
                                 <Paper className={classes.timelinePaper} key={i} style={{ backgroundColor: darkModeComponentBackground, border: darkModeBorder }}>
                                     <ToolTipModal
                                         name={timelineTweetInfo.user.name}

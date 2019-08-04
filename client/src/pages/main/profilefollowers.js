@@ -4,6 +4,7 @@
 import React from 'react';
 import { withRouter } from 'react-router';
 import { Query } from 'react-apollo';
+import { connect } from 'react-redux';
 
 // * Material-UI components
 import { withStyles, Grid, CircularProgress } from '@material-ui/core';
@@ -22,12 +23,15 @@ import NotFound from './notfound';
 // * Apollo Query
 import { SHOW_USER, VERIFY_USER } from '../../apolloclient/apolloqueries';
 
+// * Helper function
+import { changeGridBackground, fontColorChange, changeComponentBackground, changeBorder } from '../../helpers/helperfunctions';
+
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
 const styles = () => ({
     publicProfileFollowersContainerStyle: {
-        marginTop: '0.7em',
+        paddingTop: '0.7em',
         display: 'flex',
         justifyContent: 'center'
     },
@@ -48,7 +52,7 @@ const styles = () => ({
 
 let ProfileFollowers = props => {
     const param = props.match.params.params; 
-    const { classes } = props;
+    const { classes, dark_mode } = props;
     return (
         <Query
             query={SHOW_USER}
@@ -70,6 +74,10 @@ let ProfileFollowers = props => {
                                     avatarImg={two.currentUser.verifyCredentials.profile_image_url_https}
                                     name={two.currentUser.verifyCredentials.name}
                                     screenName={two.currentUser.verifyCredentials.screen_name}
+                                    darkModeStatus={dark_mode}
+                                    darkModeBorder={changeBorder(dark_mode)}
+                                    darkModeFont={fontColorChange(dark_mode)}
+                                    darkModeComponentBackground={changeComponentBackground(dark_mode)}        
                                 /> 
                                 <PublicProfileBanner
                                     URLparam={param}
@@ -86,8 +94,11 @@ let ProfileFollowers = props => {
                                     profileLinkColor={one.currentUser.showUser.profile_link_color}
                                     currentUser={two.currentUser.verifyCredentials.screen_name}
                                     avatarImg={one.currentUser.showUser.profile_image_url_https}
+                                    darkModeBorder={changeBorder(dark_mode)}
+                                    darkModeFont={fontColorChange(dark_mode)}
+                                    darkModeComponentBackground={changeComponentBackground(dark_mode)}        
                                 />
-                                <Grid container className={classes.publicProfileFollowersContainerStyle}>
+                                <Grid container className={classes.publicProfileFollowersContainerStyle} style={{ backgroundColor: changeGridBackground(dark_mode) }}>
                                     <Grid item xs={8} sm={8} md={2} className={classes.publicProfileFollowersHandlerGrid}>
                                         <PublicProfileHandle 
                                             URLparam={param}
@@ -99,9 +110,13 @@ let ProfileFollowers = props => {
                                             name={one.currentUser.showUser.name}
                                             profileLinkColor={one.currentUser.showUser.profile_link_color}
                                             avatarImg={two.currentUser.verifyCredentials.profile_image_url_https}
+                                            darkModeFont={fontColorChange(dark_mode)}        
                                         />
                                         <Trending 
                                             profileLinkColor={one.currentUser.showUser.profile_link_color}
+                                            darkModeBorder={changeBorder(dark_mode)}
+                                            darkModeFont={fontColorChange(dark_mode)}
+                                            darkModeComponentBackground={changeComponentBackground(dark_mode)}        
                                         />
                                     </Grid>
                                     <Grid item md={7}>
@@ -109,6 +124,9 @@ let ProfileFollowers = props => {
                                             currentUser={two.currentUser.verifyCredentials.screen_name}
                                             screenName={one.currentUser.showUser.screen_name}
                                             profileLinkColor={one.currentUser.showUser.profile_link_color}
+                                            darkModeBorder={changeBorder(dark_mode)}
+                                            darkModeFont={fontColorChange(dark_mode)}
+                                            darkModeComponentBackground={changeComponentBackground(dark_mode)}        
                                         />
                                     </Grid>
                                 </Grid>
@@ -124,7 +142,23 @@ let ProfileFollowers = props => {
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
+const mapStateToProps = state => {
+    return {
+        dark_mode: state.toggleDarkMode.dark_mode
+    };
+};
+
+// ----------------------------------------------------------------------------------------------------- //
+
+ProfileFollowers = connect(
+    mapStateToProps
+)(ProfileFollowers);
+
+// ----------------------------------------------------------------------------------------------------- //
+
 ProfileFollowers = withStyles(styles)(ProfileFollowers);
+
+// ----------------------------------------------------------------------------------------------------- //
 
 export default withRouter(ProfileFollowers);
 

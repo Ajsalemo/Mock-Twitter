@@ -94,9 +94,9 @@ const styles = () => ({
 // ----------------------------------------------------------------------------------------------------- //
 
 const StaticToolTip = props => {
-    const { classes, name, imgSrc, currentUser, tweetUserId, statuses_count, followers_count, friends_count, bannerImageURL, screen_name, profileLinkColor } = props;
+    const { classes, name, imgSrc, currentUser, tweetUserId, statuses_count, followers_count, friends_count, bannerImageURL, screen_name, profileLinkColor, darkModeFont, darkModeComponentBackground } = props;
     return (
-        <Card className={classes.staticToolTipModalPaper} >
+        <Card className={classes.staticToolTipModalPaper} style={{ backgroundColor: darkModeComponentBackground }}>
             <CardContent className={classes.staticToolTipUpperCardContent}>
                 <img
                     // * Alt is shown as an empty string due to these banners being a decorative image
@@ -109,8 +109,20 @@ const StaticToolTip = props => {
             <CardContent className={classes.staticToolTipContent}>
                 <Typography variant="h6" gutterBottom className={classes.staticToolTipUpperText}>
                     <div className={classes.staticToolTipHandleTextUpperDiv}>
-                        <Link to={`/userprofile/${screen_name}`} className={classNames(classes.staticToolTipHandleTextUpper, classes.toolTipProfileLink)}>{name}</Link>
-                        <Link to={`/userprofile/${screen_name}`} className={classNames(classes.staticToolTipHandleTextLower, classes.toolTipProfileLink)}>@{screen_name}</Link>
+                        <Link 
+                            to={`/userprofile/${screen_name}`}
+                            className={classNames(classes.staticToolTipHandleTextUpper, classes.toolTipProfileLink)} 
+                            style={{ color: darkModeFont }}
+                        >
+                                {name}
+                        </Link>
+                        <Link 
+                            to={`/userprofile/${screen_name}`} 
+                            className={classNames(classes.staticToolTipHandleTextLower, classes.toolTipProfileLink)} 
+                            style={{ color: darkModeFont }}
+                        >
+                                @{screen_name}
+                        </Link>
                     </div>
                 </Typography>
                 <Grid item className={classes.staticToolTipFollowGrid}>
@@ -130,7 +142,7 @@ const StaticToolTip = props => {
                             <Link 
                                 to={`/userprofile/${screen_name}`}
                                 // ! This inline style dictates what the user's color theme is set to
-                                style={{ color: `#${profileLinkColor}` }}
+                                style={{ color: darkModeFont ? darkModeFont : `#${profileLinkColor}` }}
                                 className={classes.toolTipProfileLink}
                             >
                                 {statuses_count}
@@ -145,7 +157,7 @@ const StaticToolTip = props => {
                             <Link 
                                 to={`/following/${screen_name}`}
                                 // ! This inline style dictates what the user's color theme is set to
-                                style={{ color: `#${profileLinkColor}` }}
+                                style={{ color: darkModeFont ? darkModeFont : `#${profileLinkColor}` }}
                                 className={classes.toolTipProfileLink}
                             >
                                 {friends_count}
@@ -160,7 +172,7 @@ const StaticToolTip = props => {
                             <Link 
                                 to={`/followers/${screen_name}`}
                                 // ! This inline style dictates what the user's color theme is set to
-                                style={{ color: `#${profileLinkColor}` }}
+                                style={{ color: darkModeFont ? darkModeFont : `#${profileLinkColor}` }}
                                 className={classes.toolTipProfileLink}
                             >
                                 {followers_count}

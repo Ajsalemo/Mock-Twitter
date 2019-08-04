@@ -154,6 +154,10 @@ const Navbar = props => {
                             avatarImg={avatarImg}
                             name={name}
                             screenName={screenName}
+                            darkModeBorder={darkModeBorder} 
+                            darkModeFont={darkModeFont} 
+                            darkModeComponentBackground={darkModeComponentBackground} 
+                            darkModeStatus={darkModeStatus}
                         />
                         {/* // * Class component for the modal to submit tweets */}
                         <TweetModal 

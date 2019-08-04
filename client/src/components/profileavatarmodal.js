@@ -111,7 +111,7 @@ class ProfileAvatarModal extends Component {
     // ----------------------------------------------------------------------------------------------------- //
 
     render() {
-        const { classes, avatarImg, name, screen_name, screenName } = this.props;
+        const { classes, avatarImg, name, screen_name, screenName, darkModeFont, darkModeComponentBackground } = this.props;
         const { open } = this.state;
         return (
             <React.Fragment>
@@ -154,11 +154,13 @@ class ProfileAvatarModal extends Component {
                                 id="menu-list-grow"
                                 style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
                             >
-                            <Paper>
+                            {/* // ! Inline styles are used for dark mode */}
+                            <Paper style={{ backgroundColor: darkModeComponentBackground }}>
                                 <ClickAwayListener onClickAway={this.handleClose}>
                                     <MenuList>
                                         <MenuItem onClick={this.handleClose} className={classes.profileParentGrid}>
-                                            <Typography variant="subtitle2" className={classes.menuUpperText}>
+                                            {/* // ! Inline styles are used for dark mode */}
+                                            <Typography variant="subtitle2" className={classes.menuUpperText} style={{ color: darkModeFont }}>
                                                 <div className={classes.handleTextUpperDiv}>
                                                     <span className={classes.menuHandleTextUpper}>{name}</span>
                                                     <span className={classes.menuHandleTextLower}>@{screen_name}</span>
@@ -167,20 +169,26 @@ class ProfileAvatarModal extends Component {
                                         </MenuItem>
                                         <MenuItem onClick={this.handleClose} className={classNames(classes.menuDivider, classes.profileChildMenuGrid, classes.menuPersonOutline)}>
                                             <Link to={`/userprofile/${screenName}`} className={classes.profileLinkClass}>
-                                                <PersonOutline className={classes.menuPersonOutline} />
-                                                <Typography variant="subtitle1" className={classes.profileChildMenuGridText}>
+                                                <PersonOutline className={classes.menuPersonOutline} style={{ color: darkModeFont }}/>
+                                                {/* // ! Inline styles are used for dark mode */}
+                                                <Typography variant="subtitle1" className={classes.profileChildMenuGridText} style={{ color: darkModeFont }}>
                                                     Profile
                                                 </Typography>
                                             </Link>
                                         </MenuItem>
                                         <MenuItem className={classNames(classes.menuDivider, classes.profileChildMenuGrid)}>
-                                            <DarkModeToggle />
+                                            {/* // ! Inline styles are used for dark mode */}
+                                            <DarkModeToggle 
+                                                darkModeFont={darkModeFont}
+                                            />
                                         </MenuItem>
                                         <MenuItem onClick={this.handleClose} className={classNames(classes.menuDivider, classes.profileChildMenuGrid)}>
+                                            {/* // ! Inline styles are used for dark mode */}
                                             <Typography 
                                                 variant="subtitle1" 
                                                 className={classes.profileChildMenuGridText}
                                                 onClick={() => firebaseClass.signOut()}
+                                                style={{ color: darkModeFont }}
                                             >
                                                 Log Out @{name}
                                             </Typography>

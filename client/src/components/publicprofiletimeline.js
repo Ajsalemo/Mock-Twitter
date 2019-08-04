@@ -83,7 +83,7 @@ const styles = () => ({
 // ----------------------------------------------------------------------------------------------------- //
 
 const PublicProfileTimeline = props => {
-    const { classes, screenName, profileLinkColor } = props;
+    const { classes, screenName, profileLinkColor, darkModeBorder, darkModeFont, darkModeComponentBackground } = props;
     return (
         <Query 
             query={GET_USERPROFILE_TWEETS} 
@@ -105,7 +105,8 @@ const PublicProfileTimeline = props => {
                     data.currentUser.userProfileTweets.length ? 
                         data.currentUser.userProfileTweets.map((userTweetInfo, i) => {
                             return (
-                                <Paper className={classes.publicTimelinePaper} key={i}>
+                                // ! Inline styles are used for dark mode 
+                                <Paper className={classes.publicTimelinePaper} key={i} style={{ backgroundColor: darkModeComponentBackground, border: darkModeBorder }}>
                                     <Avatar src={userTweetInfo.user.profile_image_url_https} alt='User profile avatar' />
                                     <Grid item className={classes.profileTimelineGrid}>
                                         {/* Tweet text body */}
@@ -114,7 +115,9 @@ const PublicProfileTimeline = props => {
                                             verified={userTweetInfo.user.verified}
                                             nickname={userTweetInfo.user.screen_name}
                                             created_at={userTweetInfo.created_at}
-                                            full_text={userTweetInfo.full_text}                                    
+                                            full_text={userTweetInfo.full_text}
+                                            darkModeFont={darkModeFont}
+                                            darkModeComponentBackground={darkModeComponentBackground}                                    
                                         />
                                         {/* Tweet Media */}
                                         {userTweetInfo.entities.media ?
@@ -129,7 +132,7 @@ const PublicProfileTimeline = props => {
                                             null
                                         }
                                         <Grid item>
-                                            <Typography variant="subtitle2" className={classes.profileButtonOptionsGrid}>
+                                            <Typography variant="subtitle2" className={classes.profileButtonOptionsGrid} style={{ color: darkModeFont }}>
                                                 <div className={classNames(classes.profileButtonOptionsSpacing, classes.profileButtonOptionsHover)}>
                                                     <ChatBubbleOutline className={classes.profileTimelineIcons} />
                                                 </div>

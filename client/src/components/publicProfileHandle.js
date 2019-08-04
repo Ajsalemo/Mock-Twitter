@@ -69,11 +69,12 @@ const styles = () => ({
 // ----------------------------------------------------------------------------------------------------- //
 
 const PublicProfileHandle = props => {
-    const { classes, screenName, currentUser, URLparam, verified, description, createdAt, name, profileLinkColor, avatarImg} = props;
+    const { classes, screenName, currentUser, URLparam, verified, description, createdAt, name, profileLinkColor, avatarImg, darkModeFont } = props;
     return (
         <Card className={classes.publicProfileCard}>
             <CardContent className={classes.publicProfileCardContent}>
-                <Typography variant="h6" gutterBottom className={classes.publicProfileUpperText}>
+                {/* // ! Inline styles are used for dark mode */}
+                <Typography variant="h6" gutterBottom className={classes.publicProfileUpperText} style={{ color: darkModeFont }}>
                     <span className={classes.publicProfileTextUpper}>{name}</span>
                     {/* // * If the account is verified display the 'blue check' icon */}
                     {verified === true 
@@ -81,10 +82,10 @@ const PublicProfileHandle = props => {
                     <img src={verifiedIcon} className={classes.verifiedPublicHandleIcon} alt="verified account" />
                         : 
                     null}
-                    <span className={classes.publicProfileTextLower}>@{screenName}</span>
-                    <span className={classes.descriptionContent}>{description}</span>
+                    <span className={classes.publicProfileTextLower} style={{ color: darkModeFont }}>@{screenName}</span>
+                    <span className={classes.descriptionContent} style={{ color: darkModeFont }}>{description}</span>
                     <CalendarToday className={classes.createdAtIcon} />
-                    <span className={classes.publicProfileCreatedAt}>
+                    <span className={classes.publicProfileCreatedAt} style={{ color: darkModeFont }}>
                         Joined {parseCreatedAtDate(createdAt)}
                     </span>
                     {/* // * If you're viewing your own profile, this component will be hidden */}
