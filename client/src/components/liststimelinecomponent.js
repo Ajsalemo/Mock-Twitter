@@ -81,7 +81,7 @@ const styles = () => ({
 // ----------------------------------------------------------------------------------------------------- //
 
 const ListsTimelineComponent = props => {
-    const { classes, currentUser, URLparam } = props;
+    const { classes, currentUser, URLparam, darkModeFont, darkModeComponentBackground, darkModeBorder, profileLinkColor } = props;
     return (
         <React.Fragment>
             <Query 
@@ -98,7 +98,8 @@ const ListsTimelineComponent = props => {
                     return (
                         data.currentUser.getListsTimeline.map((getListsTimeline, i) => {
                             return (
-                                <Paper className={classes.listsTimelinePaper} key={i}>
+                                // ! Inline styles are used for dark mode 
+                                <Paper className={classes.listsTimelinePaper} key={i} style={{ backgroundColor: darkModeComponentBackground, border: darkModeBorder  }}>
                                     <ToolTipModal
                                         name={getListsTimeline.user.name}
                                         screenName={getListsTimeline.user.screen_name}
@@ -110,7 +111,10 @@ const ListsTimelineComponent = props => {
                                         id={getListsTimeline.id_str}  
                                         tweetUserId={getListsTimeline.user.id}
                                         verified={getListsTimeline.user.verified} 
-                                        profileLinkColor={getListsTimeline.user.profile_link_color}  
+                                        profileLinkColor={profileLinkColor}
+                                        darkModeBorder={darkModeBorder}
+                                        darkModeFont={darkModeFont}
+                                        darkModeComponentBackground={darkModeComponentBackground}  
                                     />
                                     <Grid item className={classes.listsTimelineGrid}>
                                         {/* Tweet text body */}
@@ -122,6 +126,8 @@ const ListsTimelineComponent = props => {
                                             full_text={getListsTimeline.full_text}
                                             id={getListsTimeline.id_str}
                                             tweetUserId={getListsTimeline.user.id}
+                                            darkModeFont={darkModeFont}
+                                            darkModeComponentBackground={darkModeComponentBackground}
                                         />
                                         {/* Tweet Media */}
                                         {getListsTimeline.entities.media ?
@@ -136,7 +142,8 @@ const ListsTimelineComponent = props => {
                                             null
                                         }
                                         <Grid item>
-                                            <Typography variant="subtitle2" className={classes.listsButtonOptionsGrid}>
+                                            {/* // ! Inline styles are used for dark mode */}
+                                            <Typography variant="subtitle2" className={classes.listsButtonOptionsGrid} style={{ color: darkModeFont }}>
                                                 <div className={classNames(classes.listsButtonOptionsSpacing, classes.listsButtonOptionsHover)}>
                                                     <ChatBubbleOutline className={classes.listsTimelineIcons} />
                                                 </div>

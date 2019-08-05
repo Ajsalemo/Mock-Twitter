@@ -121,6 +121,7 @@ let PublicProfileLikes = props => {
                                             screenName={one.currentUser.showUser.screen_name}
                                             profileLinkColor={one.currentUser.showUser.profile_link_color}
                                             darkModeFont={fontColorChange(dark_mode)}
+                                            darkModeBorder={changeBorder(dark_mode)}
                                             darkModeComponentBackground={changeComponentBackground(dark_mode)}        
                                         />
                                     </Grid>

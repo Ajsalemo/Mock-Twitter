@@ -4,6 +4,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Query } from 'react-apollo';
+import { connect } from 'react-redux'; 
 
 // * Material-UI components
 import { withStyles, Grid, CircularProgress, Typography } from '@material-ui/core';
@@ -14,6 +15,9 @@ import Error from '../../components/error';
 
 // * Apollo Query
 import { VERIFY_USER } from '../../apolloclient/apolloqueries';
+
+// * Helper function
+import { fontColorChange, changeComponentBackground, changeBorder } from '../../helpers/helperfunctions';
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
@@ -39,8 +43,8 @@ const styles = () => ({
 
 // ----------------------------------------------------------------------------------------------------- //
 
-const NotFound = props => {
-    const { classes } = props;
+let NotFound = props => {
+    const { classes, dark_mode } = props;
     return (
         <Query query={VERIFY_USER}>
             {({ loading, error, data }) => {
@@ -52,16 +56,22 @@ const NotFound = props => {
                             profileLinkColor={data.currentUser.verifyCredentials.profile_link_color}
                             avatarImg={data.currentUser.verifyCredentials.profile_image_url_https}
                             name={data.currentUser.verifyCredentials.name}
-                            screenName={data.currentUser.verifyCredentials.screen_name}                      
+                            screenName={data.currentUser.verifyCredentials.screen_name}   
+                            darkModeBorder={changeBorder(dark_mode)}
+                            darkModeFont={fontColorChange(dark_mode)}
+                            darkModeComponentBackground={changeComponentBackground(dark_mode)}                   
                         />
                         <Grid container className={classes.notFoundContainer}>
-                            <Typography variant='h6' gutterBottom className={classes.notFoundMainFont}>
+                            {/* // ! Inline styles are used for dark mode */}
+                            <Typography variant='h6' gutterBottom className={classes.notFoundMainFont} style={{ color: fontColorChange(dark_mode) }}>
                                 Sorry, that page doesn't exist!
                             </Typography>
-                            <Typography variant='h6' gutterBottom className={classes.notFoundMainFont}>
+                            {/* // ! Inline styles are used for dark mode */}
+                            <Typography variant='h6' gutterBottom className={classes.notFoundMainFont} style={{ color: fontColorChange(dark_mode) }}>
                                 Or an error occured
                             </Typography>
-                            <Typography variant='subtitle2' gutterBottom>
+                            {/* // ! Inline styles are used for dark mode */}
+                            <Typography variant='subtitle2' gutterBottom style={{ color: fontColorChange(dark_mode) }}>
                                 <span>Why not try a <Link to={'/main'}>search</Link> to find something else?</span>
                             </Typography>
                         </Grid>
@@ -73,6 +83,20 @@ const NotFound = props => {
 };
 
 // ----------------------------------------------------------------------------------------------------- //
+// ----------------------------------------------------------------------------------------------------- //
+
+const mapStateToProps = state => {
+    return {
+        dark_mode: state.toggleDarkMode.dark_mode
+    };
+};
+
+// ----------------------------------------------------------------------------------------------------- //
+
+NotFound = connect(
+    mapStateToProps
+)(NotFound);
+
 // ----------------------------------------------------------------------------------------------------- //
 
 export default withStyles(styles)(NotFound);

@@ -73,7 +73,7 @@ const styles = () => ({
 // ----------------------------------------------------------------------------------------------------- //
 
 const ListsProfileHandle = props => {
-    const { URLparam, classes, currentUser, profileLinkColor } = props;
+    const { URLparam, classes, currentUser, profileLinkColor, darkModeFont, darkModeBorder, darkModeComponentBackground } = props;
     return (
         <Query 
             query={GET_LISTS_SHOW}
@@ -87,9 +87,10 @@ const ListsProfileHandle = props => {
                 if (loading) return <div className={classes.errorAndLoadingDiv}><CircularProgress /></div>;
                 if (error) return <div className={classes.errorAndLoadingDiv}><Error /></div>;                
                 return (
-                    <Paper className={classes.listsProfilePaper}>
+                    // ! Inline styles are used for dark mode 
+                    <Paper className={classes.listsProfilePaper} style={{ border: darkModeBorder }}>
                         <Card className={classes.listsProfileCard}>
-                            <CardContent classes={{ root: classes.cardContentRoot }}>
+                            <CardContent classes={{ root: classes.cardContentRoot }} style={{ backgroundColor: darkModeComponentBackground }}>
                                 <Typography variant="h6" className={classes.listsProfileLineHeight}>
                                     {data.currentUser.getListsShow.name}
                                 </Typography>
@@ -119,7 +120,11 @@ const ListsProfileHandle = props => {
                                         <Typography variant="subtitle2">
                                             Members
                                         </Typography>
-                                        <Typography variant="subtitle2" className={classes.listsProfileUserCountColor}>
+                                        <Typography 
+                                            variant="subtitle2" 
+                                            className={classes.listsProfileUserCountColor}
+                                            style={{ color: darkModeFont ? darkModeFont : `#${profileLinkColor}` }}
+                                        >
                                             {data.currentUser.getListsShow.member_count}
                                         </Typography>
                                     </Grid>
@@ -127,7 +132,11 @@ const ListsProfileHandle = props => {
                                         <Typography variant="subtitle2">
                                             Subscribers
                                         </Typography>
-                                        <Typography variant="subtitle2" className={classes.listsProfileUserCountColor}>
+                                        <Typography 
+                                            variant="subtitle2" 
+                                            className={classes.listsProfileUserCountColor}
+                                            style={{ color: darkModeFont ? darkModeFont : `#${profileLinkColor}` }}
+                                        >
                                             {data.currentUser.getListsShow.subscriber_count}
                                         </Typography>
                                     </Grid>
@@ -149,7 +158,7 @@ const ListsProfileHandle = props => {
                                     }
                                 </Grid>
                             </CardContent>
-                            <Grid className={classes.listsProfileAvatarGrid}>
+                            <Grid className={classes.listsProfileAvatarGrid} style={{ backgroundColor: darkModeComponentBackground }}>
                                 <Link to={`/userprofile/${data.currentUser.getListsShow.user.screen_name}`}>
                                     <Avatar src={data.currentUser.getListsShow.user.profile_image_url_https} alt={`${data.currentUser.getListsShow.user.screen_name} avatar`}/>
                                 </Link>
