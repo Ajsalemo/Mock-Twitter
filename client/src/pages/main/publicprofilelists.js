@@ -4,6 +4,7 @@
 import React from 'react';
 import { withRouter } from 'react-router';
 import { Query } from 'react-apollo';
+import { connect } from 'react-redux';
 
 // * Material-UI components
 import { withStyles, Grid, CircularProgress } from '@material-ui/core';
@@ -22,12 +23,15 @@ import NotFound from './notfound';
 // * Apollo Query
 import { VERIFY_USER, SHOW_USER } from '../../apolloclient/apolloqueries';
 
+// * Helper function
+import { changeGridBackground, fontColorChange, changeComponentBackground, changeBorder } from '../../helpers/helperfunctions';
+
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
 const styles = () => ({
     publicListsContainerStyle: {
-        marginTop: '0.7em',
+        paddingTop: '0.7em',
         display: 'flex',
         justifyContent: 'center'
     },
@@ -53,7 +57,7 @@ const styles = () => ({
 
 let PublicProfileLists = props => {
     const param = props.match.params.params; 
-    const { classes } = props;
+    const { classes, dark_mode } = props;
     return (
         <React.Fragment>
             <Query
@@ -74,6 +78,10 @@ let PublicProfileLists = props => {
                                         avatarImg={two.currentUser.verifyCredentials.profile_image_url_https}
                                         name={two.currentUser.verifyCredentials.name}
                                         screenName={two.currentUser.verifyCredentials.screen_name}
+                                        darkModeStatus={dark_mode}
+                                        darkModeBorder={changeBorder(dark_mode)}
+                                        darkModeFont={fontColorChange(dark_mode)}
+                                        darkModeComponentBackground={changeComponentBackground(dark_mode)}            
                                     /> 
                                     <PublicProfileBanner
                                         URLparam={param}
@@ -90,8 +98,11 @@ let PublicProfileLists = props => {
                                         profileLinkColor={one.currentUser.showUser.profile_link_color}
                                         currentUser={two.currentUser.verifyCredentials.screen_name}
                                         avatarImg={one.currentUser.showUser.profile_image_url_https}
+                                        darkModeBorder={changeBorder(dark_mode)}
+                                        darkModeFont={fontColorChange(dark_mode)}
+                                        darkModeComponentBackground={changeComponentBackground(dark_mode)}            
                                     />
-                                    <Grid container className={classes.publicListsContainerStyle}>
+                                    <Grid container className={classes.publicListsContainerStyle} style={{ backgroundColor: changeGridBackground(dark_mode) }}>
                                         <Grid item xs={8} sm={8} md={2} className={classes.publicListsHandlerGrid}>
                                             <PublicProfileHandle 
                                                 URLparam={param}
@@ -103,17 +114,23 @@ let PublicProfileLists = props => {
                                                 name={one.currentUser.showUser.name}
                                                 profileLinkColor={one.currentUser.showUser.profile_link_color}
                                                 avatarImg={two.currentUser.verifyCredentials.profile_image_url_https}
+                                                darkModeFont={fontColorChange(dark_mode)}        
                                             />
                                         </Grid>
                                         <Grid item md={4} className={classes.publicListsTimelineItem}>
                                             <ListsComponent 
                                                 screenName={one.currentUser.showUser.screen_name}
                                                 profileLinkColor={one.currentUser.showUser.profile_link_color}
+                                                darkModeFont={fontColorChange(dark_mode)}
+                                                darkModeComponentBackground={changeComponentBackground(dark_mode)}            
                                             />
                                         </Grid>
                                         <Grid item md={2} className={classes.trendingGrid}>
                                             <Trending 
                                                 profileLinkColor={one.currentUser.showUser.profile_link_color}
+                                                darkModeBorder={changeBorder(dark_mode)}
+                                                darkModeFont={fontColorChange(dark_mode)}
+                                                darkModeComponentBackground={changeComponentBackground(dark_mode)}            
                                             />
                                         </Grid>
                                     </Grid>
@@ -130,7 +147,23 @@ let PublicProfileLists = props => {
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
+const mapStateToProps = state => {
+    return {
+        dark_mode: state.toggleDarkMode.dark_mode
+    };
+};
+
+// ----------------------------------------------------------------------------------------------------- //
+
+PublicProfileLists = connect(
+    mapStateToProps
+)(PublicProfileLists);
+
+// ----------------------------------------------------------------------------------------------------- //
+
 PublicProfileLists = withStyles(styles)(PublicProfileLists);
+
+// ----------------------------------------------------------------------------------------------------- //
 
 export default withRouter(PublicProfileLists);
 

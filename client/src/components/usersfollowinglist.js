@@ -30,7 +30,7 @@ const styles = () => ({
 // ----------------------------------------------------------------------------------------------------- //
 
 const UsersFollowingList = props => {
-    const { screenName, currentUser, profileLinkColor, classes } = props;
+    const { screenName, currentUser, profileLinkColor, classes, darkModeFont, darkModeComponentBackground } = props;
     return (
         <Query
             query={USERS_FOLLOWERS}
@@ -62,6 +62,8 @@ const UsersFollowingList = props => {
                                     friends_count={userFollowersList.friends_count}
                                     bannerImageURL={extractAndReplaceNormalJPG(userFollowersList.profile_banner_url)}
                                     profileLinkColor={profileLinkColor}
+                                    darkModeFont={darkModeFont}
+                                    darkModeComponentBackground={darkModeComponentBackground}
                                 />
                             );    
                         })

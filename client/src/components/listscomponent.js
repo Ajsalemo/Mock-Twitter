@@ -78,7 +78,7 @@ const styles = () => ({
 // ----------------------------------------------------------------------------------------------------- //
 
 const ListsComponent = props => {
-    const { classes, screenName, profileLinkColor } = props;
+    const { classes, screenName, profileLinkColor, darkModeFont, darkModeComponentBackground } = props;
     return (
         <Query 
             query={GET_USER_LISTS}
@@ -96,11 +96,11 @@ const ListsComponent = props => {
                      */
                     // ! query.length checks to see if there is values being returned, if the values are empty a placeholder will be displayed
                     data.currentUser.getLists.length ? 
-                        <Paper className={classes.listsComponentPaper}>
+                        <Paper className={classes.listsComponentPaper} style={{ backgroundColor: darkModeComponentBackground }}>
                             <Grid className={classes.listsComponentFontGrid}>
                                 <Typography variant="h6">
                                     {/* // ! This inline style dictates what the user's color theme is set to */}
-                                    <span  style={{ color: `#${profileLinkColor}` }}>Subscribed to</span>
+                                    <span style={{ color: darkModeFont ? darkModeFont : `#${profileLinkColor}` }}>Subscribed to</span>
                                 </Typography>
                             </Grid>
                             {
@@ -112,18 +112,25 @@ const ListsComponent = props => {
                                                     to={`/lists-statuses/${lists.user.screen_name}/${lists.id}`} 
                                                     className={classes.listsComponentName}
                                                     // ! This inline style dictates what the user's color theme is set to
-                                                    style={{ color: `#${profileLinkColor}` }}
+                                                    style={{ color: darkModeFont ? darkModeFont : `#${profileLinkColor}` }}
                                                 >
                                                     {lists.name}
                                                 </Link>
-                                                <span className={classes.listsComponentSpan}>
+                                                {/* // ! This inline style dictates what the user's color theme is set to */}
+                                                <span className={classes.listsComponentSpan} style={{ color: darkModeFont ? darkModeFont : `#${profileLinkColor}` }}>
                                                     by 
                                                     <Link to={`/userprofile/${lists.user.screen_name}`} className={classes.listsComponentLink}>
                                                         {lists.user.screen_name}
                                                     </Link>
                                                 </span>
                                             </Typography>
-                                            <Typography variant="subtitle2" gutterBottom className={classes.listsComponentSpanMembers}>
+                                            <Typography 
+                                                variant="subtitle2" 
+                                                gutterBottom 
+                                                className={classes.listsComponentSpanMembers}
+                                                // ! This inline style dictates what the user's color theme is set to
+                                                style={{ color: darkModeFont ? darkModeFont : `#${profileLinkColor}` }}
+                                            >
                                                 <span>{lists.member_count}</span> members
                                             </Typography>
                                         </Grid>

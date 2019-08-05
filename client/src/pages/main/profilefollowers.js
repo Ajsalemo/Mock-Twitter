@@ -124,7 +124,6 @@ let ProfileFollowers = props => {
                                             currentUser={two.currentUser.verifyCredentials.screen_name}
                                             screenName={one.currentUser.showUser.screen_name}
                                             profileLinkColor={one.currentUser.showUser.profile_link_color}
-                                            darkModeBorder={changeBorder(dark_mode)}
                                             darkModeFont={fontColorChange(dark_mode)}
                                             darkModeComponentBackground={changeComponentBackground(dark_mode)}        
                                         />

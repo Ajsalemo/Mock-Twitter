@@ -83,7 +83,7 @@ const styles = () => ({
 // ----------------------------------------------------------------------------------------------------- //
 
 const LikesComponent = props => {
-    const { classes, screenName, profileLinkColor } = props;
+    const { classes, screenName, profileLinkColor, darkModeBorder, darkModeFont, darkModeComponentBackground } = props;
     return (
         <Query 
             query={GET_USERS_LIKES} 
@@ -105,7 +105,7 @@ const LikesComponent = props => {
                     data.currentUser.getUsersFavorites.length ?
                         data.currentUser.getUsersFavorites.map((usersLikes, i) => {
                             return (
-                                <Paper className={classes.likesComponentPaper} key={i}>
+                                <Paper className={classes.likesComponentPaper} key={i} style={{ backgroundColor: darkModeComponentBackground, border: darkModeBorder }}>
                                     <Avatar src={usersLikes.user.profile_image_url_https} alt='User profile avatar' />
                                     <Grid item className={classes.profileTimelineGrid}>
                                         {/* Tweet text body */}
@@ -114,7 +114,9 @@ const LikesComponent = props => {
                                             verified={usersLikes.user.verified}
                                             nickname={usersLikes.user.screen_name}
                                             created_at={usersLikes.created_at}
-                                            full_text={usersLikes.full_text}                                    
+                                            full_text={usersLikes.full_text}  
+                                            darkModeFont={darkModeFont}
+                                            darkModeComponentBackground={darkModeComponentBackground}                                  
                                         />
                                         {/* Tweet Media */}
                                         {usersLikes.entities.media ?
@@ -129,7 +131,7 @@ const LikesComponent = props => {
                                             null
                                         }
                                         <Grid item>
-                                            <Typography variant="subtitle2" className={classes.profileButtonOptionsGrid}>
+                                            <Typography variant="subtitle2" className={classes.profileButtonOptionsGrid} style={{ color: darkModeFont }}>
                                                 <div className={classNames(classes.profileButtonOptionsSpacing, classes.profileButtonOptionsHover)}>
                                                     <ChatBubbleOutline className={classes.profileTimelineIcons} />
                                                 </div>
