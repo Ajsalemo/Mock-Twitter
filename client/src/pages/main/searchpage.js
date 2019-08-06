@@ -3,6 +3,7 @@
 
 import React from 'react';
 import { Query } from 'react-apollo';
+import { connect } from 'react-redux';
 
 // * Material-UI components
 import { CircularProgress, withStyles, Grid } from '@material-ui/core';
@@ -19,6 +20,9 @@ import NotFound from './notfound';
 // * Apollo Query
 import { VERIFY_USER } from '../../apolloclient/apolloqueries';
 
+// * Helper function
+import { changeGridBackground, fontColorChange, changeComponentBackground, changeBorder } from '../../helpers/helperfunctions';
+
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
@@ -34,7 +38,7 @@ const styles = () => ({
         paddingRight: '2em'
     },
     searchPageContainerStyle: {
-        marginTop: '0.7em',
+        paddingTop: '0.7em',
         display: 'flex',
         justifyContent: 'flex-start'
     },
@@ -45,8 +49,8 @@ const styles = () => ({
 
 // ----------------------------------------------------------------------------------------------------- //
 
-const SearchPage = props => {
-    const { classes } = props;
+let SearchPage = props => {
+    const { classes, dark_mode } = props;
     const param = props.match.params.params; 
     return (
         <Query query={VERIFY_USER}>
@@ -60,15 +64,22 @@ const SearchPage = props => {
                             avatarImg={data.currentUser.verifyCredentials.profile_image_url_https}
                             name={data.currentUser.verifyCredentials.name}
                             screenName={data.currentUser.verifyCredentials.screen_name}
+                            darkModeBorder={changeBorder(dark_mode)}
+                            darkModeFont={fontColorChange(dark_mode)}
+                            darkModeComponentBackground={changeComponentBackground(dark_mode)}                   
                         />
                         <SearchAppBar
                             searchQuery={param}
                             profileLinkColor={data.currentUser.verifyCredentials.profile_link_color}
+                            dark_mode={dark_mode}
                         />
-                        <Grid container className={classes.searchPageContainerStyle}>
+                        <Grid container className={classes.searchPageContainerStyle} style={{ backgroundColor: changeGridBackground(dark_mode) }}>
                             <Grid item xs={8} sm={8} md={2} className={classes.searchTrendingGrid} >
                                 <Trending 
                                     profileLinkColor={data.currentUser.verifyCredentials.profile_link_color}
+                                    darkModeBorder={changeBorder(dark_mode)}
+                                    darkModeFont={fontColorChange(dark_mode)}
+                                    darkModeComponentBackground={changeComponentBackground(dark_mode)}            
                                 />
                             </Grid>
                             <Grid item xs={12} sm={12} md={5} className={classes.searchQueryTimelineGrid}>
@@ -76,6 +87,9 @@ const SearchPage = props => {
                                     profileLinkColor={data.currentUser.verifyCredentials.profile_link_color}
                                     screenName={data.currentUser.verifyCredentials.screen_name}
                                     searchQuery={param}
+                                    darkModeBorder={changeBorder(dark_mode)}
+                                    darkModeFont={fontColorChange(dark_mode)}
+                                    darkModeComponentBackground={changeComponentBackground(dark_mode)}            
                                 />
                             </Grid>
                         </Grid>
@@ -87,6 +101,20 @@ const SearchPage = props => {
 };
 
 // ----------------------------------------------------------------------------------------------------- //
+// ----------------------------------------------------------------------------------------------------- //
+
+const mapStateToProps = state => {
+    return {
+        dark_mode: state.toggleDarkMode.dark_mode
+    };
+};
+
+// ----------------------------------------------------------------------------------------------------- //
+
+SearchPage = connect(
+    mapStateToProps
+)(SearchPage);
+
 // ----------------------------------------------------------------------------------------------------- //
 
 export default withStyles(styles)(SearchPage);

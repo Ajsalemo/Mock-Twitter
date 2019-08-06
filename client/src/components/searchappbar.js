@@ -22,7 +22,6 @@ const styles = () => ({
         fontWeight: 'bold'
     },
     searchAppBarPlaceholder: {
-        backgroundColor: '#fff',
         height: '2.3em'
     }
 });
@@ -30,7 +29,7 @@ const styles = () => ({
 // ----------------------------------------------------------------------------------------------------- //
 
 const SearchAppBar = props => {
-    const { classes, searchQuery, profileLinkColor } = props;
+    const { classes, searchQuery, profileLinkColor, dark_mode } = props;
     return (
         <React.Fragment>
             <AppBar 
@@ -45,7 +44,12 @@ const SearchAppBar = props => {
                     </Typography>
                 </Toolbar>
             </AppBar>
-            <AppBar position='static' className={classes.searchAppBarPlaceholder}>
+            <AppBar 
+                position='static' 
+                className={classes.searchAppBarPlaceholder}
+                // ! Inline styles are used for dark mode
+                style={{ backgroundColor: dark_mode ? '#000000d4' : '#fff' }}
+            >
                 <Toolbar></Toolbar>
             </AppBar>
         </React.Fragment>

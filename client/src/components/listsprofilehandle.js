@@ -91,16 +91,18 @@ const ListsProfileHandle = props => {
                     <Paper className={classes.listsProfilePaper} style={{ border: darkModeBorder }}>
                         <Card className={classes.listsProfileCard}>
                             <CardContent classes={{ root: classes.cardContentRoot }} style={{ backgroundColor: darkModeComponentBackground }}>
-                                <Typography variant="h6" className={classes.listsProfileLineHeight}>
+                                <Typography variant="h6" className={classes.listsProfileLineHeight} style={{ color: darkModeFont }}>
                                     {data.currentUser.getListsShow.name}
                                 </Typography>
-                                <Typography variant="subtitle2" gutterBottom className={classes.listsProfileOwner}>
+                                {/* // ! Inline styles are used for dark mode */}
+                                <Typography variant="subtitle2" gutterBottom className={classes.listsProfileOwner} style={{ color: darkModeFont }}>
                                     {/* // * If the list is public, display that it is - else if it doesn't show that it's private */}
                                     {data.currentUser.getListsShow.mode === "public"
                                         ?
-                                    <span>
+                                    // ! Inline styles are used for dark mode
+                                    <span style={{ color: darkModeFont }}>
                                         A public list by 
-                                        <Link to={`/userprofile/${data.currentUser.getListsShow.user.screen_name}`} className={classes.listsProfileLink}>
+                                        <Link to={`/userprofile/${data.currentUser.getListsShow.user.screen_name}`} className={classes.listsProfileLink} style={{ color: darkModeFont }}>
                                             {data.currentUser.getListsShow.user.screen_name}
                                         </Link>
                                     </span>
@@ -112,14 +114,17 @@ const ListsProfileHandle = props => {
                                         </Link>
                                     </span>}
                                 </Typography>
-                                <Typography variant="subtitle2" className={classes.listsProfileOwner}>
+                                {/* // ! Inline styles are used for dark mode */}
+                                <Typography variant="subtitle2" className={classes.listsProfileOwner} style={{ color: darkModeFont }}>
                                     {data.currentUser.getListsShow.description}
                                 </Typography>
                                 <Grid item className={classes.listProfileUserCountGrid}>
                                     <Grid item>
-                                        <Typography variant="subtitle2">
+                                        {/* // ! Inline styles are used for dark mode */}
+                                        <Typography variant="subtitle2" style={{ color: darkModeFont }}>
                                             Members
                                         </Typography>
+                                        {/* // ! Inline styles are used for dark mode */}
                                         <Typography 
                                             variant="subtitle2" 
                                             className={classes.listsProfileUserCountColor}
@@ -129,9 +134,11 @@ const ListsProfileHandle = props => {
                                         </Typography>
                                     </Grid>
                                     <Grid item>
-                                        <Typography variant="subtitle2">
+                                        {/* // ! Inline styles are used for dark mode */}
+                                        <Typography variant="subtitle2" style={{ color: darkModeFont }}>
                                             Subscribers
                                         </Typography>
+                                        {/* // ! Inline styles are used for dark mode */}
                                         <Typography 
                                             variant="subtitle2" 
                                             className={classes.listsProfileUserCountColor}
@@ -158,6 +165,7 @@ const ListsProfileHandle = props => {
                                     }
                                 </Grid>
                             </CardContent>
+                            {/* // ! Inline styles are used for dark mode */}
                             <Grid className={classes.listsProfileAvatarGrid} style={{ backgroundColor: darkModeComponentBackground }}>
                                 <Link to={`/userprofile/${data.currentUser.getListsShow.user.screen_name}`}>
                                     <Avatar src={data.currentUser.getListsShow.user.profile_image_url_https} alt={`${data.currentUser.getListsShow.user.screen_name} avatar`}/>

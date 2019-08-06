@@ -77,7 +77,7 @@ const styles = () => ({
 // ----------------------------------------------------------------------------------------------------- //
 
 const SearchQueryTimeline = props => {
-    const { classes, screenName, profileLinkColor, searchQuery } = props;
+    const { classes, screenName, profileLinkColor, searchQuery, darkModeBorder, darkModeFont, darkModeComponentBackground } = props;
     return (
         <React.Fragment>
             <Query 
@@ -96,7 +96,8 @@ const SearchQueryTimeline = props => {
                         data.currentUser.searchTweets.statuses.length ?
                             data.currentUser.searchTweets.statuses.map((searchQueryList, i) => {
                                 return (
-                                    <Paper className={classes.searchQueryTimelinePaper} key={i}>
+                                    // ! Inline styles are used for dark mode
+                                    <Paper className={classes.searchQueryTimelinePaper} key={i} style={{ backgroundColor: darkModeComponentBackground, border: darkModeBorder }}>
                                         <ToolTipModal
                                             name={searchQueryList.user.name}
                                             nickname={searchQueryList.user.screen_name}
@@ -111,6 +112,9 @@ const SearchQueryTimeline = props => {
                                             profileLinkColor={profileLinkColor}
                                             screenName={searchQueryList.user.screen_name}
                                             currentUser={screenName}
+                                            darkModeBorder={darkModeBorder}
+                                            darkModeFont={darkModeFont}
+                                            darkModeComponentBackground={darkModeComponentBackground}    
                                         />
                                         <Grid item className={classes.searchQueryTimelineGrid}>
                                             {/* Tweet text body */}
@@ -122,6 +126,8 @@ const SearchQueryTimeline = props => {
                                                 full_text={searchQueryList.full_text}
                                                 id={searchQueryList.id_str}
                                                 tweetUserId={searchQueryList.user.id}
+                                                darkModeFont={darkModeFont}
+                                                darkModeComponentBackground={darkModeComponentBackground}    
                                             />
                                             {/* Tweet Media */}
                                             {searchQueryList.entities.media ?
@@ -136,7 +142,7 @@ const SearchQueryTimeline = props => {
                                                 null
                                             }
                                             <Grid item>
-                                                <Typography variant="subtitle2" className={classes.searchQueryOptionsGrid}>
+                                                <Typography variant="subtitle2" className={classes.searchQueryOptionsGrid} style={{ color: darkModeFont }}>
                                                     <div className={classNames(classes.searchQueryOptionsSpacing, classes.searchQueryOptionsHover)}>
                                                         <ChatBubbleOutline className={classes.searchQueryTimelineIcons} />
                                                     </div>
