@@ -3,6 +3,7 @@
 
 import React from 'react';
 import { Query } from 'react-apollo';
+import { Waypoint } from 'react-waypoint';
 
 // * Components
 import StaticToolTip from './statictooltip';
@@ -31,14 +32,16 @@ const styles = () => ({
 
 const UsersFollowingList = props => {
     const { currentUser, screenName, profileLinkColor, classes, darkModeFont, darkModeComponentBackground } = props;
+    const initialCursor = '-1';
     return (
         <Query
             query={USERS_FOLLOWING}
             variables={{
-                screen_name: screenName
+                screen_name: screenName,
+                cursor: initialCursor
             }}
         >
-            {({ loading, data, error }) => {
+            {({ loading, data, error, fetchMore }) => {
                 if (loading) return <div><CircularProgress /></div>;
                 if (error) return <Error />
                 return (
@@ -48,10 +51,9 @@ const UsersFollowingList = props => {
                      */
                     // ! query.length checks to see if there is values being returned, if the values are empty a placeholder will be display
                     data.currentUser.usersFollowing.users.length ? 
-                        data.currentUser.usersFollowing.users.map((usersFollowersList, i) => {
-                            return (
+                        data.currentUser.usersFollowing.users.map((usersFollowersList, i) => (
+                            <React.Fragment key={i}>
                                 <StaticToolTip
-                                    key={i}
                                     currentUser={currentUser}
                                     name={usersFollowersList.name}
                                     screen_name={usersFollowersList.screen_name}
@@ -66,8 +68,35 @@ const UsersFollowingList = props => {
                                     darkModeFont={darkModeFont}
                                     darkModeComponentBackground={darkModeComponentBackground}
                                 />
-                            );    
-                        })
+                                {/* // TODO - This is pulling the pagingated data, but not merging it with the original query - this needs to be fixed */}
+                                {i === data.currentUser.usersFollowing.users.length - 10 && (
+                                    <Waypoint 
+                                        onEnter={() => fetchMore({
+                                            variables: {
+                                                screen_name: screenName,
+                                                cursor: data.currentUser.usersFollowing.next_cursor_str
+                                            },
+                                            updateQuery: (pv, { fetchMoreResult }) => {
+                                                if(!fetchMoreResult) {
+                                                    return pv;
+                                                }
+                                                console.log(pv)
+                                                console.log(fetchMoreResult)
+                                                return {
+                                                    currentUser: {
+                                                        __typename: 'User',
+                                                        usersFollowing: [
+                                                            ...pv.currentUser.usersFollowing, 
+                                                            ...fetchMoreResult.currentUser.usersFollowing
+                                                        ]
+                                                    }
+                                                }
+                                            }
+                                        })}                                     
+                                    />
+                                )}
+                            </React.Fragment>
+                        ))
                         :
                     // ! If the associated profile doesn't have any followers, this placeholder will be displayed
                     <EmptyTweetMessage 

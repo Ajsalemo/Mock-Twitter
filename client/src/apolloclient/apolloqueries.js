@@ -234,9 +234,9 @@ export const USERS_FOLLOWERS =
 
 export const USERS_FOLLOWING =
     gql`
-        query UsersFollowing($screen_name: String!) {
+        query UsersFollowing($screen_name: String!, $cursor: String) {
             currentUser {
-                usersFollowing(screen_name: $screen_name) {
+                usersFollowing(screen_name: $screen_name, cursor: $cursor) {
                     previous_cursor_str
                     next_cursor_str
                     users {

@@ -38,7 +38,7 @@ const typeDefs =
             compareRelationship(target_screenName: String!, source_screenName: String!): RelationshipWrapper 
             verifyCredentials: UserObject
             usersFollowers(screen_name: String!): UsersFollowers
-            usersFollowing(screen_name: String!): UsersFollowers
+            usersFollowing(screen_name: String!, cursor: String): UsersFollowers
             getUsersFavorites(screen_name: String!): [UserTimelineTweets]
             getLists(screen_name: String!): [UsersLists]
             getListsTimeline(list_id: String!): [UserTimelineTweets]
@@ -267,7 +267,7 @@ const resolvers = {
             return usersFollowersResponse;
         },
         usersFollowing: async (parent, args, user) => {
-            const usersFollowingRequest = await twitterNetworkCall(user.access_token, user.access_secret).get('followers/list', { screen_name: args.screen_name });
+            const usersFollowingRequest = await twitterNetworkCall(user.access_token, user.access_secret).get('followers/list', { screen_name: args.screen_name, cursor: args.cursor });
             const usersFollowingResponse = usersFollowingRequest;
             return usersFollowingResponse;
         },
