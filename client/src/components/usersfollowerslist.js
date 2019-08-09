@@ -81,7 +81,7 @@ const UsersFollowingList = props => {
                                                 if(!fetchMoreResult) {
                                                     return pv;
                                                 }
-                                                const previousCursor = fetchMoreResult.currentUser.usersFollowing.previous_cursor_str;
+                                                const previousCursor = pv.currentUser.usersFollowing.previous_cursor_str;
                                                 const nextCursor = fetchMoreResult.currentUser.usersFollowing.next_cursor_str;
                                                 return {
                                                     // * This is structured like a normal apollo query
@@ -91,6 +91,7 @@ const UsersFollowingList = props => {
                                                             __typename: 'UsersFollowers',
                                                             previous_cursor_str: previousCursor,
                                                             next_cursor_str: nextCursor, 
+                                                            // * The spread operator adds the previous data collection as well as the new data when the user scrolls and triggers the waypoint, which calls the API
                                                             users: [
                                                                 ...pv.currentUser.usersFollowing.users, 
                                                                 ...fetchMoreResult.currentUser.usersFollowing.users

@@ -3,6 +3,7 @@
 
 import React from 'react';
 import { Query } from 'react-apollo';
+import { Waypoint } from 'react-waypoint';
 
 // * Components
 import StaticToolTip from './statictooltip';
@@ -38,7 +39,7 @@ const UsersFollowingList = props => {
                 screen_name: screenName
             }}
         >
-            {({ loading, data, error }) => {
+            {({ loading, data, error, fetchMore }) => {
                 if (loading) return <div><CircularProgress /></div>;
                 if (error) return <Error />     
                 return (
@@ -48,10 +49,9 @@ const UsersFollowingList = props => {
                     */
                    // ! query.length checks to see if there is values being returned, if the values are empty a placeholder will be displayed
                     data.currentUser.usersFollowers.users.length ?
-                        data.currentUser.usersFollowers.users.map((userFollowersList, i) => {
-                            return (
+                        data.currentUser.usersFollowers.users.map((userFollowersList, i) => (
+                            <React.Fragment key={i}>
                                 <StaticToolTip
-                                    key={i}
                                     currentUser={currentUser}
                                     name={userFollowersList.name}
                                     screen_name={userFollowersList.screen_name}
@@ -65,8 +65,42 @@ const UsersFollowingList = props => {
                                     darkModeFont={darkModeFont}
                                     darkModeComponentBackground={darkModeComponentBackground}
                                 />
-                            );    
-                        })
+                                {i === data.currentUser.usersFollowers.users.length - 10 && (
+                                    <Waypoint 
+                                        onEnter={() => fetchMore({
+                                            variables: {
+                                                screen_name: screenName,
+                                                cursor: data.currentUser.usersFollowers.next_cursor_str
+                                            },
+                                            // This method updates Apollo's store, it merges the old data with the new data being called by the API request
+                                            updateQuery: (pv, { fetchMoreResult }) => {
+                                                if(!fetchMoreResult) {
+                                                    return pv;
+                                                }
+                                                const previousCursor = pv.currentUser.usersFollowers.previous_cursor_str;
+                                                const nextCursor = fetchMoreResult.currentUser.usersFollowers.next_cursor_str;
+                                                return {
+                                                    // * This is structured like a normal apollo query
+                                                    currentUser: {
+                                                        __typename: 'User',
+                                                        usersFollowers: {
+                                                            __typename: 'UsersFollowing',
+                                                            previous_cursor_str: previousCursor,
+                                                            next_cursor_str: nextCursor, 
+                                                            // * The spread operator adds the previous data collection as well as the new data when the user scrolls and triggers the waypoint, which calls the API
+                                                            users: [
+                                                                ...pv.currentUser.usersFollowers.users, 
+                                                                ...fetchMoreResult.currentUser.usersFollowers.users
+                                                            ]   
+                                                        }                                                      
+                                                    }
+                                                }
+                                            }
+                                        })}                                     
+                                    />
+                                )}
+                                </React.Fragment>
+                            ))
                         :
                     // ! If the associated profile isn't following anyone, this placeholder will be displayed
                     <EmptyTweetMessage 
