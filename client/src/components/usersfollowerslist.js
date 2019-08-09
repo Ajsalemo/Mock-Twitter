@@ -68,7 +68,7 @@ const UsersFollowingList = props => {
                                     darkModeFont={darkModeFont}
                                     darkModeComponentBackground={darkModeComponentBackground}
                                 />
-                                {/* // TODO - This is pulling the pagingated data, but not merging it with the original query - this needs to be fixed */}
+                                {/* // * When the data list is 10 from the end, call this function to display more items */}
                                 {i === data.currentUser.usersFollowing.users.length - 10 && (
                                     <Waypoint 
                                         onEnter={() => fetchMore({
@@ -76,19 +76,26 @@ const UsersFollowingList = props => {
                                                 screen_name: screenName,
                                                 cursor: data.currentUser.usersFollowing.next_cursor_str
                                             },
+                                            // This method updates Apollo's store, it merges the old data with the new data being called by the API request
                                             updateQuery: (pv, { fetchMoreResult }) => {
                                                 if(!fetchMoreResult) {
                                                     return pv;
                                                 }
-                                                console.log(pv)
-                                                console.log(fetchMoreResult)
+                                                const previousCursor = fetchMoreResult.currentUser.usersFollowing.previous_cursor_str;
+                                                const nextCursor = fetchMoreResult.currentUser.usersFollowing.next_cursor_str;
                                                 return {
+                                                    // * This is structured like a normal apollo query
                                                     currentUser: {
                                                         __typename: 'User',
-                                                        usersFollowing: [
-                                                            ...pv.currentUser.usersFollowing, 
-                                                            ...fetchMoreResult.currentUser.usersFollowing
-                                                        ]
+                                                        usersFollowing: {
+                                                            __typename: 'UsersFollowers',
+                                                            previous_cursor_str: previousCursor,
+                                                            next_cursor_str: nextCursor, 
+                                                            users: [
+                                                                ...pv.currentUser.usersFollowing.users, 
+                                                                ...fetchMoreResult.currentUser.usersFollowing.users
+                                                            ]   
+                                                        }                                                      
                                                     }
                                                 }
                                             }
