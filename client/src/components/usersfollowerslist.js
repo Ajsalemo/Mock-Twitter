@@ -78,11 +78,11 @@ const UsersFollowingList = props => {
                                             },
                                             // This method updates Apollo's store, it merges the old data with the new data being called by the API request
                                             updateQuery: (pv, { fetchMoreResult }) => {
+                                                const previousCursor = pv.currentUser.usersFollowing.previous_cursor_str;
+                                                const nextCursor = fetchMoreResult.currentUser.usersFollowing.next_cursor_str;
                                                 if(!fetchMoreResult) {
                                                     return pv;
                                                 }
-                                                const previousCursor = pv.currentUser.usersFollowing.previous_cursor_str;
-                                                const nextCursor = fetchMoreResult.currentUser.usersFollowing.next_cursor_str;
                                                 return {
                                                     // * This is structured like a normal apollo query
                                                     currentUser: {

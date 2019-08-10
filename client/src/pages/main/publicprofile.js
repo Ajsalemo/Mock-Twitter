@@ -40,7 +40,8 @@ const styles = () => ({
         paddingRight: '0em'
     },
     publicProfileTimelineItem: {
-        marginRight: '0.6em'
+        marginRight: '0.6em',
+        paddingBottom: '4em'
     },
     errorAndLoadingDiv: {
         display: 'flex',

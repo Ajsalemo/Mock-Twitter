@@ -262,7 +262,7 @@ const resolvers = {
             return verifyCredentialsResponse;
         },
         usersFollowers: async (parent, args, user) => {
-            const usersFollowersRequest = await twitterNetworkCall(user.access_token, user.access_secret).get('friends/list', { screen_name: args.screen_name });
+            const usersFollowersRequest = await twitterNetworkCall(user.access_token, user.access_secret).get('friends/list', { screen_name: args.screen_name, cursor: args.cursor });
             const usersFollowersResponse = usersFollowersRequest;
             return usersFollowersResponse;
         },

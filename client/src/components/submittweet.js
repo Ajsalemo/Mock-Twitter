@@ -17,7 +17,7 @@ const styles = theme => ({
     gridItem: {
         padding: '1em',
         [theme.breakpoints.up('md')]: {
-            padding: '0 0.7em'
+            padding: '0em 0.7em 4em 0.7em'
         }
     },
     paperOutline: {

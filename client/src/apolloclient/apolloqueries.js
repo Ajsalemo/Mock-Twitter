@@ -204,9 +204,9 @@ export const VERIFY_USER =
 
 export const USERS_FOLLOWERS =
     gql`
-        query UsersFollowers($screen_name: String!) {
+        query UsersFollowers($screen_name: String!, $cursor: String) {
             currentUser {
-                usersFollowers(screen_name: $screen_name) {
+                usersFollowers(screen_name: $screen_name, cursor: $cursor) {
                     previous_cursor_str
                     next_cursor_str
                     users {

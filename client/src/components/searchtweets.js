@@ -15,7 +15,7 @@ import { withStyles, TextField, InputAdornment, Fab, CircularProgress } from '@m
 
 const styles = () => ({
     navTextField: {
-        height: '-webkit-fill-available',
+        height: '2em',
         paddingRight: '0em'
     },
     searchIconColor: {
