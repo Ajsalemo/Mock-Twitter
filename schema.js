@@ -37,7 +37,7 @@ const typeDefs =
             trendingTopics: [trendsWrapper]
             compareRelationship(target_screenName: String!, source_screenName: String!): RelationshipWrapper 
             verifyCredentials: UserObject
-            usersFollowers(screen_name: String!): UsersFollowers
+            usersFollowers(screen_name: String!, cursor: String): UsersFollowers
             usersFollowing(screen_name: String!, cursor: String): UsersFollowers
             getUsersFavorites(screen_name: String!): [UserTimelineTweets]
             getLists(screen_name: String!): [UsersLists]

@@ -5,7 +5,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 // * Material-UI icons
-import { Done } from '@material-ui/icons';
+import { BrightnessHigh, BrightnessLow } from '@material-ui/icons';
 
 // * Redux actions
 import { darkModeOn, darkModeOff } from '../redux/actions';
@@ -19,10 +19,10 @@ let DarkModeToggle = props => {
         // * If dark mode is toggled on, display an icon to show that it is - else if it isn't, remove the icon
         dark_mode ?
         // ! Inline styles are used for dark mode
-        <span onClick={() => props.darkModeOff()} style={{ color: darkModeFont }}>Dark mode <Done/></span>
+        <span onClick={() => props.darkModeOff()} style={{ color: darkModeFont }}>Dark mode <BrightnessHigh /></span>
             :
         // ! Inline styles are used for dark mode
-        <span onClick={() => props.darkModeOn()} style={{ color: darkModeFont }}>Dark mode</span>
+        <span onClick={() => props.darkModeOn()} style={{ color: darkModeFont }}>Dark mode <BrightnessLow /></span>
     );
 };
 

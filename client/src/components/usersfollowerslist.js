@@ -80,7 +80,8 @@ const UsersFollowingList = props => {
                                             updateQuery: (pv, { fetchMoreResult }) => {
                                                 const previousCursor = pv.currentUser.usersFollowing.previous_cursor_str;
                                                 const nextCursor = fetchMoreResult.currentUser.usersFollowing.next_cursor_str;
-                                                if(!fetchMoreResult) {
+                                                // * If there are no results or the next_cursor is done traversing data/returning previous result then return from this method
+                                                if(!fetchMoreResult || nextCursor === '0') {
                                                     return pv;
                                                 }
                                                 return {
