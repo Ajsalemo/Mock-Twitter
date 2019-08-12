@@ -38,7 +38,7 @@ const styles = () => ({
         paddingRight: '2em'
     },
     searchPageContainerStyle: {
-        paddingTop: '0.7em',
+        padding: '0.7em 0em 4em 0em',
         display: 'flex',
         justifyContent: 'flex-start'
     },

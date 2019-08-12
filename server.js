@@ -25,7 +25,7 @@ const getUid = async (req) => {
     let idToken = (req.headers && req.headers.authorization) ? req.headers.authorization : null;
     // * Throw an error message if a token isn't found
     if (!idToken) {
-        console.log('no token found');
+        console.log('No token found');
         return null;
     }
     const newToken = idToken.split('Bearer ')[1];

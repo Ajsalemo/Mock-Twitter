@@ -34,6 +34,7 @@ class FirebaseHelperClass {
         this.persistAuthentication = this.persistAuthentication.bind(this);
         this.getAccessToken = this.getAccessToken.bind(this);
         this.getAccessSecret = this.getAccessSecret.bind(this);
+        this.getTokenForValidation = this.getTokenForValidation.bind(this);
     }
 
     firebaseAuth = () => {
@@ -67,15 +68,18 @@ class FirebaseHelperClass {
     }
 
     // * Retrieves a JWT token to be associated with the user
-    getTokenForValidation = () => {
-        const verifyToken = this.firebaseAuth().currentUser.getIdToken()
-            .then(idToken => {
-                return idToken;
-            }).catch(err => {
-                // * Handle error
-                console.log(err);
-            });
-        return verifyToken;
+    getTokenForValidation = async () => {
+        const checkInitialUserRequest = await this.firebaseAuth().currentUser;
+        if(checkInitialUserRequest) {
+            const verifyToken = await this.firebaseAuth().currentUser.getIdToken(true)
+                .then(idToken => {
+                    return idToken;
+                }).catch(err => {
+                    // * Handle error
+                    console.log(err);
+                });
+            return verifyToken;
+        }
     };
 
     // * This function sets the persistence of the authenticated session
