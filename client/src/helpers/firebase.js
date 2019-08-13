@@ -68,17 +68,25 @@ class FirebaseHelperClass {
     }
 
     // * Retrieves a JWT token to be associated with the user
-    getTokenForValidation = async () => {
-        const checkInitialUserRequest = await this.firebaseAuth().currentUser;
-        if(checkInitialUserRequest) {
-            const verifyToken = await this.firebaseAuth().currentUser.getIdToken(true)
+    getTokenForValidation = () => {
+        if(this.firebaseAuth().currentUser) {
+            console.log('User fetched from server...');
+            return this.firebaseAuth().currentUser.getIdToken(true)
                 .then(idToken => {
+                    console.log(idToken)
                     return idToken;
                 }).catch(err => {
                     // * Handle error
                     console.log(err);
                 });
-            return verifyToken;
+        } else {
+            console.log('Fetching user...');
+            return this.firebaseAuth().onIdTokenChanged(user => {
+                user.getIdToken(true).then(idToken =>{
+                    console.log(idToken)
+                    return idToken;
+                })
+            });
         }
     };
 

@@ -24,10 +24,11 @@ import { fontColorChange, changeComponentBackground, changeBorder } from '../../
 
 const styles = () => ({
     notFoundContainer: {
-        marginTop: '10em',
+        paddingTop: '10em',
         display: 'flex',
         textAlign: 'center',
-        flexDirection: 'column'
+        flexDirection: 'column',
+        height: '100vh'
     },
     notFoundMainFont: {
         fontWeight: 'bold',
@@ -61,7 +62,7 @@ let NotFound = props => {
                             darkModeFont={fontColorChange(dark_mode)}
                             darkModeComponentBackground={changeComponentBackground(dark_mode)}                   
                         />
-                        <Grid container className={classes.notFoundContainer}>
+                        <Grid container className={classes.notFoundContainer} style={{ backgroundColor: changeComponentBackground(dark_mode) }}>
                             {/* // ! Inline styles are used for dark mode */}
                             <Typography variant='h6' gutterBottom className={classes.notFoundMainFont} style={{ color: fontColorChange(dark_mode) }}>
                                 Sorry, that page doesn't exist!

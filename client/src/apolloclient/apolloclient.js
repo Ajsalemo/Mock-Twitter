@@ -34,6 +34,7 @@ export const client = new ApolloClient({
     const firebaseToken = await firebaseClass.getTokenForValidation();
     const twitterAccessToken = await firebaseClass.getAccessToken(twitter_token);
     const twitterAccessSecret = await firebaseClass.getAccessToken(twitter_secret);
+    console.log(firebaseToken)
     operation.setContext(context => ({
       headers: {
         ...context.headers,
