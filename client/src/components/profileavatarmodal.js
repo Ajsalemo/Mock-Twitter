@@ -43,8 +43,10 @@ const styles = () => ({
         fontWeight: '200',
         fontSize: '1em'
     },
-    menuUpperText: {
-        marginRight: '1em'
+    handleTextUpperDiv: {
+        display: 'flex',
+        flexDirection: 'row-reverse',
+        justifyContent: 'flex-end'
     },
     menuDivider: {
         borderBottom: '1px solid #80808026'
@@ -158,9 +160,9 @@ class ProfileAvatarModal extends Component {
                             <Paper style={{ backgroundColor: darkModeComponentBackground }}>
                                 <ClickAwayListener onClickAway={this.handleClose}>
                                     <MenuList>
-                                        <MenuItem onClick={this.handleClose} className={classes.profileParentGrid}>
+                                        <MenuItem onClick={this.handleClose} className={classes.profileChildMenuGrid}>
                                             {/* // ! Inline styles are used for dark mode */}
-                                            <Typography variant="subtitle2" className={classes.menuUpperText} style={{ color: darkModeFont }}>
+                                            <Typography variant="subtitle2" style={{ color: darkModeFont }}>
                                                 <div className={classes.handleTextUpperDiv}>
                                                     <span className={classes.menuHandleTextUpper}>{name}</span>
                                                     <span className={classes.menuHandleTextLower}>@{screen_name}</span>
