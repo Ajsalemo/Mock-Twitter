@@ -10,25 +10,42 @@ import { withStyles, Paper, Card, CardContent, Avatar, Typography } from '@mater
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
-const styles = () => ({
+const styles = theme => ({
     twitterAvatar: {
-        width: 70,
-        height: 70,
+        width: '7em',
+        height: '7em',
         border: '4px solid #fff',
         '&:hover': {
             cursor: 'pointer'
         },
-        margin: '-1.5em 0 0 0.5em'
+        margin: '-3.5em 0 0 0.5em',
+        [theme.breakpoints.up('sm')]: {
+            width: 70,
+            height: 70,
+            border: '4px solid #fff',
+            '&:hover': {
+                cursor: 'pointer'
+            },
+            margin: '-1.5em 0 0 0.5em'
+        }
     },
     upperCardContent: {
         height: '6em',
         padding: '0em'
     },
     upperText: {
-        textAlign: 'center'
+        textAlign: 'center'        
     },
     handleTextUpperDiv: {
-        paddingLeft: '4em',
+        fontSize: '1.4em',
+        [theme.breakpoints.between('sm', 'md')]: {
+            fontSize: '0.7em',
+            paddingLeft: '4em'
+        },
+        [theme.breakpoints.up(691)]: {
+            fontSize: 'initial',
+            paddingLeft: '4em'
+        }
     },
     handleTextUpper: {
         wordBreak: 'break-word',
@@ -56,7 +73,14 @@ const styles = () => ({
     profileHandleTypography: {
         display: 'flex',
         flexDirection: 'row',
-        justifyContent: 'space-around'
+        justifyContent: 'space-around',
+        fontSize: '1.2em',
+        [theme.breakpoints.between('sm', 'md')]: {
+            fontSize: '0.8em'
+        },
+        [theme.breakpoints.up('lg')]: {
+            fontSize: '0.9em'
+        }
     },
     linkToProfileStats: {
         textDecoration: 'none',

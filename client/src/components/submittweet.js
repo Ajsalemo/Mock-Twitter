@@ -15,7 +15,7 @@ import SubmitTweetForm from './submittweetform';
 
 const styles = theme => ({
     gridItem: {
-        padding: '1em',
+        padding: '0em 1em 1em 1em',
         [theme.breakpoints.up('md')]: {
             padding: '0em 0.7em 4em 0.7em'
         }
@@ -35,7 +35,7 @@ const SubmitTweet = props => {
     const { classes, screenName, profileLinkColor, avatarImg, darkModeStatus, darkModeFont, darkModeBorder, darkModeComponentBackground } = props;
     return (
         <React.Fragment>
-            <Grid item xs={10} sm={8} md={5} className={classes.gridItem} >
+            <Grid item xs={12} sm={8} md={5} className={classes.gridItem} >
                 {/* // ! Inline styles are used for dark mode */}
                 <Paper className={classes.paperOutline} style={{ backgroundColor: darkModeComponentBackground, border: darkModeBorder }}>
                     <SubmitTweetForm 
