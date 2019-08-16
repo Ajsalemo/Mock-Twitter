@@ -11,11 +11,13 @@ import { withStyles, AppBar, Typography, Toolbar } from '@material-ui/core';
 
 const styles = () => ({
     searchToolBar: {
-        height: '4.5em'
+        height: '4.5em',
+        margin: '0em 10em',
+        display: 'flex',
+        justifyContent: 'end'
     },
     searchAppBar: {
-        marginTop: '2.5em',
-        padding: '0 12em'
+        marginTop: '2.5em'
     },
     searchAppBarFontColor: {
         color: '#fff',

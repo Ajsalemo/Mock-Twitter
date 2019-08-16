@@ -26,7 +26,7 @@ import { changeGridBackground, fontColorChange, changeComponentBackground, chang
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
-const styles = () => ({
+const styles = theme => ({
     errorAndLoadingDiv: {
         display: 'flex',
         justifyContent: 'center',
@@ -34,13 +34,24 @@ const styles = () => ({
         height: '100vh'
     },
     searchTrendingGrid: {
-        marginLeft: '12em',
-        paddingRight: '2em'
+        paddingLeft: '6em',
+        [theme.breakpoints.up('sm')]: {
+            paddingRight: '2em'    
+        },
+        [theme.breakpoints.up('lg')]: {
+            marginLeft: '6em'
+        }
     },
     searchPageContainerStyle: {
-        padding: '0.7em 0em 4em 0em',
         display: 'flex',
-        justifyContent: 'flex-start'
+        flexDirection: 'column-reverse',
+        padding: '1em',
+        [theme.breakpoints.up('sm')]: {
+            padding: '0.7em 0em 4em 0em',
+            display: 'flex',
+            justifyContent: 'flex-start',
+            flexDirection: 'initial'    
+        }
     },
     searchQueryTimelineGrid: {
         marginTop: '1em'
@@ -74,7 +85,7 @@ let SearchPage = props => {
                             dark_mode={dark_mode}
                         />
                         <Grid container className={classes.searchPageContainerStyle} style={{ backgroundColor: changeGridBackground(dark_mode) }}>
-                            <Grid item xs={8} sm={8} md={2} className={classes.searchTrendingGrid} >
+                            <Grid item xs={10} sm={5} md={4} lg={3} className={classes.searchTrendingGrid}>
                                 <Trending 
                                     profileLinkColor={data.currentUser.verifyCredentials.profile_link_color}
                                     darkModeBorder={changeBorder(dark_mode)}
@@ -82,7 +93,7 @@ let SearchPage = props => {
                                     darkModeComponentBackground={changeComponentBackground(dark_mode)}            
                                 />
                             </Grid>
-                            <Grid item xs={12} sm={12} md={5} className={classes.searchQueryTimelineGrid}>
+                            <Grid item xs={12} sm={6} md={6} lg={6} className={classes.searchQueryTimelineGrid}>
                                 <SearchQueryTimeline
                                     profileLinkColor={data.currentUser.verifyCredentials.profile_link_color}
                                     screenName={data.currentUser.verifyCredentials.screen_name}
