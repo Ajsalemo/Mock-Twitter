@@ -85,58 +85,60 @@ let PublicProfile = props => {
                                     darkModeFont={fontColorChange(dark_mode)}
                                     darkModeComponentBackground={changeComponentBackground(dark_mode)}        
                                 /> 
-                                <PublicProfileBanner
-                                    URLparam={param}
-                                    profileBannerURL={one.currentUser.showUser.profile_banner_url}
-                                />
-                                <ProfileBannerBar 
-                                    URLparam={param}
-                                    screenName={one.currentUser.showUser.screen_name}
-                                    statusCount={one.currentUser.showUser.statuses_count}
-                                    friendsCount={one.currentUser.showUser.friends_count}
-                                    followersCount={one.currentUser.showUser.followers_count}
-                                    favouritesCount={one.currentUser.showUser.favourites_count}
-                                    tweetUserId={one.currentUser.showUser.id}
-                                    profileLinkColor={one.currentUser.showUser.profile_link_color}
-                                    currentUser={two.currentUser.verifyCredentials.screen_name}
-                                    avatarImg={one.currentUser.showUser.profile_image_url_https}
-                                    darkModeBorder={changeBorder(dark_mode)}
-                                    darkModeFont={fontColorChange(dark_mode)}
-                                    darkModeComponentBackground={changeComponentBackground(dark_mode)}        
-                                />
-                                <Grid container className={classes.publicProfileContainerStyle} style={{ backgroundColor: changeGridBackground(dark_mode) }}>
-                                    <Grid item xs={8} sm={8} md={2} className={classes.publicProfileHandlerGrid}>
-                                        <PublicProfileHandle 
-                                            URLparam={param}
-                                            currentUser={two.currentUser.verifyCredentials.screen_name}
-                                            screenName={one.currentUser.showUser.screen_name}
-                                            verified={one.currentUser.showUser.verified}
-                                            description={one.currentUser.showUser.description}
-                                            createdAt={one.currentUser.showUser.created_at}
-                                            name={one.currentUser.showUser.name}
-                                            profileLinkColor={one.currentUser.showUser.profile_link_color}
-                                            avatarImg={two.currentUser.verifyCredentials.profile_image_url_https}
-                                            darkModeFont={fontColorChange(dark_mode)}        
-                                        />
+                                <div>
+                                    <PublicProfileBanner
+                                        URLparam={param}
+                                        profileBannerURL={one.currentUser.showUser.profile_banner_url}
+                                    />
+                                    <ProfileBannerBar 
+                                        URLparam={param}
+                                        screenName={one.currentUser.showUser.screen_name}
+                                        statusCount={one.currentUser.showUser.statuses_count}
+                                        friendsCount={one.currentUser.showUser.friends_count}
+                                        followersCount={one.currentUser.showUser.followers_count}
+                                        favouritesCount={one.currentUser.showUser.favourites_count}
+                                        tweetUserId={one.currentUser.showUser.id}
+                                        profileLinkColor={one.currentUser.showUser.profile_link_color}
+                                        currentUser={two.currentUser.verifyCredentials.screen_name}
+                                        avatarImg={one.currentUser.showUser.profile_image_url_https}
+                                        darkModeBorder={changeBorder(dark_mode)}
+                                        darkModeFont={fontColorChange(dark_mode)}
+                                        darkModeComponentBackground={changeComponentBackground(dark_mode)}        
+                                    />
+                                    <Grid container className={classes.publicProfileContainerStyle} style={{ backgroundColor: changeGridBackground(dark_mode) }}>
+                                        <Grid item xs={8} sm={8} md={2} className={classes.publicProfileHandlerGrid}>
+                                            <PublicProfileHandle 
+                                                URLparam={param}
+                                                currentUser={two.currentUser.verifyCredentials.screen_name}
+                                                screenName={one.currentUser.showUser.screen_name}
+                                                verified={one.currentUser.showUser.verified}
+                                                description={one.currentUser.showUser.description}
+                                                createdAt={one.currentUser.showUser.created_at}
+                                                name={one.currentUser.showUser.name}
+                                                profileLinkColor={one.currentUser.showUser.profile_link_color}
+                                                avatarImg={two.currentUser.verifyCredentials.profile_image_url_https}
+                                                darkModeFont={fontColorChange(dark_mode)}        
+                                            />
+                                        </Grid>
+                                        <Grid item md={4} className={classes.publicProfileTimelineItem}>
+                                            <PublicProfileTimeline
+                                                screenName={one.currentUser.showUser.screen_name}
+                                                profileLinkColor={one.currentUser.showUser.profile_link_color}
+                                                darkModeBorder={changeBorder(dark_mode)}
+                                                darkModeFont={fontColorChange(dark_mode)}
+                                                darkModeComponentBackground={changeComponentBackground(dark_mode)}        
+                                            />
+                                        </Grid>
+                                        <Grid item md={2} className={classes.trendingGrid}>
+                                            <Trending 
+                                                profileLinkColor={one.currentUser.showUser.profile_link_color}
+                                                darkModeBorder={changeBorder(dark_mode)}
+                                                darkModeFont={fontColorChange(dark_mode)}
+                                                darkModeComponentBackground={changeComponentBackground(dark_mode)}        
+                                            />
+                                        </Grid>
                                     </Grid>
-                                    <Grid item md={4} className={classes.publicProfileTimelineItem}>
-                                        <PublicProfileTimeline
-                                            screenName={one.currentUser.showUser.screen_name}
-                                            profileLinkColor={one.currentUser.showUser.profile_link_color}
-                                            darkModeBorder={changeBorder(dark_mode)}
-                                            darkModeFont={fontColorChange(dark_mode)}
-                                            darkModeComponentBackground={changeComponentBackground(dark_mode)}        
-                                        />
-                                    </Grid>
-                                    <Grid item md={2} className={classes.trendingGrid}>
-                                        <Trending 
-                                            profileLinkColor={one.currentUser.showUser.profile_link_color}
-                                            darkModeBorder={changeBorder(dark_mode)}
-                                            darkModeFont={fontColorChange(dark_mode)}
-                                            darkModeComponentBackground={changeComponentBackground(dark_mode)}        
-                                        />
-                                    </Grid>
-                                </Grid>
+                                </div>
                             </React.Fragment>
                         );
                     }}

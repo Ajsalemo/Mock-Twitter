@@ -43,6 +43,12 @@ const styles = theme => ({
         paddingBottom: '4em',
         [theme.breakpoints.between('sm', 'md')]: {
             paddingLeft: '1em'
+        },
+        [theme.breakpoints.between('md', 'lg')]: {
+            padding: '0em 1em 0em 0em'
+        },
+        [theme.breakpoints.up('lg')]: {
+            padding: '0em'
         }
     },
     errorAndLoadingDiv: {
@@ -83,7 +89,7 @@ let Main = props => {
                             // ! Inline styles are used for dark mode
                             style={{ backgroundColor: changeGridBackground(dark_mode) }}
                         >
-                            <Grid item xs={11} sm={4} md={2} className={classes.profileHandlerGrid}>
+                            <Grid item xs={11} sm={4} md={3} lg={2} className={classes.profileHandlerGrid}>
                                 <ProfileHandle 
                                     darkModeBorder={changeBorder(dark_mode)}
                                     darkModeFont={fontColorChange(dark_mode)}
@@ -107,7 +113,7 @@ let Main = props => {
                                 darkModeFont={fontColorChange(dark_mode)}
                                 darkModeComponentBackground={changeComponentBackground(dark_mode)}
                             />
-                            <Grid item xs={11} sm={4} md={2} className={classes.recommendedGrid}>
+                            <Grid item xs={11} sm={4} md={3} lg={2} className={classes.recommendedGrid}>
                                 <Trending 
                                     profileLinkColor={data.currentUser.verifyCredentials.profile_link_color}
                                     darkModeBorder={changeBorder(dark_mode)}

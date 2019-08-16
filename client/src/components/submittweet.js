@@ -35,7 +35,7 @@ const SubmitTweet = props => {
     const { classes, screenName, profileLinkColor, avatarImg, darkModeStatus, darkModeFont, darkModeBorder, darkModeComponentBackground } = props;
     return (
         <React.Fragment>
-            <Grid item xs={12} sm={8} md={5} className={classes.gridItem} >
+            <Grid item xs={12} sm={8} md={6} lg={5} className={classes.gridItem} >
                 {/* // ! Inline styles are used for dark mode */}
                 <Paper className={classes.paperOutline} style={{ backgroundColor: darkModeComponentBackground, border: darkModeBorder }}>
                     <SubmitTweetForm 
