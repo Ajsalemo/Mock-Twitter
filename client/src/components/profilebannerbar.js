@@ -21,7 +21,7 @@ import { extractAndReplaceNormalJPG } from '../helpers/helperfunctions';
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
-const styles = () => ({
+const styles = theme => ({
     bannerBarPlacement: {
         marginTop: '-0.3em',
         height: '4em'
@@ -30,49 +30,90 @@ const styles = () => ({
         display: 'flex',
         flexBasis: '30%',
         justifyContent: 'flex-end',
-        marginTop: '-4.5em'
+        [theme.breakpoints.up('sm')]: {
+            marginTop: '-2.5em'
+        },
+        [theme.breakpoints.up('md')]: {
+            marginTop: '-4.5em'
+        },
     },
     avatarInfoGrid: {
+        paddingLeft: '0em',
         display: 'flex',
         flexBasis: '70%',
         height: '4em',
         justifyContent: 'flex-start',
-        paddingLeft: '2.5em'
+        [theme.breakpoints.up(650)]: {
+            paddingLeft: '2.5em'
+        }
     },
     profileAvatar: {
-        height: '10em',
-        width: '10em'
+        display: 'none',
+        [theme.breakpoints.up(650)]: {
+            display: 'initial',
+            height: '7em',
+            width: '8em'
+        },
+        [theme.breakpoints.up('md')]: {
+            display: 'initial',
+            height: '10em',
+            width: '10em'
+        }
     },
     infoDescription: {
-        fontSize: '0.6em',
+        fontSize: '0.4em',
         fontWeight: '600',
-        display: 'block'
+        display: 'block',
+        [theme.breakpoints.up('md')]: {
+            fontSize: 'initial'
+        }
     },
     infoNumbers: {
         fontWeight: '600',
+        fontSize: '0.65em',
         '&:hover': {
             color: '#4136dd',
             borderBottom: '3px solid #4136dd'
+        },
+        [theme.breakpoints.up('md')]: {
+            fontSize: 'initial'
         }
     },
     infoDescriptionTypography: {
+        padding: '0.4em 0.4em 0em 0em',
         textAlign: 'center',
         lineHeight: '1em',
-        padding: '0.97em 2em 0em 0em',
         color: '#787878',
         '&:hover': {
             cursor: 'pointer'
+        },
+        [theme.breakpoints.up('md')]: {
+            padding: '0.97em 2em 0em 0em'
         }
     },
     profileBannerFollowButton: {
+        paddingLeft: '0em',
         alignSelf: 'center',
-        paddingLeft: '10.5em'
+        [theme.breakpoints.between(960, 980)]: {
+            paddingLeft: '5em',
+            alignSelf: 'center'
+        },
+        [theme.breakpoints.up(981)]: {
+            alignSelf: 'center',
+            paddingLeft: '10.5em'    
+        }
     },
     publicProfileLinkToProfileStats: {
         textDecoration: 'none',
         color: 'inherit',
         '&:hover': {
             color: '#00acee'
+        }
+    },
+    toolBarRoot: {
+        padding: '0em',
+        [theme.breakpoints.up('sm')]: {
+            padding: 'initial'
         }
     }
 });
@@ -99,7 +140,12 @@ const ProfileBannerBar = props => {
                             className={classes.bannerBarPlacement} 
                             style={{ backgroundColor: darkModeComponentBackground }}
                         >
-                            <Toolbar style={{ border: darkModeBorder }}>
+                            <Toolbar 
+                                style={{ border: darkModeBorder }} 
+                                classes={{
+                                    root: classes.toolBarRoot
+                                }}                      
+                            >
                                 <Grid item className={classes.avatarBannerGrid}>
                                     <Avatar src={extractAndReplaceNormalJPG(avatarImg)} className={classes.profileAvatar} alt='User profile avatar' />
                                 </Grid>

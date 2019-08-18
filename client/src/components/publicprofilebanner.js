@@ -9,13 +9,25 @@ import { withStyles, Grid } from '@material-ui/core';
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
-const styles = () => ({
+const styles = theme => ({
     bannerPlaceholderImage: {
         height: '15em',
         backgroundColor: '#007fec'
     },
     bannerImage: {
-        width: '-webkit-fill-available'
+        width: '100%',
+        height: '16em',
+        paddingTop: '2.6em',
+        [theme.breakpoints.up('sm')]: {
+            height: 'initial'
+        },
+        [theme.breakpoints.up('md')]: {
+            paddingTop: '0em',
+            height: 'initial'
+        },
+        [theme.breakpoints.up('lg')]: {
+            width: '-webkit-fill-available'
+        }
     },
     bannerErrorAndLoadingDiv: {
         padding: '15em 0',

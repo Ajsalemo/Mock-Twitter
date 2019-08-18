@@ -29,22 +29,40 @@ import { changeGridBackground, fontColorChange, changeComponentBackground, chang
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
-const styles = () => ({
+const styles = theme => ({
     publicProfileContainerStyle: {
         paddingTop: '0.7em',
         display: 'flex',
         justifyContent: 'center'
     },
     publicProfileHandlerGrid: {
-        width: 'auto',
-        paddingRight: '2em',
-        marginLeft: '10em'
+        marginLeft: '0em',
+        [theme.breakpoints.up('md')]: {
+            width: 'auto',
+            paddingRight: '2em',
+            marginLeft: '10em'    
+        }
     },
     errorAndLoadingDiv: {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
         height: '100vh'
+    },
+    trendingProfileFollowingGrid: {
+        display: 'none',
+        [theme.breakpoints.up('sm')]: {
+            display: 'initial'
+        },
+    },
+    followingGrid: {
+        display: 'flex',
+        justifyContent: 'center',
+        flexDirection: 'column',
+        [theme.breakpoints.up('sm')]: {
+            display: 'initial',
+            marginLeft: '1em'
+        }
     }
 });
 
@@ -99,7 +117,7 @@ let ProfileFollowing = props => {
                                     darkModeComponentBackground={changeComponentBackground(dark_mode)}        
                                 />
                                 <Grid container className={classes.publicProfileContainerStyle} style={{ backgroundColor: changeGridBackground(dark_mode) }}>
-                                    <Grid item xs={8} sm={8} md={2} className={classes.publicProfileHandlerGrid}>
+                                    <Grid item xs={8} sm={4} md={2} className={classes.publicProfileHandlerGrid}>
                                         <PublicProfileHandle 
                                             URLparam={param}
                                             currentUser={two.currentUser.verifyCredentials.screen_name}
@@ -112,14 +130,16 @@ let ProfileFollowing = props => {
                                             avatarImg={two.currentUser.verifyCredentials.profile_image_url_https}
                                             darkModeFont={fontColorChange(dark_mode)}        
                                         />
-                                        <Trending 
-                                            profileLinkColor={one.currentUser.showUser.profile_link_color}
-                                            darkModeBorder={changeBorder(dark_mode)}
-                                            darkModeFont={fontColorChange(dark_mode)}
-                                            darkModeComponentBackground={changeComponentBackground(dark_mode)}        
-                                        />
+                                        <Grid item className={classes.trendingProfileFollowingGrid}>
+                                            <Trending 
+                                                profileLinkColor={one.currentUser.showUser.profile_link_color}
+                                                darkModeBorder={changeBorder(dark_mode)}
+                                                darkModeFont={fontColorChange(dark_mode)}
+                                                darkModeComponentBackground={changeComponentBackground(dark_mode)}        
+                                            />
+                                        </Grid>
                                     </Grid>
-                                    <Grid item md={7}>
+                                    <Grid item md={7} sm={6} className={classes.followingGrid}>
                                         <UsersFollowingList
                                             currentUser={two.currentUser.verifyCredentials.screen_name}
                                             screenName={one.currentUser.showUser.screen_name}
