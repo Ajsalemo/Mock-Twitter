@@ -29,7 +29,7 @@ import { changeGridBackground, fontColorChange, changeComponentBackground, chang
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
-const styles = () => ({
+const styles = theme => ({
     publicProfileLikesContainerStyle: {
         paddingTop: '0.7em',
         display: 'flex',
@@ -40,8 +40,11 @@ const styles = () => ({
         paddingRight: '0em'
     },
     publicProfileLikesTimelineItem: {
-        marginRight: '0.6em',
-        paddingBottom: '4em'
+        padding: '0.6em',
+        [theme.breakpoints.up('sm')]: {
+            marginRight: '0.6em',
+            padding: '0em 0em 4em 0.5em'
+        }
     },
     errorAndLoadingDiv: {
         display: 'flex',
@@ -50,7 +53,11 @@ const styles = () => ({
         height: '100vh'
     },
     trendingGrid: {
-        marginTop: '-1em'
+        marginTop: '-1em',
+        display: 'none',
+        [theme.breakpoints.up('md')]: {
+            display: 'initial'
+        }
     }
 });
 

@@ -40,7 +40,8 @@ const styles = () => ({
         paddingRight: '0em'
     },
     publicListsTimelineItem: {
-        marginRight: '0.6em'
+        marginRight: '0.6em',
+        paddingBottom: '2em'
     },
     errorAndLoadingDiv: {
         display: 'flex',
@@ -49,7 +50,8 @@ const styles = () => ({
         height: '100vh'
     },
     trendingGrid: {
-        marginTop: '-1em'
+        marginTop: '-1em',
+        paddingBottom: '2em',
     }
 });
 

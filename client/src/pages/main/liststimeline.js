@@ -26,7 +26,7 @@ import { changeGridBackground, fontColorChange, changeComponentBackground, chang
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
-const styles = () => ({
+const styles = theme => ({
     listsTimelineContainer: {
         width: 'auto',
         padding: '4em 2em 0 0',
@@ -38,7 +38,11 @@ const styles = () => ({
         margin: '1em 2em 0em 2em'
     },
     listsTimelineTrend: {
-        margin: '-0.1em 2em 0em 2em'
+        margin: '-0.1em 2em 0em 2em',
+        display: 'none',
+        [theme.breakpoints.up('md')]: {
+            display: 'initial'
+        }
     },
     listsTimelineGridMain: {
         marginTop: '1em'
