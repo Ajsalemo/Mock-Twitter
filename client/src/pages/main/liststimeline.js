@@ -28,14 +28,24 @@ import { changeGridBackground, fontColorChange, changeComponentBackground, chang
 
 const styles = theme => ({
     listsTimelineContainer: {
-        width: 'auto',
-        padding: '4em 2em 0 0',
-        paddingLeft: '10em'
+        padding: '5em 1em 2em 1em',
+        display: 'flex',
+        justifyContent: 'space-around',
+        [theme.breakpoints.up('sm')]: {
+            width: 'auto',
+            paddingTop: '4em'
+        },
+        [theme.breakpoints.up('md')]: {
+            justifyContent: 'center'
+        }
     },
     listsTimelineGrid: {
         display: 'flex',
         justifyContent: 'center',
-        margin: '1em 2em 0em 2em'
+        margin: '1em 2em 0em 2em',
+        [theme.breakpoints.up('md')]: {
+            marginRight: '3.5em'
+        }
     },
     listsTimelineTrend: {
         margin: '-0.1em 2em 0em 2em',
@@ -85,7 +95,7 @@ let ListsTimeline = props => {
                                         darkModeComponentBackground={changeComponentBackground(dark_mode)}            
                                     />
                                     <Grid container className={classes.listsTimelineContainer} style={{ backgroundColor: changeGridBackground(dark_mode) }}>
-                                        <Grid item xs={8} sm={8} md={2} className={classes.listsTimelineGrid}>
+                                        <Grid item xs={8} sm={2} md={2} className={classes.listsTimelineGrid}>
                                             <ListsProfileHandle 
                                                 URLparam={param}
                                                 currentUser={two.currentUser.verifyCredentials.screen_name}
@@ -95,7 +105,7 @@ let ListsTimeline = props => {
                                                 darkModeComponentBackground={changeComponentBackground(dark_mode)}            
                                             />
                                         </Grid>
-                                        <Grid item md={6} className={classes.listsTimelineGridMain}>
+                                        <Grid item sm={7} md={4} className={classes.listsTimelineGridMain}>
                                             <ListsTimelineComponent
                                                 URLparam={param}
                                                 currentUser={two.currentUser.verifyCredentials.screen_name}

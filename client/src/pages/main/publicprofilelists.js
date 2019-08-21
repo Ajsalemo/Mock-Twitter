@@ -105,7 +105,7 @@ let PublicProfileLists = props => {
                                         darkModeComponentBackground={changeComponentBackground(dark_mode)}            
                                     />
                                     <Grid container className={classes.publicListsContainerStyle} style={{ backgroundColor: changeGridBackground(dark_mode) }}>
-                                        <Grid item xs={8} sm={8} md={2} className={classes.publicListsHandlerGrid}>
+                                        <Grid item xs={8} sm={4} md={2} className={classes.publicListsHandlerGrid}>
                                             <PublicProfileHandle 
                                                 URLparam={param}
                                                 currentUser={two.currentUser.verifyCredentials.screen_name}
