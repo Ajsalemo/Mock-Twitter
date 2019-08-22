@@ -237,12 +237,12 @@ const resolvers = {
     },
     User: {
         userTimelineTweets: async (parent, args, user) => {
-            const userTimelineTweetsRequest = await twitterNetworkCall(user.access_token, user.access_secret).get('statuses/home_timeline', { tweet_mode: 'extended' });
+            const userTimelineTweetsRequest = await twitterNetworkCall(user.access_token, user.access_secret).get('statuses/home_timeline', { tweet_mode: 'extended', count: '200' });
             const userTimelineTweetsResponse = await userTimelineTweetsRequest;
             return userTimelineTweetsResponse;
         },
         userProfileTweets: async (parent, args, user) => {
-            const userProfileTweetsRequest = await twitterNetworkCall(user.access_token, user.access_secret).get('statuses/user_timeline', { screen_name: args.screen_name, tweet_mode: 'extended' });
+            const userProfileTweetsRequest = await twitterNetworkCall(user.access_token, user.access_secret).get('statuses/user_timeline', { screen_name: args.screen_name, tweet_mode: 'extended', count: '200' });
             const userProfileTweetsResponse = userProfileTweetsRequest;
             return userProfileTweetsResponse;
         },
@@ -297,7 +297,7 @@ const resolvers = {
             return showUserResponse;
         },
         searchTweets: async (parent, args, user) => {
-            const searchTweetsRequest = await twitterNetworkCall(user.access_token, user.access_secret).get('search/tweets', { q: args.query, tweet_mode: 'extended' });
+            const searchTweetsRequest = await twitterNetworkCall(user.access_token, user.access_secret).get('search/tweets', { q: args.query, tweet_mode: 'extended', count: '100' });
             const searchTweetsResponse = await searchTweetsRequest;
             return searchTweetsResponse;
         }

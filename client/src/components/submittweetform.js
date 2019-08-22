@@ -50,7 +50,7 @@ const styles = () => ({
         backgroundColor: '#fff',
     },
     activeTextField: {
-        height: '-webkit-fill-available'
+        height: 'inherit'
     },
     twitterAvatar: {
         width: 30,

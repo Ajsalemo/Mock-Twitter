@@ -38,13 +38,13 @@ const UsersFollowingList = props => {
             query={USERS_FOLLOWING}
             variables={{
                 screen_name: screenName,
-                cursor: initialCursor
+                cursor: initialCursor,
             }}
         >
             {({ loading, data, error, fetchMore }) => {
                 if (loading) return <div><CircularProgress /></div>;
                 if (error) return <Error />
-                return (
+                 return (
                     /**
                      *   * This ternary checks to see if a user has followed any accounts
                      *   * If they haven't, this will display a message - else it'll display who the user has followed

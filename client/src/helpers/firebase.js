@@ -73,7 +73,6 @@ class FirebaseHelperClass {
             console.log('User fetched from server...');
             return this.firebaseAuth().currentUser.getIdToken(true)
                 .then(idToken => {
-                    console.log(idToken)
                     return idToken;
                 }).catch(err => {
                     // * Handle error
@@ -83,7 +82,6 @@ class FirebaseHelperClass {
             console.log('Fetching user...');
             return this.firebaseAuth().onIdTokenChanged(user => {
                 user.getIdToken(true).then(idToken =>{
-                    console.log(idToken)
                     return idToken;
                 })
             });
