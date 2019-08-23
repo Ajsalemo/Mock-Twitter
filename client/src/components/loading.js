@@ -40,7 +40,7 @@ class Loading extends Component {
                 this.props.history.push('/');
             }
         });
-    }
+    };
 
     render() {
         const { classes } = this.props;

@@ -272,7 +272,7 @@ const resolvers = {
             return usersFollowingResponse;
         },
         getUsersFavorites: async (parent, args, user) => {
-            const getUsersFavoritesRequest = await twitterNetworkCall(user.access_token, user.access_secret).get('favorites/list', { screen_name: args.screen_name, tweet_mode: 'extended' });
+            const getUsersFavoritesRequest = await twitterNetworkCall(user.access_token, user.access_secret).get('favorites/list', { screen_name: args.screen_name, tweet_mode: 'extended', count: '200' });
             const getUsersFavoritesResponse = getUsersFavoritesRequest;
             return getUsersFavoritesResponse;
         },
@@ -282,7 +282,7 @@ const resolvers = {
             return getListsResponse;
         },
         getListsTimeline: async (parent, args, user) => {
-            const getListsTimelineRequest = await twitterNetworkCall(user.access_token, user.access_secret).get('lists/statuses', { list_id: args.list_id, tweet_mode: 'extended', count: '20' });
+            const getListsTimelineRequest = await twitterNetworkCall(user.access_token, user.access_secret).get('lists/statuses', { list_id: args.list_id, tweet_mode: 'extended', count: '200' });
             const getListsTimelineResponse = await getListsTimelineRequest;
             return getListsTimelineResponse;
         },

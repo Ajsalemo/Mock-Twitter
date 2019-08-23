@@ -36,14 +36,25 @@ class RouteContainer extends Component {
                 this.props.history.push('/');
             }
         });
-        // TODO - Need to implement a better working version of this, idToken still sometimes returns null(doesn't effect site usability)
-        // TODO - Need to implement a better way to push between routes 
-        // ?  - Work around to prevent the getTokenId method on the firebase constructor from becoming null
         // * If the page hard refreshes, it pushes it to a loading indicator page
         // * Which then pushes back to the previous page, unless the route is the log in route
         if(window.location.reload && this.props.location.pathname !== '/') {
             this.props.history.push('/loading');
         }
+
+        firebaseClass.firebaseAuth().getRedirectResult().then(result => {
+            if(result.credential) {
+                const token = result.credential.accessToken;
+                console.log(token);
+                localStorage.setItem('access_token', token);
+                const secret = result.credential.secret;
+                localStorage.setItem('access_secret', secret);
+            }
+        }).catch(error => {
+            const errorMessage = error.message;
+            console.log(errorMessage)
+            return errorMessage;
+        });
     };
 
     render() {
@@ -68,7 +79,6 @@ class RouteContainer extends Component {
     }
 };
 
-// ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
 export default withRouter(RouteContainer);

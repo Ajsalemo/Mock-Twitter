@@ -12,7 +12,7 @@ import errorImage from '../images/error-gasp-emoji.jpg';
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
-const styles = () => ({
+const styles = theme => ({
     errorSpan: {
         display: 'block'
     },
@@ -20,7 +20,7 @@ const styles = () => ({
         height: '2em'
     },
     errorCenter: {
-        padding: '0em 10em 3em'
+        paddingBottom: '2.5em',
     }
 });
 

@@ -24,6 +24,7 @@ const styles = () => ({
     fabButton: {
         backgroundColor: 'inherit',
         boxShadow: 'none',
+        width: 'auto', 
         '&:hover': {
             backgroundColor: 'inherit'
         }

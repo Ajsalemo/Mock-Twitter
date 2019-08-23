@@ -42,19 +42,7 @@ class FirebaseHelperClass {
     };
 
     twitterSignIn = () => {
-        this.firebaseAuth().signInWithPopup(provider)
-            .then(result => {
-                // * This gives you a the Twitter OAuth 1.0 Access Token and Secret.
-                // * You can use these server side with your app's credentials to access the Twitter API.
-                const token = result.credential.accessToken;
-                localStorage.setItem('access_token', token)
-                const secret = result.credential.secret;
-                localStorage.setItem('access_secret', secret)
-            }).catch(function (error) {
-                const errorMessage = error.message;
-                console.log(errorMessage)
-                return errorMessage;
-            });
+        this.firebaseAuth().signInWithRedirect(provider);
     };
 
     // * Returns Twitters Access Token Key
@@ -83,7 +71,10 @@ class FirebaseHelperClass {
             return this.firebaseAuth().onIdTokenChanged(user => {
                 user.getIdToken(true).then(idToken =>{
                     return idToken;
-                })
+                }).catch(err => {
+                    // * Handle error
+                    console.log(err);
+                });
             });
         }
     };
