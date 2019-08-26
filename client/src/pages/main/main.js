@@ -69,7 +69,7 @@ let Main = props => {
                 fetchPolicy='network-only'
             >
             {({ loading, error, data }) => {
-                if (loading) return <div className={classes.errorAndLoadingDiv}><CircularProgress /></div>
+                if (loading) return <div className={classes.errorAndLoadingDiv} style={{ backgroundColor: changeGridBackground(dark_mode) }}><CircularProgress /></div>
                 if (error) return <div className={classes.errorAndLoadingDiv}><Error /></div>
                 return (
                     <React.Fragment>

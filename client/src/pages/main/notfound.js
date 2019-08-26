@@ -17,7 +17,7 @@ import Error from '../../components/error';
 import { VERIFY_USER } from '../../apolloclient/apolloqueries';
 
 // * Helper function
-import { fontColorChange, changeComponentBackground, changeBorder } from '../../helpers/helperfunctions';
+import { fontColorChange, changeComponentBackground, changeBorder, changeGridBackground } from '../../helpers/helperfunctions';
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
@@ -49,7 +49,7 @@ let NotFound = props => {
     return (
         <Query query={VERIFY_USER}>
             {({ loading, error, data }) => {
-                if (loading) return <div className={classes.errorAndLoadingDiv}><CircularProgress /></div>;
+                if (loading) return <div className={classes.errorAndLoadingDiv} style={{ backgroundColor: changeGridBackground(dark_mode) }}><CircularProgress /></div>;
                 if (error) return <div className={classes.errorAndLoadingDiv}><Error /></div>;
                 return (
                     <React.Fragment>

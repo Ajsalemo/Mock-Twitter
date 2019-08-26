@@ -85,7 +85,7 @@ const Timeline = props => {
             <Query 
                 query={GET_AUTHUSER_TWEETS} 
                 pollInterval={pollMinute(1000, 60)} 
-                fetchPolicy='network-only'
+                fetchPolicy='cache-and-network'
             >
                 {({ loading, error, data }) => {
                     if (loading) return <div className={classes.errorAndLoadingDiv}><CircularProgress /></div>;

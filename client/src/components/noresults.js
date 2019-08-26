@@ -24,19 +24,19 @@ const styles = () => ({
 // ----------------------------------------------------------------------------------------------------- //
 
 const NoResults = props => {
-    const { classes, profileLinkColor } = props;
+    const { classes, dark_mode } = props;
     return (
         <Grid className={classes.noResultsGrid}>
             <Typography 
                 variant='h6'
                 // ! This inline style dictates what the user's color theme is set to 
-                style={{ color: `#${profileLinkColor}` }}
+                style={{ color: dark_mode ? '#fff' : null }}
                 className={classes.noResultsTypography}
             >
                 {/* //* If the Search API returns no results, then display this message */}
                 No results
             </Typography>
-            <Typography variant='subtitle2' gutterBottom>
+            <Typography variant='subtitle2' gutterBottom style={{ color: dark_mode ? '#fff' : null }}>
                 Nothing came up for that search
             </Typography>
         </Grid>

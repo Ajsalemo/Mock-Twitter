@@ -23,7 +23,7 @@ import ToolTipModal from '../components/tooltipmodal';
 import NoResults from '../components/noresults';
 
 // * Helper functions
-import { pollMinute } from '../helpers/helperfunctions';
+import { pollMinute, changeGridBackground } from '../helpers/helperfunctions';
 
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
@@ -77,7 +77,7 @@ const styles = () => ({
 // ----------------------------------------------------------------------------------------------------- //
 
 const SearchQueryTimeline = props => {
-    const { classes, screenName, profileLinkColor, searchQuery, darkModeBorder, darkModeFont, darkModeComponentBackground } = props;
+    const { classes, dark_mode, screenName, profileLinkColor, searchQuery, darkModeBorder, darkModeFont, darkModeComponentBackground } = props;
     return (
         <React.Fragment>
             <Query 
@@ -89,7 +89,7 @@ const SearchQueryTimeline = props => {
                 }}
             >
                 {({ loading, error, data }) => {
-                    if (loading) return <div className={classes.errorAndLoadingDiv}><CircularProgress /></div>;
+                    if (loading) return <div className={classes.errorAndLoadingDiv} style={{ backgroundColor: changeGridBackground(dark_mode) }}><CircularProgress /></div>;
                     if (error) return <div className={classes.errorAndLoadingDiv}><Error /></div>;
                     return (
                         // ! query.length checks to see if there is values being returned, if the values are empty a placeholder will be displayed
@@ -205,7 +205,7 @@ const SearchQueryTimeline = props => {
                             :
                         // ! If there are no search results, this message will be displayed
                         <NoResults 
-                            profileLinkColor={profileLinkColor}
+                            dark_mode={dark_mode}
                         />
                     );
                 }}

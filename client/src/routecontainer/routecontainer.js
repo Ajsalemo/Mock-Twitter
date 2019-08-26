@@ -45,7 +45,6 @@ class RouteContainer extends Component {
         firebaseClass.firebaseAuth().getRedirectResult().then(result => {
             if(result.credential) {
                 const token = result.credential.accessToken;
-                console.log(token);
                 localStorage.setItem('access_token', token);
                 const secret = result.credential.secret;
                 localStorage.setItem('access_secret', secret);

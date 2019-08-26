@@ -78,7 +78,7 @@ let PublicProfile = props => {
                     query={VERIFY_USER}
                 >
                     {({ loading: loadingTwo, error: errorTwo, data: two }) => {
-                        if (loadingOne || loadingTwo) return <div className={classes.errorAndLoadingDiv}><CircularProgress /></div>;
+                        if (loadingOne || loadingTwo) return <div className={classes.errorAndLoadingDiv} style={{ backgroundColor: changeGridBackground(dark_mode) }}><CircularProgress /></div>;
                         if (errorOne || errorTwo) return <NotFound />;
                         return (
                             <React.Fragment>

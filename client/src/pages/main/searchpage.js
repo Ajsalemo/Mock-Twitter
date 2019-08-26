@@ -98,6 +98,7 @@ let SearchPage = props => {
                                     profileLinkColor={data.currentUser.verifyCredentials.profile_link_color}
                                     screenName={data.currentUser.verifyCredentials.screen_name}
                                     searchQuery={param}
+                                    dark_mode={dark_mode}
                                     darkModeBorder={changeBorder(dark_mode)}
                                     darkModeFont={fontColorChange(dark_mode)}
                                     darkModeComponentBackground={changeComponentBackground(dark_mode)}            

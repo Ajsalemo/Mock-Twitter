@@ -2,6 +2,7 @@
 // ----------------------------------------------------------------------------------------------------- //
 
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 // * Material-UI component
 import { withStyles, CircularProgress, Typography, Grid } from '@material-ui/core';
@@ -43,12 +44,14 @@ class Loading extends Component {
     };
 
     render() {
-        const { classes } = this.props;
+        const { classes, dark_mode } = this.props;
         return (
-            <Grid container direction='column' className={classes.gridContainer}>
+            <Grid container direction='column' className={classes.gridContainer} style={{ backgroundColor: dark_mode ? '#000000e0' : null }}>
                 <Grid item xs={12} className={classes.gridItem}>
-                    <CircularProgress />
-                    <Typography variant='h6' className={classes.typography}>
+                    <CircularProgress 
+                        style={{ color: dark_mode ? '#fff' : null }}
+                    />
+                    <Typography variant='h6' className={classes.typography} style={{ color: dark_mode ? '#fff' : null }}>
                         Loading..
                     </Typography>
                 </Grid>
@@ -58,6 +61,20 @@ class Loading extends Component {
 };
 
 // ----------------------------------------------------------------------------------------------------- //
+// ----------------------------------------------------------------------------------------------------- //
+
+const mapStateToProps = state => {
+    return {
+        dark_mode: state.toggleDarkMode.dark_mode
+    }
+};
+
+// ----------------------------------------------------------------------------------------------------- //
+
+Loading = connect(
+    mapStateToProps
+)(Loading);
+
 // ----------------------------------------------------------------------------------------------------- //
 
 export default withStyles(styles)(Loading);
