@@ -108,13 +108,6 @@ const Home = props => {
                             Join Twitter today.
                         </Typography>
                         <Fab
-                            aria-label="Sign Up"
-                            className={classNames(classes.button, classes.logInButton)}
-                            variant="extended"
-                        >
-                            Sign up
-                        </Fab>
-                        <Fab
                             variant="extended"
                             aria-label="Log In"
                             className={classNames(classes.button, classes.signInButton)}

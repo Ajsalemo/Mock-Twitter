@@ -25,7 +25,7 @@ import SearchPage from '../pages/main/searchpage';
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
-class RouteContainer extends Component {
+class RouteContainer extends Component {    
     async componentDidMount() {
         // * When the routes mount - push the authenicated user to the home page
         // * Else if the user is unAuthenticated(i.e, logs out) - push them to the log in page

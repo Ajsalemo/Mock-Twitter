@@ -44,7 +44,7 @@ const getUid = async (req) => {
             return err;
         });
     return user;
-}
+};
 
 const server = new ApolloServer({
     typeDefs,
