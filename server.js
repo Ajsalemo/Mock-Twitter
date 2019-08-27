@@ -4,7 +4,7 @@
 require('dotenv').config();
 const { ApolloServer } = require('apollo-server');
 const admin = require('firebase-admin');
-const serviceAccount = require('./firebaseKeys.json');
+const serviceAccount = require('./firebaseLogKey.json');
 const { typeDefs, resolvers } = require('./schema');
 
 // ----------------------------------------------------------------------------------------------------- //
