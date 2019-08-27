@@ -4,7 +4,7 @@
 require('dotenv').config();
 const { ApolloServer } = require('apollo-server');
 const admin = require('firebase-admin');
-const serviceAccount = require('../../firebaseJson/twitter-graphql-firebase-adminsdk-bki0q-2783044879.json');
+const serviceAccount = require('./firebaseKeys.json');
 const { typeDefs, resolvers } = require('./schema');
 
 // ----------------------------------------------------------------------------------------------------- //
