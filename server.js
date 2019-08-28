@@ -7,11 +7,11 @@ const admin = require('firebase-admin');
 const { typeDefs, resolvers } = require('./schema');
 
 // ----------------------------------------------------------------------------------------------------- //
-console.log(process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, '\n'));
+console.log(process.env.FIREBASE_PRIVATE_KEY);
 admin.initializeApp({
     credential: admin.credential.cert({
         projectId: process.env.FIREBASE_PROJECT_ID,
-        privateKey: process.env.FIREBASE_PRIVATE_KEY,
+        privateKey: process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, ''),
         clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
     }),
     databaseURL: process.env.REACT_APP_FIREBASE_DATABASE_URL
