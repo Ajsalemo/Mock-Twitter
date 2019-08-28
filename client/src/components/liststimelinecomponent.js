@@ -86,7 +86,7 @@ const ListsTimelineComponent = props => {
         <React.Fragment>
             <Query 
                 query={GET_LISTS_TIMELINE} 
-                pollInterval={pollMinute(1000, 60)} 
+                pollInterval={pollMinute(1000, 30)} 
                 fetchPolicy='network-only'
                 variables={{
                     list_id: URLparam

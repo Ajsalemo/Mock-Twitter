@@ -90,7 +90,7 @@ const LikesComponent = props => {
             variables={{
                 screen_name: screenName
             }}
-            pollInterval={pollMinute(1000, 60)} 
+            pollInterval={pollMinute(1000, 30)} 
             fetchPolicy='cache-and-network'
         >
             {({ loading, error, data }) => {

@@ -82,7 +82,7 @@ const SearchQueryTimeline = props => {
         <React.Fragment>
             <Query 
                 query={SEARCH_TWEETS} 
-                pollInterval={pollMinute(1000, 60)} 
+                pollInterval={pollMinute(1000, 30)} 
                 fetchPolicy='network-only'
                 variables={{
                     query: searchQuery

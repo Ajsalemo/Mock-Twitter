@@ -84,7 +84,7 @@ const Timeline = props => {
         <React.Fragment>
             <Query 
                 query={GET_AUTHUSER_TWEETS} 
-                pollInterval={pollMinute(1000, 60)} 
+                pollInterval={pollMinute(1000, 30)} 
                 fetchPolicy='cache-and-network'
             >
                 {({ loading, error, data }) => {
