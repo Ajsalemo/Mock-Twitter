@@ -7,7 +7,7 @@ const admin = require('firebase-admin');
 const { typeDefs, resolvers } = require('./schema');
 
 // ----------------------------------------------------------------------------------------------------- //
-
+console.log(process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, '\n'));
 admin.initializeApp({
     credential: admin.credential.cert({
         projectId: process.env.FIREBASE_PROJECT_ID,
