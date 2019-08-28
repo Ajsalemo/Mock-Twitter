@@ -18,7 +18,6 @@ persistCache({
   cache,
   storage: window.localStorage,
 });
-
 export const client = new ApolloClient({
   uri: process.env.REACT_APP_APOLLO_URI,
   // * When Apollo encounters an error, this will log it in the browser console

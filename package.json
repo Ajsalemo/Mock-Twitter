@@ -24,7 +24,9 @@
     "apollo-cache-inmemory": "^1.5.1",
     "apollo-cache-persist": "^0.1.1",
     "apollo-server": "^2.4.8",
+    "apollo-server-express": "^2.9.0",
     "dotenv": "^6.2.0",
+    "express": "^4.17.1",
     "firebase-admin": "^8.2.0",
     "graphql": "^14.1.1"
   },

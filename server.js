@@ -4,13 +4,16 @@
 require('dotenv').config();
 const { ApolloServer } = require('apollo-server');
 const admin = require('firebase-admin');
-const serviceAccount = require('./firebaseLogKey.json');
 const { typeDefs, resolvers } = require('./schema');
 
 // ----------------------------------------------------------------------------------------------------- //
 
 admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount),
+    credential: admin.credential.cert({
+        projectId: process.env.FIREBASE_PROJECT_ID,
+        privateKey: process.env.FIREBASE_PRIVATE_KEY,
+        clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
+    }),
     databaseURL: process.env.REACT_APP_FIREBASE_DATABASE_URL
 });
 
@@ -62,7 +65,9 @@ const server = new ApolloServer({
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
-server.listen().then(({ url }) => {
+const PORT = process.env.PORT || 4000;
+
+server.listen({ port: PORT }).then(({ url }) => {
     console.log(`🚀  Server ready at ${url}`);
 });
 
