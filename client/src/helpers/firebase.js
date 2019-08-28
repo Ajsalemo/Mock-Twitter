@@ -58,7 +58,6 @@ class FirebaseHelperClass {
     // * Retrieves a JWT token to be associated with the user
     getTokenForValidation = () => {
         if(this.firebaseAuth().currentUser) {
-            console.log('User fetched from server...');
             return this.firebaseAuth().currentUser.getIdToken(true)
                 .then(idToken => {
                     return idToken;
@@ -67,7 +66,6 @@ class FirebaseHelperClass {
                     console.log(err);
                 });
         } else {
-            console.log('Fetching user...');
             return this.firebaseAuth().onIdTokenChanged(user => {
                 user.getIdToken(true).then(idToken =>{
                     return idToken;
