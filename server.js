@@ -15,8 +15,10 @@ const app = express();
 
 // ----------------------------------------------------------------------------------------------------- //
 
+// Enable CORS
 app.use(cors());
 
+// Server the public folder
 app.use(express.static('public'));
 
 // Static folder
@@ -85,8 +87,10 @@ const server = new ApolloServer({
 // ----------------------------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------------------- //
 
+// Listen to the production port(heroku), or the local one
 const PORT = process.env.PORT || 4000;
 
+// Merge apollo-server-express with Express
 server.applyMiddleware({
     path: '/', 
     app,

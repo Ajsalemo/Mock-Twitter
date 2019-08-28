@@ -9,8 +9,8 @@ const Twitter = require('twitter-lite');
 // ! Exported function which takes two arguments, these are added in server.js by pulling them off of the headers
 const twitterNetworkCall = (token, secret) => {
     return new Twitter({
-        consumer_key: "bRtT382oSfnYPPoRxdqhyW0qv",
-        consumer_secret: "xMS12S8fDKHytWR6abySlVD1ADAjLTEWsqggxC5CHV5HMxl5TK",
+        consumer_key: process.env.REACT_APP_TWITTER_CONSUMER_KEY,
+        consumer_secret: process.env.REACT_APP_TWITTER_CONSUMER_SECRET,
         access_token_key: token,
         access_token_secret: secret
     });
