@@ -2,12 +2,32 @@
 // ----------------------------------------------------------------------------------------------------- //
 
 require('dotenv').config();
-const { ApolloServer } = require('apollo-server');
+const { ApolloServer } = require('apollo-server-express');
 const admin = require('firebase-admin');
+const cors = require('cors');
+const path = require('path');
+const express = require('express');
 const { typeDefs, resolvers } = require('./schema');
 
 // ----------------------------------------------------------------------------------------------------- //
-console.log(process.env.FIREBASE_PRIVATE_KEY);
+
+const app = express();
+
+// ----------------------------------------------------------------------------------------------------- //
+
+app.use(cors());
+
+app.use(express.static('public'));
+
+// Static folder
+app.use(express.static('client/build'));
+
+app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+});
+
+// ----------------------------------------------------------------------------------------------------- //
+
 admin.initializeApp({
     credential: admin.credential.cert({
         projectId: process.env.FIREBASE_PROJECT_ID,
@@ -67,8 +87,13 @@ const server = new ApolloServer({
 
 const PORT = process.env.PORT || 4000;
 
-server.listen({ port: PORT }).then(({ url }) => {
-    console.log(`🚀  Server ready at ${url}`);
+server.applyMiddleware({
+    path: '/', 
+    app,
+});
+  
+app.listen({ port: PORT }, () => {
+    console.log(`🚀  Server ready at Port: ${PORT}`);
 });
 
 // ----------------------------------------------------------------------------------------------------- //
