@@ -1,5 +1,5 @@
 
-# Mock Twitter - a replica site - :rocket: [Link to site](https://mock-twitter-site.herokuapp.com)
+# Mock Twitter - a replica site - ### :rocket: [Link to site](https://mock-twitter-site.herokuapp.com)
 <br>
 
 #### This site was created with the intentions of producing a decently close replica of Twitter's UI and functionality. The UI is modeled after is Twitter's old UI, their UI was recently refresh and changed during the building of this site.
